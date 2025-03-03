@@ -1,0 +1,184 @@
+/* Global styles to prevent scrolling */
+html, body {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Full view containers */
+.full-view {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+/* Intro screen styles */
+.intro-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+}
+
+.intro-content {
+    text-align: center;
+    padding: 2rem;
+}
+
+.intro-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.intro-text {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.intro-input {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.intro-button {
+    margin-top: 1rem;
+}
+
+/* Training screen styles */
+.training-screen {
+    padding: 1rem;
+    background-color: #f8f9fa;
+}
+
+/* Header styles */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.step-title {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.nav-buttons {
+    display: flex;
+}
+
+.prev-btn {
+    margin-right: 0.5rem;
+    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+}
+
+.next-btn {
+    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+}
+
+/* Column layout */
+.left-column {
+    padding-right: 0.5rem;
+}
+
+.right-column {
+    padding-left: 0.5rem;
+}
+
+/* Card styles */
+.content-card,
+.control-card {
+    margin-bottom: 0.75rem;
+    border-radius: 0.25rem;
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 0.5rem 0.75rem;
+}
+
+.control-header {
+    background-color: #007bff;
+    color: white;
+}
+
+.short-text-header,
+.long-text-header {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.image-header {
+    background-color: #28a745;
+    color: white;
+}
+
+.video-header {
+    background-color: #dc3545;
+    color: white;
+}
+
+.content-title {
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* Card bodies with scrollable content */
+.card-body {
+    padding: 0.75rem;
+    overflow-y: auto;
+    max-height: calc(100vh - 250px);
+}
+
+.control-body {
+    padding: 0.5rem;
+}
+
+.control-buttons {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.control-btn {
+    text-align: left;
+    font-size: 0.875rem;
+    padding: 0.375rem 0.5rem;
+}
+
+/* Content styles */
+.content-body {
+    font-size: 0.875rem;
+}
+
+.image-body,
+.video-body {
+    text-align: center;
+    padding: 0.5rem;
+}
+
+.content-image {
+    max-width: 100%;
+    max-height: calc(100vh - 260px);
+}
+
+.content-video {
+    width: 100%;
+    max-height: calc(100vh - 260px);
+}
+
+/* Footer styles */
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: #6c757d;
+}
