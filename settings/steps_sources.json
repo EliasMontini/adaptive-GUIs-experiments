@@ -8,6 +8,20 @@
       "adaptive_fields": {
         "short_text": "Brief description of the step.",
         "long_text": "Detailed explanation of the assembly step, including tools, materials, and instructions.",
+        "image_single_pieces": "./images_single_pieces/1.png",
+        "image_assembly": "./images_assembly/1.png",
+        "image_assembly_process": "./images/assembly_process/1.jpg",
+        "video": "./videos/1.mp4"
+      }
+    },
+    {
+      "id": 1,
+      "name": "Step Name 1",
+      "type": "manual",
+      "target_cycle_time": 10.5,
+      "adaptive_fields": {
+        "short_text": "Brief description of the step.",
+        "long_text": "Detailed explanation of the assembly step, including tools, materials, and instructions.",
         "image_single_pieces": "url_to_image_of_single_pieces.jpg",
         "image_assembly": "url_to_image_of_assembled_part.jpg",
         "image_assembly_process": "url_to_image_of_assembly_process.jpg",
