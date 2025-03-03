@@ -3,44 +3,33 @@
     {
       "id": 1,
       "name": "Step Name 1",
-      "type": "manual",
-      "target_cycle_time": 10.5,
+      "type": "withdraw",
+      "target_cycle_time": 5,
       "adaptive_fields": {
-        "short_text": "Brief description of the step.",
-        "long_text": "Detailed explanation of the assembly step, including tools, materials, and instructions.",
-        "image_single_pieces": "./images_single_pieces/1.png",
-        "image_assembly": "./images_assembly/1.png",
-        "image_assembly_process": "./images/assembly_process/1.jpg",
-        "video": "./videos/1.mp4"
+        "short_text": "Withdraw SNP1 (2 pieces) from shelf A1 and PG1 (2 pieces) from shelf A3",
+        "long_text_1": "",
+        "long_text_2": "",
+        "image_single_pieces_1": "./images_single_pieces/SNP1.png",
+        "image_single_pieces_2": "./images_single_pieces/PG1.png",
+        "image_assembly": "",
+        "video": ""
       }
     },
     {
-      "id": 1,
-      "name": "Step Name 1",
-      "type": "manual",
-      "target_cycle_time": 10.5,
+      "id": 2,
+      "name": "Step Name 2",
+      "type": "assembly",
+      "target_cycle_time": 15,
       "adaptive_fields": {
-        "short_text": "Brief description of the step.",
-        "long_text": "Detailed explanation of the assembly step, including tools, materials, and instructions.",
-        "image_single_pieces": "url_to_image_of_single_pieces.jpg",
-        "image_assembly": "url_to_image_of_assembled_part.jpg",
-        "image_assembly_process": "url_to_image_of_assembly_process.jpg",
+        "short_text": "Insert the two PG1 pieces into the holes of the two SNP1 pieces.",
+        "long_text_1": "Position the two SNP1 pieces so that the two 'L' shapes are mirrored, meaning, pointing in the same direction.",
+        "long_text_2": "Insert the two PG1 pieces into the cross-shaped holes located at the ends of the SNP1 pieces. The two gray axes should be centered into the two L-shaped pieces.",
+        "image_single_pieces_1": "./images_single_pieces/SNP1.png",
+        "image_single_pieces_2": "./images_single_pieces/PG1.png",
+        "image_assembly": "./images_assembly/pezzo_1.png",
         "video": "url_to_video_of_process.mp4"
       }
     },
-    {
-      "id": 1,
-      "name": "Step Name 1",
-      "type": "manual",
-      "target_cycle_time": 10.5,
-      "adaptive_fields": {
-        "short_text": "Brief description of the step.",
-        "long_text": "Detailed explanation of the assembly step, including tools, materials, and instructions.",
-        "image_single_pieces": "url_to_image_of_single_pieces.jpg",
-        "image_assembly": "url_to_image_of_assembled_part.jpg",
-        "image_assembly_process": "url_to_image_of_assembly_process.jpg",
-        "video": "url_to_video_of_process.mp4"
-      }
     }
   ]
 }
