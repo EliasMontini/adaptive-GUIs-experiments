@@ -7,10 +7,8 @@
       "target_cycle_time": 5,
       "adaptive_fields": {
         "short_text": "Withdraw SNP1 (2 pieces) from shelf A1 and PG1 (2 pieces) from shelf A3",
-        "long_text_1": "",
-        "long_text_2": "",
-        "image_single_pieces_1": "./images_single_pieces/SNP1.png",
-        "image_single_pieces_2": "./images_single_pieces/PG1.png",
+        "long_text": "",
+        "image_single_pieces": "./images_single_pieces/pezzi_iniziali_1.png",
         "image_assembly": "",
         "video": ""
       }
@@ -22,14 +20,11 @@
       "target_cycle_time": 15,
       "adaptive_fields": {
         "short_text": "Insert the two PG1 pieces into the holes of the two SNP1 pieces.",
-        "long_text_1": "Position the two SNP1 pieces so that the two 'L' shapes are mirrored, meaning, pointing in the same direction.",
-        "long_text_2": "Insert the two PG1 pieces into the cross-shaped holes located at the ends of the SNP1 pieces. The two gray axes should be centered into the two L-shaped pieces.",
-        "image_single_pieces_1": "./images_single_pieces/SNP1.png",
-        "image_single_pieces_2": "./images_single_pieces/PG1.png",
+        "long_text": "Position the two SNP1 pieces so that the two 'L' shapes are mirrored, meaning, pointing in the same direction. \n Insert the two PG1 pieces into the cross-shaped holes located at the ends of the SNP1 pieces. The two gray axes should be centered into the two L-shaped pieces",
+        "image_single_pieces": "./images_single_pieces/pezzi_iniziali_1.png",
         "image_assembly": "./images_assembly/pezzo_1.png",
         "video": "./videos/operazione_1.mp4"
       }
-    },
     }
   ]
 }
