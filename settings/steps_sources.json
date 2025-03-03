@@ -1,0 +1,28 @@
+{
+  "assembly_process": [
+    {
+      "id": 1,
+      "name": "Step Name 1",
+      "type": "manual",
+      "short_text": "Brief description of the step.",
+      "long_text": "Detailed explanation of the assembly step, including tools, materials, and instructions.",
+      "image_single_pieces": "url_to_image_of_single_pieces.jpg",
+      "image_assembly": "url_to_image_of_assembled_part.jpg",
+      "image_assembly_process": "url_to_image_of_assembly_process.jpg",
+      "video": "url_to_video_of_process.mp4",
+      "target_cycle_time": 10.5
+    },
+    {
+      "id": 2,
+      "name": "Step Name 2",
+      "type": "automated",
+      "short_text": "Short description of the step.",
+      "long_text": "More detailed description with assembly procedure.",
+      "image_single_pieces": "url_to_image_of_single_pieces_2.jpg",
+      "image_assembly": "url_to_image_of_assembled_part_2.jpg",
+      "image_assembly_process": "url_to_image_of_assembly_process_2.jpg",
+      "video": "url_to_video_of_process_2.mp4",
+      "target_cycle_time": 8.2
+    }
+  ]
+}
