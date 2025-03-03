@@ -27,7 +27,7 @@
         "image_single_pieces_1": "./images_single_pieces/SNP1.png",
         "image_single_pieces_2": "./images_single_pieces/PG1.png",
         "image_assembly": "./images_assembly/pezzo_1.png",
-        "video": "url_to_video_of_process.mp4"
+        "video": "./videos/operazione_1.mp4"
       }
     },
     }
