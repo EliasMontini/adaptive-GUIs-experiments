@@ -1,0 +1,24 @@
+{
+    "steps": [
+        {
+            "step_id": 1,
+            "content": {
+                "short_text": false,
+                "long_text": false,
+                "single_pieces": false,
+                "assembly": false,
+                "video": false
+            }
+        },
+        {
+            "step_id": 2,
+            "content": {
+                "short_text": true,
+                "long_text": false,
+                "single_pieces": true,
+                "assembly": false,
+                "video": false
+            }
+        }
+    ]
+}
