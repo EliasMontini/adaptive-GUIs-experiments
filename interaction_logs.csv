@@ -243,3 +243,10 @@ qwe,2025-03-04 17:51:31.262841,navigate_previous,2.0,Step Name 2
 12,2025-03-04 17:54:03.571970,toggle_short_text_none,1.0,Step Name 1
 12,2025-03-04 17:54:04.545534,toggle_short_text_block,1.0,Step Name 1
 12,2025-03-04 17:54:05.149618,toggle_short_text_none,1.0,Step Name 1
+12,2025-03-05 08:03:09.347120,start_experiment,,
+12,2025-03-05 08:03:54.335169,toggle_single_pieces_block,1.0,Step Name 1
+12,2025-03-05 08:04:01.730027,toggle_long_text_block,1.0,Step Name 1
+12,2025-03-05 08:04:05.386382,navigate_next,1.0,Step Name 1
+12,2025-03-05 08:04:55.698798,navigate_previous,2.0,Step Name 2
+12,2025-03-05 08:16:48.139657,start_experiment,,
+12,2025-03-05 08:16:53.472732,navigate_next,1.0,Step Name 1

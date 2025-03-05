@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "Step Name 1",
-      "type": "withdraw",
+      "category": "withdraw",
       "target_cycle_time": 5,
       "adaptive_fields": {
         "short_text": "Withdraw SNP1 (2 pieces) from shelf A1 and PG1 (2 pieces) from shelf A3",
@@ -16,7 +16,7 @@
     {
       "id": 2,
       "name": "Step Name 2",
-      "type": "assembly",
+      "category": "assembly",
       "target_cycle_time": 15,
       "adaptive_fields": {
         "short_text": "Insert the two PG1 pieces into the holes of the two SNP1 pieces.",

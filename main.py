@@ -397,6 +397,7 @@ def update_step_content(current_step, assembly_data, experiment_id):
 
     step = assembly_data[current_step - 1]
     step_name = step['name']
+    step_category = step['category']
 
     # Get content
     short_text = step['adaptive_fields']['short_text']
@@ -411,8 +412,8 @@ def update_step_content(current_step, assembly_data, experiment_id):
     experiment_id_display = f"Experiment ID: {experiment_id}"
 
     return (
-        step_name,
-        step_counter,
+        f"Step {step_name} ({step_category}) ",
+        step_counter ,
         experiment_id_display,
         image_single_pieces,
         image_assembly,
