@@ -13,9 +13,149 @@
         {
             "step_id": 2,
             "content": {
-                "short_text": true,
+                "short_text": false,
+                "long_text": false,
+                "single_pieces": false,
+                "assembly": false,
+                "video": false
+            }
+        },
+        {
+            "step_id": 3,
+            "content": {
+                "short_text": false,
+                "long_text": false,
+                "single_pieces": false,
+                "assembly": false,
+                "video": false
+            }
+        },
+        {
+            "step_id": 4,
+            "content": {
+                "short_text": false,
                 "long_text": false,
                 "single_pieces": true,
+                "assembly": false,
+                "video": false
+            }
+        },
+        {
+            "step_id": 5,
+            "content": {
+                "short_text": false,
+                "long_text": false,
+                "single_pieces": false,
+                "assembly": false,
+                "video": false
+            }
+        },
+        {
+            "step_id": 6,
+            "content": {
+                "short_text": false,
+                "long_text": false,
+                "single_pieces": false,
+                "assembly": false,
+                "video": false
+            }
+        },
+        {
+            "step_id": 7,
+            "content": {
+                "short_text": false,
+                "long_text": false,
+                "single_pieces": false,
+                "assembly": false,
+                "video": false
+            }
+        },
+        {
+            "step_id": 8,
+            "content": {
+                "short_text": false,
+                "long_text": false,
+                "single_pieces": false,
+                "assembly": false,
+                "video": false
+            }
+        },
+        {
+            "step_id": 9,
+            "content": {
+                "short_text": false,
+                "long_text": false,
+                "single_pieces": false,
+                "assembly": false,
+                "video": false
+            }
+        },
+        {
+            "step_id": 10,
+            "content": {
+                "short_text": false,
+                "long_text": false,
+                "single_pieces": false,
+                "assembly": false,
+                "video": false
+            }
+        },
+        {
+            "step_id": 11,
+            "content": {
+                "short_text": false,
+                "long_text": false,
+                "single_pieces": false,
+                "assembly": false,
+                "video": false
+            }
+        },
+        {
+            "step_id": 12,
+            "content": {
+                "short_text": false,
+                "long_text": false,
+                "single_pieces": false,
+                "assembly": false,
+                "video": false
+            }
+        },
+        {
+            "step_id": 13,
+            "content": {
+                "short_text": false,
+                "long_text": false,
+                "single_pieces": false,
+                "assembly": false,
+                "video": false
+            }
+        },
+        {
+            "step_id": 14,
+            "content": {
+                "short_text": false,
+                "long_text": false,
+                "single_pieces": false,
+                "assembly": false,
+                "video": false
+            }
+        },
+        {
+            "step_id": 15,
+            "content": {
+                "short_text": false,
+                "long_text": false,
+                "single_pieces": false,
+                "assembly": false,
+                "video": false
+            }
+        },
+        {
+            "step_id": 16,
+            "content": {
+                "short_text": false,
+                "long_text": false,
+                "single_pieces": false,
                 "assembly": false,
                 "video": false
             }

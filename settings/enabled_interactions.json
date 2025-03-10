@@ -4,20 +4,160 @@
             "step_id": 1,
             "buttons": {
                 "short_text": true,
-                "long_text": true,
+                "long_text": false,
                 "single_pieces": true,
                 "assembly": false,
-                "video": true
+                "video": false
             }
         },
         {
             "step_id": 2,
             "buttons": {
                 "short_text": true,
-                "long_text": false,
+                "long_text": true,
                 "single_pieces": true,
                 "assembly": true,
+                "video": true
+            }
+        },
+        {
+            "step_id": 3,
+            "buttons": {
+                "short_text": true,
+                "long_text": false,
+                "single_pieces": true,
+                "assembly": false,
                 "video": false
+            }
+        },
+        {
+            "step_id": 4,
+            "buttons": {
+                "short_text": true,
+                "long_text": true,
+                "single_pieces": true,
+                "assembly": true,
+                "video": true
+            }
+        },
+        {
+            "step_id": 5,
+            "buttons": {
+                "short_text": true,
+                "long_text": false,
+                "single_pieces": true,
+                "assembly": false,
+                "video": false
+            }
+        },
+        {
+            "step_id": 6,
+            "buttons": {
+                "short_text": true,
+                "long_text": true,
+                "single_pieces": true,
+                "assembly": true,
+                "video": true
+            }
+        },
+        {
+            "step_id": 7,
+            "buttons": {
+                "short_text": true,
+                "long_text": false,
+                "single_pieces": true,
+                "assembly": false,
+                "video": false
+            }
+        },
+        {
+            "step_id": 8,
+            "buttons": {
+                "short_text": true,
+                "long_text": true,
+                "single_pieces": true,
+                "assembly": true,
+                "video": true
+            }
+        },
+        {
+            "step_id": 9,
+            "buttons": {
+                "short_text": true,
+                "long_text": false,
+                "single_pieces": true,
+                "assembly": false,
+                "video": false
+            }
+        },
+        {
+            "step_id": 10,
+            "buttons": {
+                "short_text": true,
+                "long_text": true,
+                "single_pieces": true,
+                "assembly": true,
+                "video": true
+            }
+        },
+        {
+            "step_id": 11,
+            "buttons": {
+                "short_text": true,
+                "long_text": true,
+                "single_pieces": true,
+                "assembly": true,
+                "video": true
+            }
+        },
+        {
+            "step_id": 12,
+            "buttons": {
+                "short_text": true,
+                "long_text": false,
+                "single_pieces": true,
+                "assembly": false,
+                "video": false
+            }
+        },
+        {
+            "step_id": 13,
+            "buttons": {
+                "short_text": true,
+                "long_text": true,
+                "single_pieces": true,
+                "assembly": true,
+                "video": true
+            }
+        },
+        {
+            "step_id": 14,
+            "buttons": {
+                "short_text": true,
+                "long_text": false,
+                "single_pieces": true,
+                "assembly": false,
+                "video": false
+            }
+        },
+        {
+            "step_id": 15,
+            "buttons": {
+                "short_text": true,
+                "long_text": true,
+                "single_pieces": true,
+                "assembly": true,
+                "video": true
+            }
+        },
+        {
+            "step_id": 16,
+            "buttons": {
+                "short_text": true,
+                "long_text": true,
+                "single_pieces": true,
+                "assembly": false,
+                "video": true
             }
         }
     ]
