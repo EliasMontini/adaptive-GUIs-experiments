@@ -35,7 +35,7 @@
             "content": {
                 "short_text": false,
                 "long_text": false,
-                "single_pieces": true,
+                "single_pieces": false,
                 "assembly": false,
                 "video": false
             }
