@@ -69,6 +69,7 @@ def log_interaction(experiment_id, action, step_id=None, step_name=None):
     df.to_csv('interaction_logs.csv', index=False)
     return
 
+
 def load_enabled_interactions():
     try:
         with open('settings/enabled_interactions.json', 'r') as f:
@@ -82,6 +83,7 @@ def load_enabled_interactions():
             "assembly": True,
             "video": True
         }}]}
+
 
 def load_initial_visibility():
     try:
@@ -118,30 +120,45 @@ styles = {
     'training-screen': {
         'padding': '20px',
         'height': '100vh',
-        'overflow-y': 'hidden'
+        'overflow-y': 'auto'  # Changed from 'hidden' to 'auto' to allow scrolling if needed
     },
     'content-container': {
         'margin-bottom': '20px',
         'height': '100%'
     },
     'button-container': {
-        'text-align': 'center',
-        'margin-top': '10px'
+        'position': 'absolute',  # Fixed position
+        'bottom': '0',
+        'left': '0',
+        'right': '0',
+        'padding': '10px',
+        'background-color': 'rgba(255, 255, 255, 0.9)',  # Semi-transparent background
+        'z-index': '10'  # Ensure it's above other content
+    },
+    'text-content-area': {
+        'min-height': '150px',  # Fixed minimum height for text containers
+        'position': 'relative',  # Needed for absolute positioning of buttons
+        'padding-bottom': '60px',  # Space for the button
+        'overflow': 'auto'  # Allow scrolling if content is large
     },
     'image-container': {
+        'position': 'relative',  # For absolute positioning of buttons
+        'height': '350px',  # Fixed height
         'display': 'flex',
-        'flex-direction': 'column',
-        'align-items': 'center',
-        'justify-content': 'space-between',
-        'height': '100%',
+        'flex-direction': 'column'
     },
     'image-wrapper': {
+        'flex-grow': '1',
         'display': 'flex',
         'justify-content': 'center',
         'align-items': 'center',
-        'width': '100%',
-        'height': '100%',
-        'flex-grow': 1,
+        'overflow': 'hidden',  # Hide overflow
+        'position': 'relative'  # For absolute positioning of buttons
+    },
+    'image-content': {
+        'max-width': '100%',
+        'max-height': '250px',  # Fixed height
+        'object-fit': 'contain'  # Maintain aspect ratio
     },
     'footer-container': {
         'display': 'flex',
@@ -197,55 +214,59 @@ app.layout = html.Div([
                 # Short text area
                 html.Div(className="col-md-4", children=[
                     html.Span("Short description", className="h5 d-block mb-2"),
-                    html.Div(id="short-text-placeholder", className="placeholder-glow", children=[
-                        html.Span(className="placeholder col-5"),
-                        html.Span(className="placeholder col-3"),
-                        html.Span(className="placeholder col-4"),
-                        html.Span(className="placeholder col-4")
-
-                    ]),
-                    html.Div(id="short-text-content", style={'display': 'none'}),
-                    html.Div(className="mt-2", children=[
-                        dbc.Button([
-                            html.I(className="bi bi-eye-fill me-1"),
-                            "Show"
-                        ], id="short-text-btn", color="primary", size="lg", style={"width": "100%"})
+                    html.Div(style=styles['text-content-area'], children=[
+                        html.Div(id="short-text-placeholder", className="placeholder-glow", children=[
+                            html.Span(className="placeholder col-5"),
+                            html.Span(className="placeholder col-3"),
+                            html.Span(className="placeholder col-4"),
+                            html.Span(className="placeholder col-4")
+                        ]),
+                        html.Div(id="short-text-content", style={'display': 'none'}),
+                        html.Div(style=styles['button-container'], children=[
+                            dbc.Button([
+                                html.I(className="bi bi-eye-fill me-1"),
+                                "Show"
+                            ], id="short-text-btn", color="primary", size="lg", style={"width": "100%"})
+                        ])
                     ])
                 ]),
 
                 # Long text area
                 html.Div(className="col-md-8", children=[
                     html.Span("Long description", className="h5 d-block mb-2"),
-                    html.Div(id="long-text-placeholder", className="placeholder-glow", children=[
-                        html.Span(className="placeholder col-7"),
-                        html.Span(className="placeholder col-4"),
-                        html.Span(className="placeholder col-6")
-                    ]),
-                    html.Div(id="long-text-content", style={'display': 'none'}),
-                    html.Div(className="mt-2", children=[
-                        dbc.Button([
-                            html.I(className="bi bi-eye-fill me-1"),
-                            "Show"
-                        ], id="long-text-btn", color="primary", size="lg", style={"width": "100%"})
+                    html.Div(style=styles['text-content-area'], children=[
+                        html.Div(id="long-text-placeholder", className="placeholder-glow", children=[
+                            html.Span(className="placeholder col-7"),
+                            html.Span(className="placeholder col-4"),
+                            html.Span(className="placeholder col-6")
+                        ]),
+                        html.Div(id="long-text-content", style={'display': 'none'}),
+                        html.Div(style=styles['button-container'], children=[
+                            dbc.Button([
+                                html.I(className="bi bi-eye-fill me-1"),
+                                "Show"
+                            ], id="long-text-btn", color="primary", size="lg", style={"width": "100%"})
+                        ])
                     ])
                 ])
             ]),
 
             # Bottom row: Visual content
-            html.Div(className="row", style={'height': '400px'}, children=[
+            html.Div(className="row", children=[
                 # Individual Parts image
-                html.Div(className="col-md-4", children=[
+                html.Div(className="col-md-4 mb-4", children=[
+                    html.Span("Image Single", className="h5 d-block mb-2"),
                     html.Div(style=styles['image-container'], children=[
-                        html.Span("Image Single ", className="h5 d-block mb-2"),
                         html.Div(style=styles['image-wrapper'], children=[
                             html.Img(id="single-pieces-placeholder",
                                      src=placeholder_img,
+                                     className="img-fluid",
+                                     style=styles['image-content']),
+                            html.Img(id="single-pieces-img",
+                                     style={'display': 'none', **styles['image-content']},
                                      className="img-fluid")
                         ]),
-                        html.Img(id="single-pieces-img",
-                                 style={'display': 'none', 'max-width': '100%', 'max-height': '300px'},
-                                 className="img-fluid"),
-                        html.Div(className="mt-2 mb-3 w-100 text-center", children=[
+                        html.Div(style=styles['button-container'], children=[
                             dbc.Button([
                                 html.I(className="bi bi-eye-fill me-1"),
                                 "Show"
@@ -255,18 +276,19 @@ app.layout = html.Div([
                 ]),
 
                 # Assembled Parts image
-                html.Div(className="col-md-4", children=[
+                html.Div(className="col-md-4 mb-4", children=[
+                    html.Span("Assembled parts", className="h5 d-block mb-2"),
                     html.Div(style=styles['image-container'], children=[
-                        html.Span("Assembled parts", className="h5 d-block mb-2"),
                         html.Div(style=styles['image-wrapper'], children=[
                             html.Img(id="assembly-placeholder",
                                      src=placeholder_img,
+                                     className="img-fluid",
+                                     style=styles['image-content']),
+                            html.Img(id="assembly-img",
+                                     style={'display': 'none', **styles['image-content']},
                                      className="img-fluid")
                         ]),
-                        html.Img(id="assembly-img",
-                                 style={'display': 'none', 'max-width': '100%', 'max-height': '300px'},
-                                 className="img-fluid"),
-                        html.Div(className="mt-2 mb-3 w-100 text-center", children=[
+                        html.Div(style=styles['button-container'], children=[
                             dbc.Button([
                                 html.I(className="bi bi-eye-fill me-1"),
                                 "Show"
@@ -274,24 +296,22 @@ app.layout = html.Div([
                         ])
                     ])
                 ]),
-                # Replace the entire video column section with this updated version
-                html.Div(className="col-md-4", children=[
+
+                # Video section
+                html.Div(className="col-md-4 mb-4", children=[
+                    html.Span("Video", className="h5 d-block mb-2"),
                     html.Div(style=styles['image-container'], children=[
-                        html.Span("Video", className="h5 d-block mb-2"),
-                        # Image wrapper div
                         html.Div(style=styles['image-wrapper'], children=[
-                            # Placeholder - structured more like the image placeholders
                             html.Img(id="video-placeholder",
                                      src=placeholder_img,
-                                     className="img-fluid")
+                                     className="img-fluid",
+                                     style=styles['image-content']),
+                            html.Video(id="video-player",
+                                       controls=True,
+                                       style={'display': 'none', **styles['image-content']},
+                                       className="img-fluid")
                         ]),
-                        # Video player
-                        html.Video(id="video-player",
-                                   controls=True,
-                                   style={'display': 'none', 'max-width': '100%', 'max-height': '300px'},
-                                   className="img-fluid mb-3"),
-                        # Button container
-                        html.Div(className="mt-2 mb-3 w-100 text-center", children=[
+                        html.Div(style=styles['button-container'], children=[
                             dbc.Button([
                                 html.I(className="bi bi-eye-fill me-1"),
                                 "Show"
@@ -303,7 +323,12 @@ app.layout = html.Div([
 
             # Footer
             html.Div(style=styles['footer-container'], children=[
-                html.Div(id='step-counter'),
+                html.Div(id='step-counter', children=[
+                    html.Div(className="d-flex align-items-center", children=[
+                        dbc.Progress(id="step-progress-bar", value=0, style={"width": "200px", "height": "10px"}),
+                        html.Span(id="step-text", className="ms-2 text-muted small")
+                    ])
+                ]),
                 html.Div(id='experiment-id-display')
             ])
         ])
@@ -380,7 +405,8 @@ def navigate_steps(prev_clicks, next_clicks, current_step, assembly_data, experi
 # Update step content
 @app.callback(
     [Output('step-header', 'children'),
-     Output('step-counter', 'children'),
+     Output('step-progress-bar', 'value'),
+     Output('step-text', 'children'),
      Output('experiment-id-display', 'children'),
      Output('single-pieces-img', 'src'),
      Output('assembly-img', 'src'),
@@ -393,7 +419,7 @@ def navigate_steps(prev_clicks, next_clicks, current_step, assembly_data, experi
 )
 def update_step_content(current_step, assembly_data, experiment_id):
     if current_step <= 0 or current_step > len(assembly_data):
-        return "", "", "", "", "", "", "", ""
+        return "", 0, "", "", "", "", "", "", ""
 
     step = assembly_data[current_step - 1]
     step_name = step['name']
@@ -408,12 +434,15 @@ def update_step_content(current_step, assembly_data, experiment_id):
     image_assembly = step['adaptive_fields']['image_assembly']
     video = step['adaptive_fields']['video']
 
-    step_counter = f"Step {current_step} of {len(assembly_data)}"
+    # Calculate progress percentage
+    progress_value = (current_step / len(assembly_data)) * 100
+    step_text = f"Step {current_step} of {len(assembly_data)}"
     experiment_id_display = f"Experiment ID: {experiment_id}"
 
     return (
-        f"Step {step_name} ({step_category}) ",
-        step_counter ,
+        f"{step_name} ({step_category}) ",
+        progress_value,
+        step_text,
         experiment_id_display,
         image_single_pieces,
         image_assembly,
@@ -487,14 +516,20 @@ def set_initial_content_visibility(current_step, initial_visibility):
     # Define styles for visible and hidden states
     visible_placeholder = {'display': 'none'}
     hidden_placeholder = {'display': 'block'}
-    visible_content = {'display': 'block', 'max-width': '100%', 'max-height': '300px'}
-    hidden_content = {'display': 'none', 'max-width': '100%', 'max-height': '300px'}
+
+    # Keep the fixed position and dimensions for content
+    visible_content = {'display': 'block', **styles['image-content']}
+    hidden_content = {'display': 'none', **styles['image-content']}
+
+    # For text content, we need to handle separately
+    visible_text = {'display': 'block'}
+    hidden_text = {'display': 'none'}
 
     return (
         visible_placeholder if content.get('short_text', False) else hidden_placeholder,
-        visible_content if content.get('short_text', False) else hidden_content,
+        visible_text if content.get('short_text', False) else hidden_text,
         visible_placeholder if content.get('long_text', False) else hidden_placeholder,
-        visible_content if content.get('long_text', False) else hidden_content,
+        visible_text if content.get('long_text', False) else hidden_text,
         visible_placeholder if content.get('single_pieces', False) else hidden_placeholder,
         visible_content if content.get('single_pieces', False) else hidden_content,
         visible_placeholder if content.get('assembly', False) else hidden_placeholder,
@@ -533,6 +568,7 @@ def toggle_short_text(n_clicks, placeholder_style, experiment_id, current_step, 
         log_interaction(experiment_id, "toggle_short_text_block", current_step, step_name)
         return {'display': 'none'}, {'display': 'block'}, [html.I(className="bi bi-eye-slash me-1"), "Hide"]
 
+
 # Toggle Long Text
 @app.callback(
     [Output('long-text-placeholder', 'style', allow_duplicate=True),
@@ -562,6 +598,7 @@ def toggle_long_text(n_clicks, placeholder_style, experiment_id, current_step, a
         log_interaction(experiment_id, "toggle_long_text_block", current_step, step_name)
         return {'display': 'none'}, {'display': 'block'}, [html.I(className="bi bi-eye-slash me-1"), "Hide"]
 
+
 # Toggle Single Pieces
 @app.callback(
     [Output('single-pieces-placeholder', 'style', allow_duplicate=True),
@@ -576,7 +613,7 @@ def toggle_long_text(n_clicks, placeholder_style, experiment_id, current_step, a
 )
 def toggle_single_pieces(n_clicks, placeholder_style, experiment_id, current_step, assembly_data):
     if n_clicks is None:
-        return placeholder_style, {'display': 'none', 'max-width': '100%', 'max-height': '300px'}, [
+        return placeholder_style, {'display': 'none', **styles['image-content']}, [
             html.I(className="bi bi-eye-fill me-1"), "Show"]
 
     step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
@@ -586,13 +623,14 @@ def toggle_single_pieces(n_clicks, placeholder_style, experiment_id, current_ste
     if is_showing:
         # Hide content
         log_interaction(experiment_id, "toggle_single_pieces_none", current_step, step_name)
-        return {'display': 'block'}, {'display': 'none', 'max-width': '100%', 'max-height': '300px'}, [
+        return {'display': 'block'}, {'display': 'none', **styles['image-content']}, [
             html.I(className="bi bi-eye-fill me-1"), "Show"]
     else:
         # Show content
         log_interaction(experiment_id, "toggle_single_pieces_block", current_step, step_name)
-        return {'display': 'none'}, {'display': 'block', 'max-width': '100%', 'max-height': '300px'}, [
+        return {'display': 'none'}, {'display': 'block', **styles['image-content']}, [
             html.I(className="bi bi-eye-slash me-1"), "Hide"]
+
 
 # Toggle Assembly
 @app.callback(
@@ -608,7 +646,7 @@ def toggle_single_pieces(n_clicks, placeholder_style, experiment_id, current_ste
 )
 def toggle_assembly(n_clicks, placeholder_style, experiment_id, current_step, assembly_data):
     if n_clicks is None:
-        return placeholder_style, {'display': 'none', 'max-width': '100%', 'max-height': '300px'}, [
+        return placeholder_style, {'display': 'none', **styles['image-content']}, [
             html.I(className="bi bi-eye-fill me-1"), "Show"]
 
     step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
@@ -618,16 +656,16 @@ def toggle_assembly(n_clicks, placeholder_style, experiment_id, current_step, as
     if is_showing:
         # Hide content
         log_interaction(experiment_id, "toggle_assembly_none", current_step, step_name)
-        return {'display': 'block'}, {'display': 'none', 'max-width': '100%', 'max-height': '300px'}, [
+        return {'display': 'block'}, {'display': 'none', **styles['image-content']}, [
             html.I(className="bi bi-eye-fill me-1"), "Show"]
     else:
         # Show content
         log_interaction(experiment_id, "toggle_assembly_block", current_step, step_name)
-        return {'display': 'none'}, {'display': 'block', 'max-width': '100%', 'max-height': '300px'}, [
+        return {'display': 'none'}, {'display': 'block', **styles['image-content']}, [
             html.I(className="bi bi-eye-slash me-1"), "Hide"]
 
+
 # Toggle video
-# Modified toggle_video callback
 @app.callback(
     [Output('video-placeholder', 'style', allow_duplicate=True),
      Output('video-player', 'style', allow_duplicate=True),
@@ -641,13 +679,12 @@ def toggle_assembly(n_clicks, placeholder_style, experiment_id, current_step, as
 )
 def toggle_video(n_clicks, placeholder_style, experiment_id, current_step, assembly_data):
     if n_clicks is None:
-        return {'display': 'block'}, {'display': 'none', 'max-width': '100%', 'max-height': '300px'}, [
+        return {'display': 'block'}, {'display': 'none', **styles['image-content']}, [
             html.I(className="bi bi-eye-fill me-1"), "Show"]
 
     step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
 
-    # Check if the button was just clicked (not based on current visibility state)
-    # This ensures the toggle happens reliably
+    # Check if the button was just clicked
     if dash.callback_context.triggered:
         button_id = dash.callback_context.triggered[0]['prop_id'].split('.')[0]
         if button_id == 'video-btn':

@@ -250,3 +250,114 @@ qwe,2025-03-04 17:51:31.262841,navigate_previous,2.0,Step Name 2
 12,2025-03-05 08:04:55.698798,navigate_previous,2.0,Step Name 2
 12,2025-03-05 08:16:48.139657,start_experiment,,
 12,2025-03-05 08:16:53.472732,navigate_next,1.0,Step Name 1
+12,2025-03-06 13:52:42.265202,start_experiment,,
+12,2025-03-06 13:53:10.628028,toggle_short_text_block,1.0,Step Name 1
+12,2025-03-06 13:53:13.650414,toggle_long_text_block,1.0,Step Name 1
+12,2025-03-06 13:53:19.258798,toggle_single_pieces_block,1.0,Step Name 1
+12,2025-03-06 13:53:22.489042,navigate_next,1.0,Step Name 1
+12,2025-03-06 13:54:57.574269,toggle_assembly_block,2.0,Step Name 2
+1,2025-03-10 21:00:38.106901,start_experiment,,
+1,2025-03-10 21:00:39.196890,toggle_short_text_block,1.0,Step Name 1
+1,2025-03-10 21:00:40.038496,toggle_short_text_none,1.0,Step Name 1
+1,2025-03-10 21:00:40.601728,toggle_long_text_block,1.0,Step Name 1
+1,2025-03-10 21:00:42.626149,toggle_long_text_none,1.0,Step Name 1
+1,2025-03-10 21:01:41.313573,toggle_long_text_block,1.0,Step Name 1
+1,2025-03-10 21:01:42.235226,toggle_long_text_none,1.0,Step Name 1
+12,2025-03-10 21:02:53.488304,start_experiment,,
+12,2025-03-10 21:02:54.625167,toggle_long_text_block,1.0,Step Name 1
+12,2025-03-10 21:02:56.141523,toggle_long_text_none,1.0,Step Name 1
+12,2025-03-10 21:05:03.313734,start_experiment,,
+12,2025-03-10 21:05:04.801850,toggle_long_text_block,1.0,Step Name 1
+12,2025-03-10 21:05:05.627959,toggle_long_text_none,1.0,Step Name 1
+12,2025-03-10 21:05:06.326846,toggle_short_text_block,1.0,Step Name 1
+12,2025-03-10 21:05:06.980031,toggle_short_text_none,1.0,Step Name 1
+123,2025-03-10 21:05:40.429052,start_experiment,,
+123,2025-03-10 21:05:42.594615,toggle_short_text_block,1.0,Step Name 1
+123,2025-03-10 21:05:43.514964,toggle_short_text_none,1.0,Step Name 1
+123,2025-03-10 21:05:43.936630,toggle_long_text_block,1.0,Step Name 1
+123,2025-03-10 21:05:44.622554,toggle_long_text_none,1.0,Step Name 1
+123,2025-03-10 21:05:45.457229,toggle_short_text_block,1.0,Step Name 1
+123,2025-03-10 21:05:45.970267,toggle_short_text_none,1.0,Step Name 1
+12,2025-03-10 21:06:09.997342,start_experiment,,
+12,2025-03-10 21:06:11.799018,toggle_short_text_block,1.0,Step Name 1
+12,2025-03-10 21:06:12.794879,toggle_short_text_none,1.0,Step Name 1
+12,2025-03-10 21:06:13.523714,toggle_long_text_block,1.0,Step Name 1
+12,2025-03-10 21:06:14.331289,toggle_long_text_none,1.0,Step Name 1
+12,2025-03-10 21:06:24.719595,start_experiment,,
+12,2025-03-10 21:06:35.642376,start_experiment,,
+12,2025-03-10 21:06:40.004486,toggle_short_text_block,1.0,Step Name 1
+12,2025-03-10 21:06:40.808457,toggle_short_text_none,1.0,Step Name 1
+12,2025-03-10 21:06:41.597340,toggle_long_text_block,1.0,Step Name 1
+12,2025-03-10 21:06:41.992299,toggle_long_text_none,1.0,Step Name 1
+12,2025-03-10 21:06:42.820680,toggle_video_block,1.0,Step Name 1
+12,2025-03-10 21:06:43.831655,toggle_video_none,1.0,Step Name 1
+12,2025-03-10 21:06:44.969307,toggle_single_pieces_block,1.0,Step Name 1
+12,2025-03-10 21:06:46.030958,toggle_single_pieces_none,1.0,Step Name 1
+12,2025-03-10 21:06:47.776590,toggle_short_text_block,1.0,Step Name 1
+12,2025-03-10 21:06:48.623182,toggle_short_text_none,1.0,Step Name 1
+122313,2025-03-10 21:07:01.856216,start_experiment,,
+122313,2025-03-10 21:07:03.374321,toggle_short_text_block,1.0,Step Name 1
+122313,2025-03-10 21:07:05.536999,toggle_video_block,1.0,Step Name 1
+122313,2025-03-10 21:07:28.279694,toggle_short_text_none,1.0,Step Name 1
+q3,2025-03-10 21:07:33.218828,start_experiment,,
+q3,2025-03-10 21:07:34.612791,toggle_long_text_block,1.0,Step Name 1
+12,2025-03-10 21:07:53.176949,start_experiment,,
+12,2025-03-10 21:07:54.347439,toggle_long_text_block,1.0,Step Name 1
+12,2025-03-10 21:08:26.017626,start_experiment,,
+123,2025-03-10 21:09:28.617386,start_experiment,,
+123,2025-03-10 21:09:30.247622,toggle_short_text_block,1.0,Step Name 1
+123,2025-03-10 21:09:30.849038,toggle_short_text_none,1.0,Step Name 1
+12,2025-03-10 21:09:50.392057,start_experiment,,
+12,2025-03-10 21:09:51.793837,toggle_short_text_block,1.0,Step Name 1
+12,2025-03-10 21:09:52.916002,toggle_long_text_block,1.0,Step Name 1
+12,2025-03-10 21:09:53.817938,toggle_long_text_none,1.0,Step Name 1
+12,2025-03-10 21:10:28.300741,start_experiment,,
+12,2025-03-10 21:10:55.638721,start_experiment,,
+12,2025-03-10 21:10:56.809492,toggle_short_text_block,1.0,Step Name 1
+12,2025-03-10 21:10:58.147142,navigate_next,1.0,Step Name 1
+12,2025-03-10 21:10:59.285552,toggle_short_text_none,2.0,Step Name 2
+12,2025-03-10 21:11:00.040482,toggle_short_text_block,2.0,Step Name 2
+12,2025-03-10 21:11:01.859746,toggle_short_text_none,2.0,Step Name 2
+123,2025-03-10 21:11:59.151719,start_experiment,,
+123,2025-03-10 21:12:01.394021,toggle_short_text_block,1.0,Step Name 1
+123,2025-03-10 21:12:01.888200,toggle_short_text_none,1.0,Step Name 1
+123,2025-03-10 21:12:24.455087,toggle_short_text_block,1.0,Step Name 1
+12,2025-03-10 21:12:29.798549,start_experiment,,
+unknown,2025-03-10 21:12:39.259296,start_experiment,,
+unknown,2025-03-10 21:12:40.548032,toggle_short_text_block,1.0,Step Name 1
+unknown,2025-03-10 21:12:41.571449,toggle_short_text_none,1.0,Step Name 1
+unknown,2025-03-10 21:12:42.155751,toggle_long_text_block,1.0,Step Name 1
+unknown,2025-03-10 21:12:42.957219,toggle_long_text_none,1.0,Step Name 1
+13,2025-03-10 21:16:36.279419,start_experiment,,
+123,2025-03-10 21:19:03.935639,start_experiment,,
+123,2025-03-10 21:19:09.018459,toggle_video_block,1.0,Step Name 1
+123,2025-03-10 21:19:09.886955,toggle_video_none,1.0,Step Name 1
+123,2025-03-10 21:19:12.207999,toggle_single_pieces_block,1.0,Step Name 1
+123,2025-03-10 21:19:13.002643,toggle_single_pieces_none,1.0,Step Name 1
+123,2025-03-10 21:19:14.198951,toggle_long_text_block,1.0,Step Name 1
+123,2025-03-10 21:19:15.106290,toggle_long_text_none,1.0,Step Name 1
+123,2025-03-10 21:19:15.798425,toggle_short_text_block,1.0,Step Name 1
+123,2025-03-10 21:19:16.464602,toggle_short_text_none,1.0,Step Name 1
+123,2025-03-10 21:19:18.562723,navigate_next,1.0,Step Name 1
+123,2025-03-10 21:21:16.517960,start_experiment,,
+123,2025-03-10 21:21:18.924224,toggle_short_text_block,1.0,Step Name 1
+123,2025-03-10 21:21:19.603425,toggle_short_text_none,1.0,Step Name 1
+123,2025-03-10 21:21:20.472328,toggle_long_text_block,1.0,Step Name 1
+123,2025-03-10 21:21:21.100981,toggle_long_text_none,1.0,Step Name 1
+123,2025-03-10 21:21:22.064466,toggle_short_text_block,1.0,Step Name 1
+q23,2025-03-10 21:24:59.241128,start_experiment,,
+q23,2025-03-10 21:25:00.920334,toggle_short_text_block,1.0,Step Name 1
+q23,2025-03-10 21:25:01.833335,toggle_short_text_none,1.0,Step Name 1
+q23,2025-03-10 21:25:02.612583,toggle_long_text_block,1.0,Step Name 1
+q23,2025-03-10 21:25:03.675301,toggle_long_text_none,1.0,Step Name 1
+q23,2025-03-10 21:25:05.620802,toggle_single_pieces_block,1.0,Step Name 1
+q23,2025-03-10 21:25:06.318297,toggle_single_pieces_none,1.0,Step Name 1
+q23,2025-03-10 21:25:09.710353,toggle_single_pieces_block,1.0,Step Name 1
+q23,2025-03-10 21:25:10.386010,toggle_single_pieces_none,1.0,Step Name 1
+q23,2025-03-10 21:25:11.122338,toggle_video_block,1.0,Step Name 1
+q23,2025-03-10 21:25:11.740164,toggle_video_none,1.0,Step Name 1
+q23,2025-03-10 21:25:13.569836,navigate_next,1.0,Step Name 1
+q23,2025-03-10 21:25:16.726861,toggle_assembly_block,2.0,Step Name 2
+q23,2025-03-10 21:25:17.482899,toggle_assembly_none,2.0,Step Name 2
+q23,2025-03-10 21:25:19.586860,toggle_short_text_none,2.0,Step Name 2
+q23,2025-03-10 21:25:20.268929,toggle_short_text_block,2.0,Step Name 2
