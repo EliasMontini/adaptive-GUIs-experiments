@@ -120,30 +120,30 @@ styles = {
     'training-screen': {
         'padding': '20px',
         'height': '100vh',
-        'overflow-y': 'auto'  # Changed from 'hidden' to 'auto' to allow scrolling if needed
+        'overflow-y': 'auto'
     },
     'content-container': {
         'margin-bottom': '20px',
         'height': '100%'
     },
     'button-container': {
-        'position': 'absolute',  # Fixed position
+        'position': 'absolute',
         'bottom': '0',
         'left': '0',
         'right': '0',
         'padding': '10px',
-        'background-color': 'rgba(255, 255, 255, 0.9)',  # Semi-transparent background
-        'z-index': '10'  # Ensure it's above other content
+        'background-color': 'rgba(255, 255, 255, 0.9)',
+        'z-index': '10'
     },
     'text-content-area': {
-        'min-height': '150px',  # Fixed minimum height for text containers
-        'position': 'relative',  # Needed for absolute positioning of buttons
-        'padding-bottom': '60px',  # Space for the button
-        'overflow': 'auto'  # Allow scrolling if content is large
+        'min-height': '150px',
+        'position': 'relative',
+        'padding-bottom': '60px',
+        'overflow': 'auto'
     },
     'image-container': {
-        'position': 'relative',  # For absolute positioning of buttons
-        'height': '350px',  # Fixed height
+        'position': 'relative',
+        'height': '350px',
         'display': 'flex',
         'flex-direction': 'column'
     },
@@ -152,20 +152,38 @@ styles = {
         'display': 'flex',
         'justify-content': 'center',
         'align-items': 'center',
-        'overflow': 'hidden',  # Hide overflow
-        'position': 'relative'  # For absolute positioning of buttons
+        'overflow': 'hidden',
+        'position': 'relative'
     },
     'image-content': {
         'max-width': '100%',
-        'max-height': '250px',  # Fixed height
-        'object-fit': 'contain'  # Maintain aspect ratio
+        'max-height': '250px',
+        'object-fit': 'contain'
     },
     'footer-container': {
+        'position': 'fixed',
+        'bottom': '0',
+        'width': '100%',
+        'padding': '50px',
+        'backgroundColor': '#f8f9fa',
+        'textAlign': 'center'
+    },
+    'footer-content': {
         'display': 'flex',
-        'justify-content': 'space-between',
-        'padding': '10px 0',
-        'margin-top': '20px',
-        'border-top': '1px solid #dee2e6'
+        'justifyContent': 'center',
+        'alignItems': 'center',
+        'flexDirection': 'column'
+    },
+    'footer-images': {
+        'display': 'flex',
+        'justifyContent': 'space-between',
+        'alignItems': 'center',
+        'width': '100%',
+        'marginTop': '10px'
+    },
+    'image-style': {
+        'width': '100px',  # Adjust size as needed
+        'height': 'auto'
     }
 }
 
@@ -178,6 +196,7 @@ app.layout = html.Div([
     dcc.Store(id='navigation-in-progress', data=False),  # Store to track navigation state
     dcc.Store(id='enabled-interactions-store', data=load_enabled_interactions()),
     dcc.Store(id='initial-visibility-store', data=load_initial_visibility()),
+    dcc.Store(id='clicked-buttons-store', data={}),
 
     # Introduction page
     html.Div(id='intro-container',
@@ -198,8 +217,8 @@ app.layout = html.Div([
     html.Div(id='training-container', style={'display': 'none'}, children=[
         html.Div(className="container-fluid", children=[
             # Header
-            html.H1("Adaptive UI", className="mb-4 mt-3"),
-
+            html.H1("Operator Assembly Support System", className="font-bold mb-4 mt-3"),
+            html.Hr(),
             # Navigation buttons
             html.Div(className="d-flex justify-content-between align-items-center mb-3", children=[
                 html.H3(id='step-header', className="m-0"),
@@ -321,15 +340,25 @@ app.layout = html.Div([
                 ])
             ]),
 
-            # Footer
             html.Div(style=styles['footer-container'], children=[
-                html.Div(id='step-counter', children=[
-                    html.Div(className="d-flex align-items-center", children=[
-                        dbc.Progress(id="step-progress-bar", value=0, style={"width": "200px", "height": "10px"}),
-                        html.Span(id="step-text", className="ms-2 text-muted small")
-                    ])
+                html.Div(className="d-flex justify-content-center align-items-center", children=[
+                    # Experiment ID
+                    html.Div(id='experiment-id-display', className="me-3"),  # Add margin to separate
+
+                    # Step Counter with Progress Bar
+                    html.Div(id='step-counter', children=[
+                        html.Div(className="d-flex align-items-center", children=[
+                            dbc.Progress(id="step-progress-bar", value=0, style={"width": "200px", "height": "10px"}),
+                            html.Span(id="step-text", className="ms-2 text-muted small")
+                        ])
+                    ]),
                 ]),
-                html.Div(id='experiment-id-display')
+
+                # Images Section
+                html.Div(style=styles['footer-images'], children=[
+                    html.Img(src='/assets/logosps.png', style=styles['image-style']),  # Left Image
+                    html.Img(src='/assets/logoxr.jpg', style=styles['image-style'])  # Right Image
+                ]),
             ])
         ])
     ])
@@ -452,17 +481,225 @@ def update_step_content(current_step, assembly_data, experiment_id):
     )
 
 
-# Button state control callback
+#  toggle_short_text callback
+
 @app.callback(
-    [Output('short-text-btn', 'disabled'),
-     Output('long-text-btn', 'disabled'),
-     Output('single-pieces-btn', 'disabled'),
-     Output('assembly-btn', 'disabled'),
-     Output('video-btn', 'disabled')],
-    [Input('current-step', 'data'),
-     Input('enabled-interactions-store', 'data')]
+    [Output('short-text-placeholder', 'style', allow_duplicate=True),
+     Output('short-text-content', 'style', allow_duplicate=True),
+     Output('short-text-btn', 'children'),
+     Output('clicked-buttons-store', 'data', allow_duplicate=True)],
+    [Input('short-text-btn', 'n_clicks')],
+    [State('short-text-placeholder', 'style'),
+     State('experiment-id-store', 'data'),
+     State('current-step', 'data'),
+     State('assembly-data-store', 'data'),
+     State('clicked-buttons-store', 'data')],
+    prevent_initial_call=True
 )
-def update_button_states(current_step, enabled_interactions):
+def toggle_short_text(n_clicks, placeholder_style, experiment_id, current_step, assembly_data, clicked_buttons):
+    if n_clicks is None:
+        return placeholder_style, {'display': 'none'}, [html.I(className="bi bi-eye-fill me-1"),
+                                                        "Show"], clicked_buttons
+
+    step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
+    is_showing = placeholder_style.get('display') == 'none'
+
+    # Use string keys for steps
+    step_key = str(current_step)
+    if step_key not in clicked_buttons:
+        clicked_buttons[step_key] = {}
+
+    if is_showing:
+        # Hide content
+        log_interaction(experiment_id, "toggle_short_text_none", current_step, step_name)
+        clicked_buttons[step_key]['short_text'] = False
+        return {'display': 'block'}, {'display': 'none'}, [html.I(className="bi bi-eye-fill me-1"),
+                                                           "Show"], clicked_buttons
+    else:
+        # Show content
+        log_interaction(experiment_id, "toggle_short_text_block", current_step, step_name)
+        clicked_buttons[step_key]['short_text'] = True
+        return {'display': 'none'}, {'display': 'block'}, [html.I(className="bi bi-eye-fill me-1"),
+                                                           "Viewed"], clicked_buttons
+
+
+# toggle_long_text callback
+@app.callback(
+    [Output('long-text-placeholder', 'style', allow_duplicate=True),
+     Output('long-text-content', 'style', allow_duplicate=True),
+     Output('long-text-btn', 'children'),
+     Output('clicked-buttons-store', 'data', allow_duplicate=True)],
+    [Input('long-text-btn', 'n_clicks')],
+    [State('long-text-placeholder', 'style'),
+     State('experiment-id-store', 'data'),
+     State('current-step', 'data'),
+     State('assembly-data-store', 'data'),
+     State('clicked-buttons-store', 'data')],
+    prevent_initial_call=True
+)
+def toggle_long_text(n_clicks, placeholder_style, experiment_id, current_step, assembly_data, clicked_buttons):
+    if n_clicks is None:
+        return placeholder_style, {'display': 'none'}, [html.I(className="bi bi-eye-fill me-1"),
+                                                        "Show"], clicked_buttons
+
+    step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
+    is_showing = placeholder_style.get('display') == 'none'
+
+    # Update clicked buttons store
+    step_key = str(current_step)
+    if step_key not in clicked_buttons:
+        clicked_buttons[step_key] = {}
+
+    if is_showing:
+        # Hide content
+        log_interaction(experiment_id, "toggle_long_text_none", current_step, step_name)
+        clicked_buttons[step_key]['long_text'] = False
+        return {'display': 'block'}, {'display': 'none'}, [html.I(className="bi bi-eye-fill me-1"),
+                                                           "Show"], clicked_buttons
+    else:
+        # Show content
+        log_interaction(experiment_id, "toggle_long_text_block", current_step, step_name)
+        clicked_buttons[step_key]['long_text'] = True
+        return {'display': 'none'}, {'display': 'block'}, [html.I(className="bi bi-eye-fill me-1"),
+                                                           "Viewed"], clicked_buttons
+
+
+#  toggle_single_pieces callback
+@app.callback(
+    [Output('single-pieces-placeholder', 'style', allow_duplicate=True),
+     Output('single-pieces-img', 'style', allow_duplicate=True),
+     Output('single-pieces-btn', 'children'),
+     Output('clicked-buttons-store', 'data', allow_duplicate=True)],
+    [Input('single-pieces-btn', 'n_clicks')],
+    [State('single-pieces-placeholder', 'style'),
+     State('experiment-id-store', 'data'),
+     State('current-step', 'data'),
+     State('assembly-data-store', 'data'),
+     State('clicked-buttons-store', 'data')],
+    prevent_initial_call=True
+)
+def toggle_single_pieces(n_clicks, placeholder_style, experiment_id, current_step, assembly_data, clicked_buttons):
+    if n_clicks is None:
+        return placeholder_style, {'display': 'none', **styles['image-content']}, [
+            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons
+
+    step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
+    is_showing = placeholder_style.get('display') == 'none'
+
+    # Update clicked buttons store
+    step_key = str(current_step)
+    if step_key not in clicked_buttons:
+        clicked_buttons[step_key] = {}
+
+    if is_showing:
+        # Hide content
+        log_interaction(experiment_id, "toggle_single_pieces_none", current_step, step_name)
+        clicked_buttons[step_key]['single_pieces'] = False
+        return {'display': 'block'}, {'display': 'none', **styles['image-content']}, [
+            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons
+    else:
+        # Show content
+        log_interaction(experiment_id, "toggle_single_pieces_block", current_step, step_name)
+        clicked_buttons[step_key]['single_pieces'] = True
+        return {'display': 'none'}, {'display': 'block', **styles['image-content']}, [
+            html.I(className="bi bi-eye-fill me-1"), "Viewed"], clicked_buttons
+
+
+#  toggle_assembly callback
+@app.callback(
+    [Output('assembly-placeholder', 'style', allow_duplicate=True),
+     Output('assembly-img', 'style', allow_duplicate=True),
+     Output('assembly-btn', 'children'),
+     Output('clicked-buttons-store', 'data', allow_duplicate=True)],
+    [Input('assembly-btn', 'n_clicks')],
+    [State('assembly-placeholder', 'style'),
+     State('experiment-id-store', 'data'),
+     State('current-step', 'data'),
+     State('assembly-data-store', 'data'),
+     State('clicked-buttons-store', 'data')],
+    prevent_initial_call=True
+)
+def toggle_assembly(n_clicks, placeholder_style, experiment_id, current_step, assembly_data, clicked_buttons):
+    if n_clicks is None:
+        return placeholder_style, {'display': 'none', **styles['image-content']}, [
+            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons
+
+    step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
+    is_showing = placeholder_style.get('display') == 'none'
+
+    # Update clicked buttons store
+    step_key = str(current_step)
+    if step_key not in clicked_buttons:
+        clicked_buttons[step_key] = {}
+
+    if is_showing:
+        # Hide content
+        log_interaction(experiment_id, "toggle_assembly_none", current_step, step_name)
+        clicked_buttons[step_key]['assembly'] = False
+        return {'display': 'block'}, {'display': 'none', **styles['image-content']}, [
+            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons
+    else:
+        # Show content
+        log_interaction(experiment_id, "toggle_assembly_block", current_step, step_name)
+        clicked_buttons[step_key]['assembly'] = True
+        return {'display': 'none'}, {'display': 'block', **styles['image-content']}, [
+            html.I(className="bi bi-eye-fill me-1"), "Viewed"], clicked_buttons
+
+
+# toggle_video callback
+@app.callback(
+    [Output('video-placeholder', 'style', allow_duplicate=True),
+     Output('video-player', 'style', allow_duplicate=True),
+     Output('video-btn', 'children'),
+     Output('clicked-buttons-store', 'data', allow_duplicate=True)],
+    [Input('video-btn', 'n_clicks')],
+    [State('video-placeholder', 'style'),
+     State('experiment-id-store', 'data'),
+     State('current-step', 'data'),
+     State('assembly-data-store', 'data'),
+     State('clicked-buttons-store', 'data')],
+    prevent_initial_call=True
+)
+def toggle_video(n_clicks, placeholder_style, experiment_id, current_step, assembly_data, clicked_buttons):
+    if n_clicks is None:
+        return placeholder_style, {'display': 'none', **styles['image-content']}, [
+            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons
+
+    step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
+    is_showing = placeholder_style.get('display') == 'none'
+
+    # Update clicked buttons store
+    step_key = str(current_step)
+    if step_key not in clicked_buttons:
+        clicked_buttons[step_key] = {}
+
+    if is_showing:
+        # Hide content
+        log_interaction(experiment_id, "toggle_video_none", current_step, step_name)
+        clicked_buttons[step_key]['video'] = False
+        return {'display': 'block'}, {'display': 'none', **styles['image-content']}, [
+            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons
+    else:
+        # Show content
+        log_interaction(experiment_id, "toggle_video_block", current_step, step_name)
+        clicked_buttons[step_key]['video'] = True
+        return {'display': 'none'}, {'display': 'block', **styles['image-content']}, [
+            html.I(className="bi bi-eye-fill me-1"), "Viewed"], clicked_buttons
+
+
+# button state callback
+@app.callback(
+    [Output('short-text-btn', 'disabled', allow_duplicate=True),
+     Output('long-text-btn', 'disabled', allow_duplicate=True),
+     Output('single-pieces-btn', 'disabled', allow_duplicate=True),
+     Output('assembly-btn', 'disabled', allow_duplicate=True),
+     Output('video-btn', 'disabled', allow_duplicate=True)],
+    [Input('current-step', 'data'),
+     Input('enabled-interactions-store', 'data'),
+     Input('clicked-buttons-store', 'data')],
+    prevent_initial_call=True
+)
+def update_button_states(current_step, enabled_interactions, clicked_buttons):
     # Find the configuration for the current step
     step_config = next((step for step in enabled_interactions['steps']
                         if step['step_id'] == current_step),
@@ -475,31 +712,48 @@ def update_button_states(current_step, enabled_interactions):
                        }})
 
     buttons = step_config['buttons']
+
+    # Get the clicked state for the current step using string key
+    step_key = str(current_step)
+    step_clicked = clicked_buttons.get(step_key, {})
+
+    # A button should be disabled if either:
+    # 1. It's disabled in the JSON configuration, or
+    # 2. It has been clicked in the current step
     return (
-        not buttons.get('short_text', True),
-        not buttons.get('long_text', True),
-        not buttons.get('single_pieces', True),
-        not buttons.get('assembly', True),
-        not buttons.get('video', True)
+        not buttons.get('short_text', True) or step_clicked.get('short_text', False),
+        not buttons.get('long_text', True) or step_clicked.get('long_text', False),
+        not buttons.get('single_pieces', True) or step_clicked.get('single_pieces', False),
+        not buttons.get('assembly', True) or step_clicked.get('assembly', False),
+        not buttons.get('video', True) or step_clicked.get('video', False)
     )
 
 
-# Initial content visibility callback
+# Reset button labels and placeholders when changing steps
 @app.callback(
-    [Output('short-text-placeholder', 'style'),
-     Output('short-text-content', 'style'),
-     Output('long-text-placeholder', 'style'),
-     Output('long-text-content', 'style'),
-     Output('single-pieces-placeholder', 'style'),
-     Output('single-pieces-img', 'style'),
-     Output('assembly-placeholder', 'style'),
-     Output('assembly-img', 'style'),
-     Output('video-placeholder', 'style'),
-     Output('video-player', 'style')],
-    [Input('current-step', 'data'),
-     Input('initial-visibility-store', 'data')]
+    [Output('short-text-placeholder', 'style', allow_duplicate=True),
+     Output('short-text-content', 'style', allow_duplicate=True),
+     Output('long-text-placeholder', 'style', allow_duplicate=True),
+     Output('long-text-content', 'style', allow_duplicate=True),
+     Output('single-pieces-placeholder', 'style', allow_duplicate=True),
+     Output('single-pieces-img', 'style', allow_duplicate=True),
+     Output('assembly-placeholder', 'style', allow_duplicate=True),
+     Output('assembly-img', 'style', allow_duplicate=True),
+     Output('video-placeholder', 'style', allow_duplicate=True),
+     Output('video-player', 'style', allow_duplicate=True),
+     Output('short-text-btn', 'children', allow_duplicate=True),
+     Output('long-text-btn', 'children', allow_duplicate=True),
+     Output('single-pieces-btn', 'children', allow_duplicate=True),
+     Output('assembly-btn', 'children', allow_duplicate=True),
+     Output('video-btn', 'children', allow_duplicate=True)],
+    [Input('current-step', 'data')],
+    [State('initial-visibility-store', 'data')],
+    prevent_initial_call=True
 )
-def set_initial_content_visibility(current_step, initial_visibility):
+def reset_button_states_and_visibility(current_step, initial_visibility):
+    # Default button label
+    default_label = [html.I(className="bi bi-eye-fill me-1"), "Show"]
+
     # Find the configuration for the current step
     step_config = next((step for step in initial_visibility['steps']
                         if step['step_id'] == current_step),
@@ -535,175 +789,13 @@ def set_initial_content_visibility(current_step, initial_visibility):
         visible_placeholder if content.get('assembly', False) else hidden_placeholder,
         visible_content if content.get('assembly', False) else hidden_content,
         visible_placeholder if content.get('video', False) else hidden_placeholder,
-        visible_content if content.get('video', False) else hidden_content
+        visible_content if content.get('video', False) else hidden_content,
+        default_label,
+        default_label,
+        default_label,
+        default_label,
+        default_label
     )
-
-
-# Toggle Short Text
-@app.callback(
-    [Output('short-text-placeholder', 'style', allow_duplicate=True),
-     Output('short-text-content', 'style', allow_duplicate=True),
-     Output('short-text-btn', 'children')],
-    [Input('short-text-btn', 'n_clicks')],
-    [State('short-text-placeholder', 'style'),
-     State('experiment-id-store', 'data'),
-     State('current-step', 'data'),
-     State('assembly-data-store', 'data')],
-    prevent_initial_call=True
-)
-def toggle_short_text(n_clicks, placeholder_style, experiment_id, current_step, assembly_data):
-    if n_clicks is None:
-        return placeholder_style, {'display': 'none'}, [html.I(className="bi bi-eye-fill me-1"), "Show"]
-
-    step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
-
-    is_showing = placeholder_style.get('display') == 'none'
-
-    if is_showing:
-        # Hide content
-        log_interaction(experiment_id, "toggle_short_text_none", current_step, step_name)
-        return {'display': 'block'}, {'display': 'none'}, [html.I(className="bi bi-eye-fill me-1"), "Show"]
-    else:
-        # Show content
-        log_interaction(experiment_id, "toggle_short_text_block", current_step, step_name)
-        return {'display': 'none'}, {'display': 'block'}, [html.I(className="bi bi-eye-slash me-1"), "Hide"]
-
-
-# Toggle Long Text
-@app.callback(
-    [Output('long-text-placeholder', 'style', allow_duplicate=True),
-     Output('long-text-content', 'style', allow_duplicate=True),
-     Output('long-text-btn', 'children')],
-    [Input('long-text-btn', 'n_clicks')],
-    [State('long-text-placeholder', 'style'),
-     State('experiment-id-store', 'data'),
-     State('current-step', 'data'),
-     State('assembly-data-store', 'data')],
-    prevent_initial_call=True
-)
-def toggle_long_text(n_clicks, placeholder_style, experiment_id, current_step, assembly_data):
-    if n_clicks is None:
-        return placeholder_style, {'display': 'none'}, [html.I(className="bi bi-eye-fill me-1"), "Show"]
-
-    step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
-
-    is_showing = placeholder_style.get('display') == 'none'
-
-    if is_showing:
-        # Hide content
-        log_interaction(experiment_id, "toggle_long_text_none", current_step, step_name)
-        return {'display': 'block'}, {'display': 'none'}, [html.I(className="bi bi-eye-fill me-1"), "Show"]
-    else:
-        # Show content
-        log_interaction(experiment_id, "toggle_long_text_block", current_step, step_name)
-        return {'display': 'none'}, {'display': 'block'}, [html.I(className="bi bi-eye-slash me-1"), "Hide"]
-
-
-# Toggle Single Pieces
-@app.callback(
-    [Output('single-pieces-placeholder', 'style', allow_duplicate=True),
-     Output('single-pieces-img', 'style', allow_duplicate=True),
-     Output('single-pieces-btn', 'children')],
-    [Input('single-pieces-btn', 'n_clicks')],
-    [State('single-pieces-placeholder', 'style'),
-     State('experiment-id-store', 'data'),
-     State('current-step', 'data'),
-     State('assembly-data-store', 'data')],
-    prevent_initial_call=True
-)
-def toggle_single_pieces(n_clicks, placeholder_style, experiment_id, current_step, assembly_data):
-    if n_clicks is None:
-        return placeholder_style, {'display': 'none', **styles['image-content']}, [
-            html.I(className="bi bi-eye-fill me-1"), "Show"]
-
-    step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
-
-    is_showing = placeholder_style.get('display') == 'none'
-
-    if is_showing:
-        # Hide content
-        log_interaction(experiment_id, "toggle_single_pieces_none", current_step, step_name)
-        return {'display': 'block'}, {'display': 'none', **styles['image-content']}, [
-            html.I(className="bi bi-eye-fill me-1"), "Show"]
-    else:
-        # Show content
-        log_interaction(experiment_id, "toggle_single_pieces_block", current_step, step_name)
-        return {'display': 'none'}, {'display': 'block', **styles['image-content']}, [
-            html.I(className="bi bi-eye-slash me-1"), "Hide"]
-
-
-# Toggle Assembly
-@app.callback(
-    [Output('assembly-placeholder', 'style', allow_duplicate=True),
-     Output('assembly-img', 'style', allow_duplicate=True),
-     Output('assembly-btn', 'children')],
-    [Input('assembly-btn', 'n_clicks')],
-    [State('assembly-placeholder', 'style'),
-     State('experiment-id-store', 'data'),
-     State('current-step', 'data'),
-     State('assembly-data-store', 'data')],
-    prevent_initial_call=True
-)
-def toggle_assembly(n_clicks, placeholder_style, experiment_id, current_step, assembly_data):
-    if n_clicks is None:
-        return placeholder_style, {'display': 'none', **styles['image-content']}, [
-            html.I(className="bi bi-eye-fill me-1"), "Show"]
-
-    step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
-
-    is_showing = placeholder_style.get('display') == 'none'
-
-    if is_showing:
-        # Hide content
-        log_interaction(experiment_id, "toggle_assembly_none", current_step, step_name)
-        return {'display': 'block'}, {'display': 'none', **styles['image-content']}, [
-            html.I(className="bi bi-eye-fill me-1"), "Show"]
-    else:
-        # Show content
-        log_interaction(experiment_id, "toggle_assembly_block", current_step, step_name)
-        return {'display': 'none'}, {'display': 'block', **styles['image-content']}, [
-            html.I(className="bi bi-eye-slash me-1"), "Hide"]
-
-
-# Toggle video
-@app.callback(
-    [Output('video-placeholder', 'style', allow_duplicate=True),
-     Output('video-player', 'style', allow_duplicate=True),
-     Output('video-btn', 'children')],
-    [Input('video-btn', 'n_clicks')],
-    [State('video-placeholder', 'style'),
-     State('experiment-id-store', 'data'),
-     State('current-step', 'data'),
-     State('assembly-data-store', 'data')],
-    prevent_initial_call=True
-)
-def toggle_video(n_clicks, placeholder_style, experiment_id, current_step, assembly_data):
-    if n_clicks is None:
-        return {'display': 'block'}, {'display': 'none', **styles['image-content']}, [
-            html.I(className="bi bi-eye-fill me-1"), "Show"]
-
-    step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
-
-    # Check if the button was just clicked
-    if dash.callback_context.triggered:
-        button_id = dash.callback_context.triggered[0]['prop_id'].split('.')[0]
-        if button_id == 'video-btn':
-            # If the video is currently showing (placeholder is hidden)
-            current_display = placeholder_style.get('display', 'block')
-            if current_display == 'none':
-                # Hide video, show placeholder
-                log_interaction(experiment_id, "toggle_video_none", current_step, step_name)
-                return {'display': 'block'}, {'display': 'none', 'max-width': '100%', 'max-height': '300px'}, [
-                    html.I(className="bi bi-eye-fill me-1"), "Show"]
-            else:
-                # Show video, hide placeholder
-                log_interaction(experiment_id, "toggle_video_block", current_step, step_name)
-                return {'display': 'none'}, {'display': 'block', 'max-width': '100%', 'max-height': '300px'}, [
-                    html.I(className="bi bi-eye-slash me-1"), "Hide"]
-
-    # Default fallback (shouldn't typically reach here)
-    return placeholder_style, {'display': 'none', 'max-width': '100%', 'max-height': '300px'}, [
-        html.I(className="bi bi-eye-fill me-1"), "Show"]
 
 
 # Ensure the required directories exist
