@@ -56,7 +56,7 @@ def init_log_df():
 
 
 # Log user interaction
-def log_interaction(experiment_id, action, step_id=None, step_name=None):
+def log_interaction(experiment_id, action, step_id=None, step_name=None, button_states=None):
     df = init_log_df()
     new_row = {
         'experiment_id': experiment_id,
@@ -65,9 +65,47 @@ def log_interaction(experiment_id, action, step_id=None, step_name=None):
         'step_id': step_id if step_id is not None else 'N/A',
         'step_name': step_name if step_name is not None else 'N/A'
     }
+
+    # Aggiungi lo stato di tutti i pulsanti se fornito
+    if button_states:
+        for button_name, state in button_states.items():
+            new_row[f'{button_name}_viewed'] = 1 if state else 0
+
     df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
     df.to_csv('interaction_logs.csv', index=False)
     return
+
+
+# Inizializzazione del DataFrame di log con colonne aggiuntive
+def init_log_df():
+    columns = [
+        'experiment_id', 'timestamp', 'action', 'step_id', 'step_name',
+        'short_text_viewed', 'long_text_viewed', 'single_pieces_viewed',
+        'assembly_viewed', 'video_viewed'
+    ]
+
+    if os.path.exists('interaction_logs.csv'):
+        df = pd.read_csv('interaction_logs.csv')
+        for col in columns:
+            if col not in df.columns:
+                df[col] = 0
+        return df
+    else:
+        return pd.DataFrame(columns=columns)
+
+
+# Funzione di utilità per ottenere lo stato completo dei pulsanti per il passo corrente
+def get_complete_button_states(current_step, clicked_buttons):
+    step_key = str(current_step)
+    step_clicked = clicked_buttons.get(step_key, {})
+
+    return {
+        'short_text': step_clicked.get('short_text', False),
+        'long_text': step_clicked.get('long_text', False),
+        'single_pieces': step_clicked.get('single_pieces', False),
+        'assembly': step_clicked.get('assembly', False),
+        'video': step_clicked.get('video', False)
+    }
 
 
 def load_enabled_interactions():
@@ -403,32 +441,7 @@ def set_navigation_in_progress(prev_clicks, next_clicks):
     return True
 
 
-# Previous and Next buttons navigation
-@app.callback(
-    [Output('current-step', 'data', allow_duplicate=True),
-     Output('navigation-in-progress', 'data', allow_duplicate=True)],
-    [Input('prev-button', 'n_clicks'),
-     Input('next-button', 'n_clicks')],
-    [State('current-step', 'data'),
-     State('assembly-data-store', 'data'),
-     State('experiment-id-store', 'data')],
-    prevent_initial_call=True
-)
-def navigate_steps(prev_clicks, next_clicks, current_step, assembly_data, experiment_id):
-    ctx = dash.callback_context
-    if not ctx.triggered:
-        return current_step, False
 
-    button_id = ctx.triggered[0]['prop_id'].split('.')[0]
-    step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
-
-    if button_id == 'prev-button' and current_step > 1:
-        log_interaction(experiment_id, 'navigate_previous', current_step, step_name)
-        return current_step - 1, False
-    elif button_id == 'next-button' and current_step < len(assembly_data):
-        log_interaction(experiment_id, 'navigate_next', current_step, step_name)
-        return current_step + 1, False
-    return current_step, False
 
 
 # Update step content
@@ -511,19 +524,21 @@ def toggle_short_text(n_clicks, placeholder_style, experiment_id, current_step, 
 
     if is_showing:
         # Hide content
-        log_interaction(experiment_id, "toggle_short_text_none", current_step, step_name)
         clicked_buttons[step_key]['short_text'] = False
+        button_states = get_complete_button_states(current_step, clicked_buttons)
+        log_interaction(experiment_id, "toggle_short_text_none", current_step, step_name, button_states)
         return {'display': 'block'}, {'display': 'none'}, [html.I(className="bi bi-eye-fill me-1"),
                                                            "Show"], clicked_buttons
     else:
         # Show content
-        log_interaction(experiment_id, "toggle_short_text_block", current_step, step_name)
         clicked_buttons[step_key]['short_text'] = True
+        button_states = get_complete_button_states(current_step, clicked_buttons)
+        log_interaction(experiment_id, "toggle_short_text_block", current_step, step_name, button_states)
         return {'display': 'none'}, {'display': 'block'}, [html.I(className="bi bi-eye-fill me-1"),
                                                            "Viewed"], clicked_buttons
 
 
-# toggle_long_text callback
+# toggle long_text
 @app.callback(
     [Output('long-text-placeholder', 'style', allow_duplicate=True),
      Output('long-text-content', 'style', allow_duplicate=True),
@@ -552,19 +567,21 @@ def toggle_long_text(n_clicks, placeholder_style, experiment_id, current_step, a
 
     if is_showing:
         # Hide content
-        log_interaction(experiment_id, "toggle_long_text_none", current_step, step_name)
         clicked_buttons[step_key]['long_text'] = False
+        button_states = get_complete_button_states(current_step, clicked_buttons)
+        log_interaction(experiment_id, "toggle_long_text_none", current_step, step_name, button_states)
         return {'display': 'block'}, {'display': 'none'}, [html.I(className="bi bi-eye-fill me-1"),
                                                            "Show"], clicked_buttons
     else:
         # Show content
-        log_interaction(experiment_id, "toggle_long_text_block", current_step, step_name)
         clicked_buttons[step_key]['long_text'] = True
+        button_states = get_complete_button_states(current_step, clicked_buttons)
+        log_interaction(experiment_id, "toggle_long_text_block", current_step, step_name, button_states)
         return {'display': 'none'}, {'display': 'block'}, [html.I(className="bi bi-eye-fill me-1"),
                                                            "Viewed"], clicked_buttons
 
 
-#  toggle_single_pieces callback
+# toggle single_pieces callback
 @app.callback(
     [Output('single-pieces-placeholder', 'style', allow_duplicate=True),
      Output('single-pieces-img', 'style', allow_duplicate=True),
@@ -593,19 +610,21 @@ def toggle_single_pieces(n_clicks, placeholder_style, experiment_id, current_ste
 
     if is_showing:
         # Hide content
-        log_interaction(experiment_id, "toggle_single_pieces_none", current_step, step_name)
         clicked_buttons[step_key]['single_pieces'] = False
+        button_states = get_complete_button_states(current_step, clicked_buttons)
+        log_interaction(experiment_id, "toggle_single_pieces_none", current_step, step_name, button_states)
         return {'display': 'block'}, {'display': 'none', **styles['image-content']}, [
             html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons
     else:
         # Show content
-        log_interaction(experiment_id, "toggle_single_pieces_block", current_step, step_name)
         clicked_buttons[step_key]['single_pieces'] = True
+        button_states = get_complete_button_states(current_step, clicked_buttons)
+        log_interaction(experiment_id, "toggle_single_pieces_block", current_step, step_name, button_states)
         return {'display': 'none'}, {'display': 'block', **styles['image-content']}, [
             html.I(className="bi bi-eye-fill me-1"), "Viewed"], clicked_buttons
 
 
-#  toggle_assembly callback
+# toggle assembly callback
 @app.callback(
     [Output('assembly-placeholder', 'style', allow_duplicate=True),
      Output('assembly-img', 'style', allow_duplicate=True),
@@ -634,19 +653,21 @@ def toggle_assembly(n_clicks, placeholder_style, experiment_id, current_step, as
 
     if is_showing:
         # Hide content
-        log_interaction(experiment_id, "toggle_assembly_none", current_step, step_name)
         clicked_buttons[step_key]['assembly'] = False
+        button_states = get_complete_button_states(current_step, clicked_buttons)
+        log_interaction(experiment_id, "toggle_assembly_none", current_step, step_name, button_states)
         return {'display': 'block'}, {'display': 'none', **styles['image-content']}, [
             html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons
     else:
         # Show content
-        log_interaction(experiment_id, "toggle_assembly_block", current_step, step_name)
         clicked_buttons[step_key]['assembly'] = True
+        button_states = get_complete_button_states(current_step, clicked_buttons)
+        log_interaction(experiment_id, "toggle_assembly_block", current_step, step_name, button_states)
         return {'display': 'none'}, {'display': 'block', **styles['image-content']}, [
             html.I(className="bi bi-eye-fill me-1"), "Viewed"], clicked_buttons
 
 
-# toggle_video callback
+# toggle video callback
 @app.callback(
     [Output('video-placeholder', 'style', allow_duplicate=True),
      Output('video-player', 'style', allow_duplicate=True),
@@ -675,16 +696,70 @@ def toggle_video(n_clicks, placeholder_style, experiment_id, current_step, assem
 
     if is_showing:
         # Hide content
-        log_interaction(experiment_id, "toggle_video_none", current_step, step_name)
         clicked_buttons[step_key]['video'] = False
+        button_states = get_complete_button_states(current_step, clicked_buttons)
+        log_interaction(experiment_id, "toggle_video_none", current_step, step_name, button_states)
         return {'display': 'block'}, {'display': 'none', **styles['image-content']}, [
             html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons
     else:
         # Show content
-        log_interaction(experiment_id, "toggle_video_block", current_step, step_name)
         clicked_buttons[step_key]['video'] = True
+        button_states = get_complete_button_states(current_step, clicked_buttons)
+        log_interaction(experiment_id, "toggle_video_block", current_step, step_name, button_states)
         return {'display': 'none'}, {'display': 'block', **styles['image-content']}, [
             html.I(className="bi bi-eye-fill me-1"), "Viewed"], clicked_buttons
+
+
+# navigation callback
+@app.callback(
+    [Output('current-step', 'data', allow_duplicate=True),
+     Output('navigation-in-progress', 'data', allow_duplicate=True)],
+    [Input('prev-button', 'n_clicks'),
+     Input('next-button', 'n_clicks')],
+    [State('current-step', 'data'),
+     State('assembly-data-store', 'data'),
+     State('experiment-id-store', 'data'),
+     State('clicked-buttons-store', 'data')],
+    prevent_initial_call=True
+)
+def navigate_steps(prev_clicks, next_clicks, current_step, assembly_data, experiment_id, clicked_buttons):
+    ctx = dash.callback_context
+    if not ctx.triggered:
+        return current_step, False
+
+    button_id = ctx.triggered[0]['prop_id'].split('.')[0]
+    step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
+
+    # Get the current state of all buttons for logging
+    button_states = get_complete_button_states(current_step, clicked_buttons)
+
+    if button_id == 'prev-button' and current_step > 1:
+        log_interaction(experiment_id, 'navigate_previous', current_step, step_name, button_states)
+        return current_step - 1, False
+    elif button_id == 'next-button' and current_step < len(assembly_data):
+        log_interaction(experiment_id, 'navigate_next', current_step, step_name, button_states)
+        return current_step + 1, False
+    return current_step, False
+
+
+# state loading callback for every step
+@app.callback(
+    Output('current-step', 'data', allow_duplicate=True),
+    [Input('current-step', 'data')],
+    [State('experiment-id-store', 'data'),
+     State('assembly-data-store', 'data'),
+     State('clicked-buttons-store', 'data')],
+    prevent_initial_call=True
+)
+def log_step_load(current_step, experiment_id, assembly_data, clicked_buttons):
+    if current_step <= 0 or current_step > len(assembly_data):
+        return current_step
+
+    step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
+    button_states = get_complete_button_states(current_step, clicked_buttons)
+
+    log_interaction(experiment_id, 'step_loaded', current_step, step_name, button_states)
+    return current_step
 
 
 # button state callback
