@@ -2,11 +2,11 @@
   "assembly_process": [
     {
       "id": 1,
-      "name": "Step Name 1",
+      "name": "Withdraw Components for PIECE 1",
       "category": "withdraw",
       "target_cycle_time": 5,
       "adaptive_fields": {
-        "short_text": "Withdraw SNP1 (2 pieces) from shelf A1 and PG1 (2 pieces) from shelf A3",
+        "short_text": "Withdraw SNP1 (2 pieces) from shelf B2 and PG1 (2 pieces) from shelf B4",
         "long_text": "",
         "image_single_pieces": "./images_single_pieces/pezzi_iniziali_1.png",
         "image_assembly": "",
@@ -15,7 +15,7 @@
     },
     {
       "id": 2,
-      "name": "Step Name 2",
+      "name": "Assembly PIECE 1",
       "category": "assembly",
       "target_cycle_time": 15,
       "adaptive_fields": {
@@ -28,11 +28,11 @@
     },
     {
       "id": 3,
-      "name": "Step Name 3",
+      "name": "Withdraw Components for PIECE 2",
       "category": "withdraw",
       "target_cycle_time": 5,
       "adaptive_fields": {
-        "short_text": "Withdraw GNE22 (2 pieces) from shelf A2",
+        "short_text": "Withdraw GNE22 (2 pieces) from shelf C3",
         "long_text": "",
         "image_single_pieces": "./images_single_pieces/pezzi_iniziali_2.png",
         "image_assembly": "",
@@ -41,7 +41,7 @@
     },
     {
       "id": 4,
-      "name": "Step Name 4",
+      "name": "Assembly PIECE 2",
       "category": "assembly",
       "target_cycle_time": 15,
       "adaptive_fields": {
@@ -54,11 +54,11 @@
     },
     {
       "id": 5,
-      "name": "Step Name 5",
+      "name": "Withdraw Components for PIECE 3",
       "category": "withdraw",
       "target_cycle_time": 10,
       "adaptive_fields": {
-        "short_text": "Withdraw GPP11 (2 pieces) from shelf A2",
+        "short_text": "Withdraw GPP11 (2 pieces) from shelf B3",
         "long_text": "",
         "image_single_pieces": "./images_single_pieces/pezzi_iniziali_3.png",
         "image_assembly": "",
@@ -67,7 +67,7 @@
     },
     {
       "id": 6,
-      "name": "Step Name 6",
+      "name": "Assembly PIECE 3",
       "category": "assembly",
       "target_cycle_time": 15,
       "adaptive_fields": {
@@ -80,11 +80,11 @@
     },
     {
       "id": 7,
-      "name": "Step Name 7",
+      "name": "Withdraw Components for PIECE 4",
       "category": "withdraw",
       "target_cycle_time": 10,
       "adaptive_fields": {
-        "short_text": "Withdraw PN3 (2 pieces) from shelf A3 and GNP21 from shelf A2",
+        "short_text": "Withdraw PN3 (2 pieces) from shelf D1 and GNP21 from shelf A1",
         "long_text": "",
         "image_single_pieces": "./images_single_pieces/pezzi_iniziali_4.png",
         "image_assembly": "",
@@ -93,7 +93,7 @@
     },
     {
       "id": 8,
-      "name": "Step Name 8",
+      "name": "Assembly PIECE 4",
       "category": "assembly",
       "target_cycle_time": 15,
       "adaptive_fields": {
@@ -106,11 +106,11 @@
     },
     {
       "id": 9,
-      "name": "Step Name 9",
+      "name": "Withdraw Components for PIECE 5",
       "category": "withdraw",
       "target_cycle_time": 10,
       "adaptive_fields": {
-        "short_text": "Withdraw PON from shelf B3",
+        "short_text": "Withdraw PON from shelf C1",
         "long_text": "",
         "image_single_pieces": "./images_single_pieces/pezzi_iniziali_5.png",
         "image_assembly": "",
@@ -119,7 +119,7 @@
     },
     {
       "id": 10,
-      "name": "Step Name 10",
+      "name": "Assembly PIECE 5",
       "category": "assembly",
       "target_cycle_time": 15,
       "adaptive_fields": {
@@ -132,7 +132,7 @@
     },
     {
       "id": 11,
-      "name": "Step Name 11",
+      "name": "Assembly PIECE 6",
       "category": "assembly",
       "target_cycle_time": 15,
       "adaptive_fields": {
@@ -145,11 +145,11 @@
     },
     {
       "id": 12,
-      "name": "Step Name 12",
+      "name": "Withdraw Components for PIECE 7",
       "category": "withdraw",
       "target_cycle_time": 10,
       "adaptive_fields": {
-        "short_text": "Withdraw ELA from shelf B7",
+        "short_text": "Withdraw ELA from shelf A3",
         "long_text": "",
         "image_single_pieces": "./images_single_pieces/pezzi_iniziali_7.png",
         "image_assembly": "",
@@ -158,7 +158,7 @@
     },
     {
       "id": 13,
-      "name": "Step Name 13",
+      "name": "Assembly PIECE 7",
       "category": "assembly",
       "target_cycle_time": 15,
       "adaptive_fields": {
@@ -171,11 +171,11 @@
     },
     {
       "id": 14,
-      "name": "Step Name 14",
+      "name": "Withdraw Components for PIECE 8",
       "category": "withdraw",
       "target_cycle_time": 10,
       "adaptive_fields": {
-        "short_text": "Withdraw F1 from shelf A3",
+        "short_text": "Withdraw F1 from shelf D2",
         "long_text": "",
         "image_single_pieces": "./images_single_pieces/pezzi_iniziali_8.png",
         "image_assembly": "",
@@ -184,7 +184,7 @@
     },
     {
       "id": 15,
-      "name": "Step Name 15",
+      "name": "Assembly PIECE 8",
       "category": "assembly",
       "target_cycle_time": 15,
       "adaptive_fields": {
@@ -197,7 +197,7 @@
     },
     {
       "id": 16,
-      "name": "Step Name 16",
+      "name": "Final Control",
       "category": "control",
       "target_cycle_time": 15,
       "adaptive_fields": {
