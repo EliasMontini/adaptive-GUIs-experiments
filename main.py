@@ -204,7 +204,7 @@ styles = {
     },
     'image-content': {
         'max-width': '100%',
-        'max-height': '250px',
+        'max-height': '200px',
         'object-fit': 'contain'
     },
     'footer-container': {
