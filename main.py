@@ -143,93 +143,99 @@ placeholder_img = "https://developers.elementor.com/docs/assets/img/elementor-pl
 
 # Define custom styles to add to the layout
 styles = {
-'full-view': {
-    'width': '100%',
-    'height': '100vh',
-    'display': 'flex',
-    'flexDirection': 'column',
-    'overflow': 'hidden'
-},
-'intro-screen': {
-    'display': 'flex',
-    'justify-content': 'center',
-    'align-items': 'center',
-    'background-color': '#f8f9fa',
-    'flex': '1',
-    'padding':'10px',
-    'overflow-y': 'auto',
-    'height': '100vh',
-},
-'training-screen': {
-    'padding': '10px',
-    'flex': '1',
-    'display': 'flex',
-    'flexDirection': 'column',
-    'overflow-y': 'auto'
-},
-'content-container': {
-    'flex': '1',
-    'overflow-y': 'auto',
-    'paddingBottom': '70px'
-},
-'button-container': {
-    'padding': '10px',
-    'background-color': 'rgba(255, 255, 255, 0.9)',
-    'z-index': '10'
-},
-'text-content-area': {
-    'min-height': '150px',
-    'position': 'relative',
-    'overflow': 'auto'
-},
-'image-container': {
-    'position': 'relative',
-    'height': '350px',
-    'display': 'flex',
-    'flex-direction': 'column'
-},
-'image-wrapper': {
-    'flex-grow': '1',
-    'display': 'flex',
-    'justify-content': 'center',
-    'align-items': 'center',
-    'overflow': 'hidden',
-    'position': 'relative'
-},
-'image-content': {
-    'max-width': '100%',
-    'max-height': '250px',
-    'object-fit': 'contain'
-},
-'footer-container': {
-    'position': 'fixed',
-    'bottom': '0',
-    'left': '0',
-    'width': '100%',
-    'padding': '10px',
-    'backgroundColor': '#f8f9fa',
-    'textAlign': 'center',
-    'borderTop': '1px solid #e0e0e0',
-    'z-index': '100'
-},
-'footer-content': {
-    'display': 'flex',
-    'justifyContent': 'center',
-    'alignItems': 'center',
-    'flexDirection': 'column'
-},
-'footer-images': {
-    'display': 'flex',
-    'justifyContent': 'space-between',
-    'alignItems': 'center',
-    'width': '100%',
-    'marginTop': '5px'
-},
-'image-style': {
-    'width': '80px',
-    'height': 'auto'
+    'full-view': {
+        'width': '100%',
+        'height': '100vh',
+        'display': 'flex',
+        'flexDirection': 'column',
+        'overflow': 'hidden'
+    },
+    'intro-screen': {
+        'display': 'flex',
+        'justify-content': 'center',
+        'align-items': 'center',
+        'background-color': '#f8f9fa',
+        'flex': '1',
+        'padding': '10px',
+        'overflow-y': 'auto',
+        'height': '100vh',
+    },
+    'training-screen': {
+        'padding': '10px',
+        'flex': '1',
+        'display': 'flex',
+        'flexDirection': 'column',
+        'overflow-y': 'auto'
+    },
+    'content-container': {
+        'flex': '1',
+        'overflow-y': 'auto',
+        'paddingBottom': '70px'
+    },
 
-}}
+    'text-content-area': {
+        'min-height': '150px',
+        'position': 'relative',
+        'overflow': 'auto',
+        'padding-bottom': '60px'
+    },
+    'image-container': {
+        'position': 'relative',
+        'height': '350px',
+        'padding-bottom': '60px'
+    },
+    'image-wrapper': {
+        'flex-grow': '1',
+        'display': 'flex',
+        'justify-content': 'center',
+        'align-items': 'center',
+        'overflow': 'hidden',
+        'position': 'relative',
+        'height': 'calc(100% - 60px)'
+    },
+    'button-container': {
+        'position': 'absolute',
+        'bottom': '0',
+        'left': '0',
+        'width': '100%',
+        'padding': '10px',
+        'background-color': 'rgba(255, 255, 255, 0.9)',
+        'z-index': '10'
+    },
+    'image-content': {
+        'max-width': '100%',
+        'max-height': '250px',
+        'object-fit': 'contain'
+    },
+    'footer-container': {
+        'position': 'fixed',
+        'bottom': '0',
+        'left': '0',
+        'width': '100%',
+        'padding': '10px',
+        'backgroundColor': '#f8f9fa',
+        'textAlign': 'center',
+        'borderTop': '1px solid #e0e0e0',
+        'z-index': '100'
+    },
+    'footer-content': {
+        'display': 'flex',
+        'justifyContent': 'center',
+        'alignItems': 'center',
+        'flexDirection': 'column'
+    },
+    'footer-images': {
+        'display': 'flex',
+        'justifyContent': 'space-between',
+        'alignItems': 'center',
+        'width': '100%',
+        'marginTop': '5px'
+    },
+    'image-style': {
+        'width': '80px',
+        'height': 'auto'
+
+    }}
 
 # App layout
 app.layout = html.Div([
@@ -247,7 +253,7 @@ app.layout = html.Div([
              style=styles['intro-screen'],
              children=[
                  html.Div(style={'width': '400px', 'padding': '30px', 'border-radius': '8px',
-                               }, children=[
+                                 }, children=[
                      html.H1("Assembly Training Dashboard", style={'text-align': 'center', 'margin-bottom': '20px'}),
                      html.P("Welcome to the Assembly Training Dashboard. Please enter an experiment ID to begin.",
                             style={'margin-bottom': '20px'}),
@@ -266,16 +272,18 @@ app.layout = html.Div([
             html.Div(className="d-flex justify-content-between align-items-center mb-1", children=[
                 html.H3(id='step-header', className="m-0"),
                 html.Div(className="d-flex gap-2", children=[
-                    dbc.Button("PREVIOUS", id='prev-button', color='secondary', style={ 'padding': '20px 20px', 'width': '150px'}),
-                    dbc.Button("NEXT", id='next-button', color='primary', style={ 'padding': '20px 20px', 'width': '150px'}),
+                    dbc.Button("PREVIOUS", id='prev-button', color='secondary',
+                               style={'padding': '20px 20px', 'width': '150px'}),
+                    dbc.Button("NEXT", id='next-button', color='primary',
+                               style={'padding': '20px 20px', 'width': '150px'}),
                 ])
             ]),
 
             # Top row: Text descriptions
             html.Div(className="row mb-1", children=[
                 # Short text area
-                html.Div(className="col-md-4", children=[
-                    html.Span("Short description", className="h5 d-block mb-2"),
+                html.Div(className="col-md-4", style={'height': '150px'}, children=[
+                    html.Span("Short description", className="h5 d-block mb-1"),
                     html.Div(style=styles['text-content-area'], children=[
                         html.Div(id="short-text-placeholder", className="placeholder-glow", children=[
                             html.Span(className="placeholder col-5"),
@@ -370,6 +378,7 @@ app.layout = html.Div([
                                      style=styles['image-content']),
                             html.Video(id="video-player",
                                        controls=True,
+                                       autoPlay=False,
                                        style={'display': 'none', **styles['image-content']},
                                        className="img-fluid")
                         ]),
@@ -444,9 +453,6 @@ def set_navigation_in_progress(prev_clicks, next_clicks):
     if prev_clicks is None and next_clicks is None:
         return False
     return True
-
-
-
 
 
 # Update step content
@@ -677,7 +683,8 @@ def toggle_assembly(n_clicks, placeholder_style, experiment_id, current_step, as
     [Output('video-placeholder', 'style', allow_duplicate=True),
      Output('video-player', 'style', allow_duplicate=True),
      Output('video-btn', 'children'),
-     Output('clicked-buttons-store', 'data', allow_duplicate=True)],
+     Output('clicked-buttons-store', 'data', allow_duplicate=True),
+     Output('video-player', 'autoPlay')],  # Add autoPlay output
     [Input('video-btn', 'n_clicks')],
     [State('video-placeholder', 'style'),
      State('experiment-id-store', 'data'),
@@ -689,7 +696,7 @@ def toggle_assembly(n_clicks, placeholder_style, experiment_id, current_step, as
 def toggle_video(n_clicks, placeholder_style, experiment_id, current_step, assembly_data, clicked_buttons):
     if n_clicks is None:
         return placeholder_style, {'display': 'none', **styles['image-content']}, [
-            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons
+            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, False
 
     step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
     is_showing = placeholder_style.get('display') == 'none'
@@ -705,14 +712,14 @@ def toggle_video(n_clicks, placeholder_style, experiment_id, current_step, assem
         button_states = get_complete_button_states(current_step, clicked_buttons)
         log_interaction(experiment_id, "toggle_video_none", current_step, step_name, button_states)
         return {'display': 'block'}, {'display': 'none', **styles['image-content']}, [
-            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons
+            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, False
     else:
-        # Show content
+        # Show content and autoplay
         clicked_buttons[step_key]['video'] = True
         button_states = get_complete_button_states(current_step, clicked_buttons)
         log_interaction(experiment_id, "toggle_video_block", current_step, step_name, button_states)
         return {'display': 'none'}, {'display': 'block', **styles['image-content']}, [
-            html.I(className="bi bi-eye-fill me-1"), "Viewed"], clicked_buttons
+            html.I(className="bi bi-eye-fill me-1"), "Viewed"], clicked_buttons, True
 
 
 # navigation callback
@@ -825,7 +832,8 @@ def update_button_states(current_step, enabled_interactions, clicked_buttons):
      Output('long-text-btn', 'children', allow_duplicate=True),
      Output('single-pieces-btn', 'children', allow_duplicate=True),
      Output('assembly-btn', 'children', allow_duplicate=True),
-     Output('video-btn', 'children', allow_duplicate=True)],
+     Output('video-btn', 'children', allow_duplicate=True),
+     Output('video-player', 'autoPlay', allow_duplicate=True)],  # Add autoPlay output
     [Input('current-step', 'data')],
     [State('initial-visibility-store', 'data')],
     prevent_initial_call=True
@@ -859,6 +867,9 @@ def reset_button_states_and_visibility(current_step, initial_visibility):
     visible_text = {'display': 'block'}
     hidden_text = {'display': 'none'}
 
+    # Reset autoPlay to False when changing steps
+    autoPlay = False
+
     return (
         visible_placeholder if content.get('short_text', False) else hidden_placeholder,
         visible_text if content.get('short_text', False) else hidden_text,
@@ -874,8 +885,10 @@ def reset_button_states_and_visibility(current_step, initial_visibility):
         default_label,
         default_label,
         default_label,
-        default_label
+        default_label,
+        autoPlay
     )
+
 
 
 # Ensure the required directories exist

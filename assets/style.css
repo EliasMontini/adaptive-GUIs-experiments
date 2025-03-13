@@ -255,3 +255,10 @@ html, body {
     margin-top: 20px;
     border-top: 1px solid #dee2e6;
 }
+
+.btn:disabled {
+    opacity: 0.4 !important;
+    background-color: #e9ecef !important;
+    border-color: #e9ecef !important;
+    color: #6c757d !important;
+ }
