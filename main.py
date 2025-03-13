@@ -161,7 +161,7 @@ styles = {
     'height': '100vh',
 },
 'training-screen': {
-    'padding': '20px',
+    'padding': '10px',
     'flex': '1',
     'display': 'flex',
     'flexDirection': 'column',
@@ -261,19 +261,18 @@ app.layout = html.Div([
     html.Div(id='training-container', style={'display': 'none'}, children=[
         html.Div(className="container-fluid", children=[
             # Header
-            html.H1("Operator Assembly Support System", className="font-bold mb-4 mt-3"),
-            html.Hr(),
+
             # Navigation buttons
-            html.Div(className="d-flex justify-content-between align-items-center mb-3", children=[
+            html.Div(className="d-flex justify-content-between align-items-center mb-1", children=[
                 html.H3(id='step-header', className="m-0"),
                 html.Div(className="d-flex gap-2", children=[
-                    dbc.Button("Previous", id='prev-button', color='secondary'),
-                    dbc.Button("Next", id='next-button', color='primary')
+                    dbc.Button("PREVIOUS", id='prev-button', color='secondary', style={ 'padding': '20px 20px', 'width': '150px'}),
+                    dbc.Button("NEXT", id='next-button', color='primary', style={ 'padding': '20px 20px', 'width': '150px'}),
                 ])
             ]),
 
             # Top row: Text descriptions
-            html.Div(className="row mb-4", children=[
+            html.Div(className="row mb-1", children=[
                 # Short text area
                 html.Div(className="col-md-4", children=[
                     html.Span("Short description", className="h5 d-block mb-2"),
@@ -296,7 +295,7 @@ app.layout = html.Div([
 
                 # Long text area
                 html.Div(className="col-md-8", children=[
-                    html.Span("Long description", className="h5 d-block mb-2"),
+                    html.Span("Long description", className="h5 d-block mb-1"),
                     html.Div(style=styles['text-content-area'], children=[
                         html.Div(id="long-text-placeholder", className="placeholder-glow", children=[
                             html.Span(className="placeholder col-7"),
@@ -403,7 +402,7 @@ app.layout = html.Div([
         # Images Section
         html.Div(style=styles['footer-images'], children=[
             html.Img(src='/assets/logosps.png', style=styles['image-style']),  # Left Image
-            html.Img(src='/assets/logoxr.jpg', style=styles['image-style'])  # Right Image
+            html.Img(src='/assets/logoxr.png', style=styles['image-style'])  # Right Image
         ]),
     ])
 ])
