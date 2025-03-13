@@ -143,87 +143,93 @@ placeholder_img = "https://developers.elementor.com/docs/assets/img/elementor-pl
 
 # Define custom styles to add to the layout
 styles = {
-    'full-view': {
-        'width': '100%',
-        'height': '100vh',
-        'overflow': 'hidden'
-    },
-    'intro-screen': {
-        'display': 'flex',
-        'justify-content': 'center',
-        'align-items': 'center',
-        'background-color': '#f8f9fa',
-        'height': '100vh'
-    },
-    'training-screen': {
-        'padding': '20px',
-        'height': '100vh',
-        'overflow-y': 'auto'
-    },
-    'content-container': {
-        'margin-bottom': '20px',
-        'height': '100%'
-    },
-    'button-container': {
-        'position': 'absolute',
-        'bottom': '0',
-        'left': '0',
-        'right': '0',
-        'padding': '10px',
-        'background-color': 'rgba(255, 255, 255, 0.9)',
-        'z-index': '10'
-    },
-    'text-content-area': {
-        'min-height': '150px',
-        'position': 'relative',
-        'padding-bottom': '60px',
-        'overflow': 'auto'
-    },
-    'image-container': {
-        'position': 'relative',
-        'height': '350px',
-        'display': 'flex',
-        'flex-direction': 'column'
-    },
-    'image-wrapper': {
-        'flex-grow': '1',
-        'display': 'flex',
-        'justify-content': 'center',
-        'align-items': 'center',
-        'overflow': 'hidden',
-        'position': 'relative'
-    },
-    'image-content': {
-        'max-width': '100%',
-        'max-height': '250px',
-        'object-fit': 'contain'
-    },
-    'footer-container': {
-        'position': 'fixed',
-        'bottom': '0',
-        'width': '100%',
-        'padding': '50px',
-        'backgroundColor': '#f8f9fa',
-        'textAlign': 'center'
-    },
-    'footer-content': {
-        'display': 'flex',
-        'justifyContent': 'center',
-        'alignItems': 'center',
-        'flexDirection': 'column'
-    },
-    'footer-images': {
-        'display': 'flex',
-        'justifyContent': 'space-between',
-        'alignItems': 'center',
-        'width': '100%',
-        'marginTop': '10px'
-    },
-    'image-style': {
-        'width': '100px',  # Adjust size as needed
-        'height': 'auto'
-    }
-}
+'full-view': {
+    'width': '100%',
+    'height': '100vh',
+    'display': 'flex',
+    'flexDirection': 'column',
+    'overflow': 'hidden'
+},
+'intro-screen': {
+    'display': 'flex',
+    'justify-content': 'center',
+    'align-items': 'center',
+    'background-color': '#f8f9fa',
+    'flex': '1',
+    'padding':'10px',
+    'overflow-y': 'auto',
+    'height': '100vh',
+},
+'training-screen': {
+    'padding': '20px',
+    'flex': '1',
+    'display': 'flex',
+    'flexDirection': 'column',
+    'overflow-y': 'auto'
+},
+'content-container': {
+    'flex': '1',
+    'overflow-y': 'auto',
+    'paddingBottom': '70px'
+},
+'button-container': {
+    'padding': '10px',
+    'background-color': 'rgba(255, 255, 255, 0.9)',
+    'z-index': '10'
+},
+'text-content-area': {
+    'min-height': '150px',
+    'position': 'relative',
+    'overflow': 'auto'
+},
+'image-container': {
+    'position': 'relative',
+    'height': '350px',
+    'display': 'flex',
+    'flex-direction': 'column'
+},
+'image-wrapper': {
+    'flex-grow': '1',
+    'display': 'flex',
+    'justify-content': 'center',
+    'align-items': 'center',
+    'overflow': 'hidden',
+    'position': 'relative'
+},
+'image-content': {
+    'max-width': '100%',
+    'max-height': '250px',
+    'object-fit': 'contain'
+},
+'footer-container': {
+    'position': 'fixed',
+    'bottom': '0',
+    'left': '0',
+    'width': '100%',
+    'padding': '10px',
+    'backgroundColor': '#f8f9fa',
+    'textAlign': 'center',
+    'borderTop': '1px solid #e0e0e0',
+    'z-index': '100'
+},
+'footer-content': {
+    'display': 'flex',
+    'justifyContent': 'center',
+    'alignItems': 'center',
+    'flexDirection': 'column'
+},
+'footer-images': {
+    'display': 'flex',
+    'justifyContent': 'space-between',
+    'alignItems': 'center',
+    'width': '100%',
+    'marginTop': '5px'
+},
+'image-style': {
+    'width': '80px',
+    'height': 'auto'
+
+}}
 
 # App layout
 app.layout = html.Div([
@@ -240,8 +246,8 @@ app.layout = html.Div([
     html.Div(id='intro-container',
              style=styles['intro-screen'],
              children=[
-                 html.Div(style={'width': '400px', 'padding': '30px', 'background': 'white', 'border-radius': '8px',
-                                 'box-shadow': '0 0 15px rgba(0,0,0,0.1)'}, children=[
+                 html.Div(style={'width': '400px', 'padding': '30px', 'border-radius': '8px',
+                               }, children=[
                      html.H1("Assembly Training Dashboard", style={'text-align': 'center', 'margin-bottom': '20px'}),
                      html.P("Welcome to the Assembly Training Dashboard. Please enter an experiment ID to begin.",
                             style={'margin-bottom': '20px'}),
@@ -377,28 +383,28 @@ app.layout = html.Div([
                     ])
                 ])
             ]),
+        ]),
 
-            html.Div(style=styles['footer-container'], children=[
-                html.Div(className="d-flex justify-content-center align-items-center", children=[
-                    # Experiment ID
-                    html.Div(id='experiment-id-display', className="me-3"),  # Add margin to separate
+    ]),
+    html.Div(style=styles['footer-container'], children=[
+        html.Div(className="d-flex justify-content-center align-items-center", children=[
+            # Experiment ID
+            html.Div(id='experiment-id-display', className="me-3"),  # Add margin to separate
 
-                    # Step Counter with Progress Bar
-                    html.Div(id='step-counter', children=[
-                        html.Div(className="d-flex align-items-center", children=[
-                            dbc.Progress(id="step-progress-bar", value=0, style={"width": "200px", "height": "10px"}),
-                            html.Span(id="step-text", className="ms-2 text-muted small")
-                        ])
-                    ]),
-                ]),
+            # Step Counter with Progress Bar
+            html.Div(id='step-counter', children=[
+                html.Div(className="d-flex align-items-center", children=[
+                    dbc.Progress(id="step-progress-bar", value=0, style={"width": "200px", "height": "10px"}),
+                    html.Span(id="step-text", className="ms-2 text-muted small")
+                ])
+            ]),
+        ]),
 
-                # Images Section
-                html.Div(style=styles['footer-images'], children=[
-                    html.Img(src='/assets/logosps.png', style=styles['image-style']),  # Left Image
-                    html.Img(src='/assets/logoxr.jpg', style=styles['image-style'])  # Right Image
-                ]),
-            ])
-        ])
+        # Images Section
+        html.Div(style=styles['footer-images'], children=[
+            html.Img(src='/assets/logosps.png', style=styles['image-style']),  # Left Image
+            html.Img(src='/assets/logoxr.jpg', style=styles['image-style'])  # Right Image
+        ]),
     ])
 ])
 
