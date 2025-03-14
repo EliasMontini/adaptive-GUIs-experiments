@@ -12,7 +12,7 @@ from dash import dcc, html, Input, Output, State
 
 # Initialize the app with Flask server to handle static files
 server = flask.Flask(__name__)
-app = dash.Dash(__name__, server=server,
+dash_app = dash.Dash(__name__, server=server,
                 external_stylesheets=[
                     dbc.themes.BOOTSTRAP,
                     "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
@@ -20,7 +20,7 @@ app = dash.Dash(__name__, server=server,
                 assets_folder='assets',
                 meta_tags=[{'name': 'viewport',
                             'content': 'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'}])
-
+app = dash_app.server  # required for vercel deployment
 
 # Create routes for serving static files
 @server.route('/images_single_pieces/<path:path>')
@@ -358,7 +358,7 @@ styles = {
     }}
 
 # App layout
-app.layout = html.Div([
+dash_app.layout = html.Div([
     # Store components for state management
     dcc.Store(id='current-step', data=0),  # 0 = intro, 1+ = steps
     dcc.Store(id='experiment-id-store', data=None),
@@ -569,7 +569,7 @@ app.layout = html.Div([
 # Callbacks
 
 # Begin button callback
-@app.callback(
+@dash_app.callback(
     [Output('intro-container', 'style'),
      Output('training-container', 'style'),
      Output('experiment-id-store', 'data'),
@@ -594,7 +594,7 @@ def begin_training(n_clicks, experiment_id, mode):
 
 
 # Set navigation in progress
-@app.callback(
+@dash_app.callback(
     Output('navigation-in-progress', 'data'),
     [Input('prev-button', 'n_clicks'),
      Input('next-button', 'n_clicks')]
@@ -621,7 +621,7 @@ def update_visibility_mode(selected_mode):
 
 
 # Update step content
-@app.callback(
+@dash_app.callback(
     [Output('step-header', 'children'),
      Output('step-progress-bar', 'value'),
      Output('step-text', 'children'),
@@ -671,7 +671,7 @@ def update_step_content(current_step, assembly_data, experiment_id):
 
 #  toggle_short_text callback
 
-@app.callback(
+@dash_app.callback(
     [Output('short-text-placeholder', 'style', allow_duplicate=True),
      Output('short-text-content', 'style', allow_duplicate=True),
      Output('short-text-btn', 'children'),
@@ -726,7 +726,7 @@ def toggle_short_text(n_clicks, placeholder_style, experiment_id, mode, current_
 
 
 # toggle long_text
-@app.callback(
+@dash_app.callback(
     [Output('long-text-placeholder', 'style', allow_duplicate=True),
      Output('long-text-content', 'style', allow_duplicate=True),
      Output('long-text-btn', 'children'),
@@ -781,7 +781,7 @@ def toggle_long_text(n_clicks, placeholder_style, experiment_id, mode, current_s
 
 
 # toggle single_pieces callback
-@app.callback(
+@dash_app.callback(
     [Output('single-pieces-placeholder', 'style', allow_duplicate=True),
      Output('single-pieces-img', 'style', allow_duplicate=True),
      Output('single-pieces-btn', 'children'),
@@ -836,7 +836,7 @@ def toggle_single_pieces(n_clicks, placeholder_style, experiment_id, mode, curre
 
 
 # toggle assembly callback
-@app.callback(
+@dash_app.callback(
     [Output('assembly-placeholder', 'style', allow_duplicate=True),
      Output('assembly-img', 'style', allow_duplicate=True),
      Output('assembly-btn', 'children'),
@@ -891,7 +891,7 @@ def toggle_assembly(n_clicks, placeholder_style, experiment_id, mode, current_st
 
 
 # toggle video callback
-@app.callback(
+@dash_app.callback(
     [Output('video-placeholder', 'style', allow_duplicate=True),
      Output('video-player', 'style', allow_duplicate=True),
      Output('video-btn', 'children'),
@@ -947,7 +947,7 @@ def toggle_video(n_clicks, placeholder_style, experiment_id, mode, current_step,
 
 
 # navigation callback
-@app.callback(
+@dash_app.callback(
     [Output('current-step', 'data', allow_duplicate=True),
      Output('navigation-in-progress', 'data', allow_duplicate=True),
      Output('training-container', 'style', allow_duplicate=True),
@@ -1035,7 +1035,7 @@ def navigate_steps(prev_clicks, next_clicks, initial_visibility, current_step, a
 
 
 # state loading callback for every step
-@app.callback(
+@dash_app.callback(
     Output('current-step', 'data', allow_duplicate=True),
     [Input('current-step', 'data')],
     [State('experiment-id-store', 'data'),
@@ -1056,7 +1056,7 @@ def log_step_load(current_step, experiment_id, mode, assembly_data, clicked_butt
 
 
 # button state callback
-@app.callback(
+@dash_app.callback(
     [Output('short-text-btn', 'disabled', allow_duplicate=True),
      Output('long-text-btn', 'disabled', allow_duplicate=True),
      Output('single-pieces-btn', 'disabled', allow_duplicate=True),
@@ -1130,7 +1130,7 @@ def update_button_states(current_step, enabled_interactions, clicked_buttons,
 
 
 # Reset button labels and placeholders when changing steps
-@app.callback(
+@dash_app.callback(
     [Output('short-text-placeholder', 'style', allow_duplicate=True),
      Output('short-text-content', 'style', allow_duplicate=True),
      Output('long-text-placeholder', 'style', allow_duplicate=True),
@@ -1358,4 +1358,4 @@ def ensure_directories_exist():
 # Run the app
 if __name__ == '__main__':
     ensure_directories_exist()
-    app.run_server(debug=False, host='0.0.0.0', port=3000)
+    dash_app.run_server(debug=False, host='0.0.0.0', port=3000)
