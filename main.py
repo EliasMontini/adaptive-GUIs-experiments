@@ -394,6 +394,19 @@ app.layout = html.Div([
         ]),
 
     ]),
+    # Thank you page
+    html.Div(id='thankyou-container', style={'display': 'none'}, children=[
+        html.Div(className="container-fluid d-flex flex-column justify-content-center align-items-center",
+                 style={'height': '80vh'}, children=[
+                html.H1("Thanks for Partecipating!",
+                        className="mb-5 text-center"),
+                html.Div(className="text-center", children=[
+                    dbc.Button("Restart", id='restart-button', color='primary',
+                               style={'padding': '20px 20px', 'width': '200px'})
+                ])
+            ])
+    ]),
+
     html.Div(style=styles['footer-container'], children=[
         html.Div(className="d-flex justify-content-center align-items-center", children=[
             # Experiment ID
@@ -684,7 +697,7 @@ def toggle_assembly(n_clicks, placeholder_style, experiment_id, current_step, as
      Output('video-player', 'style', allow_duplicate=True),
      Output('video-btn', 'children'),
      Output('clicked-buttons-store', 'data', allow_duplicate=True),
-     Output('video-player', 'autoPlay')],  # Add autoPlay output
+     Output('video-player', 'autoPlay')],
     [Input('video-btn', 'n_clicks')],
     [State('video-placeholder', 'style'),
      State('experiment-id-store', 'data'),
@@ -725,19 +738,24 @@ def toggle_video(n_clicks, placeholder_style, experiment_id, current_step, assem
 # navigation callback
 @app.callback(
     [Output('current-step', 'data', allow_duplicate=True),
-     Output('navigation-in-progress', 'data', allow_duplicate=True)],
+     Output('navigation-in-progress', 'data', allow_duplicate=True),
+     Output('training-container', 'style', allow_duplicate=True),
+     Output('thankyou-container', 'style', allow_duplicate=True)],
     [Input('prev-button', 'n_clicks'),
      Input('next-button', 'n_clicks')],
     [State('current-step', 'data'),
      State('assembly-data-store', 'data'),
      State('experiment-id-store', 'data'),
-     State('clicked-buttons-store', 'data')],
+     State('clicked-buttons-store', 'data'),
+     State('training-container', 'style'),
+     State('thankyou-container', 'style')],
     prevent_initial_call=True
 )
-def navigate_steps(prev_clicks, next_clicks, current_step, assembly_data, experiment_id, clicked_buttons):
+def navigate_steps(prev_clicks, next_clicks, current_step, assembly_data, experiment_id,
+                   clicked_buttons, training_style, thankyou_style):
     ctx = dash.callback_context
     if not ctx.triggered:
-        return current_step, False
+        return current_step, False, training_style, thankyou_style
 
     button_id = ctx.triggered[0]['prop_id'].split('.')[0]
     step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
@@ -745,13 +763,25 @@ def navigate_steps(prev_clicks, next_clicks, current_step, assembly_data, experi
     # Get the current state of all buttons for logging
     button_states = get_complete_button_states(current_step, clicked_buttons)
 
+    # If user clicks previous from the first step, do nothing
     if button_id == 'prev-button' and current_step > 1:
         log_interaction(experiment_id, 'navigate_previous', current_step, step_name, button_states)
-        return current_step - 1, False
+        # If we're returning from thank you page to the last step
+        if current_step == len(assembly_data) + 1:
+            return len(assembly_data), False, {'display': 'block', **styles['training-screen']}, {'display': 'none'}
+        return current_step - 1, False, training_style, thankyou_style
+
+    # If user clicks next on the last step, show thank you page
+    elif button_id == 'next-button' and current_step == len(assembly_data):
+        log_interaction(experiment_id, 'navigate_to_thankyou', current_step, step_name, button_states)
+        return len(assembly_data) + 1, False, {'display': 'none'}, {'display': 'block'}
+
+    # Regular next button navigation
     elif button_id == 'next-button' and current_step < len(assembly_data):
         log_interaction(experiment_id, 'navigate_next', current_step, step_name, button_states)
-        return current_step + 1, False
-    return current_step, False
+        return current_step + 1, False, training_style, thankyou_style
+
+    return current_step, False, training_style, thankyou_style
 
 
 # state loading callback for every step
@@ -889,6 +919,35 @@ def reset_button_states_and_visibility(current_step, initial_visibility):
         autoPlay
     )
 
+
+# Restart button callback
+@app.callback(
+    [Output('intro-container', 'style', allow_duplicate=True),
+     Output('training-container', 'style', allow_duplicate=True),
+     Output('thankyou-container', 'style', allow_duplicate=True),
+     Output('experiment-id-store', 'data', allow_duplicate=True),
+     Output('current-step', 'data', allow_duplicate=True),
+     Output('clicked-buttons-store', 'data', allow_duplicate=True)],
+    [Input('restart-button', 'n_clicks')],
+    [State('experiment-id-store', 'data')],
+    prevent_initial_call=True
+)
+def restart_application(n_clicks, experiment_id):
+    if n_clicks is None:
+        raise dash.exceptions.PreventUpdate
+
+    # Log restart action
+    log_interaction(experiment_id, 'restart_application')
+
+    # Reset to intro screen
+    return (
+        styles['intro-screen'],  # Show intro screen
+        {'display': 'none'},  # Hide training screen
+        {'display': 'none'},  # Hide thank you screen
+        None,  # Reset experiment ID
+        0,  # Reset step to 0
+        {}  # Reset clicked buttons
+    )
 
 
 # Ensure the required directories exist
