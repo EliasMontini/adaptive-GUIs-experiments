@@ -1,0 +1,635 @@
+experiment_id,timestamp,action,step_id,step_name,short_text_viewed,long_text_viewed,single_pieces_viewed,assembly_viewed,video_viewed
+1,2025-03-17 14:02:13.403138,start_experiment,,,,,,,
+1,2025-03-17 14:02:13.539651,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0
+1,2025-03-17 14:02:22.162499,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0
+1,2025-03-17 14:02:27.994210,toggle_single_pieces_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
+1,2025-03-17 14:03:03.900904,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
+1,2025-03-17 14:03:04.146268,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0
+1,2025-03-17 14:03:09.683092,toggle_short_text_block,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0
+1,2025-03-17 14:03:16.436638,toggle_video_block,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,1.0
+1,2025-03-17 14:03:38.415317,navigate_next,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,1.0
+1,2025-03-17 14:03:38.517064,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0
+1,2025-03-17 14:03:43.043205,toggle_single_pieces_block,3.0,Withdraw Components for PIECE 2,0.0,0.0,1.0,0.0,0.0
+1,2025-03-17 14:03:50.064130,navigate_next,3.0,Withdraw Components for PIECE 2,0.0,0.0,1.0,0.0,0.0
+1,2025-03-17 14:03:50.286686,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0
+1,2025-03-17 14:03:51.863476,toggle_video_block,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,1.0
+1,2025-03-17 14:04:11.218919,navigate_next,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,1.0
+1,2025-03-17 14:04:11.328010,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0
+1,2025-03-17 14:04:14.562705,toggle_single_pieces_block,5.0,Withdraw Components for PIECE 3,0.0,0.0,1.0,0.0,0.0
+1,2025-03-17 14:04:18.549729,navigate_next,5.0,Withdraw Components for PIECE 3,0.0,0.0,1.0,0.0,0.0
+1,2025-03-17 14:04:18.670336,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0
+1,2025-03-17 14:04:20.078057,toggle_assembly_block,6.0,Assembly PIECE 3,0.0,0.0,0.0,1.0,0.0
+1,2025-03-17 14:04:32.437664,navigate_next,6.0,Assembly PIECE 3,0.0,0.0,0.0,1.0,0.0
+1,2025-03-17 14:04:32.575866,step_loaded,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0
+1,2025-03-17 14:04:35.634658,toggle_single_pieces_block,7.0,Withdraw Components for PIECE 4,0.0,0.0,1.0,0.0,0.0
+1,2025-03-17 14:04:40.775850,navigate_next,7.0,Withdraw Components for PIECE 4,0.0,0.0,1.0,0.0,0.0
+1,2025-03-17 14:04:40.884199,step_loaded,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0
+1,2025-03-17 14:04:42.238401,toggle_assembly_block,8.0,Assembly PIECE 4,0.0,0.0,0.0,1.0,0.0
+1,2025-03-17 14:04:52.200099,navigate_next,8.0,Assembly PIECE 4,0.0,0.0,0.0,1.0,0.0
+1,2025-03-17 14:04:52.306711,step_loaded,9.0,Withdraw Components for PIECE 5,0.0,0.0,0.0,0.0,0.0
+1,2025-03-17 14:04:58.049077,toggle_single_pieces_block,9.0,Withdraw Components for PIECE 5,0.0,0.0,1.0,0.0,0.0
+1,2025-03-17 14:05:04.111433,navigate_next,9.0,Withdraw Components for PIECE 5,0.0,0.0,1.0,0.0,0.0
+1,2025-03-17 14:05:04.222254,step_loaded,10.0,Assembly PIECE 5,0.0,0.0,0.0,0.0,0.0
+1,2025-03-17 14:05:05.654758,toggle_assembly_block,10.0,Assembly PIECE 5,0.0,0.0,0.0,1.0,0.0
+1,2025-03-17 14:05:09.573743,navigate_next,10.0,Assembly PIECE 5,0.0,0.0,0.0,1.0,0.0
+1,2025-03-17 14:05:09.697742,step_loaded,11.0,Assembly PIECE 6,0.0,0.0,0.0,0.0,0.0
+1,2025-03-17 14:05:11.116393,toggle_single_pieces_block,11.0,Assembly PIECE 6,0.0,0.0,1.0,0.0,0.0
+1,2025-03-17 14:05:20.095788,toggle_assembly_block,11.0,Assembly PIECE 6,0.0,0.0,1.0,1.0,0.0
+1,2025-03-17 14:05:35.192052,navigate_next,11.0,Assembly PIECE 6,0.0,0.0,1.0,1.0,0.0
+1,2025-03-17 14:05:35.301658,step_loaded,12.0,Withdraw Components for PIECE 7,0.0,0.0,0.0,0.0,0.0
+1,2025-03-17 14:05:38.265498,toggle_single_pieces_block,12.0,Withdraw Components for PIECE 7,0.0,0.0,1.0,0.0,0.0
+1,2025-03-17 14:05:41.850698,navigate_next,12.0,Withdraw Components for PIECE 7,0.0,0.0,1.0,0.0,0.0
+1,2025-03-17 14:05:41.971177,step_loaded,13.0,Assembly PIECE 7,0.0,0.0,0.0,0.0,0.0
+1,2025-03-17 14:05:44.321365,toggle_assembly_block,13.0,Assembly PIECE 7,0.0,0.0,0.0,1.0,0.0
+1,2025-03-17 14:05:47.620968,toggle_video_block,13.0,Assembly PIECE 7,0.0,0.0,0.0,1.0,1.0
+1,2025-03-17 14:06:05.827506,navigate_next,13.0,Assembly PIECE 7,0.0,0.0,0.0,1.0,1.0
+1,2025-03-17 14:06:05.957786,step_loaded,14.0,Withdraw Components for PIECE 8,0.0,0.0,0.0,0.0,0.0
+1,2025-03-17 14:06:10.846877,toggle_single_pieces_block,14.0,Withdraw Components for PIECE 8,0.0,0.0,1.0,0.0,0.0
+1,2025-03-17 14:06:17.571423,navigate_next,14.0,Withdraw Components for PIECE 8,0.0,0.0,1.0,0.0,0.0
+1,2025-03-17 14:06:17.666197,step_loaded,15.0,Assembly PIECE 8,0.0,0.0,0.0,0.0,0.0
+1,2025-03-17 14:06:20.856957,toggle_video_block,15.0,Assembly PIECE 8,0.0,0.0,0.0,0.0,1.0
+1,2025-03-17 14:06:33.246510,navigate_next,15.0,Assembly PIECE 8,0.0,0.0,0.0,0.0,1.0
+1,2025-03-17 14:06:33.351509,step_loaded,16.0,Final Control,0.0,0.0,0.0,0.0,0.0
+1,2025-03-17 14:06:45.088444,toggle_video_block,16.0,Final Control,0.0,0.0,0.0,0.0,1.0
+1,2025-03-17 14:06:54.761324,navigate_to_thankyou,16.0,Final Control,0.0,0.0,0.0,0.0,1.0
+1,2025-03-17 14:07:09.658476,restart_application,,,,,,,
+2,2025-03-17 14:13:47.771680,start_experiment,,,,,,,
+2,2025-03-17 14:13:47.893667,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:14:01.650115,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:14:37.502785,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:14:37.619464,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:14:39.730012,toggle_short_text_block,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:14:59.408126,toggle_long_text_block,2.0,Assembly PIECE 1,1.0,1.0,0.0,0.0,0.0
+2,2025-03-17 14:16:16.530152,toggle_single_pieces_block,2.0,Assembly PIECE 1,1.0,1.0,1.0,0.0,0.0
+2,2025-03-17 14:16:18.864678,toggle_assembly_block,2.0,Assembly PIECE 1,1.0,1.0,1.0,1.0,0.0
+2,2025-03-17 14:16:35.356173,navigate_next,2.0,Assembly PIECE 1,1.0,1.0,1.0,1.0,0.0
+2,2025-03-17 14:16:35.479832,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:16:37.403134,toggle_short_text_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:16:48.564859,navigate_next,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:16:48.685734,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:16:54.350649,toggle_short_text_block,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:17:20.986617,toggle_single_pieces_block,4.0,Assembly PIECE 2,1.0,0.0,1.0,0.0,0.0
+2,2025-03-17 14:17:22.339409,toggle_assembly_block,4.0,Assembly PIECE 2,1.0,0.0,1.0,1.0,0.0
+2,2025-03-17 14:17:29.946474,toggle_video_block,4.0,Assembly PIECE 2,1.0,0.0,1.0,1.0,1.0
+2,2025-03-17 14:17:54.198900,navigate_next,4.0,Assembly PIECE 2,1.0,0.0,1.0,1.0,1.0
+2,2025-03-17 14:17:54.298489,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:17:56.062219,toggle_short_text_block,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:18:06.414816,navigate_next,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:18:06.557345,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:18:08.123770,toggle_short_text_block,6.0,Assembly PIECE 3,1.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:18:29.456215,toggle_assembly_block,6.0,Assembly PIECE 3,1.0,0.0,0.0,1.0,0.0
+2,2025-03-17 14:19:01.052629,navigate_next,6.0,Assembly PIECE 3,1.0,0.0,0.0,1.0,0.0
+2,2025-03-17 14:19:01.158015,step_loaded,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:19:04.098955,toggle_short_text_block,7.0,Withdraw Components for PIECE 4,1.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:19:22.190243,navigate_next,7.0,Withdraw Components for PIECE 4,1.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:19:22.302670,step_loaded,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:19:28.103410,toggle_short_text_block,8.0,Assembly PIECE 4,1.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:19:39.978286,toggle_assembly_block,8.0,Assembly PIECE 4,1.0,0.0,0.0,1.0,0.0
+2,2025-03-17 14:19:51.753577,navigate_next,8.0,Assembly PIECE 4,1.0,0.0,0.0,1.0,0.0
+2,2025-03-17 14:19:51.859237,step_loaded,9.0,Withdraw Components for PIECE 5,0.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:19:53.495744,toggle_short_text_block,9.0,Withdraw Components for PIECE 5,1.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:20:05.580190,navigate_next,9.0,Withdraw Components for PIECE 5,1.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:20:05.710740,step_loaded,10.0,Assembly PIECE 5,0.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:20:07.272896,toggle_short_text_block,10.0,Assembly PIECE 5,1.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:20:23.418352,toggle_single_pieces_block,10.0,Assembly PIECE 5,1.0,0.0,1.0,0.0,0.0
+2,2025-03-17 14:20:25.544220,toggle_assembly_block,10.0,Assembly PIECE 5,1.0,0.0,1.0,1.0,0.0
+2,2025-03-17 14:20:50.751488,navigate_next,10.0,Assembly PIECE 5,1.0,0.0,1.0,1.0,0.0
+2,2025-03-17 14:20:50.976657,step_loaded,11.0,Assembly PIECE 6,0.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:20:54.294529,toggle_short_text_block,11.0,Assembly PIECE 6,1.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:21:03.937089,toggle_assembly_block,11.0,Assembly PIECE 6,1.0,0.0,0.0,1.0,0.0
+2,2025-03-17 14:22:07.869810,navigate_next,11.0,Assembly PIECE 6,1.0,0.0,0.0,1.0,0.0
+2,2025-03-17 14:22:07.979015,step_loaded,12.0,Withdraw Components for PIECE 7,0.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:22:10.372927,toggle_short_text_block,12.0,Withdraw Components for PIECE 7,1.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:22:29.994778,navigate_next,12.0,Withdraw Components for PIECE 7,1.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:22:30.117241,step_loaded,13.0,Assembly PIECE 7,0.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:22:33.241921,toggle_short_text_block,13.0,Assembly PIECE 7,1.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:22:51.163966,toggle_assembly_block,13.0,Assembly PIECE 7,1.0,0.0,0.0,1.0,0.0
+2,2025-03-17 14:23:09.545016,navigate_previous,13.0,Assembly PIECE 7,1.0,0.0,0.0,1.0,0.0
+2,2025-03-17 14:23:09.657526,step_loaded,12.0,Withdraw Components for PIECE 7,1.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:23:12.872283,navigate_next,12.0,Withdraw Components for PIECE 7,1.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:23:12.996025,step_loaded,13.0,Assembly PIECE 7,1.0,0.0,0.0,1.0,0.0
+2,2025-03-17 14:23:18.823875,toggle_long_text_block,13.0,Assembly PIECE 7,1.0,1.0,0.0,1.0,0.0
+2,2025-03-17 14:23:24.615161,navigate_next,13.0,Assembly PIECE 7,1.0,1.0,0.0,1.0,0.0
+2,2025-03-17 14:23:24.717752,step_loaded,14.0,Withdraw Components for PIECE 8,0.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:23:26.048244,toggle_short_text_block,14.0,Withdraw Components for PIECE 8,1.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:23:33.863076,navigate_next,14.0,Withdraw Components for PIECE 8,1.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:23:33.997077,step_loaded,15.0,Assembly PIECE 8,0.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:23:35.601440,toggle_short_text_block,15.0,Assembly PIECE 8,1.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:23:47.354128,toggle_assembly_block,15.0,Assembly PIECE 8,1.0,0.0,0.0,1.0,0.0
+2,2025-03-17 14:24:01.907799,navigate_next,15.0,Assembly PIECE 8,1.0,0.0,0.0,1.0,0.0
+2,2025-03-17 14:24:02.033920,step_loaded,16.0,Final Control,0.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:24:03.862644,toggle_short_text_block,16.0,Final Control,1.0,0.0,0.0,0.0,0.0
+2,2025-03-17 14:24:18.097855,toggle_single_pieces_block,16.0,Final Control,1.0,0.0,1.0,0.0,0.0
+2,2025-03-17 14:24:41.564787,toggle_long_text_block,16.0,Final Control,1.0,1.0,1.0,0.0,0.0
+2,2025-03-17 14:24:55.645680,navigate_to_thankyou,16.0,Final Control,1.0,1.0,1.0,0.0,0.0
+2,2025-03-17 14:29:02.313661,restart_application,,,,,,,
+3,2025-03-17 14:43:35.733148,start_experiment,,,,,,,
+3,2025-03-17 14:43:36.014754,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:43:47.359612,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:44:15.806027,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:44:15.925083,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:44:18.228056,toggle_short_text_block,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:44:31.559115,toggle_single_pieces_block,2.0,Assembly PIECE 1,1.0,0.0,1.0,0.0,0.0
+3,2025-03-17 14:44:34.488037,toggle_assembly_block,2.0,Assembly PIECE 1,1.0,0.0,1.0,1.0,0.0
+3,2025-03-17 14:44:48.258455,navigate_next,2.0,Assembly PIECE 1,1.0,0.0,1.0,1.0,0.0
+3,2025-03-17 14:44:48.388732,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:44:58.798961,navigate_previous,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:44:58.923661,step_loaded,2.0,Assembly PIECE 1,1.0,0.0,1.0,1.0,0.0
+3,2025-03-17 14:45:12.817649,navigate_next,2.0,Assembly PIECE 1,1.0,0.0,1.0,1.0,0.0
+3,2025-03-17 14:45:12.924152,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:45:22.540363,toggle_short_text_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:45:33.399052,navigate_next,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:45:33.508648,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:45:35.976681,toggle_short_text_block,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:45:46.486633,toggle_assembly_block,4.0,Assembly PIECE 2,1.0,0.0,0.0,1.0,0.0
+3,2025-03-17 14:45:51.709784,toggle_long_text_block,4.0,Assembly PIECE 2,1.0,1.0,0.0,1.0,0.0
+3,2025-03-17 14:46:29.057966,navigate_next,4.0,Assembly PIECE 2,1.0,1.0,0.0,1.0,0.0
+3,2025-03-17 14:46:29.160775,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:46:31.642521,toggle_short_text_block,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:46:42.276456,navigate_next,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:46:42.396135,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:46:44.259504,toggle_short_text_block,6.0,Assembly PIECE 3,1.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:46:50.177287,toggle_assembly_block,6.0,Assembly PIECE 3,1.0,0.0,0.0,1.0,0.0
+3,2025-03-17 14:47:15.884105,navigate_next,6.0,Assembly PIECE 3,1.0,0.0,0.0,1.0,0.0
+3,2025-03-17 14:47:16.054863,step_loaded,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:47:17.724086,toggle_short_text_block,7.0,Withdraw Components for PIECE 4,1.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:47:31.127932,navigate_next,7.0,Withdraw Components for PIECE 4,1.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:47:31.269145,step_loaded,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:47:35.068337,navigate_previous,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:47:35.201938,step_loaded,7.0,Withdraw Components for PIECE 4,1.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:47:37.095664,navigate_next,7.0,Withdraw Components for PIECE 4,1.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:47:37.238164,step_loaded,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:47:46.400548,toggle_short_text_block,8.0,Assembly PIECE 4,1.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:47:51.414220,toggle_assembly_block,8.0,Assembly PIECE 4,1.0,0.0,0.0,1.0,0.0
+3,2025-03-17 14:48:03.514360,navigate_next,8.0,Assembly PIECE 4,1.0,0.0,0.0,1.0,0.0
+3,2025-03-17 14:48:03.629396,step_loaded,9.0,Withdraw Components for PIECE 5,0.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:48:05.246508,toggle_short_text_block,9.0,Withdraw Components for PIECE 5,1.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:48:12.545269,navigate_next,9.0,Withdraw Components for PIECE 5,1.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:48:12.679293,step_loaded,10.0,Assembly PIECE 5,0.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:48:14.350915,toggle_short_text_block,10.0,Assembly PIECE 5,1.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:48:16.722808,toggle_assembly_block,10.0,Assembly PIECE 5,1.0,0.0,0.0,1.0,0.0
+3,2025-03-17 14:48:36.780664,navigate_next,10.0,Assembly PIECE 5,1.0,0.0,0.0,1.0,0.0
+3,2025-03-17 14:48:36.901846,step_loaded,11.0,Assembly PIECE 6,0.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:48:38.590414,toggle_short_text_block,11.0,Assembly PIECE 6,1.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:48:41.382996,toggle_assembly_block,11.0,Assembly PIECE 6,1.0,0.0,0.0,1.0,0.0
+3,2025-03-17 14:49:03.416573,navigate_next,11.0,Assembly PIECE 6,1.0,0.0,0.0,1.0,0.0
+3,2025-03-17 14:49:03.542917,step_loaded,12.0,Withdraw Components for PIECE 7,0.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:49:05.242628,toggle_short_text_block,12.0,Withdraw Components for PIECE 7,1.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:49:17.634539,navigate_next,12.0,Withdraw Components for PIECE 7,1.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:49:17.738712,step_loaded,13.0,Assembly PIECE 7,0.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:49:19.052320,toggle_short_text_block,13.0,Assembly PIECE 7,1.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:49:21.543534,toggle_assembly_block,13.0,Assembly PIECE 7,1.0,0.0,0.0,1.0,0.0
+3,2025-03-17 14:49:37.103678,toggle_video_block,13.0,Assembly PIECE 7,1.0,0.0,0.0,1.0,1.0
+3,2025-03-17 14:50:33.971201,navigate_next,13.0,Assembly PIECE 7,1.0,0.0,0.0,1.0,1.0
+3,2025-03-17 14:50:34.121475,step_loaded,14.0,Withdraw Components for PIECE 8,0.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:50:35.972447,toggle_short_text_block,14.0,Withdraw Components for PIECE 8,1.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:50:44.928363,navigate_next,14.0,Withdraw Components for PIECE 8,1.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:50:45.037116,step_loaded,15.0,Assembly PIECE 8,0.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:50:53.424610,toggle_short_text_block,15.0,Assembly PIECE 8,1.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:50:58.932448,toggle_assembly_block,15.0,Assembly PIECE 8,1.0,0.0,0.0,1.0,0.0
+3,2025-03-17 14:51:16.687869,navigate_next,15.0,Assembly PIECE 8,1.0,0.0,0.0,1.0,0.0
+3,2025-03-17 14:51:16.808452,step_loaded,16.0,Final Control,0.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:51:19.455831,toggle_short_text_block,16.0,Final Control,1.0,0.0,0.0,0.0,0.0
+3,2025-03-17 14:51:27.543121,toggle_video_block,16.0,Final Control,1.0,0.0,0.0,0.0,1.0
+3,2025-03-17 14:51:52.919487,navigate_to_thankyou,16.0,Final Control,1.0,0.0,0.0,0.0,1.0
+3,2025-03-17 14:55:54.535844,restart_application,,,,,,,
+4,2025-03-17 14:57:28.948579,start_experiment,,,,,,,
+4,2025-03-17 14:57:29.069648,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0
+4,2025-03-17 14:57:34.006215,toggle_single_pieces_block,1.0,Withdraw Components for PIECE 1,0.0,0.0,1.0,0.0,0.0
+4,2025-03-17 14:58:16.152821,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
+4,2025-03-17 14:58:38.115551,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
+4,2025-03-17 14:58:38.223493,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0
+4,2025-03-17 14:58:39.766016,toggle_assembly_block,2.0,Assembly PIECE 1,0.0,0.0,0.0,1.0,0.0
+4,2025-03-17 14:59:01.484391,navigate_next,2.0,Assembly PIECE 1,0.0,0.0,0.0,1.0,0.0
+4,2025-03-17 14:59:01.613337,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0
+4,2025-03-17 14:59:03.498234,toggle_single_pieces_block,3.0,Withdraw Components for PIECE 2,0.0,0.0,1.0,0.0,0.0
+4,2025-03-17 14:59:08.325509,toggle_short_text_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,1.0,0.0,0.0
+4,2025-03-17 14:59:13.750641,navigate_next,3.0,Withdraw Components for PIECE 2,1.0,0.0,1.0,0.0,0.0
+4,2025-03-17 14:59:13.890757,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0
+4,2025-03-17 14:59:15.506655,toggle_single_pieces_block,4.0,Assembly PIECE 2,0.0,0.0,1.0,0.0,0.0
+4,2025-03-17 14:59:17.372230,toggle_assembly_block,4.0,Assembly PIECE 2,0.0,0.0,1.0,1.0,0.0
+4,2025-03-17 14:59:29.216027,navigate_next,4.0,Assembly PIECE 2,0.0,0.0,1.0,1.0,0.0
+4,2025-03-17 14:59:29.323548,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0
+4,2025-03-17 14:59:30.868111,toggle_single_pieces_block,5.0,Withdraw Components for PIECE 3,0.0,0.0,1.0,0.0,0.0
+4,2025-03-17 14:59:33.328437,toggle_short_text_block,5.0,Withdraw Components for PIECE 3,1.0,0.0,1.0,0.0,0.0
+4,2025-03-17 14:59:38.337740,navigate_next,5.0,Withdraw Components for PIECE 3,1.0,0.0,1.0,0.0,0.0
+4,2025-03-17 14:59:38.457358,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0
+4,2025-03-17 14:59:39.465259,toggle_assembly_block,6.0,Assembly PIECE 3,0.0,0.0,0.0,1.0,0.0
+4,2025-03-17 14:59:46.626268,navigate_next,6.0,Assembly PIECE 3,0.0,0.0,0.0,1.0,0.0
+4,2025-03-17 14:59:46.734422,step_loaded,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0
+4,2025-03-17 14:59:49.075113,toggle_short_text_block,7.0,Withdraw Components for PIECE 4,1.0,0.0,0.0,0.0,0.0
+4,2025-03-17 14:59:49.771469,toggle_single_pieces_block,7.0,Withdraw Components for PIECE 4,1.0,0.0,1.0,0.0,0.0
+4,2025-03-17 15:00:02.372604,navigate_next,7.0,Withdraw Components for PIECE 4,1.0,0.0,1.0,0.0,0.0
+4,2025-03-17 15:00:02.483166,step_loaded,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0
+4,2025-03-17 15:00:03.348631,toggle_assembly_block,8.0,Assembly PIECE 4,0.0,0.0,0.0,1.0,0.0
+4,2025-03-17 15:00:09.264757,navigate_next,8.0,Assembly PIECE 4,0.0,0.0,0.0,1.0,0.0
+4,2025-03-17 15:00:09.402235,step_loaded,9.0,Withdraw Components for PIECE 5,0.0,0.0,0.0,0.0,0.0
+4,2025-03-17 15:00:11.020691,toggle_short_text_block,9.0,Withdraw Components for PIECE 5,1.0,0.0,0.0,0.0,0.0
+4,2025-03-17 15:00:11.614414,toggle_single_pieces_block,9.0,Withdraw Components for PIECE 5,1.0,0.0,1.0,0.0,0.0
+4,2025-03-17 15:00:18.993731,navigate_next,9.0,Withdraw Components for PIECE 5,1.0,0.0,1.0,0.0,0.0
+4,2025-03-17 15:00:19.112993,step_loaded,10.0,Assembly PIECE 5,0.0,0.0,0.0,0.0,0.0
+4,2025-03-17 15:00:20.254252,toggle_assembly_block,10.0,Assembly PIECE 5,0.0,0.0,0.0,1.0,0.0
+4,2025-03-17 15:00:30.606841,navigate_next,10.0,Assembly PIECE 5,0.0,0.0,0.0,1.0,0.0
+4,2025-03-17 15:00:30.784083,step_loaded,11.0,Assembly PIECE 6,0.0,0.0,0.0,0.0,0.0
+4,2025-03-17 15:00:33.793581,toggle_assembly_block,11.0,Assembly PIECE 6,0.0,0.0,0.0,1.0,0.0
+4,2025-03-17 15:00:49.413717,navigate_next,11.0,Assembly PIECE 6,0.0,0.0,0.0,1.0,0.0
+4,2025-03-17 15:00:49.520424,step_loaded,12.0,Withdraw Components for PIECE 7,0.0,0.0,0.0,0.0,0.0
+4,2025-03-17 15:00:51.133563,toggle_short_text_block,12.0,Withdraw Components for PIECE 7,1.0,0.0,0.0,0.0,0.0
+4,2025-03-17 15:00:51.747174,toggle_single_pieces_block,12.0,Withdraw Components for PIECE 7,1.0,0.0,1.0,0.0,0.0
+4,2025-03-17 15:00:55.848930,navigate_next,12.0,Withdraw Components for PIECE 7,1.0,0.0,1.0,0.0,0.0
+4,2025-03-17 15:00:55.983827,step_loaded,13.0,Assembly PIECE 7,0.0,0.0,0.0,0.0,0.0
+4,2025-03-17 15:00:56.984759,toggle_assembly_block,13.0,Assembly PIECE 7,0.0,0.0,0.0,1.0,0.0
+4,2025-03-17 15:01:18.432858,navigate_next,13.0,Assembly PIECE 7,0.0,0.0,0.0,1.0,0.0
+4,2025-03-17 15:01:18.552462,step_loaded,14.0,Withdraw Components for PIECE 8,0.0,0.0,0.0,0.0,0.0
+4,2025-03-17 15:01:19.951385,toggle_short_text_block,14.0,Withdraw Components for PIECE 8,1.0,0.0,0.0,0.0,0.0
+4,2025-03-17 15:01:20.830410,toggle_single_pieces_block,14.0,Withdraw Components for PIECE 8,1.0,0.0,1.0,0.0,0.0
+4,2025-03-17 15:01:28.460354,navigate_next,14.0,Withdraw Components for PIECE 8,1.0,0.0,1.0,0.0,0.0
+4,2025-03-17 15:01:28.574761,step_loaded,15.0,Assembly PIECE 8,0.0,0.0,0.0,0.0,0.0
+4,2025-03-17 15:01:29.716863,toggle_assembly_block,15.0,Assembly PIECE 8,0.0,0.0,0.0,1.0,0.0
+4,2025-03-17 15:01:35.378083,navigate_next,15.0,Assembly PIECE 8,0.0,0.0,0.0,1.0,0.0
+4,2025-03-17 15:01:35.504241,step_loaded,16.0,Final Control,0.0,0.0,0.0,0.0,0.0
+4,2025-03-17 15:01:38.033299,toggle_short_text_block,16.0,Final Control,1.0,0.0,0.0,0.0,0.0
+4,2025-03-17 15:01:40.078764,toggle_single_pieces_block,16.0,Final Control,1.0,0.0,1.0,0.0,0.0
+4,2025-03-17 15:01:45.201626,toggle_video_block,16.0,Final Control,1.0,0.0,1.0,0.0,1.0
+4,2025-03-17 15:01:56.579204,navigate_to_thankyou,16.0,Final Control,1.0,0.0,1.0,0.0,1.0
+4,2025-03-17 15:03:09.587020,restart_application,,,,,,,
+5,2025-03-17 15:05:29.611903,start_experiment,,,,,,,
+5,2025-03-17 15:05:29.764938,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0
+5,2025-03-17 15:05:40.376616,toggle_single_pieces_block,1.0,Withdraw Components for PIECE 1,0.0,0.0,1.0,0.0,0.0
+5,2025-03-17 15:06:15.954796,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
+5,2025-03-17 15:06:33.569970,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
+5,2025-03-17 15:06:33.709771,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0
+5,2025-03-17 15:06:42.027155,toggle_assembly_block,2.0,Assembly PIECE 1,0.0,0.0,0.0,1.0,0.0
+5,2025-03-17 15:07:09.724936,navigate_next,2.0,Assembly PIECE 1,0.0,0.0,0.0,1.0,0.0
+5,2025-03-17 15:07:09.859713,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0
+5,2025-03-17 15:07:13.182527,toggle_single_pieces_block,3.0,Withdraw Components for PIECE 2,0.0,0.0,1.0,0.0,0.0
+5,2025-03-17 15:07:15.972491,toggle_short_text_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,1.0,0.0,0.0
+5,2025-03-17 15:07:23.498112,navigate_next,3.0,Withdraw Components for PIECE 2,1.0,0.0,1.0,0.0,0.0
+5,2025-03-17 15:07:23.619072,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0
+5,2025-03-17 15:07:28.803461,toggle_video_block,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,1.0
+5,2025-03-17 15:07:49.931296,navigate_next,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,1.0
+5,2025-03-17 15:07:50.048162,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0
+5,2025-03-17 15:07:52.404252,toggle_single_pieces_block,5.0,Withdraw Components for PIECE 3,0.0,0.0,1.0,0.0,0.0
+5,2025-03-17 15:07:54.312105,toggle_short_text_block,5.0,Withdraw Components for PIECE 3,1.0,0.0,1.0,0.0,0.0
+5,2025-03-17 15:08:01.540042,navigate_next,5.0,Withdraw Components for PIECE 3,1.0,0.0,1.0,0.0,0.0
+5,2025-03-17 15:08:01.655309,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0
+5,2025-03-17 15:08:13.478886,toggle_assembly_block,6.0,Assembly PIECE 3,0.0,0.0,0.0,1.0,0.0
+5,2025-03-17 15:08:32.751421,navigate_next,6.0,Assembly PIECE 3,0.0,0.0,0.0,1.0,0.0
+5,2025-03-17 15:08:32.882488,step_loaded,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0
+5,2025-03-17 15:08:35.312387,toggle_single_pieces_block,7.0,Withdraw Components for PIECE 4,0.0,0.0,1.0,0.0,0.0
+5,2025-03-17 15:08:37.146731,toggle_short_text_block,7.0,Withdraw Components for PIECE 4,1.0,0.0,1.0,0.0,0.0
+5,2025-03-17 15:08:50.192190,navigate_next,7.0,Withdraw Components for PIECE 4,1.0,0.0,1.0,0.0,0.0
+5,2025-03-17 15:08:50.318394,step_loaded,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0
+5,2025-03-17 15:08:52.820449,toggle_assembly_block,8.0,Assembly PIECE 4,0.0,0.0,0.0,1.0,0.0
+5,2025-03-17 15:09:02.553116,navigate_next,8.0,Assembly PIECE 4,0.0,0.0,0.0,1.0,0.0
+5,2025-03-17 15:09:02.662406,step_loaded,9.0,Withdraw Components for PIECE 5,0.0,0.0,0.0,0.0,0.0
+5,2025-03-17 15:09:04.845697,toggle_single_pieces_block,9.0,Withdraw Components for PIECE 5,0.0,0.0,1.0,0.0,0.0
+5,2025-03-17 15:09:06.647994,toggle_short_text_block,9.0,Withdraw Components for PIECE 5,1.0,0.0,1.0,0.0,0.0
+5,2025-03-17 15:09:12.270790,navigate_next,9.0,Withdraw Components for PIECE 5,1.0,0.0,1.0,0.0,0.0
+5,2025-03-17 15:09:12.368611,step_loaded,10.0,Assembly PIECE 5,0.0,0.0,0.0,0.0,0.0
+5,2025-03-17 15:09:20.629282,toggle_assembly_block,10.0,Assembly PIECE 5,0.0,0.0,0.0,1.0,0.0
+5,2025-03-17 15:09:28.236012,navigate_next,10.0,Assembly PIECE 5,0.0,0.0,0.0,1.0,0.0
+5,2025-03-17 15:09:28.364201,step_loaded,11.0,Assembly PIECE 6,0.0,0.0,0.0,0.0,0.0
+5,2025-03-17 15:09:30.682756,toggle_assembly_block,11.0,Assembly PIECE 6,0.0,0.0,0.0,1.0,0.0
+5,2025-03-17 15:09:44.306727,navigate_next,11.0,Assembly PIECE 6,0.0,0.0,0.0,1.0,0.0
+5,2025-03-17 15:09:44.443113,step_loaded,12.0,Withdraw Components for PIECE 7,0.0,0.0,0.0,0.0,0.0
+5,2025-03-17 15:09:47.169820,toggle_single_pieces_block,12.0,Withdraw Components for PIECE 7,0.0,0.0,1.0,0.0,0.0
+5,2025-03-17 15:09:50.692175,toggle_short_text_block,12.0,Withdraw Components for PIECE 7,1.0,0.0,1.0,0.0,0.0
+5,2025-03-17 15:09:56.680896,navigate_next,12.0,Withdraw Components for PIECE 7,1.0,0.0,1.0,0.0,0.0
+5,2025-03-17 15:09:56.842334,step_loaded,13.0,Assembly PIECE 7,0.0,0.0,0.0,0.0,0.0
+5,2025-03-17 15:10:02.836426,toggle_single_pieces_block,13.0,Assembly PIECE 7,0.0,0.0,1.0,0.0,0.0
+5,2025-03-17 15:10:05.386251,toggle_short_text_block,13.0,Assembly PIECE 7,1.0,0.0,1.0,0.0,0.0
+5,2025-03-17 15:10:11.018891,toggle_assembly_block,13.0,Assembly PIECE 7,1.0,0.0,1.0,1.0,0.0
+5,2025-03-17 15:10:58.445107,toggle_video_block,13.0,Assembly PIECE 7,1.0,0.0,1.0,1.0,1.0
+5,2025-03-17 15:11:21.901021,navigate_next,13.0,Assembly PIECE 7,1.0,0.0,1.0,1.0,1.0
+5,2025-03-17 15:11:22.010042,step_loaded,14.0,Withdraw Components for PIECE 8,0.0,0.0,0.0,0.0,0.0
+5,2025-03-17 15:11:25.254582,toggle_short_text_block,14.0,Withdraw Components for PIECE 8,1.0,0.0,0.0,0.0,0.0
+5,2025-03-17 15:11:34.063893,navigate_next,14.0,Withdraw Components for PIECE 8,1.0,0.0,0.0,0.0,0.0
+5,2025-03-17 15:11:34.160853,step_loaded,15.0,Assembly PIECE 8,0.0,0.0,0.0,0.0,0.0
+5,2025-03-17 15:11:40.705407,toggle_assembly_block,15.0,Assembly PIECE 8,0.0,0.0,0.0,1.0,0.0
+5,2025-03-17 15:11:52.501978,navigate_next,15.0,Assembly PIECE 8,0.0,0.0,0.0,1.0,0.0
+5,2025-03-17 15:11:52.635648,step_loaded,16.0,Final Control,0.0,0.0,0.0,0.0,0.0
+5,2025-03-17 15:12:02.149589,toggle_short_text_block,16.0,Final Control,1.0,0.0,0.0,0.0,0.0
+5,2025-03-17 15:12:06.112607,toggle_single_pieces_block,16.0,Final Control,1.0,0.0,1.0,0.0,0.0
+5,2025-03-17 15:12:31.823550,toggle_video_block,16.0,Final Control,1.0,0.0,1.0,0.0,1.0
+5,2025-03-17 15:12:38.948601,toggle_long_text_block,16.0,Final Control,1.0,1.0,1.0,0.0,1.0
+5,2025-03-17 15:12:50.612236,navigate_to_thankyou,16.0,Final Control,1.0,1.0,1.0,0.0,1.0
+5,2025-03-17 15:15:03.896399,restart_application,,,,,,,
+6,2025-03-17 15:15:53.292922,start_experiment,,,,,,,
+6,2025-03-17 15:15:53.440103,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:16:21.797487,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:16:45.561644,toggle_single_pieces_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
+6,2025-03-17 15:16:48.729620,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
+6,2025-03-17 15:16:48.827028,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:17:09.949119,toggle_short_text_block,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:17:18.937821,toggle_long_text_block,2.0,Assembly PIECE 1,1.0,1.0,0.0,0.0,0.0
+6,2025-03-17 15:17:41.440525,toggle_assembly_block,2.0,Assembly PIECE 1,1.0,1.0,0.0,1.0,0.0
+6,2025-03-17 15:18:09.821022,navigate_next,2.0,Assembly PIECE 1,1.0,1.0,0.0,1.0,0.0
+6,2025-03-17 15:18:09.925525,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:18:11.942496,toggle_short_text_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:18:23.747465,toggle_single_pieces_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,1.0,0.0,0.0
+6,2025-03-17 15:18:26.308397,navigate_next,3.0,Withdraw Components for PIECE 2,1.0,0.0,1.0,0.0,0.0
+6,2025-03-17 15:18:26.401858,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:18:28.917832,toggle_short_text_block,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:18:45.977869,toggle_assembly_block,4.0,Assembly PIECE 2,1.0,0.0,0.0,1.0,0.0
+6,2025-03-17 15:18:56.645271,navigate_next,4.0,Assembly PIECE 2,1.0,0.0,0.0,1.0,0.0
+6,2025-03-17 15:18:56.777818,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:18:58.962413,toggle_short_text_block,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:19:10.440279,navigate_next,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:19:10.548475,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:19:12.671438,toggle_short_text_block,6.0,Assembly PIECE 3,1.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:19:22.243948,toggle_assembly_block,6.0,Assembly PIECE 3,1.0,0.0,0.0,1.0,0.0
+6,2025-03-17 15:19:40.915892,navigate_next,6.0,Assembly PIECE 3,1.0,0.0,0.0,1.0,0.0
+6,2025-03-17 15:19:41.011265,step_loaded,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:19:42.907749,toggle_short_text_block,7.0,Withdraw Components for PIECE 4,1.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:19:56.834341,toggle_single_pieces_block,7.0,Withdraw Components for PIECE 4,1.0,0.0,1.0,0.0,0.0
+6,2025-03-17 15:20:00.907346,navigate_next,7.0,Withdraw Components for PIECE 4,1.0,0.0,1.0,0.0,0.0
+6,2025-03-17 15:20:01.007882,step_loaded,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:20:02.469633,toggle_assembly_block,8.0,Assembly PIECE 4,0.0,0.0,0.0,1.0,0.0
+6,2025-03-17 15:20:14.447843,navigate_next,8.0,Assembly PIECE 4,0.0,0.0,0.0,1.0,0.0
+6,2025-03-17 15:20:14.551987,step_loaded,9.0,Withdraw Components for PIECE 5,0.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:20:16.074952,toggle_short_text_block,9.0,Withdraw Components for PIECE 5,1.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:20:25.691633,navigate_next,9.0,Withdraw Components for PIECE 5,1.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:20:25.793116,step_loaded,10.0,Assembly PIECE 5,0.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:20:27.861715,toggle_assembly_block,10.0,Assembly PIECE 5,0.0,0.0,0.0,1.0,0.0
+6,2025-03-17 15:20:33.721720,toggle_long_text_block,10.0,Assembly PIECE 5,0.0,1.0,0.0,1.0,0.0
+6,2025-03-17 15:20:48.553270,navigate_next,10.0,Assembly PIECE 5,0.0,1.0,0.0,1.0,0.0
+6,2025-03-17 15:20:48.883789,step_loaded,11.0,Assembly PIECE 6,0.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:20:50.449064,toggle_short_text_block,11.0,Assembly PIECE 6,1.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:20:57.047000,toggle_assembly_block,11.0,Assembly PIECE 6,1.0,0.0,0.0,1.0,0.0
+6,2025-03-17 15:21:15.016634,navigate_next,11.0,Assembly PIECE 6,1.0,0.0,0.0,1.0,0.0
+6,2025-03-17 15:21:15.125386,step_loaded,12.0,Withdraw Components for PIECE 7,0.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:21:16.796079,toggle_short_text_block,12.0,Withdraw Components for PIECE 7,1.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:21:24.185213,toggle_single_pieces_block,12.0,Withdraw Components for PIECE 7,1.0,0.0,1.0,0.0,0.0
+6,2025-03-17 15:21:30.041048,navigate_next,12.0,Withdraw Components for PIECE 7,1.0,0.0,1.0,0.0,0.0
+6,2025-03-17 15:21:30.175758,step_loaded,13.0,Assembly PIECE 7,0.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:21:34.116443,toggle_assembly_block,13.0,Assembly PIECE 7,0.0,0.0,0.0,1.0,0.0
+6,2025-03-17 15:21:39.336676,toggle_long_text_block,13.0,Assembly PIECE 7,0.0,1.0,0.0,1.0,0.0
+6,2025-03-17 15:21:54.416922,toggle_video_block,13.0,Assembly PIECE 7,0.0,1.0,0.0,1.0,1.0
+6,2025-03-17 15:22:30.760537,navigate_next,13.0,Assembly PIECE 7,0.0,1.0,0.0,1.0,1.0
+6,2025-03-17 15:22:30.868705,step_loaded,14.0,Withdraw Components for PIECE 8,0.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:22:32.304909,toggle_short_text_block,14.0,Withdraw Components for PIECE 8,1.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:22:40.569923,toggle_single_pieces_block,14.0,Withdraw Components for PIECE 8,1.0,0.0,1.0,0.0,0.0
+6,2025-03-17 15:22:55.424096,navigate_next,14.0,Withdraw Components for PIECE 8,1.0,0.0,1.0,0.0,0.0
+6,2025-03-17 15:22:55.548607,step_loaded,15.0,Assembly PIECE 8,0.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:23:00.237521,toggle_short_text_block,15.0,Assembly PIECE 8,1.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:23:04.841965,toggle_assembly_block,15.0,Assembly PIECE 8,1.0,0.0,0.0,1.0,0.0
+6,2025-03-17 15:23:17.920903,navigate_next,15.0,Assembly PIECE 8,1.0,0.0,0.0,1.0,0.0
+6,2025-03-17 15:23:18.031887,step_loaded,16.0,Final Control,0.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:23:19.876204,toggle_short_text_block,16.0,Final Control,1.0,0.0,0.0,0.0,0.0
+6,2025-03-17 15:23:24.453548,toggle_long_text_block,16.0,Final Control,1.0,1.0,0.0,0.0,0.0
+6,2025-03-17 15:23:45.858848,toggle_video_block,16.0,Final Control,1.0,1.0,0.0,0.0,1.0
+6,2025-03-17 15:23:59.233932,navigate_to_thankyou,16.0,Final Control,1.0,1.0,0.0,0.0,1.0
+6,2025-03-17 15:24:05.329494,restart_application,,,,,,,
+7,2025-03-17 15:26:49.678907,start_experiment,,,,,,,
+7,2025-03-17 15:26:49.816560,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0
+7,2025-03-17 15:27:17.863128,toggle_single_pieces_block,1.0,Withdraw Components for PIECE 1,0.0,0.0,1.0,0.0,0.0
+7,2025-03-17 15:27:30.973578,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
+7,2025-03-17 15:27:59.338208,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
+7,2025-03-17 15:27:59.434600,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0
+7,2025-03-17 15:28:02.099680,toggle_short_text_block,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0
+7,2025-03-17 15:28:17.532542,toggle_long_text_block,2.0,Assembly PIECE 1,1.0,1.0,0.0,0.0,0.0
+7,2025-03-17 15:29:04.147180,toggle_single_pieces_block,2.0,Assembly PIECE 1,1.0,1.0,1.0,0.0,0.0
+7,2025-03-17 15:29:06.281492,toggle_assembly_block,2.0,Assembly PIECE 1,1.0,1.0,1.0,1.0,0.0
+7,2025-03-17 15:30:26.676065,navigate_next,2.0,Assembly PIECE 1,1.0,1.0,1.0,1.0,0.0
+7,2025-03-17 15:30:26.771748,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0
+7,2025-03-17 15:30:29.338384,toggle_short_text_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0
+7,2025-03-17 15:30:31.042172,toggle_single_pieces_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,1.0,0.0,0.0
+7,2025-03-17 15:30:41.822818,navigate_next,3.0,Withdraw Components for PIECE 2,1.0,0.0,1.0,0.0,0.0
+7,2025-03-17 15:30:41.925564,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0
+7,2025-03-17 15:30:44.075999,toggle_long_text_block,4.0,Assembly PIECE 2,0.0,1.0,0.0,0.0,0.0
+7,2025-03-17 15:30:44.928488,toggle_assembly_block,4.0,Assembly PIECE 2,0.0,1.0,0.0,1.0,0.0
+7,2025-03-17 15:30:57.896076,toggle_video_block,4.0,Assembly PIECE 2,0.0,1.0,0.0,1.0,1.0
+7,2025-03-17 15:31:22.846218,navigate_next,4.0,Assembly PIECE 2,0.0,1.0,0.0,1.0,1.0
+7,2025-03-17 15:31:22.949887,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0
+7,2025-03-17 15:31:25.375890,toggle_short_text_block,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0
+7,2025-03-17 15:31:36.435845,navigate_next,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0
+7,2025-03-17 15:31:36.575198,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0
+7,2025-03-17 15:31:38.454181,toggle_long_text_block,6.0,Assembly PIECE 3,0.0,1.0,0.0,0.0,0.0
+7,2025-03-17 15:31:41.068210,toggle_video_block,6.0,Assembly PIECE 3,0.0,1.0,0.0,0.0,1.0
+7,2025-03-17 15:32:12.675328,navigate_next,6.0,Assembly PIECE 3,0.0,1.0,0.0,0.0,1.0
+7,2025-03-17 15:32:12.785943,step_loaded,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0
+7,2025-03-17 15:32:16.340135,toggle_short_text_block,7.0,Withdraw Components for PIECE 4,1.0,0.0,0.0,0.0,0.0
+7,2025-03-17 15:32:30.571272,navigate_next,7.0,Withdraw Components for PIECE 4,1.0,0.0,0.0,0.0,0.0
+7,2025-03-17 15:32:30.696856,step_loaded,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0
+7,2025-03-17 15:32:33.544952,toggle_short_text_block,8.0,Assembly PIECE 4,1.0,0.0,0.0,0.0,0.0
+7,2025-03-17 15:32:35.080750,toggle_long_text_block,8.0,Assembly PIECE 4,1.0,1.0,0.0,0.0,0.0
+7,2025-03-17 15:32:41.532412,toggle_video_block,8.0,Assembly PIECE 4,1.0,1.0,0.0,0.0,1.0
+7,2025-03-17 15:32:54.635189,navigate_next,8.0,Assembly PIECE 4,1.0,1.0,0.0,0.0,1.0
+7,2025-03-17 15:32:54.743701,step_loaded,9.0,Withdraw Components for PIECE 5,0.0,0.0,0.0,0.0,0.0
+7,2025-03-17 15:32:58.849152,toggle_short_text_block,9.0,Withdraw Components for PIECE 5,1.0,0.0,0.0,0.0,0.0
+7,2025-03-17 15:33:06.831392,navigate_next,9.0,Withdraw Components for PIECE 5,1.0,0.0,0.0,0.0,0.0
+7,2025-03-17 15:33:06.968131,step_loaded,10.0,Assembly PIECE 5,0.0,0.0,0.0,0.0,0.0
+7,2025-03-17 15:33:09.893965,toggle_long_text_block,10.0,Assembly PIECE 5,0.0,1.0,0.0,0.0,0.0
+7,2025-03-17 15:33:10.804544,toggle_video_block,10.0,Assembly PIECE 5,0.0,1.0,0.0,0.0,1.0
+7,2025-03-17 15:33:27.905756,navigate_next,10.0,Assembly PIECE 5,0.0,1.0,0.0,0.0,1.0
+7,2025-03-17 15:33:28.260232,step_loaded,11.0,Assembly PIECE 6,0.0,0.0,0.0,0.0,0.0
+7,2025-03-17 15:33:30.569709,toggle_video_block,11.0,Assembly PIECE 6,0.0,0.0,0.0,0.0,1.0
+7,2025-03-17 15:34:16.354861,toggle_long_text_block,11.0,Assembly PIECE 6,0.0,1.0,0.0,0.0,1.0
+7,2025-03-17 15:34:44.029587,navigate_next,11.0,Assembly PIECE 6,0.0,1.0,0.0,0.0,1.0
+7,2025-03-17 15:34:44.142475,step_loaded,12.0,Withdraw Components for PIECE 7,0.0,0.0,0.0,0.0,0.0
+7,2025-03-17 15:34:46.752483,toggle_short_text_block,12.0,Withdraw Components for PIECE 7,1.0,0.0,0.0,0.0,0.0
+7,2025-03-17 15:34:54.407478,toggle_single_pieces_block,12.0,Withdraw Components for PIECE 7,1.0,0.0,1.0,0.0,0.0
+7,2025-03-17 15:34:57.246896,navigate_next,12.0,Withdraw Components for PIECE 7,1.0,0.0,1.0,0.0,0.0
+7,2025-03-17 15:34:57.353463,step_loaded,13.0,Assembly PIECE 7,0.0,0.0,0.0,0.0,0.0
+7,2025-03-17 15:35:00.578143,toggle_video_block,13.0,Assembly PIECE 7,0.0,0.0,0.0,0.0,1.0
+7,2025-03-17 15:35:14.827379,toggle_long_text_block,13.0,Assembly PIECE 7,0.0,1.0,0.0,0.0,1.0
+7,2025-03-17 15:36:01.842824,navigate_next,13.0,Assembly PIECE 7,0.0,1.0,0.0,0.0,1.0
+7,2025-03-17 15:36:01.957940,step_loaded,14.0,Withdraw Components for PIECE 8,0.0,0.0,0.0,0.0,0.0
+7,2025-03-17 15:36:04.483940,toggle_short_text_block,14.0,Withdraw Components for PIECE 8,1.0,0.0,0.0,0.0,0.0
+7,2025-03-17 15:36:09.821446,toggle_single_pieces_block,14.0,Withdraw Components for PIECE 8,1.0,0.0,1.0,0.0,0.0
+7,2025-03-17 15:36:23.543518,navigate_next,14.0,Withdraw Components for PIECE 8,1.0,0.0,1.0,0.0,0.0
+7,2025-03-17 15:36:23.655754,step_loaded,15.0,Assembly PIECE 8,0.0,0.0,0.0,0.0,0.0
+7,2025-03-17 15:36:26.202122,toggle_long_text_block,15.0,Assembly PIECE 8,0.0,1.0,0.0,0.0,0.0
+7,2025-03-17 15:36:32.140399,toggle_video_block,15.0,Assembly PIECE 8,0.0,1.0,0.0,0.0,1.0
+7,2025-03-17 15:37:01.840511,navigate_next,15.0,Assembly PIECE 8,0.0,1.0,0.0,0.0,1.0
+7,2025-03-17 15:37:01.987019,step_loaded,16.0,Final Control,0.0,0.0,0.0,0.0,0.0
+7,2025-03-17 15:37:04.661257,toggle_long_text_block,16.0,Final Control,0.0,1.0,0.0,0.0,0.0
+7,2025-03-17 15:37:16.479151,toggle_video_block,16.0,Final Control,0.0,1.0,0.0,0.0,1.0
+7,2025-03-17 15:38:04.112336,navigate_to_thankyou,16.0,Final Control,0.0,1.0,0.0,0.0,1.0
+7,2025-03-17 15:41:09.464996,restart_application,,,,,,,
+8,2025-03-17 15:41:24.918636,start_experiment,,,,,,,
+8,2025-03-17 15:41:25.063978,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:41:45.656207,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:42:21.249277,toggle_single_pieces_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
+8,2025-03-17 15:42:27.433804,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
+8,2025-03-17 15:42:27.532407,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:42:30.553140,toggle_single_pieces_block,2.0,Assembly PIECE 1,0.0,0.0,1.0,0.0,0.0
+8,2025-03-17 15:42:42.767864,toggle_long_text_block,2.0,Assembly PIECE 1,0.0,1.0,1.0,0.0,0.0
+8,2025-03-17 15:42:48.782828,toggle_assembly_block,2.0,Assembly PIECE 1,0.0,1.0,1.0,1.0,0.0
+8,2025-03-17 15:43:08.509992,navigate_next,2.0,Assembly PIECE 1,0.0,1.0,1.0,1.0,0.0
+8,2025-03-17 15:43:08.642806,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:43:14.589530,toggle_short_text_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:43:32.527754,navigate_next,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:43:32.641686,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:43:35.632390,toggle_long_text_block,4.0,Assembly PIECE 2,0.0,1.0,0.0,0.0,0.0
+8,2025-03-17 15:43:38.955898,toggle_assembly_block,4.0,Assembly PIECE 2,0.0,1.0,0.0,1.0,0.0
+8,2025-03-17 15:44:09.898349,navigate_next,4.0,Assembly PIECE 2,0.0,1.0,0.0,1.0,0.0
+8,2025-03-17 15:44:10.028075,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:44:14.060294,toggle_single_pieces_block,5.0,Withdraw Components for PIECE 3,0.0,0.0,1.0,0.0,0.0
+8,2025-03-17 15:44:26.915142,navigate_next,5.0,Withdraw Components for PIECE 3,0.0,0.0,1.0,0.0,0.0
+8,2025-03-17 15:44:27.019777,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:44:29.590582,toggle_assembly_block,6.0,Assembly PIECE 3,0.0,0.0,0.0,1.0,0.0
+8,2025-03-17 15:44:53.733385,navigate_next,6.0,Assembly PIECE 3,0.0,0.0,0.0,1.0,0.0
+8,2025-03-17 15:44:53.862592,step_loaded,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:44:56.990446,toggle_short_text_block,7.0,Withdraw Components for PIECE 4,1.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:45:07.631606,toggle_single_pieces_block,7.0,Withdraw Components for PIECE 4,1.0,0.0,1.0,0.0,0.0
+8,2025-03-17 15:46:15.448433,navigate_next,7.0,Withdraw Components for PIECE 4,1.0,0.0,1.0,0.0,0.0
+8,2025-03-17 15:46:15.549505,step_loaded,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:46:19.228770,toggle_short_text_block,8.0,Assembly PIECE 4,1.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:46:24.013066,toggle_assembly_block,8.0,Assembly PIECE 4,1.0,0.0,0.0,1.0,0.0
+8,2025-03-17 15:46:40.634664,navigate_next,8.0,Assembly PIECE 4,1.0,0.0,0.0,1.0,0.0
+8,2025-03-17 15:46:40.736424,step_loaded,9.0,Withdraw Components for PIECE 5,0.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:46:43.008144,toggle_short_text_block,9.0,Withdraw Components for PIECE 5,1.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:46:51.047418,navigate_next,9.0,Withdraw Components for PIECE 5,1.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:46:51.178509,step_loaded,10.0,Assembly PIECE 5,0.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:46:54.192488,toggle_short_text_block,10.0,Assembly PIECE 5,1.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:46:56.386787,toggle_assembly_block,10.0,Assembly PIECE 5,1.0,0.0,0.0,1.0,0.0
+8,2025-03-17 15:47:12.289717,navigate_next,10.0,Assembly PIECE 5,1.0,0.0,0.0,1.0,0.0
+8,2025-03-17 15:47:12.408353,step_loaded,11.0,Assembly PIECE 6,0.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:47:14.516164,toggle_short_text_block,11.0,Assembly PIECE 6,1.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:47:19.851895,toggle_single_pieces_block,11.0,Assembly PIECE 6,1.0,0.0,1.0,0.0,0.0
+8,2025-03-17 15:47:23.730477,toggle_assembly_block,11.0,Assembly PIECE 6,1.0,0.0,1.0,1.0,0.0
+8,2025-03-17 15:47:36.942724,navigate_next,11.0,Assembly PIECE 6,1.0,0.0,1.0,1.0,0.0
+8,2025-03-17 15:47:37.053852,step_loaded,12.0,Withdraw Components for PIECE 7,0.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:47:39.387757,toggle_short_text_block,12.0,Withdraw Components for PIECE 7,1.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:47:46.570244,navigate_next,12.0,Withdraw Components for PIECE 7,1.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:47:46.673339,step_loaded,13.0,Assembly PIECE 7,0.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:47:49.705799,toggle_assembly_block,13.0,Assembly PIECE 7,0.0,0.0,0.0,1.0,0.0
+8,2025-03-17 15:48:08.810951,toggle_long_text_block,13.0,Assembly PIECE 7,0.0,1.0,0.0,1.0,0.0
+8,2025-03-17 15:48:15.620080,navigate_next,13.0,Assembly PIECE 7,0.0,1.0,0.0,1.0,0.0
+8,2025-03-17 15:48:15.714828,step_loaded,14.0,Withdraw Components for PIECE 8,0.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:48:17.958749,toggle_short_text_block,14.0,Withdraw Components for PIECE 8,1.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:48:28.019723,navigate_next,14.0,Withdraw Components for PIECE 8,1.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:48:28.123469,step_loaded,15.0,Assembly PIECE 8,0.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:48:29.770804,toggle_long_text_block,15.0,Assembly PIECE 8,0.0,1.0,0.0,0.0,0.0
+8,2025-03-17 15:48:32.552221,toggle_assembly_block,15.0,Assembly PIECE 8,0.0,1.0,0.0,1.0,0.0
+8,2025-03-17 15:48:48.781168,navigate_next,15.0,Assembly PIECE 8,0.0,1.0,0.0,1.0,0.0
+8,2025-03-17 15:48:48.880546,step_loaded,16.0,Final Control,0.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:48:51.181960,toggle_short_text_block,16.0,Final Control,1.0,0.0,0.0,0.0,0.0
+8,2025-03-17 15:48:54.932873,toggle_long_text_block,16.0,Final Control,1.0,1.0,0.0,0.0,0.0
+8,2025-03-17 15:49:32.152857,navigate_to_thankyou,16.0,Final Control,1.0,1.0,0.0,0.0,0.0
+8,2025-03-17 15:52:32.506804,restart_application,,,,,,,
+10,2025-03-17 15:55:52.720184,start_experiment,,,,,,,
+10,2025-03-17 15:55:52.876493,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0
+10,2025-03-17 15:56:19.427770,toggle_single_pieces_block,1.0,Withdraw Components for PIECE 1,0.0,0.0,1.0,0.0,0.0
+10,2025-03-17 15:56:45.421757,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
+10,2025-03-17 15:56:59.229269,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
+10,2025-03-17 15:56:59.342872,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0
+10,2025-03-17 15:57:06.155620,toggle_assembly_block,2.0,Assembly PIECE 1,0.0,0.0,0.0,1.0,0.0
+10,2025-03-17 15:57:33.946829,navigate_next,2.0,Assembly PIECE 1,0.0,0.0,0.0,1.0,0.0
+10,2025-03-17 15:57:34.051487,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0
+10,2025-03-17 15:57:38.652246,toggle_short_text_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0
+10,2025-03-17 15:57:53.305440,navigate_next,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0
+10,2025-03-17 15:57:53.402731,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0
+10,2025-03-17 15:57:57.187282,toggle_assembly_block,4.0,Assembly PIECE 2,0.0,0.0,0.0,1.0,0.0
+10,2025-03-17 15:58:08.606687,navigate_next,4.0,Assembly PIECE 2,0.0,0.0,0.0,1.0,0.0
+10,2025-03-17 15:58:08.707701,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0
+10,2025-03-17 15:58:11.150112,toggle_short_text_block,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0
+10,2025-03-17 15:58:25.274398,navigate_next,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0
+10,2025-03-17 15:58:25.377499,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0
+10,2025-03-17 15:58:27.090275,toggle_assembly_block,6.0,Assembly PIECE 3,0.0,0.0,0.0,1.0,0.0
+10,2025-03-17 15:58:41.632181,navigate_next,6.0,Assembly PIECE 3,0.0,0.0,0.0,1.0,0.0
+10,2025-03-17 15:58:41.753206,step_loaded,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0
+10,2025-03-17 15:58:44.292949,toggle_short_text_block,7.0,Withdraw Components for PIECE 4,1.0,0.0,0.0,0.0,0.0
+10,2025-03-17 15:59:07.846941,navigate_next,7.0,Withdraw Components for PIECE 4,1.0,0.0,0.0,0.0,0.0
+10,2025-03-17 15:59:07.974807,step_loaded,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0
+10,2025-03-17 15:59:09.684591,toggle_assembly_block,8.0,Assembly PIECE 4,0.0,0.0,0.0,1.0,0.0
+10,2025-03-17 15:59:20.647928,navigate_next,8.0,Assembly PIECE 4,0.0,0.0,0.0,1.0,0.0
+10,2025-03-17 15:59:20.781258,step_loaded,9.0,Withdraw Components for PIECE 5,0.0,0.0,0.0,0.0,0.0
+10,2025-03-17 15:59:22.584802,toggle_short_text_block,9.0,Withdraw Components for PIECE 5,1.0,0.0,0.0,0.0,0.0
+10,2025-03-17 15:59:31.807054,navigate_next,9.0,Withdraw Components for PIECE 5,1.0,0.0,0.0,0.0,0.0
+10,2025-03-17 15:59:31.932484,step_loaded,10.0,Assembly PIECE 5,0.0,0.0,0.0,0.0,0.0
+10,2025-03-17 15:59:34.350984,toggle_assembly_block,10.0,Assembly PIECE 5,0.0,0.0,0.0,1.0,0.0
+10,2025-03-17 15:59:44.658639,navigate_next,10.0,Assembly PIECE 5,0.0,0.0,0.0,1.0,0.0
+10,2025-03-17 15:59:44.761936,step_loaded,11.0,Assembly PIECE 6,0.0,0.0,0.0,0.0,0.0
+10,2025-03-17 15:59:47.421270,toggle_short_text_block,11.0,Assembly PIECE 6,1.0,0.0,0.0,0.0,0.0
+10,2025-03-17 15:59:55.474535,toggle_assembly_block,11.0,Assembly PIECE 6,1.0,0.0,0.0,1.0,0.0
+10,2025-03-17 16:00:10.411205,navigate_next,11.0,Assembly PIECE 6,1.0,0.0,0.0,1.0,0.0
+10,2025-03-17 16:00:10.508415,step_loaded,12.0,Withdraw Components for PIECE 7,0.0,0.0,0.0,0.0,0.0
+10,2025-03-17 16:00:13.290126,toggle_short_text_block,12.0,Withdraw Components for PIECE 7,1.0,0.0,0.0,0.0,0.0
+10,2025-03-17 16:00:22.289743,navigate_next,12.0,Withdraw Components for PIECE 7,1.0,0.0,0.0,0.0,0.0
+10,2025-03-17 16:00:22.393226,step_loaded,13.0,Assembly PIECE 7,0.0,0.0,0.0,0.0,0.0
+10,2025-03-17 16:00:25.464475,toggle_assembly_block,13.0,Assembly PIECE 7,0.0,0.0,0.0,1.0,0.0
+10,2025-03-17 16:00:45.203354,navigate_next,13.0,Assembly PIECE 7,0.0,0.0,0.0,1.0,0.0
+10,2025-03-17 16:00:45.306493,step_loaded,14.0,Withdraw Components for PIECE 8,0.0,0.0,0.0,0.0,0.0
+10,2025-03-17 16:00:48.637859,toggle_short_text_block,14.0,Withdraw Components for PIECE 8,1.0,0.0,0.0,0.0,0.0
+10,2025-03-17 16:01:29.593386,navigate_next,14.0,Withdraw Components for PIECE 8,1.0,0.0,0.0,0.0,0.0
+10,2025-03-17 16:01:29.731769,step_loaded,15.0,Assembly PIECE 8,0.0,0.0,0.0,0.0,0.0
+10,2025-03-17 16:01:34.557438,toggle_assembly_block,15.0,Assembly PIECE 8,0.0,0.0,0.0,1.0,0.0
+10,2025-03-17 16:01:45.777298,navigate_next,15.0,Assembly PIECE 8,0.0,0.0,0.0,1.0,0.0
+10,2025-03-17 16:01:45.907568,step_loaded,16.0,Final Control,0.0,0.0,0.0,0.0,0.0
+10,2025-03-17 16:02:06.228115,toggle_video_block,16.0,Final Control,0.0,0.0,0.0,0.0,1.0
+10,2025-03-17 16:02:30.098149,navigate_to_thankyou,16.0,Final Control,0.0,0.0,0.0,0.0,1.0
+10,2025-03-17 16:03:51.192943,restart_application,,,,,,,
+9,2025-03-17 16:29:12.701576,start_experiment,,,,,,,
+9,2025-03-17 16:29:12.879632,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0
+9,2025-03-17 16:29:39.400696,toggle_single_pieces_block,1.0,Withdraw Components for PIECE 1,0.0,0.0,1.0,0.0,0.0
+9,2025-03-17 16:30:02.740461,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
+9,2025-03-17 16:30:24.973734,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
+9,2025-03-17 16:30:25.102557,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0
+9,2025-03-17 16:30:36.222631,toggle_short_text_block,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0
+9,2025-03-17 16:30:39.512318,toggle_single_pieces_block,2.0,Assembly PIECE 1,1.0,0.0,1.0,0.0,0.0
+9,2025-03-17 16:30:47.363754,toggle_long_text_block,2.0,Assembly PIECE 1,1.0,1.0,1.0,0.0,0.0
+9,2025-03-17 16:31:09.707023,toggle_assembly_block,2.0,Assembly PIECE 1,1.0,1.0,1.0,1.0,0.0
+9,2025-03-17 16:31:23.921772,toggle_video_block,2.0,Assembly PIECE 1,1.0,1.0,1.0,1.0,1.0
+9,2025-03-17 16:31:43.506756,navigate_next,2.0,Assembly PIECE 1,1.0,1.0,1.0,1.0,1.0
+9,2025-03-17 16:31:43.622246,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0
+9,2025-03-17 16:31:45.315772,toggle_single_pieces_block,3.0,Withdraw Components for PIECE 2,0.0,0.0,1.0,0.0,0.0
+9,2025-03-17 16:31:47.465840,toggle_short_text_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,1.0,0.0,0.0
+9,2025-03-17 16:31:56.528861,navigate_next,3.0,Withdraw Components for PIECE 2,1.0,0.0,1.0,0.0,0.0
+9,2025-03-17 16:31:56.638660,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0
+9,2025-03-17 16:31:59.933938,toggle_long_text_block,4.0,Assembly PIECE 2,0.0,1.0,0.0,0.0,0.0
+9,2025-03-17 16:32:01.716337,toggle_assembly_block,4.0,Assembly PIECE 2,0.0,1.0,0.0,1.0,0.0
+9,2025-03-17 16:32:14.749818,navigate_next,4.0,Assembly PIECE 2,0.0,1.0,0.0,1.0,0.0
+9,2025-03-17 16:32:14.895941,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0
+9,2025-03-17 16:32:16.627960,toggle_short_text_block,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0
+9,2025-03-17 16:32:18.933090,toggle_single_pieces_block,5.0,Withdraw Components for PIECE 3,1.0,0.0,1.0,0.0,0.0
+9,2025-03-17 16:32:28.752495,navigate_next,5.0,Withdraw Components for PIECE 3,1.0,0.0,1.0,0.0,0.0
+9,2025-03-17 16:32:28.863972,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0
+9,2025-03-17 16:32:31.821949,toggle_assembly_block,6.0,Assembly PIECE 3,0.0,0.0,0.0,1.0,0.0
+9,2025-03-17 16:32:42.687500,navigate_next,6.0,Assembly PIECE 3,0.0,0.0,0.0,1.0,0.0
+9,2025-03-17 16:32:42.795097,step_loaded,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0
+9,2025-03-17 16:32:46.127427,toggle_short_text_block,7.0,Withdraw Components for PIECE 4,1.0,0.0,0.0,0.0,0.0
+9,2025-03-17 16:32:49.195649,toggle_single_pieces_block,7.0,Withdraw Components for PIECE 4,1.0,0.0,1.0,0.0,0.0
+9,2025-03-17 16:33:03.903465,navigate_next,7.0,Withdraw Components for PIECE 4,1.0,0.0,1.0,0.0,0.0
+9,2025-03-17 16:33:04.028818,step_loaded,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0
+9,2025-03-17 16:33:06.133701,toggle_long_text_block,8.0,Assembly PIECE 4,0.0,1.0,0.0,0.0,0.0
+9,2025-03-17 16:33:07.871487,toggle_assembly_block,8.0,Assembly PIECE 4,0.0,1.0,0.0,1.0,0.0
+9,2025-03-17 16:33:21.962983,toggle_short_text_block,8.0,Assembly PIECE 4,1.0,1.0,0.0,1.0,0.0
+9,2025-03-17 16:33:26.920386,navigate_next,8.0,Assembly PIECE 4,1.0,1.0,0.0,1.0,0.0
+9,2025-03-17 16:33:27.055856,step_loaded,9.0,Withdraw Components for PIECE 5,0.0,0.0,0.0,0.0,0.0
+9,2025-03-17 16:33:30.503058,toggle_short_text_block,9.0,Withdraw Components for PIECE 5,1.0,0.0,0.0,0.0,0.0
+9,2025-03-17 16:33:36.235660,toggle_single_pieces_block,9.0,Withdraw Components for PIECE 5,1.0,0.0,1.0,0.0,0.0
+9,2025-03-17 16:33:37.735152,navigate_next,9.0,Withdraw Components for PIECE 5,1.0,0.0,1.0,0.0,0.0
+9,2025-03-17 16:33:37.841895,step_loaded,10.0,Assembly PIECE 5,0.0,0.0,0.0,0.0,0.0
+9,2025-03-17 16:33:41.621105,toggle_long_text_block,10.0,Assembly PIECE 5,0.0,1.0,0.0,0.0,0.0
+9,2025-03-17 16:33:47.510970,toggle_assembly_block,10.0,Assembly PIECE 5,0.0,1.0,0.0,1.0,0.0
+9,2025-03-17 16:34:02.465290,navigate_next,10.0,Assembly PIECE 5,0.0,1.0,0.0,1.0,0.0
+9,2025-03-17 16:34:02.593652,step_loaded,11.0,Assembly PIECE 6,0.0,0.0,0.0,0.0,0.0
+9,2025-03-17 16:34:05.731519,toggle_short_text_block,11.0,Assembly PIECE 6,1.0,0.0,0.0,0.0,0.0
+9,2025-03-17 16:34:08.022112,toggle_single_pieces_block,11.0,Assembly PIECE 6,1.0,0.0,1.0,0.0,0.0
+9,2025-03-17 16:34:11.309917,toggle_long_text_block,11.0,Assembly PIECE 6,1.0,1.0,1.0,0.0,0.0
+9,2025-03-17 16:34:14.335040,toggle_assembly_block,11.0,Assembly PIECE 6,1.0,1.0,1.0,1.0,0.0
+9,2025-03-17 16:34:33.773897,navigate_next,11.0,Assembly PIECE 6,1.0,1.0,1.0,1.0,0.0
+9,2025-03-17 16:34:33.885016,step_loaded,12.0,Withdraw Components for PIECE 7,0.0,0.0,0.0,0.0,0.0
+9,2025-03-17 16:34:37.223572,toggle_short_text_block,12.0,Withdraw Components for PIECE 7,1.0,0.0,0.0,0.0,0.0
+9,2025-03-17 16:34:42.465307,toggle_single_pieces_block,12.0,Withdraw Components for PIECE 7,1.0,0.0,1.0,0.0,0.0
+9,2025-03-17 16:34:44.543637,navigate_next,12.0,Withdraw Components for PIECE 7,1.0,0.0,1.0,0.0,0.0
+9,2025-03-17 16:34:44.655382,step_loaded,13.0,Assembly PIECE 7,0.0,0.0,0.0,0.0,0.0
+9,2025-03-17 16:34:48.229902,toggle_long_text_block,13.0,Assembly PIECE 7,0.0,1.0,0.0,0.0,0.0
+9,2025-03-17 16:34:51.294385,toggle_assembly_block,13.0,Assembly PIECE 7,0.0,1.0,0.0,1.0,0.0
+9,2025-03-17 16:34:57.202554,toggle_video_block,13.0,Assembly PIECE 7,0.0,1.0,0.0,1.0,1.0
+9,2025-03-17 16:35:51.305298,navigate_next,13.0,Assembly PIECE 7,0.0,1.0,0.0,1.0,1.0
+9,2025-03-17 16:35:51.439306,step_loaded,14.0,Withdraw Components for PIECE 8,0.0,0.0,0.0,0.0,0.0
+9,2025-03-17 16:35:53.660524,toggle_short_text_block,14.0,Withdraw Components for PIECE 8,1.0,0.0,0.0,0.0,0.0
+9,2025-03-17 16:35:56.094916,toggle_single_pieces_block,14.0,Withdraw Components for PIECE 8,1.0,0.0,1.0,0.0,0.0
+9,2025-03-17 16:36:07.454682,navigate_next,14.0,Withdraw Components for PIECE 8,1.0,0.0,1.0,0.0,0.0
+9,2025-03-17 16:36:07.571673,step_loaded,15.0,Assembly PIECE 8,0.0,0.0,0.0,0.0,0.0
+9,2025-03-17 16:36:10.656062,toggle_long_text_block,15.0,Assembly PIECE 8,0.0,1.0,0.0,0.0,0.0
+9,2025-03-17 16:36:12.787384,toggle_assembly_block,15.0,Assembly PIECE 8,0.0,1.0,0.0,1.0,0.0
+9,2025-03-17 16:36:28.917113,navigate_next,15.0,Assembly PIECE 8,0.0,1.0,0.0,1.0,0.0
+9,2025-03-17 16:36:29.022334,step_loaded,16.0,Final Control,0.0,0.0,0.0,0.0,0.0
+9,2025-03-17 16:36:31.957785,toggle_long_text_block,16.0,Final Control,0.0,1.0,0.0,0.0,0.0
+9,2025-03-17 16:36:46.817828,toggle_video_block,16.0,Final Control,0.0,1.0,0.0,0.0,1.0
+9,2025-03-17 16:37:05.348665,navigate_to_thankyou,16.0,Final Control,0.0,1.0,0.0,0.0,1.0

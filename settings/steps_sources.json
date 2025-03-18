@@ -175,7 +175,7 @@
       "category": "withdraw",
       "target_cycle_time": 10,
       "adaptive_fields": {
-        "short_text": "Withdraw F1 from shelf D2",
+        "short_text": "Withdraw F1 (2 pieces) from shelf D2",
         "long_text": "",
         "image_single_pieces": "./images_single_pieces/pezzi_iniziali_8.png",
         "image_assembly": "",
