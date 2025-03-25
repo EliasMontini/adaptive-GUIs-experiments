@@ -125,7 +125,7 @@ def load_enabled_interactions():
 
 def load_initial_visibility():
     try:
-        with open('settings/visibility/initial_visibility_static_mode.json', 'r') as f:
+        with open('settings/visibility/initial_visibility_data_collection.json', 'r') as f:
             return json.load(f)
     except FileNotFoundError:
         # Default to all content hidden
@@ -869,61 +869,88 @@ def update_button_states(current_step, enabled_interactions, clicked_buttons):
     prevent_initial_call=True
 )
 def reset_button_states_and_visibility(current_step, initial_visibility, clicked_buttons):
-    # Default button label
+    # Defensive programming: ensure data exists
+    if not initial_visibility or 'steps' not in initial_visibility:
+        # Fallback to default visibility
+        initial_visibility = {
+            'steps': [{
+                'step_id': current_step,
+                'content': {
+                    'short_text': False,
+                    'long_text': False,
+                    'single_pieces': False,
+                    'assembly': False,
+                    'video': False
+                }
+            }]
+        }
+
+    # Find the configuration for the current step
+    try:
+        step_config = next(
+            (step for step in initial_visibility['steps'] if step['step_id'] == current_step),
+            initial_visibility['steps'][0]  # Default to first step if no match
+        )
+    except (IndexError, KeyError):
+        # Fallback to default configuration
+        step_config = {
+            'content': {
+                'short_text': False,
+                'long_text': False,
+                'single_pieces': False,
+                'assembly': False,
+                'video': False
+            }
+        }
+
+    content = step_config.get('content', {})
+
+    # Defensive conversion to ensure boolean
+    content = {k: bool(v) for k, v in content.items()}
+
+    # Default labels
     default_label = [html.I(className="bi bi-eye-fill me-1"), "Show"]
     viewed_label = [html.I(className="bi bi-eye-fill me-1"), "Viewed"]
 
-    # Find the configuration for the current step
-    step_config = next((step for step in initial_visibility['steps']
-                        if step['step_id'] == current_step),
-                       {'content': {
-                           'short_text': False,
-                           'long_text': False,
-                           'single_pieces': False,
-                           'assembly': False,
-                           'video': False
-                       }})
-
-    content = step_config['content']
-
-    # Get the clicked state for the current step using string key
+    # Get the clicked state for the current step
     step_key = str(current_step)
     step_clicked = clicked_buttons.get(step_key, {})
 
-    # Define styles for visible and hidden states
-    visible_placeholder = {'display': 'none'}
-    hidden_placeholder = {'display': 'block'}
-
-    # Keep the fixed position and dimensions for content
-    visible_content = {'display': 'block', **styles['image-content']}
-    hidden_content = {'display': 'none', **styles['image-content']}
-
-    # For text content, we need to handle separately
-    visible_text = {'display': 'block'}
-    hidden_text = {'display': 'none'}
-
-    # Reset autoPlay to False when changing steps
-    autoPlay = False
-
-    # Determine visibility and labels based on initial visibility and clicked state
-    def get_visibility_and_label(content_type):
-        initial_visible = content.get(content_type, False)
+    # Helper function to determine visibility and label
+    def get_visibility(content_type):
+        is_initially_visible = content.get(content_type, False)
         is_clicked = step_clicked.get(content_type, False)
 
         if is_clicked:
-            return visible_placeholder, visible_content if 'img' in content_type or 'video' in content_type else visible_text, viewed_label
-        elif initial_visible:
-            return hidden_placeholder, hidden_content if 'img' in content_type or 'video' in content_type else hidden_text, default_label
+            # If clicked, always show
+            return (
+                {'display': 'none'},
+                {'display': 'block', **styles['image-content']},
+                viewed_label
+            )
+        elif is_initially_visible:
+            # If initially visible, but not clicked
+            return (
+                {'display': 'none'},
+                {'display': 'block', **styles['image-content']},
+                default_label
+            )
         else:
-            return hidden_placeholder, hidden_content if 'img' in content_type or 'video' in content_type else hidden_text, default_label
+            # If not initially visible and not clicked
+            return (
+                {'display': 'block'},
+                {'display': 'none', **styles['image-content']},
+                default_label
+            )
 
-    # Unpack the visibility and label for each content type
-    short_text_placeholder, short_text_content, short_text_btn = get_visibility_and_label('short_text')
-    long_text_placeholder, long_text_content, long_text_btn = get_visibility_and_label('long_text')
-    single_pieces_placeholder, single_pieces_content, single_pieces_btn = get_visibility_and_label('single_pieces')
-    assembly_placeholder, assembly_content, assembly_btn = get_visibility_and_label('assembly')
-    video_placeholder, video_content, video_btn = get_visibility_and_label('video')
+    # Get visibility for each content type
+    short_text_placeholder, short_text_content, short_text_btn = get_visibility('short_text')
+    long_text_placeholder, long_text_content, long_text_btn = get_visibility('long_text')
+    single_pieces_placeholder, single_pieces_content, single_pieces_btn = get_visibility('single_pieces')
+    assembly_placeholder, assembly_content, assembly_btn = get_visibility('assembly')
+    video_placeholder, video_content, video_btn = get_visibility('video')
 
+    # Return all states
     return (
         short_text_placeholder, short_text_content,
         long_text_placeholder, long_text_content,
@@ -932,7 +959,7 @@ def reset_button_states_and_visibility(current_step, initial_visibility, clicked
         video_placeholder, video_content,
         short_text_btn, long_text_btn,
         single_pieces_btn, assembly_btn, video_btn,
-        autoPlay
+        False  # autoPlay
     )
 
 
