@@ -21,7 +21,7 @@
       "adaptive_fields": {
         "short_text": "Insert the two PG1 pieces into the holes of the two SNP1 pieces",
         "long_text": "Position the two SNP1 pieces so that the two 'L' shapes are mirrored, meaning, pointing in the same direction. \n Insert the two PG1 pieces into the cross-shaped holes located at the ends of the SNP1 pieces. The two gray axes should be centered into the two L-shaped pieces",
-        "image_single_pieces": "./images_single_pieces/pezzi_iniziali_1.png",
+        "image_single_pieces": "./images_single_pieces/pezzi_iniziali_1_assembly.png",
         "image_assembly": "./images_assembly/pezzo_1.png",
         "video": "./videos/operazione_1.mp4"
       }
@@ -191,7 +191,7 @@
         "short_text": "Insert the two F1 pieces into PIECE 7",
         "long_text": "Fully insert the two F1 pieces into the front holes of PIECE 7. \n Be sure to insert the side of the planks that has a small overhang",
         "image_single_pieces": "./images_single_pieces/pezzi_iniziali_8_con_pezzo_7.png",
-        "image_assembly": "./images_assembly/pezzo_8.png",
+        "image_assembly": "./images_single_pieces/pezzo_finale.png",
         "video": "./videos/operazione_8.mov"
       }
     },
