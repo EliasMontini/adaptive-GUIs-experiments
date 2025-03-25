@@ -842,11 +842,18 @@ def log_step_load(current_step, experiment_id, assembly_data, clicked_buttons):
      Output('video-btn', 'disabled', allow_duplicate=True)],
     [Input('current-step', 'data'),
      Input('enabled-interactions-store', 'data'),
-     Input('clicked-buttons-store', 'data')],
+     Input('clicked-buttons-store', 'data'),
+     Input('initial-visibility-store', 'data')],
     prevent_initial_call=True
 )
-def update_button_states(current_step, enabled_interactions, clicked_buttons):
-    # Find the configuration for the current step
+def update_button_states(current_step, enabled_interactions, clicked_buttons, initial_visibility):
+    # Find the configuration for the current step in initial visibility
+    initial_config = next((step['content'] for step in initial_visibility['steps']
+                           if step['step_id'] == current_step),
+                          {'short_text': False, 'long_text': False,
+                           'single_pieces': False, 'assembly': False, 'video': False})
+
+    # Find the configuration for the current step in enabled interactions
     step_config = next((step for step in enabled_interactions['steps']
                         if step['step_id'] == current_step),
                        {'buttons': {
@@ -863,17 +870,31 @@ def update_button_states(current_step, enabled_interactions, clicked_buttons):
     step_key = str(current_step)
     step_clicked = clicked_buttons.get(step_key, {})
 
-    # A button should be disabled if either:
+    # A button should be disabled if:
     # 1. It's disabled in the JSON configuration, or
-    # 2. It has been clicked in the current step
+    # 2. It has been clicked in the current step, or
+    # 3. It is initially set to be visible (preventing user interaction)
     return (
-        not buttons.get('short_text', True) or step_clicked.get('short_text', False),
-        not buttons.get('long_text', True) or step_clicked.get('long_text', False),
-        not buttons.get('single_pieces', True) or step_clicked.get('single_pieces', False),
-        not buttons.get('assembly', True) or step_clicked.get('assembly', False),
-        not buttons.get('video', True) or step_clicked.get('video', False)
-    )
+        not buttons.get('short_text', True) or
+        step_clicked.get('short_text', False) or
+        initial_config.get('short_text', False),
 
+        not buttons.get('long_text', True) or
+        step_clicked.get('long_text', False) or
+        initial_config.get('long_text', False),
+
+        not buttons.get('single_pieces', True) or
+        step_clicked.get('single_pieces', False) or
+        initial_config.get('single_pieces', False),
+
+        not buttons.get('assembly', True) or
+        step_clicked.get('assembly', False) or
+        initial_config.get('assembly', False),
+
+        not buttons.get('video', True) or
+        step_clicked.get('video', False) or
+        initial_config.get('video', False)
+    )
 
 # Reset button labels and placeholders when changing steps
 @app.callback(
