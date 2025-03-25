@@ -125,7 +125,7 @@ def load_enabled_interactions():
 
 def load_initial_visibility():
     try:
-        with open('settings/initial_visibility.json', 'r') as f:
+        with open('settings/visibility/initial_visibility_static_mode.json', 'r') as f:
             return json.load(f)
     except FileNotFoundError:
         # Default to all content hidden
