@@ -862,14 +862,16 @@ def update_button_states(current_step, enabled_interactions, clicked_buttons):
      Output('single-pieces-btn', 'children', allow_duplicate=True),
      Output('assembly-btn', 'children', allow_duplicate=True),
      Output('video-btn', 'children', allow_duplicate=True),
-     Output('video-player', 'autoPlay', allow_duplicate=True)],  # Add autoPlay output
+     Output('video-player', 'autoPlay', allow_duplicate=True)],
     [Input('current-step', 'data')],
-    [State('initial-visibility-store', 'data')],
+    [State('initial-visibility-store', 'data'),
+     State('clicked-buttons-store', 'data')],
     prevent_initial_call=True
 )
-def reset_button_states_and_visibility(current_step, initial_visibility):
+def reset_button_states_and_visibility(current_step, initial_visibility, clicked_buttons):
     # Default button label
     default_label = [html.I(className="bi bi-eye-fill me-1"), "Show"]
+    viewed_label = [html.I(className="bi bi-eye-fill me-1"), "Viewed"]
 
     # Find the configuration for the current step
     step_config = next((step for step in initial_visibility['steps']
@@ -883,6 +885,10 @@ def reset_button_states_and_visibility(current_step, initial_visibility):
                        }})
 
     content = step_config['content']
+
+    # Get the clicked state for the current step using string key
+    step_key = str(current_step)
+    step_clicked = clicked_buttons.get(step_key, {})
 
     # Define styles for visible and hidden states
     visible_placeholder = {'display': 'none'}
@@ -899,22 +905,33 @@ def reset_button_states_and_visibility(current_step, initial_visibility):
     # Reset autoPlay to False when changing steps
     autoPlay = False
 
+    # Determine visibility and labels based on initial visibility and clicked state
+    def get_visibility_and_label(content_type):
+        initial_visible = content.get(content_type, False)
+        is_clicked = step_clicked.get(content_type, False)
+
+        if is_clicked:
+            return visible_placeholder, visible_content if 'img' in content_type or 'video' in content_type else visible_text, viewed_label
+        elif initial_visible:
+            return hidden_placeholder, hidden_content if 'img' in content_type or 'video' in content_type else hidden_text, default_label
+        else:
+            return hidden_placeholder, hidden_content if 'img' in content_type or 'video' in content_type else hidden_text, default_label
+
+    # Unpack the visibility and label for each content type
+    short_text_placeholder, short_text_content, short_text_btn = get_visibility_and_label('short_text')
+    long_text_placeholder, long_text_content, long_text_btn = get_visibility_and_label('long_text')
+    single_pieces_placeholder, single_pieces_content, single_pieces_btn = get_visibility_and_label('single_pieces')
+    assembly_placeholder, assembly_content, assembly_btn = get_visibility_and_label('assembly')
+    video_placeholder, video_content, video_btn = get_visibility_and_label('video')
+
     return (
-        visible_placeholder if content.get('short_text', False) else hidden_placeholder,
-        visible_text if content.get('short_text', False) else hidden_text,
-        visible_placeholder if content.get('long_text', False) else hidden_placeholder,
-        visible_text if content.get('long_text', False) else hidden_text,
-        visible_placeholder if content.get('single_pieces', False) else hidden_placeholder,
-        visible_content if content.get('single_pieces', False) else hidden_content,
-        visible_placeholder if content.get('assembly', False) else hidden_placeholder,
-        visible_content if content.get('assembly', False) else hidden_content,
-        visible_placeholder if content.get('video', False) else hidden_placeholder,
-        visible_content if content.get('video', False) else hidden_content,
-        default_label,
-        default_label,
-        default_label,
-        default_label,
-        default_label,
+        short_text_placeholder, short_text_content,
+        long_text_placeholder, long_text_content,
+        single_pieces_placeholder, single_pieces_content,
+        assembly_placeholder, assembly_content,
+        video_placeholder, video_content,
+        short_text_btn, long_text_btn,
+        single_pieces_btn, assembly_btn, video_btn,
         autoPlay
     )
 
