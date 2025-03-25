@@ -259,6 +259,21 @@ app.layout = html.Div([
                             style={'margin-bottom': '20px'}),
                      dbc.Input(id='experiment-id-input', type='text', placeholder='Enter Experiment ID',
                                style={'margin-bottom': '20px'}),
+
+                     html.P("Choose the UI mode.",
+                            style={'margin-bottom': '5px'}),
+                     dcc.Dropdown(
+                         id='visibility-mode-dropdown',
+                         options=[
+                             {'label': 'Data Collection', 'value': 'initial_visibility_data_collection.json'},
+                             {'label': 'Dynamically Adaptive', 'value': 'initial_visibility_dynamically_adaptive.json'},
+                             {'label': 'Rule-Based Adaptive', 'value': 'initial_visibility_rule_based_adaptive.json'},
+                             {'label': 'Static Mode', 'value': 'initial_visibility_static_mode.json'}
+                         ],
+                         value='initial_visibility_data_collection.json',  # Default selection
+                         clearable=False,
+                         style={'text-align': 'center','margin-bottom': '5px'}
+                     ),
                      dbc.Button("Begin Training", id='begin-button', color='primary', style={'width': '100%'})
                  ])
              ]),
@@ -466,6 +481,21 @@ def set_navigation_in_progress(prev_clicks, next_clicks):
     if prev_clicks is None and next_clicks is None:
         return False
     return True
+
+
+# Add a new callback to handle visibility mode selection
+@app.callback(
+    Output('initial-visibility-store', 'data'),
+    [Input('visibility-mode-dropdown', 'value')]
+)
+def update_visibility_mode(selected_mode):
+    try:
+        with open(f'settings/visibility/{selected_mode}', 'r') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        # Fallback to data collection mode if file not found
+        with open('settings/visibility/initial_visibility_data_collection.json', 'r') as f:
+            return json.load(f)
 
 
 # Update step content
