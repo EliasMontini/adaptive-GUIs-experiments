@@ -1064,6 +1064,7 @@ def update_button_states(current_step, enabled_interactions, clicked_buttons, in
         initial_config.get('long_text', False) or
         is_content_visible(long_text_style),
 
+
         not buttons.get('single_pieces', True) or
         step_clicked.get('single_pieces', False) or
         initial_config.get('single_pieces', False) or
