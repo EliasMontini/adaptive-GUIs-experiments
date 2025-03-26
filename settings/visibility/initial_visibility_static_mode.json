@@ -63,7 +63,7 @@
         {
             "step_id": 7,
             "content": {
-                "short_text": false,
+                "short_text": true,
                 "long_text": false,
                 "single_pieces": false,
                 "assembly": false,
