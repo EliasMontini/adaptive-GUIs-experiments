@@ -1039,7 +1039,7 @@ def update_button_states(current_step, enabled_interactions, clicked_buttons, in
     # A button should be disabled if:
     # 1. It's disabled in the JSON configuration, or
     # 2. It has been clicked in the current step, or
-    # 3. It is initially set to be visible (preventing user interaction)
+    # 3. It is initially set to be visible
     return (
         not buttons.get('short_text', True) or
         step_clicked.get('short_text', False) or
