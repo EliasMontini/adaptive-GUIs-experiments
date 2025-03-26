@@ -63,9 +63,9 @@
         {
             "step_id": 7,
             "content": {
-                "short_text": true,
+                "short_text": false,
                 "long_text": false,
-                "single_pieces": false,
+                "single_pieces": true,
                 "assembly": false,
                 "video": false
             }
@@ -83,9 +83,9 @@
         {
             "step_id": 9,
             "content": {
-                "short_text": true,
+                "short_text": false,
                 "long_text": false,
-                "single_pieces": false,
+                "single_pieces": true,
                 "assembly": false,
                 "video": false
             }
@@ -126,8 +126,8 @@
                 "short_text": false,
                 "long_text": false,
                 "single_pieces": false,
-                "assembly": false,
-                "video": true
+                "assembly": true,
+                "video": false
             }
         },
         {
@@ -144,9 +144,9 @@
             "step_id": 15,
             "content": {
                 "short_text": false,
-                "long_text": true,
+                "long_text": false,
                 "single_pieces": false,
-                "assembly": false,
+                "assembly": true,
                 "video": false
             }
         },

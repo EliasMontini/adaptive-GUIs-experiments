@@ -1,11 +1,14 @@
-import dash
-from dash import dcc, html, Input, Output, State, callback
-import dash_bootstrap_components as dbc
+import datetime
 import json
 import os
-import pandas as pd
 from datetime import datetime
+from typing import Dict, List, Optional
+
+import dash
+import dash_bootstrap_components as dbc
 import flask
+import pandas as pd
+from dash import dcc, html, Input, Output, State
 
 # Initialize the app with Flask server to handle static files
 server = flask.Flask(__name__)
@@ -138,6 +141,113 @@ def load_initial_visibility():
         }}]}
 
 
+def update_user_preferences(
+        preferences: Dict[str, Dict[str, List[float]]],
+        step_type: str,
+        content_types: List[str],
+        timestamp: Optional[float] = None,
+        is_initial: bool = False
+) -> Dict[str, Dict[str, List[float]]]:
+    """
+    Update user preferences with robust tracking per step type.
+
+    Ensures that preferences are always tracked under the correct step type.
+    """
+    if preferences is None:
+        preferences = {}
+
+    # Ensure the step type exists in preferences
+    if step_type not in preferences:
+        preferences[step_type] = {}
+
+    # Track each requested content type
+    for content_type in content_types:
+        if timestamp is None:
+            timestamp = datetime.datetime.now().timestamp()
+
+        if content_type not in preferences[step_type]:
+            preferences[step_type][content_type] = []
+
+        # For initial visibility, only add if no previous entries
+        if not is_initial or not preferences[step_type][content_type]:
+            preferences[step_type][content_type].append(timestamp)
+
+    # Remove any 'Unknown' key if it exists
+    if 'Unknown' in preferences:
+        del preferences['Unknown']
+
+    return preferences
+
+
+def calculate_weighted_frequencies(
+        preferences: Dict[str, Dict[str, List[float]]],
+        decay_factor: float = 0.9,
+        max_history: int = 20
+) -> Dict[str, Dict[str, float]]:
+    """
+    Calculate weighted frequencies with decay for recent selections.
+
+    Filters out any 'Unknown' type preferences.
+    """
+    if not preferences:
+        return {}
+
+    # Remove 'Unknown' type if present
+    filtered_preferences = {
+        k: v for k, v in preferences.items()
+        if k != 'Unknown' and v
+    }
+
+    weighted_frequencies = {}
+
+    for step_type, content_types in filtered_preferences.items():
+        weighted_frequencies[step_type] = {}
+
+        for content_type, timestamps in content_types.items():
+            # Sort timestamps in descending order and take most recent
+            recent_timestamps = sorted(timestamps, reverse=True)[:max_history]
+
+            # Calculate weighted sum with exponential decay
+            weighted_sum = sum(
+                (decay_factor ** i) for i, _ in enumerate(recent_timestamps)
+            )
+
+            weighted_frequencies[step_type][content_type] = weighted_sum
+
+    return weighted_frequencies
+
+
+def get_most_frequent_content(
+        preferences: Dict[str, Dict[str, List[float]]],
+        step_type: str
+) -> Optional[str]:
+    """
+    Determine the most frequently requested content type for a specific step type.
+
+    Args:
+    - preferences: User preferences dictionary
+    - step_type: Type of step to analyze
+
+    Returns:
+    Most frequent content type or None if no preferences exist
+    """
+    if not preferences or step_type not in preferences:
+        return None
+
+    # Calculate weighted frequencies
+    weighted_freqs = calculate_weighted_frequencies(preferences)
+
+    # Check if we have frequencies for this step type
+    if step_type not in weighted_freqs or not weighted_freqs[step_type]:
+        return None
+
+    # Find and return the content type with the highest weighted frequency
+    return max(
+        weighted_freqs[step_type].items(),
+        key=lambda x: x[1]
+    )[0]
+
+
 # Define placeholder image URL
 placeholder_img = "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
 
@@ -247,6 +357,7 @@ app.layout = html.Div([
     dcc.Store(id='enabled-interactions-store', data=load_enabled_interactions()),
     dcc.Store(id='initial-visibility-store', data=load_initial_visibility()),
     dcc.Store(id='clicked-buttons-store', data={}),
+    dcc.Store(id='user-preferences-store', data={}),
 
     # Introduction page
     html.Div(id='intro-container',
@@ -272,7 +383,7 @@ app.layout = html.Div([
                          ],
                          value='initial_visibility_data_collection.json',  # Default selection
                          clearable=False,
-                         style={'text-align': 'center','margin-bottom': '5px'}
+                         style={'text-align': 'center', 'margin-bottom': '5px'}
                      ),
                      dbc.Button("Begin Training", id='begin-button', color='primary', style={'width': '100%'})
                  ])
@@ -553,21 +664,27 @@ def update_step_content(current_step, assembly_data, experiment_id):
     [Output('short-text-placeholder', 'style', allow_duplicate=True),
      Output('short-text-content', 'style', allow_duplicate=True),
      Output('short-text-btn', 'children'),
-     Output('clicked-buttons-store', 'data', allow_duplicate=True)],
+     Output('clicked-buttons-store', 'data', allow_duplicate=True),
+     Output('user-preferences-store', 'data', allow_duplicate=True)],  # Added for adaptive mode
     [Input('short-text-btn', 'n_clicks')],
     [State('short-text-placeholder', 'style'),
      State('experiment-id-store', 'data'),
      State('current-step', 'data'),
      State('assembly-data-store', 'data'),
-     State('clicked-buttons-store', 'data')],
+     State('clicked-buttons-store', 'data'),
+     State('user-preferences-store', 'data')],  # Added for adaptive mode
     prevent_initial_call=True
 )
-def toggle_short_text(n_clicks, placeholder_style, experiment_id, current_step, assembly_data, clicked_buttons):
+def toggle_short_text(n_clicks, placeholder_style, experiment_id, current_step,
+                      assembly_data, clicked_buttons, user_preferences):
     if n_clicks is None:
-        return placeholder_style, {'display': 'none'}, [html.I(className="bi bi-eye-fill me-1"),
-                                                        "Show"], clicked_buttons
+        return placeholder_style, {'display': 'none'}, [
+            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, user_preferences
 
     step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
+    step_type = assembly_data[current_step - 1].get('category', 'Unknown') if 0 < current_step <= len(
+        assembly_data) else 'Unknown'
+
     is_showing = placeholder_style.get('display') == 'none'
 
     # Use string keys for steps
@@ -580,15 +697,20 @@ def toggle_short_text(n_clicks, placeholder_style, experiment_id, current_step, 
         clicked_buttons[step_key]['short_text'] = False
         button_states = get_complete_button_states(current_step, clicked_buttons)
         log_interaction(experiment_id, "toggle_short_text_none", current_step, step_name, button_states)
-        return {'display': 'block'}, {'display': 'none'}, [html.I(className="bi bi-eye-fill me-1"),
-                                                           "Show"], clicked_buttons
+        return {'display': 'block'}, {'display': 'none'}, [
+            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, user_preferences
     else:
-        # Show content
+        # Show content and update preferences
         clicked_buttons[step_key]['short_text'] = True
         button_states = get_complete_button_states(current_step, clicked_buttons)
         log_interaction(experiment_id, "toggle_short_text_block", current_step, step_name, button_states)
-        return {'display': 'none'}, {'display': 'block'}, [html.I(className="bi bi-eye-fill me-1"),
-                                                           "Viewed"], clicked_buttons
+
+        # Update user preferences with timestamp
+        user_preferences = update_user_preferences(
+            user_preferences, step_type, ['short_text'], datetime.now().timestamp(), is_initial=False)
+
+        return {'display': 'none'}, {'display': 'block'}, [
+            html.I(className="bi bi-eye-fill me-1"), "Viewed"], clicked_buttons, user_preferences
 
 
 # toggle long_text
@@ -596,21 +718,27 @@ def toggle_short_text(n_clicks, placeholder_style, experiment_id, current_step, 
     [Output('long-text-placeholder', 'style', allow_duplicate=True),
      Output('long-text-content', 'style', allow_duplicate=True),
      Output('long-text-btn', 'children'),
-     Output('clicked-buttons-store', 'data', allow_duplicate=True)],
+     Output('clicked-buttons-store', 'data', allow_duplicate=True),
+     Output('user-preferences-store', 'data', allow_duplicate=True)],  # Added for adaptive mode
     [Input('long-text-btn', 'n_clicks')],
     [State('long-text-placeholder', 'style'),
      State('experiment-id-store', 'data'),
      State('current-step', 'data'),
      State('assembly-data-store', 'data'),
-     State('clicked-buttons-store', 'data')],
+     State('clicked-buttons-store', 'data'),
+     State('user-preferences-store', 'data')],  # Added for adaptive mode
     prevent_initial_call=True
 )
-def toggle_long_text(n_clicks, placeholder_style, experiment_id, current_step, assembly_data, clicked_buttons):
+def toggle_long_text(n_clicks, placeholder_style, experiment_id, current_step,
+                     assembly_data, clicked_buttons, user_preferences):
     if n_clicks is None:
-        return placeholder_style, {'display': 'none'}, [html.I(className="bi bi-eye-fill me-1"),
-                                                        "Show"], clicked_buttons
+        return placeholder_style, {'display': 'none'}, [
+            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, user_preferences
 
     step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
+    step_type = assembly_data[current_step - 1].get('category', 'Unknown') if 0 < current_step <= len(
+        assembly_data) else 'Unknown'
+
     is_showing = placeholder_style.get('display') == 'none'
 
     # Update clicked buttons store
@@ -623,15 +751,20 @@ def toggle_long_text(n_clicks, placeholder_style, experiment_id, current_step, a
         clicked_buttons[step_key]['long_text'] = False
         button_states = get_complete_button_states(current_step, clicked_buttons)
         log_interaction(experiment_id, "toggle_long_text_none", current_step, step_name, button_states)
-        return {'display': 'block'}, {'display': 'none'}, [html.I(className="bi bi-eye-fill me-1"),
-                                                           "Show"], clicked_buttons
+        return {'display': 'block'}, {'display': 'none'}, [
+            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, user_preferences
     else:
-        # Show content
+        # Show content and update preferences
         clicked_buttons[step_key]['long_text'] = True
         button_states = get_complete_button_states(current_step, clicked_buttons)
         log_interaction(experiment_id, "toggle_long_text_block", current_step, step_name, button_states)
-        return {'display': 'none'}, {'display': 'block'}, [html.I(className="bi bi-eye-fill me-1"),
-                                                           "Viewed"], clicked_buttons
+
+        # Update user preferences with timestamp
+        user_preferences = update_user_preferences(
+            user_preferences, step_type, ['long_text'], datetime.now().timestamp(), is_initial=False)
+
+        return {'display': 'none'}, {'display': 'block'}, [
+            html.I(className="bi bi-eye-fill me-1"), "Viewed"], clicked_buttons, user_preferences
 
 
 # toggle single_pieces callback
@@ -639,21 +772,27 @@ def toggle_long_text(n_clicks, placeholder_style, experiment_id, current_step, a
     [Output('single-pieces-placeholder', 'style', allow_duplicate=True),
      Output('single-pieces-img', 'style', allow_duplicate=True),
      Output('single-pieces-btn', 'children'),
-     Output('clicked-buttons-store', 'data', allow_duplicate=True)],
+     Output('clicked-buttons-store', 'data', allow_duplicate=True),
+     Output('user-preferences-store', 'data', allow_duplicate=True)],  # Added for adaptive mode
     [Input('single-pieces-btn', 'n_clicks')],
     [State('single-pieces-placeholder', 'style'),
      State('experiment-id-store', 'data'),
      State('current-step', 'data'),
      State('assembly-data-store', 'data'),
-     State('clicked-buttons-store', 'data')],
+     State('clicked-buttons-store', 'data'),
+     State('user-preferences-store', 'data')],  # Added for adaptive mode
     prevent_initial_call=True
 )
-def toggle_single_pieces(n_clicks, placeholder_style, experiment_id, current_step, assembly_data, clicked_buttons):
+def toggle_single_pieces(n_clicks, placeholder_style, experiment_id, current_step,
+                         assembly_data, clicked_buttons, user_preferences):
     if n_clicks is None:
         return placeholder_style, {'display': 'none', **styles['image-content']}, [
-            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons
+            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, user_preferences
 
     step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
+    step_type = assembly_data[current_step - 1].get('category', 'Unknown') if 0 < current_step <= len(
+        assembly_data) else 'Unknown'
+
     is_showing = placeholder_style.get('display') == 'none'
 
     # Update clicked buttons store
@@ -667,14 +806,19 @@ def toggle_single_pieces(n_clicks, placeholder_style, experiment_id, current_ste
         button_states = get_complete_button_states(current_step, clicked_buttons)
         log_interaction(experiment_id, "toggle_single_pieces_none", current_step, step_name, button_states)
         return {'display': 'block'}, {'display': 'none', **styles['image-content']}, [
-            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons
+            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, user_preferences
     else:
-        # Show content
+        # Show content and update preferences
         clicked_buttons[step_key]['single_pieces'] = True
         button_states = get_complete_button_states(current_step, clicked_buttons)
         log_interaction(experiment_id, "toggle_single_pieces_block", current_step, step_name, button_states)
+
+        # Update user preferences with timestamp
+        user_preferences = update_user_preferences(
+            user_preferences, step_type, ['single_pieces'], datetime.now().timestamp(), is_initial=False)
+
         return {'display': 'none'}, {'display': 'block', **styles['image-content']}, [
-            html.I(className="bi bi-eye-fill me-1"), "Viewed"], clicked_buttons
+            html.I(className="bi bi-eye-fill me-1"), "Viewed"], clicked_buttons, user_preferences
 
 
 # toggle assembly callback
@@ -682,21 +826,27 @@ def toggle_single_pieces(n_clicks, placeholder_style, experiment_id, current_ste
     [Output('assembly-placeholder', 'style', allow_duplicate=True),
      Output('assembly-img', 'style', allow_duplicate=True),
      Output('assembly-btn', 'children'),
-     Output('clicked-buttons-store', 'data', allow_duplicate=True)],
+     Output('clicked-buttons-store', 'data', allow_duplicate=True),
+     Output('user-preferences-store', 'data', allow_duplicate=True)],  # Added for adaptive mode
     [Input('assembly-btn', 'n_clicks')],
     [State('assembly-placeholder', 'style'),
      State('experiment-id-store', 'data'),
      State('current-step', 'data'),
      State('assembly-data-store', 'data'),
-     State('clicked-buttons-store', 'data')],
+     State('clicked-buttons-store', 'data'),
+     State('user-preferences-store', 'data')],  # Added for adaptive mode
     prevent_initial_call=True
 )
-def toggle_assembly(n_clicks, placeholder_style, experiment_id, current_step, assembly_data, clicked_buttons):
+def toggle_assembly(n_clicks, placeholder_style, experiment_id, current_step,
+                    assembly_data, clicked_buttons, user_preferences):
     if n_clicks is None:
         return placeholder_style, {'display': 'none', **styles['image-content']}, [
-            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons
+            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, user_preferences
 
     step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
+    step_type = assembly_data[current_step - 1].get('category', 'Unknown') if 0 < current_step <= len(
+        assembly_data) else 'Unknown'
+
     is_showing = placeholder_style.get('display') == 'none'
 
     # Update clicked buttons store
@@ -710,14 +860,19 @@ def toggle_assembly(n_clicks, placeholder_style, experiment_id, current_step, as
         button_states = get_complete_button_states(current_step, clicked_buttons)
         log_interaction(experiment_id, "toggle_assembly_none", current_step, step_name, button_states)
         return {'display': 'block'}, {'display': 'none', **styles['image-content']}, [
-            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons
+            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, user_preferences
     else:
-        # Show content
+        # Show content and update preferences
         clicked_buttons[step_key]['assembly'] = True
         button_states = get_complete_button_states(current_step, clicked_buttons)
         log_interaction(experiment_id, "toggle_assembly_block", current_step, step_name, button_states)
+
+        # Update user preferences with timestamp
+        user_preferences = update_user_preferences(
+            user_preferences, step_type, ['assembly'], datetime.now().timestamp(), is_initial=False)
+
         return {'display': 'none'}, {'display': 'block', **styles['image-content']}, [
-            html.I(className="bi bi-eye-fill me-1"), "Viewed"], clicked_buttons
+            html.I(className="bi bi-eye-fill me-1"), "Viewed"], clicked_buttons, user_preferences
 
 
 # toggle video callback
@@ -726,21 +881,27 @@ def toggle_assembly(n_clicks, placeholder_style, experiment_id, current_step, as
      Output('video-player', 'style', allow_duplicate=True),
      Output('video-btn', 'children'),
      Output('clicked-buttons-store', 'data', allow_duplicate=True),
+     Output('user-preferences-store', 'data', allow_duplicate=True),  # Added for adaptive mode
      Output('video-player', 'autoPlay')],
     [Input('video-btn', 'n_clicks')],
     [State('video-placeholder', 'style'),
      State('experiment-id-store', 'data'),
      State('current-step', 'data'),
      State('assembly-data-store', 'data'),
-     State('clicked-buttons-store', 'data')],
+     State('clicked-buttons-store', 'data'),
+     State('user-preferences-store', 'data')],  # Added for adaptive mode
     prevent_initial_call=True
 )
-def toggle_video(n_clicks, placeholder_style, experiment_id, current_step, assembly_data, clicked_buttons):
+def toggle_video(n_clicks, placeholder_style, experiment_id, current_step,
+                 assembly_data, clicked_buttons, user_preferences):
     if n_clicks is None:
         return placeholder_style, {'display': 'none', **styles['image-content']}, [
-            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, False
+            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, user_preferences, False
 
     step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
+    step_type = assembly_data[current_step - 1].get('category', 'Unknown') if 0 < current_step <= len(
+        assembly_data) else 'Unknown'
+
     is_showing = placeholder_style.get('display') == 'none'
 
     # Update clicked buttons store
@@ -754,14 +915,19 @@ def toggle_video(n_clicks, placeholder_style, experiment_id, current_step, assem
         button_states = get_complete_button_states(current_step, clicked_buttons)
         log_interaction(experiment_id, "toggle_video_none", current_step, step_name, button_states)
         return {'display': 'block'}, {'display': 'none', **styles['image-content']}, [
-            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, False
+            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, user_preferences, False
     else:
-        # Show content and autoplay
+        # Show content, update preferences, and autoplay
         clicked_buttons[step_key]['video'] = True
         button_states = get_complete_button_states(current_step, clicked_buttons)
         log_interaction(experiment_id, "toggle_video_block", current_step, step_name, button_states)
+
+        # Update user preferences with timestamp
+        user_preferences = update_user_preferences(
+            user_preferences, step_type, ['video'], datetime.now().timestamp(), is_initial=False)
+
         return {'display': 'none'}, {'display': 'block', **styles['image-content']}, [
-            html.I(className="bi bi-eye-fill me-1"), "Viewed"], clicked_buttons, True
+            html.I(className="bi bi-eye-fill me-1"), "Viewed"], clicked_buttons, user_preferences, True
 
 
 # navigation callback
@@ -896,6 +1062,7 @@ def update_button_states(current_step, enabled_interactions, clicked_buttons, in
         initial_config.get('video', False)
     )
 
+
 # Reset button labels and placeholders when changing steps
 @app.callback(
     [Output('short-text-placeholder', 'style', allow_duplicate=True),
@@ -913,13 +1080,24 @@ def update_button_states(current_step, enabled_interactions, clicked_buttons, in
      Output('single-pieces-btn', 'children', allow_duplicate=True),
      Output('assembly-btn', 'children', allow_duplicate=True),
      Output('video-btn', 'children', allow_duplicate=True),
-     Output('video-player', 'autoPlay', allow_duplicate=True)],
+     Output('video-player', 'autoPlay', allow_duplicate=True),
+     Output('user-preferences-store', 'data', allow_duplicate=True)],
     [Input('current-step', 'data')],
     [State('initial-visibility-store', 'data'),
-     State('clicked-buttons-store', 'data')],
+     State('clicked-buttons-store', 'data'),
+     State('visibility-mode-dropdown', 'value'),
+     State('user-preferences-store', 'data'),
+     State('assembly-data-store', 'data')],
     prevent_initial_call=True
 )
-def reset_button_states_and_visibility(current_step, initial_visibility, clicked_buttons):
+def reset_button_states_and_visibility(
+        current_step,
+        initial_visibility,
+        clicked_buttons,
+        visibility_mode=None,
+        user_preferences=None,
+        assembly_data=None
+):
     # Defensive programming: ensure data exists
     if not initial_visibility or 'steps' not in initial_visibility:
         # Fallback to default visibility
@@ -955,9 +1133,58 @@ def reset_button_states_and_visibility(current_step, initial_visibility, clicked
         }
 
     content = step_config.get('content', {})
-
     # Defensive conversion to ensure boolean
     content = {k: bool(v) for k, v in content.items()}
+
+    # Apply adaptive logic only for dynamically adaptive mode
+    if visibility_mode == 'initial_visibility_dynamically_adaptive.json' and current_step > 1:
+        # Ensure user_preferences is initialized
+        if user_preferences is None:
+            user_preferences = {}
+
+        # Robust step type extraction
+        step_type = None
+        if assembly_data and 0 < current_step - 1 < len(assembly_data):
+            step_type = assembly_data[current_step - 1].get('category')
+
+        # Fallback if step_type is not found or is None
+        if not step_type:
+            print(f"Warning: Could not determine step type for step {current_step}")
+            return None  # or handle as needed
+
+        # Ensure step_type is clean and consistent
+        step_type = step_type.strip()
+
+        # Calculate weighted frequencies
+        weighted_freqs = calculate_weighted_frequencies(user_preferences)
+
+        # Debugging print
+        # print(f"Weighted frequencies for step {current_step}: {weighted_freqs}")
+
+        # If we have preferences for this step type, use the most frequent
+        if step_type in weighted_freqs and weighted_freqs[step_type]:
+            # Get the most frequent content type
+            most_frequent = max(
+                weighted_freqs[step_type].items(),
+                key=lambda x: x[1]
+            )[0]
+
+            # Reset all content to False
+            content = {k: False for k in content}
+            # Set the most frequent content to True
+            content[most_frequent] = True
+
+        # Track the initially visible content
+        initially_visible_content = [k for k, v in content.items() if v]
+        user_preferences = update_user_preferences(
+            user_preferences,
+            step_type,  # Use the correctly extracted step type
+            initially_visible_content,
+            datetime.now().timestamp(),
+            is_initial=True
+        )
+
+        print(f"Updated user preferences at step {current_step} (Type: {step_type}):", user_preferences)
 
     # Default labels
     default_label = [html.I(className="bi bi-eye-fill me-1"), "Show"]
@@ -1010,7 +1237,8 @@ def reset_button_states_and_visibility(current_step, initial_visibility, clicked
         video_placeholder, video_content,
         short_text_btn, long_text_btn,
         single_pieces_btn, assembly_btn, video_btn,
-        False  # autoPlay
+        False,  # autoPlay
+        user_preferences
     )
 
 
@@ -1021,7 +1249,8 @@ def reset_button_states_and_visibility(current_step, initial_visibility, clicked
      Output('thankyou-container', 'style', allow_duplicate=True),
      Output('experiment-id-store', 'data', allow_duplicate=True),
      Output('current-step', 'data', allow_duplicate=True),
-     Output('clicked-buttons-store', 'data', allow_duplicate=True)],
+     Output('clicked-buttons-store', 'data', allow_duplicate=True),
+     Output('user-preferences-store', 'data', allow_duplicate=True)],  # Add this output
     [Input('restart-button', 'n_clicks')],
     [State('experiment-id-store', 'data')],
     prevent_initial_call=True
@@ -1040,7 +1269,8 @@ def restart_application(n_clicks, experiment_id):
         {'display': 'none'},  # Hide thank you screen
         None,  # Reset experiment ID
         0,  # Reset step to 0
-        {}  # Reset clicked buttons
+        {},  # Reset clicked buttons
+        {}  # Reset user preferences
     )
 
 
