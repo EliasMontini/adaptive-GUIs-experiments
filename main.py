@@ -1055,27 +1055,27 @@ def update_button_states(current_step, enabled_interactions, clicked_buttons, in
     return (
         not buttons.get('short_text', True) or
         step_clicked.get('short_text', False) or
-        initial_config.get('short_text', False) or
+        # initial_config.get('short_text', False) or
         is_content_visible(short_text_style),
 
         not buttons.get('long_text', True) or
         step_clicked.get('long_text', False) or
-        initial_config.get('long_text', False) or
+        # initial_config.get('long_text', False) or
         is_content_visible(long_text_style),
 
         not buttons.get('single_pieces', True) or
         step_clicked.get('single_pieces', False) or
-        initial_config.get('single_pieces', False) or
+        # initial_config.get('single_pieces', False) or
         is_content_visible(single_pieces_style),
 
         not buttons.get('assembly', True) or
         step_clicked.get('assembly', False) or
-        initial_config.get('assembly', False) or
+        # initial_config.get('assembly', False) or
         is_content_visible(assembly_style),
 
         not buttons.get('video', True) or
         step_clicked.get('video', False) or
-        initial_config.get('video', False) or
+        # initial_config.get('video', False) or
         is_content_visible(video_style)
     )
 
