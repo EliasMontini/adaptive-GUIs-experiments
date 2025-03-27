@@ -1000,7 +1000,6 @@ def log_step_load(current_step, experiment_id, assembly_data, clicked_buttons):
 
 
 # button state callback
-
 @app.callback(
     [Output('short-text-btn', 'disabled', allow_duplicate=True),
      Output('long-text-btn', 'disabled', allow_duplicate=True),
@@ -1010,17 +1009,10 @@ def log_step_load(current_step, experiment_id, assembly_data, clicked_buttons):
     [Input('current-step', 'data'),
      Input('enabled-interactions-store', 'data'),
      Input('clicked-buttons-store', 'data'),
-     Input('initial-visibility-store', 'data'),
-     Input('short-text-content', 'style'),
-     Input('long-text-content', 'style'),
-     Input('single-pieces-img', 'style'),
-     Input('assembly-img', 'style'),
-     Input('video-player', 'style')],
+     Input('initial-visibility-store', 'data')],
     prevent_initial_call=True
 )
-def update_button_states(current_step, enabled_interactions, clicked_buttons, initial_visibility,
-                         short_text_style, long_text_style, single_pieces_style,
-                         assembly_style, video_style):
+def update_button_states(current_step, enabled_interactions, clicked_buttons, initial_visibility):
     # Find the configuration for the current step in initial visibility
     initial_config = next((step['content'] for step in initial_visibility['steps']
                            if step['step_id'] == current_step),
@@ -1044,41 +1036,32 @@ def update_button_states(current_step, enabled_interactions, clicked_buttons, in
     step_key = str(current_step)
     step_clicked = clicked_buttons.get(step_key, {})
 
-    # Function to check if content is currently visible
-    def is_content_visible(style):
-        return style.get('display', '') == 'block'
-
     # A button should be disabled if:
     # 1. It's disabled in the JSON configuration, or
     # 2. It has been clicked in the current step, or
-    # 3. It is initially set to be visible (preventing user interaction), or
-    # 4. The content is currently visible
+    # 3. It is initially set to be visible
     return (
         not buttons.get('short_text', True) or
         step_clicked.get('short_text', False) or
-        initial_config.get('short_text', False) or
-        is_content_visible(short_text_style),
+        initial_config.get('short_text', False),
 
         not buttons.get('long_text', True) or
         step_clicked.get('long_text', False) or
-        initial_config.get('long_text', False) or
-        is_content_visible(long_text_style),
+        initial_config.get('long_text', False),
 
         not buttons.get('single_pieces', True) or
         step_clicked.get('single_pieces', False) or
-        initial_config.get('single_pieces', False) or
-        is_content_visible(single_pieces_style),
+        initial_config.get('single_pieces', False),
 
         not buttons.get('assembly', True) or
         step_clicked.get('assembly', False) or
-        initial_config.get('assembly', False) or
-        is_content_visible(assembly_style),
+        initial_config.get('assembly', False),
 
         not buttons.get('video', True) or
         step_clicked.get('video', False) or
-        initial_config.get('video', False) or
-        is_content_visible(video_style)
+        initial_config.get('video', False)
     )
+
 # Reset button labels and placeholders when changing steps
 @app.callback(
     [Output('short-text-placeholder', 'style', allow_duplicate=True),
