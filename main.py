@@ -59,10 +59,20 @@ def init_log_df():
 
 
 # Log user interaction
-def log_interaction(experiment_id, action, step_id=None, step_name=None, button_states=None):
+def log_interaction(experiment_id, mode, action, step_id=None, step_name=None, button_states=None):
     df = init_log_df()
+    # not the best solution :)
+    dropdown_options = [
+        {'label': 'Data Collection', 'value': 'initial_visibility_data_collection.json'},
+        {'label': 'Dynamically Adaptive', 'value': 'initial_visibility_dynamically_adaptive.json'},
+        {'label': 'Rule-Based Adaptive', 'value': 'initial_visibility_rule_based_adaptive.json'},
+        {'label': 'Static', 'value': 'initial_visibility_static_mode.json'}
+    ]
+    mode_to_label = {option['value']: option['label'] for option in dropdown_options}
+    mode = mode_to_label.get(mode, 'Unknown Mode')
     new_row = {
         'experiment_id': experiment_id,
+        'mode': mode,
         'timestamp': datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f"),
         'action': action,
         'step_id': step_id if step_id is not None else 'N/A',
@@ -82,7 +92,7 @@ def log_interaction(experiment_id, action, step_id=None, step_name=None, button_
 # Inizializzazione del DataFrame di log con colonne aggiuntive
 def init_log_df():
     columns = [
-        'experiment_id', 'timestamp', 'action', 'step_id', 'step_name',
+        'experiment_id', 'mode', 'timestamp', 'action', 'step_id', 'step_name',
         'short_text_viewed', 'long_text_viewed', 'single_pieces_viewed',
         'assembly_viewed', 'video_viewed'
     ]
@@ -379,7 +389,7 @@ app.layout = html.Div([
                              {'label': 'Data Collection', 'value': 'initial_visibility_data_collection.json'},
                              {'label': 'Dynamically Adaptive', 'value': 'initial_visibility_dynamically_adaptive.json'},
                              {'label': 'Rule-Based Adaptive', 'value': 'initial_visibility_rule_based_adaptive.json'},
-                             {'label': 'Static Mode', 'value': 'initial_visibility_static_mode.json'}
+                             {'label': 'Static', 'value': 'initial_visibility_static_mode.json'}
                          ],
                          value='initial_visibility_data_collection.json',  # Default selection
                          clearable=False,
@@ -565,9 +575,10 @@ app.layout = html.Div([
      Output('experiment-id-store', 'data'),
      Output('current-step', 'data')],
     [Input('begin-button', 'n_clicks')],
-    [State('experiment-id-input', 'value')]
+    [State('experiment-id-input', 'value'),
+     State('visibility-mode-dropdown', 'value')]
 )
-def begin_training(n_clicks, experiment_id):
+def begin_training(n_clicks, experiment_id, mode):
     # Only proceed if button has been clicked
     if n_clicks is None:
         return styles['intro-screen'], {'display': 'none'}, None, 0
@@ -576,7 +587,7 @@ def begin_training(n_clicks, experiment_id):
         experiment_id = 'unknown'
 
     # Log the start of the experiment
-    log_interaction(experiment_id, 'start_experiment')
+    log_interaction(experiment_id, mode, 'start_experiment')
 
     # Hide intro and show training
     return {'display': 'none'}, {'display': 'block', **styles['training-screen']}, experiment_id, 1
@@ -669,13 +680,14 @@ def update_step_content(current_step, assembly_data, experiment_id):
     [Input('short-text-btn', 'n_clicks')],
     [State('short-text-placeholder', 'style'),
      State('experiment-id-store', 'data'),
+     State('visibility-mode-dropdown', 'value'),
      State('current-step', 'data'),
      State('assembly-data-store', 'data'),
      State('clicked-buttons-store', 'data'),
      State('user-preferences-store', 'data')],  # Added for adaptive mode
     prevent_initial_call=True
 )
-def toggle_short_text(n_clicks, placeholder_style, experiment_id, current_step,
+def toggle_short_text(n_clicks, placeholder_style, experiment_id, mode, current_step,
                       assembly_data, clicked_buttons, user_preferences):
     if n_clicks is None:
         return placeholder_style, {'display': 'none'}, [
@@ -696,14 +708,14 @@ def toggle_short_text(n_clicks, placeholder_style, experiment_id, current_step,
         # Hide content
         clicked_buttons[step_key]['short_text'] = False
         button_states = get_complete_button_states(current_step, clicked_buttons)
-        log_interaction(experiment_id, "toggle_short_text_none", current_step, step_name, button_states)
+        log_interaction(experiment_id, mode, "toggle_short_text_none", current_step, step_name, button_states)
         return {'display': 'block'}, {'display': 'none'}, [
             html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, user_preferences
     else:
         # Show content and update preferences
         clicked_buttons[step_key]['short_text'] = True
         button_states = get_complete_button_states(current_step, clicked_buttons)
-        log_interaction(experiment_id, "toggle_short_text_block", current_step, step_name, button_states)
+        log_interaction(experiment_id, mode, "toggle_short_text_block", current_step, step_name, button_states)
 
         # Update user preferences with timestamp
         user_preferences = update_user_preferences(
@@ -723,13 +735,14 @@ def toggle_short_text(n_clicks, placeholder_style, experiment_id, current_step,
     [Input('long-text-btn', 'n_clicks')],
     [State('long-text-placeholder', 'style'),
      State('experiment-id-store', 'data'),
+     State('visibility-mode-dropdown', 'value'),
      State('current-step', 'data'),
      State('assembly-data-store', 'data'),
      State('clicked-buttons-store', 'data'),
      State('user-preferences-store', 'data')],  # Added for adaptive mode
     prevent_initial_call=True
 )
-def toggle_long_text(n_clicks, placeholder_style, experiment_id, current_step,
+def toggle_long_text(n_clicks, placeholder_style, experiment_id, mode, current_step,
                      assembly_data, clicked_buttons, user_preferences):
     if n_clicks is None:
         return placeholder_style, {'display': 'none'}, [
@@ -750,14 +763,14 @@ def toggle_long_text(n_clicks, placeholder_style, experiment_id, current_step,
         # Hide content
         clicked_buttons[step_key]['long_text'] = False
         button_states = get_complete_button_states(current_step, clicked_buttons)
-        log_interaction(experiment_id, "toggle_long_text_none", current_step, step_name, button_states)
+        log_interaction(experiment_id, mode, "toggle_long_text_none", current_step, step_name, button_states)
         return {'display': 'block'}, {'display': 'none'}, [
             html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, user_preferences
     else:
         # Show content and update preferences
         clicked_buttons[step_key]['long_text'] = True
         button_states = get_complete_button_states(current_step, clicked_buttons)
-        log_interaction(experiment_id, "toggle_long_text_block", current_step, step_name, button_states)
+        log_interaction(experiment_id, mode, "toggle_long_text_block", current_step, step_name, button_states)
 
         # Update user preferences with timestamp
         user_preferences = update_user_preferences(
@@ -777,13 +790,14 @@ def toggle_long_text(n_clicks, placeholder_style, experiment_id, current_step,
     [Input('single-pieces-btn', 'n_clicks')],
     [State('single-pieces-placeholder', 'style'),
      State('experiment-id-store', 'data'),
+     State('visibility-mode-dropdown', 'value'),
      State('current-step', 'data'),
      State('assembly-data-store', 'data'),
      State('clicked-buttons-store', 'data'),
      State('user-preferences-store', 'data')],  # Added for adaptive mode
     prevent_initial_call=True
 )
-def toggle_single_pieces(n_clicks, placeholder_style, experiment_id, current_step,
+def toggle_single_pieces(n_clicks, placeholder_style, experiment_id, mode, current_step,
                          assembly_data, clicked_buttons, user_preferences):
     if n_clicks is None:
         return placeholder_style, {'display': 'none', **styles['image-content']}, [
@@ -804,14 +818,14 @@ def toggle_single_pieces(n_clicks, placeholder_style, experiment_id, current_ste
         # Hide content
         clicked_buttons[step_key]['single_pieces'] = False
         button_states = get_complete_button_states(current_step, clicked_buttons)
-        log_interaction(experiment_id, "toggle_single_pieces_none", current_step, step_name, button_states)
+        log_interaction(experiment_id, mode, "toggle_single_pieces_none", current_step, step_name, button_states)
         return {'display': 'block'}, {'display': 'none', **styles['image-content']}, [
             html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, user_preferences
     else:
         # Show content and update preferences
         clicked_buttons[step_key]['single_pieces'] = True
         button_states = get_complete_button_states(current_step, clicked_buttons)
-        log_interaction(experiment_id, "toggle_single_pieces_block", current_step, step_name, button_states)
+        log_interaction(experiment_id, mode, "toggle_single_pieces_block", current_step, step_name, button_states)
 
         # Update user preferences with timestamp
         user_preferences = update_user_preferences(
@@ -831,13 +845,14 @@ def toggle_single_pieces(n_clicks, placeholder_style, experiment_id, current_ste
     [Input('assembly-btn', 'n_clicks')],
     [State('assembly-placeholder', 'style'),
      State('experiment-id-store', 'data'),
+     State('visibility-mode-dropdown', 'value'),
      State('current-step', 'data'),
      State('assembly-data-store', 'data'),
      State('clicked-buttons-store', 'data'),
      State('user-preferences-store', 'data')],  # Added for adaptive mode
     prevent_initial_call=True
 )
-def toggle_assembly(n_clicks, placeholder_style, experiment_id, current_step,
+def toggle_assembly(n_clicks, placeholder_style, experiment_id, mode, current_step,
                     assembly_data, clicked_buttons, user_preferences):
     if n_clicks is None:
         return placeholder_style, {'display': 'none', **styles['image-content']}, [
@@ -858,14 +873,14 @@ def toggle_assembly(n_clicks, placeholder_style, experiment_id, current_step,
         # Hide content
         clicked_buttons[step_key]['assembly'] = False
         button_states = get_complete_button_states(current_step, clicked_buttons)
-        log_interaction(experiment_id, "toggle_assembly_none", current_step, step_name, button_states)
+        log_interaction(experiment_id, mode, "toggle_assembly_none", current_step, step_name, button_states)
         return {'display': 'block'}, {'display': 'none', **styles['image-content']}, [
             html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, user_preferences
     else:
         # Show content and update preferences
         clicked_buttons[step_key]['assembly'] = True
         button_states = get_complete_button_states(current_step, clicked_buttons)
-        log_interaction(experiment_id, "toggle_assembly_block", current_step, step_name, button_states)
+        log_interaction(experiment_id, mode, "toggle_assembly_block", current_step, step_name, button_states)
 
         # Update user preferences with timestamp
         user_preferences = update_user_preferences(
@@ -886,13 +901,14 @@ def toggle_assembly(n_clicks, placeholder_style, experiment_id, current_step,
     [Input('video-btn', 'n_clicks')],
     [State('video-placeholder', 'style'),
      State('experiment-id-store', 'data'),
+     State('visibility-mode-dropdown', 'value'),
      State('current-step', 'data'),
      State('assembly-data-store', 'data'),
      State('clicked-buttons-store', 'data'),
      State('user-preferences-store', 'data')],  # Added for adaptive mode
     prevent_initial_call=True
 )
-def toggle_video(n_clicks, placeholder_style, experiment_id, current_step,
+def toggle_video(n_clicks, placeholder_style, experiment_id, mode, current_step,
                  assembly_data, clicked_buttons, user_preferences):
     if n_clicks is None:
         return placeholder_style, {'display': 'none', **styles['image-content']}, [
@@ -913,14 +929,14 @@ def toggle_video(n_clicks, placeholder_style, experiment_id, current_step,
         # Hide content
         clicked_buttons[step_key]['video'] = False
         button_states = get_complete_button_states(current_step, clicked_buttons)
-        log_interaction(experiment_id, "toggle_video_none", current_step, step_name, button_states)
+        log_interaction(experiment_id, mode, "toggle_video_none", current_step, step_name, button_states)
         return {'display': 'block'}, {'display': 'none', **styles['image-content']}, [
             html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, user_preferences, False
     else:
         # Show content, update preferences, and autoplay
         clicked_buttons[step_key]['video'] = True
         button_states = get_complete_button_states(current_step, clicked_buttons)
-        log_interaction(experiment_id, "toggle_video_block", current_step, step_name, button_states)
+        log_interaction(experiment_id, mode, "toggle_video_block", current_step, step_name, button_states)
 
         # Update user preferences with timestamp
         user_preferences = update_user_preferences(
@@ -938,15 +954,17 @@ def toggle_video(n_clicks, placeholder_style, experiment_id, current_step,
      Output('thankyou-container', 'style', allow_duplicate=True)],
     [Input('prev-button', 'n_clicks'),
      Input('next-button', 'n_clicks')],
-    [State('current-step', 'data'),
+    [State('initial-visibility-store', 'data'),
+     State('current-step', 'data'),
      State('assembly-data-store', 'data'),
      State('experiment-id-store', 'data'),
+     State('visibility-mode-dropdown', 'value'),
      State('clicked-buttons-store', 'data'),
      State('training-container', 'style'),
      State('thankyou-container', 'style')],
     prevent_initial_call=True
 )
-def navigate_steps(prev_clicks, next_clicks, current_step, assembly_data, experiment_id,
+def navigate_steps(prev_clicks, next_clicks, initial_visibility, current_step, assembly_data, experiment_id, mode,
                    clicked_buttons, training_style, thankyou_style):
     ctx = dash.callback_context
     if not ctx.triggered:
@@ -960,7 +978,7 @@ def navigate_steps(prev_clicks, next_clicks, current_step, assembly_data, experi
 
     # If user clicks previous from the first step, do nothing
     if button_id == 'prev-button' and current_step > 1:
-        log_interaction(experiment_id, 'navigate_previous', current_step, step_name, button_states)
+        log_interaction(experiment_id, mode, 'navigate_previous', current_step, step_name, button_states)
         # If we're returning from thank you page to the last step
         if current_step == len(assembly_data) + 1:
             return len(assembly_data), False, {'display': 'block', **styles['training-screen']}, {'display': 'none'}
@@ -968,12 +986,49 @@ def navigate_steps(prev_clicks, next_clicks, current_step, assembly_data, experi
 
     # If user clicks next on the last step, show thank you page
     elif button_id == 'next-button' and current_step == len(assembly_data):
-        log_interaction(experiment_id, 'navigate_to_thankyou', current_step, step_name, button_states)
+        log_interaction(experiment_id, mode, 'navigate_to_thankyou', current_step, step_name, button_states)
         return len(assembly_data) + 1, False, {'display': 'none'}, {'display': 'block'}
 
     # Regular next button navigation
     elif button_id == 'next-button' and current_step < len(assembly_data):
-        log_interaction(experiment_id, 'navigate_next', current_step, step_name, button_states)
+        log_interaction(experiment_id, mode, 'navigate_next', current_step, step_name, button_states)
+
+        # Defensive programming: ensure data exists
+        if not initial_visibility or 'steps' not in initial_visibility:
+            # Fallback to default visibility
+            initial_visibility = {
+                'steps': [{
+                    'step_id': current_step,
+                    'content': {
+                        'short_text': False,
+                        'long_text': False,
+                        'single_pieces': False,
+                        'assembly': False,
+                        'video': False
+                    }
+                }]
+            }
+
+        # Find the configuration for the current step
+        try:
+            step_config = next(
+                (step for step in initial_visibility['steps'] if step['step_id'] == current_step),
+                initial_visibility['steps'][0]  # Default to first step if no match
+            )
+        except (IndexError, KeyError):
+            # Fallback to default configuration
+            step_config = {
+                'content': {
+                    'short_text': False,
+                    'long_text': False,
+                    'single_pieces': False,
+                    'assembly': False,
+                    'video': False
+                }
+            }
+
+        step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
+        log_interaction(experiment_id, mode, 'initial_suggestion', current_step, step_name, step_config['content'])
         return current_step + 1, False, training_style, thankyou_style
 
     return current_step, False, training_style, thankyou_style
@@ -984,18 +1039,19 @@ def navigate_steps(prev_clicks, next_clicks, current_step, assembly_data, experi
     Output('current-step', 'data', allow_duplicate=True),
     [Input('current-step', 'data')],
     [State('experiment-id-store', 'data'),
+     State('visibility-mode-dropdown', 'value'),
      State('assembly-data-store', 'data'),
      State('clicked-buttons-store', 'data')],
     prevent_initial_call=True
 )
-def log_step_load(current_step, experiment_id, assembly_data, clicked_buttons):
+def log_step_load(current_step, experiment_id, mode, assembly_data, clicked_buttons):
     if current_step <= 0 or current_step > len(assembly_data):
         return current_step
 
     step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
     button_states = get_complete_button_states(current_step, clicked_buttons)
 
-    log_interaction(experiment_id, 'step_loaded', current_step, step_name, button_states)
+    log_interaction(experiment_id, mode, 'step_loaded', current_step, step_name, button_states)
     return current_step
 
 
@@ -1009,7 +1065,6 @@ def log_step_load(current_step, experiment_id, assembly_data, clicked_buttons):
     [Input('current-step', 'data'),
      Input('enabled-interactions-store', 'data'),
      Input('clicked-buttons-store', 'data'),
-     Input('initial-visibility-store', 'data'),
      Input('short-text-content', 'style'),
      Input('long-text-content', 'style'),
      Input('single-pieces-img', 'style'),
@@ -1017,15 +1072,9 @@ def log_step_load(current_step, experiment_id, assembly_data, clicked_buttons):
      Input('video-player', 'style')],
     prevent_initial_call=True
 )
-def update_button_states(current_step, enabled_interactions, clicked_buttons, initial_visibility,
+def update_button_states(current_step, enabled_interactions, clicked_buttons,
                          short_text_style, long_text_style, single_pieces_style,
                          assembly_style, video_style):
-    # Find the configuration for the current step in initial visibility
-    initial_config = next((step['content'] for step in initial_visibility['steps']
-                           if step['step_id'] == current_step),
-                          {'short_text': False, 'long_text': False,
-                           'single_pieces': False, 'assembly': False, 'video': False})
-
     # Find the configuration for the current step in enabled interactions
     step_config = next((step for step in enabled_interactions['steps']
                         if step['step_id'] == current_step),
@@ -1079,6 +1128,7 @@ def update_button_states(current_step, enabled_interactions, clicked_buttons, in
         is_content_visible(video_style)
     )
 
+
 # Reset button labels and placeholders when changing steps
 @app.callback(
     [Output('short-text-placeholder', 'style', allow_duplicate=True),
@@ -1101,6 +1151,7 @@ def update_button_states(current_step, enabled_interactions, clicked_buttons, in
     [Input('current-step', 'data')],
     [State('initial-visibility-store', 'data'),
      State('clicked-buttons-store', 'data'),
+     State('experiment-id-store', 'data'),
      State('visibility-mode-dropdown', 'value'),
      State('user-preferences-store', 'data'),
      State('assembly-data-store', 'data')],
@@ -1110,7 +1161,8 @@ def reset_button_states_and_visibility(
         current_step,
         initial_visibility,
         clicked_buttons,
-        visibility_mode=None,
+        experiment_id,
+        mode,
         user_preferences=None,
         assembly_data=None
 ):
@@ -1153,7 +1205,7 @@ def reset_button_states_and_visibility(
     content = {k: bool(v) for k, v in content.items()}
 
     # Apply adaptive logic only for dynamically adaptive mode
-    if visibility_mode == 'initial_visibility_dynamically_adaptive.json' and current_step > 1:
+    if mode == 'initial_visibility_dynamically_adaptive.json' and current_step > 1:
         # Ensure user_preferences is initialized
         if user_preferences is None:
             user_preferences = {}
@@ -1186,6 +1238,9 @@ def reset_button_states_and_visibility(
                 content = {k: False for k in content}
                 # Set the most frequent content to True
                 content[most_frequent] = True
+
+                step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
+                log_interaction(experiment_id, mode, 'computed_suggestion', current_step, step_name, content)
 
             # # Track the initially visible content
             # initially_visible_content = [k for k, v in content.items() if v]
@@ -1265,15 +1320,16 @@ def reset_button_states_and_visibility(
      Output('clicked-buttons-store', 'data', allow_duplicate=True),
      Output('user-preferences-store', 'data', allow_duplicate=True)],  # Add this output
     [Input('restart-button', 'n_clicks')],
-    [State('experiment-id-store', 'data')],
+    [State('experiment-id-store', 'data'),
+     State('visibility-mode-dropdown', 'value')],
     prevent_initial_call=True
 )
-def restart_application(n_clicks, experiment_id):
+def restart_application(n_clicks, experiment_id, mode):
     if n_clicks is None:
         raise dash.exceptions.PreventUpdate
 
     # Log restart action
-    log_interaction(experiment_id, 'restart_application')
+    log_interaction(experiment_id, mode, 'restart_application')
 
     # Reset to intro screen
     return (
