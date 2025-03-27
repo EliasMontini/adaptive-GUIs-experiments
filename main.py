@@ -181,7 +181,7 @@ def update_user_preferences(
 
 def calculate_weighted_frequencies(
         preferences: Dict[str, Dict[str, List[float]]],
-        decay_factor: float = 0.9,
+        decay_factor: float = 0.5,
         max_history: int = 20
 ) -> Dict[str, Dict[str, float]]:
     """
@@ -1164,43 +1164,40 @@ def reset_button_states_and_visibility(
             step_type = assembly_data[current_step - 1].get('category')
 
         # Fallback if step_type is not found or is None
-        if not step_type:
-            print(f"Warning: Could not determine step type for step {current_step}")
-            return None  # or handle as needed
+        if step_type:
+            # Ensure step_type is clean and consistent
+            step_type = step_type.strip()
 
-        # Ensure step_type is clean and consistent
-        step_type = step_type.strip()
+            # Calculate weighted frequencies
+            weighted_freqs = calculate_weighted_frequencies(user_preferences)
 
-        # Calculate weighted frequencies
-        weighted_freqs = calculate_weighted_frequencies(user_preferences)
+            # Debugging print
+            # print(f"Weighted frequencies for step {current_step}: {weighted_freqs}")
 
-        # Debugging print
-        # print(f"Weighted frequencies for step {current_step}: {weighted_freqs}")
+            # If we have preferences for this step type, use the most frequent
+            if step_type in weighted_freqs and weighted_freqs[step_type]:
+                # Get the most frequent content type
+                most_frequent = max(
+                    weighted_freqs[step_type].items(),
+                    key=lambda x: x[1]
+                )[0]
 
-        # If we have preferences for this step type, use the most frequent
-        if step_type in weighted_freqs and weighted_freqs[step_type]:
-            # Get the most frequent content type
-            most_frequent = max(
-                weighted_freqs[step_type].items(),
-                key=lambda x: x[1]
-            )[0]
+                # Reset all content to False
+                content = {k: False for k in content}
+                # Set the most frequent content to True
+                content[most_frequent] = True
 
-            # Reset all content to False
-            content = {k: False for k in content}
-            # Set the most frequent content to True
-            content[most_frequent] = True
-
-        # Track the initially visible content
-        initially_visible_content = [k for k, v in content.items() if v]
-        user_preferences = update_user_preferences(
-            user_preferences,
-            step_type,  # Use the correctly extracted step type
-            initially_visible_content,
-            datetime.now().timestamp(),
-            is_initial=True
-        )
-
-        print(f"Updated user preferences at step {current_step} (Type: {step_type}):", user_preferences)
+            # # Track the initially visible content
+            # initially_visible_content = [k for k, v in content.items() if v]
+            # user_preferences = update_user_preferences(
+            #     user_preferences,
+            #     step_type,  # Use the correctly extracted step type
+            #     initially_visible_content,
+            #     datetime.now().timestamp(),
+            #     is_initial=True
+            # )
+            #
+            # print(f"Updated user preferences at step {current_step} (Type: {step_type}):", user_preferences)
 
     # Default labels
     default_label = [html.I(className="bi bi-eye-fill me-1"), "Show"]
