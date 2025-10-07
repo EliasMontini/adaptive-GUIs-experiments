@@ -1,4 +1,9 @@
 dash~=2.18.2
-dash-bootstrap-components~=2.0.0
+dash-bootstrap-components~=1.7.1
 pandas~=2.2.3
 Flask~=3.0.3
+requests~=2.32.3
+openai~=2.2.0
+google~=3.0.0
+protobuf~=5.29.5
+numpy~=2.2.3

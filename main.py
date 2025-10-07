@@ -4,13 +4,19 @@ import os
 from datetime import datetime
 from typing import Dict, List, Optional
 
+from services.sentient_gemini_api import initial_style_recommendations, adapt_step
+import pathlib
 import dash
 import dash_bootstrap_components as dbc
 import flask
 import pandas as pd
 from dash import dcc, html, Input, Output, State
+import shutil
+from pathlib import Path
 
 # Initialize the app with Flask server to handle static files
+
+
 server = flask.Flask(__name__)
 app = dash.Dash(__name__, server=server,
                 external_stylesheets=[
@@ -20,6 +26,12 @@ app = dash.Dash(__name__, server=server,
                 assets_folder='assets',
                 meta_tags=[{'name': 'viewport',
                             'content': 'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'}])
+
+
+# Add route to serve dynamically generated CSS
+@server.route('/assets/<path:path>')
+def serve_assets(path):
+    return flask.send_from_directory('./assets', path)
 
 
 # Create routes for serving static files
@@ -66,7 +78,8 @@ def log_interaction(experiment_id, mode, action, step_id=None, step_name=None, b
         {'label': 'Data Collection', 'value': 'initial_visibility_data_collection.json'},
         {'label': 'Dynamically Adaptive', 'value': 'initial_visibility_dynamically_adaptive.json'},
         {'label': 'Rule-Based Adaptive', 'value': 'initial_visibility_rule_based_adaptive.json'},
-        {'label': 'Static', 'value': 'initial_visibility_static_mode.json'}
+        {'label': 'Static', 'value': 'initial_visibility_static_mode.json'},
+        {'label': 'Sentient', 'value': 'sentient.json'}
     ]
     mode_to_label = {option['value']: option['label'] for option in dropdown_options}
     mode = mode_to_label.get(mode, 'Unknown Mode')
@@ -189,6 +202,17 @@ def update_user_preferences(
     return preferences
 
 
+def build_log_summary(preferences_store, step_type, clicked_buttons_for_step):
+    # recent weighted preference of content types for the step category
+    weighted = calculate_weighted_frequencies(preferences_store)  # already in your code
+    recent_pref = (weighted.get(step_type) or {})
+    return {
+        "step_type": step_type,
+        "recent_weighted": recent_pref,
+        "clicked_now": clicked_buttons_for_step  # booleans for short/long/single/assembly/video
+    }
+
+
 def calculate_weighted_frequencies(
         preferences: Dict[str, Dict[str, List[float]]],
         decay_factor: float = 0.5,
@@ -225,6 +249,13 @@ def calculate_weighted_frequencies(
             weighted_frequencies[step_type][content_type] = weighted_sum
 
     return weighted_frequencies
+
+
+def as_markdown(s: str) -> str:
+    if not s:
+        return ""
+    # force single newlines to render as <br>
+    return s.replace("\n", "  \n")
 
 
 def get_most_frequent_content(
@@ -368,6 +399,9 @@ app.layout = html.Div([
     dcc.Store(id='initial-visibility-store', data=load_initial_visibility()),
     dcc.Store(id='clicked-buttons-store', data={}),
     dcc.Store(id='user-preferences-store', data={}),
+    dcc.Store(id='style-profile-token', data=None),
+
+    html.Div(id="sentient-inline-style", style={"display": "none"}),
 
     # Introduction page
     html.Div(id='intro-container',
@@ -389,12 +423,32 @@ app.layout = html.Div([
                              {'label': 'Data Collection', 'value': 'initial_visibility_data_collection.json'},
                              {'label': 'Dynamically Adaptive', 'value': 'initial_visibility_dynamically_adaptive.json'},
                              {'label': 'Rule-Based Adaptive', 'value': 'initial_visibility_rule_based_adaptive.json'},
-                             {'label': 'Static', 'value': 'initial_visibility_static_mode.json'}
+                             {'label': 'Static', 'value': 'initial_visibility_static_mode.json'},
+                             {'label': 'Sentient', 'value': 'sentient.json'}  #
                          ],
                          value='initial_visibility_data_collection.json',  # Default selection
                          clearable=False,
                          style={'text-align': 'center', 'margin-bottom': '5px'}
                      ),
+                     html.Div(id='sentient-profile-form', style={'display': 'none', }, children=[
+                         html.Hr(),
+                         html.P("Sentient mode profile"),
+                         dbc.Row([
+                             dbc.Col(dbc.Input(id='profile-experience',
+                                               placeholder='Experience level (e.g., novice, intermediate, expert)')),
+                         ], className="mb-2"),
+                         dbc.Row([
+                             dbc.Col(dbc.Input(id='profile-preferences',
+                                               placeholder='Preferences (comma-separated: video, short_text, etc.)')),
+                         ], className="mb-2"),
+                         dbc.Row([
+                             dbc.Col(dbc.Input(id='profile-nationality', placeholder='Nationality (ISO or free text)')),
+                         ], className="mb-2"),
+                         dbc.Row([
+                             dbc.Col(dbc.Input(id='profile-other', placeholder='Other relevant info (free text)')),
+                         ], className="mb-2"),
+                     ]),
+                     dcc.Store(id='sentient-profile-store', data=None),
                      dbc.Button("Begin Training", id='begin-button', color='primary', style={'width': '100%'})
                  ])
              ]),
@@ -427,7 +481,10 @@ app.layout = html.Div([
                             html.Span(className="placeholder col-4"),
                             html.Span(className="placeholder col-4")
                         ]),
-                        html.Div(id="short-text-content", style={'display': 'none'}),
+                        dcc.Markdown(id="short-text-content",
+                                     style={'display': 'none'},
+                                     link_target="_blank",
+                                     dangerously_allow_html=True),
                         html.Div(style=styles['button-container'], children=[
                             dbc.Button([
                                 html.I(className="bi bi-eye-fill me-1"),
@@ -446,7 +503,10 @@ app.layout = html.Div([
                             html.Span(className="placeholder col-4"),
                             html.Span(className="placeholder col-6")
                         ]),
-                        html.Div(id="long-text-content", style={'display': 'none'}),
+                        dcc.Markdown(id="long-text-content",
+                                     style={'display': 'none'},
+                                     link_target="_blank",
+                                     dangerously_allow_html=True),
                         html.Div(style=styles['button-container'], children=[
                             dbc.Button([
                                 html.I(className="bi bi-eye-fill me-1"),
@@ -527,6 +587,7 @@ app.layout = html.Div([
                     ])
                 ])
             ]),
+
         ]),
 
     ]),
@@ -543,54 +604,136 @@ app.layout = html.Div([
             ])
     ]),
 
-    html.Div(style=styles['footer-container'], children=[
-        html.Div(className="d-flex justify-content-center align-items-center", children=[
-            # Experiment ID
-            html.Div(id='experiment-id-display', className="me-3"),  # Add margin to separate
+    html.Div(
+        style=styles['footer-container'],
+        children=[
+            # Stack vertically
+            html.Div(
+                className="d-flex flex-column justify-content-start align-items-start",
+                children=[
+                    html.H5("Style explanation:", className="mb-1 text-start"),
+                    html.H6(id='style-explanation', className='small text-muted mb-2'),
 
-            # Step Counter with Progress Bar
-            html.Div(id='step-counter', children=[
-                html.Div(className="d-flex align-items-center", children=[
-                    dbc.Progress(id="step-progress-bar", value=0, style={"width": "200px", "height": "10px"}),
-                    html.Span(id="step-text", className="ms-2 text-muted small")
-                ])
+                    html.H5("Content explanation:", className="mb-1 text-start"),
+                    html.H6(id='sentient-last-explanation', className='small text-muted mb-6'),
+                ]
+            ),
+
+            html.Div(className="d-flex justify-content-center align-items-center", children=[
+                # Experiment ID
+                html.Div(id='experiment-id-display', className="me-3"),  # Add margin to separate
+
+                # Step Counter with Progress Bar
+                html.Div(id='step-counter', children=[
+                    html.Div(className="d-flex align-items-center", children=[
+                        dbc.Progress(id="step-progress-bar", value=0, style={"width": "200px", "height": "10px"}),
+                        html.Span(id="step-text", className="ms-2 text-muted small")
+                    ])
+                ]),
             ]),
-        ]),
 
-        # Images Section
-        html.Div(style=styles['footer-images'], children=[
-            html.Img(src='/assets/logosps.png', style=styles['image-style']),  # Left Image
-            html.Img(src='/assets/logoxr.png', style=styles['image-style'])  # Right Image
-        ]),
-    ])
+            # Images Section
+
+            html.Div(style=styles['footer-images'], children=[
+                html.Img(src='/assets/logosps.png', style=styles['image-style']),  # Left Image
+                html.Img(src='/assets/logoxr.png', style=styles['image-style'])  # Right Image
+            ]),
+        ])
 ])
 
 
 # Callbacks
-
-# Begin button callback
 @app.callback(
     [Output('intro-container', 'style'),
      Output('training-container', 'style'),
      Output('experiment-id-store', 'data'),
-     Output('current-step', 'data')],
+     Output('current-step', 'data'),
+     Output('sentient-profile-store', 'data'),
+     Output('style-explanation', 'children'),
+     Output('style-profile-token', 'data'),
+     Output('sentient-inline-style', 'children')],
     [Input('begin-button', 'n_clicks')],
     [State('experiment-id-input', 'value'),
-     State('visibility-mode-dropdown', 'value')]
+     State('visibility-mode-dropdown', 'value'),
+     State('profile-experience', 'value'),
+     State('profile-preferences', 'value'),
+     State('profile-nationality', 'value'),
+     State('profile-other', 'value'),
+     State('assembly-data-store', 'data')]
 )
-def begin_training(n_clicks, experiment_id, mode):
-    # Only proceed if button has been clicked
-    if n_clicks is None:
-        return styles['intro-screen'], {'display': 'none'}, None, 0
+def begin_training(n_clicks, experiment_id, mode, experience, preferences, nationality, other, assembly_data):
+    # First render: return all 8 outputs
+    if not n_clicks:
+        return (
+            styles['intro-screen'],  # intro visible
+            {'display': 'none'},  # training hidden
+            None,  # experiment-id-store
+            0,  # current-step
+            None,  # sentient-profile-store
+            "",  # style-explanation
+            None,  # style-profile-token
+            ""  # sentient-inline-style (no CSS yet)
+        )
 
+    # Normalise experiment id
     if not experiment_id:
         experiment_id = 'unknown'
 
-    # Log the start of the experiment
+    # Defaults
+    profile = None
+    style_expl = ""
+    style_token = None
+    css_text = ""
+
+    # Sentient mode: build profile and request style overrides
+    if mode == 'sentient.json':
+        profile = {
+            'experience': (experience or '').strip().lower(),
+            'preferences': [p.strip().lower() for p in (preferences or '').split(',') if p.strip()],
+            'nationality': (nationality or '').strip(),
+            'other': (other or '').strip()
+        }
+
+        # Categories present in the current session
+        categories = sorted(list(set(step.get('category', 'Unknown') for step in (assembly_data or []))))
+
+        try:
+            print(f"Calling initial_style_recommendations with profile={profile}, categories={categories}")
+            out = initial_style_recommendations(profile, categories)
+
+            css = out.get('css_overrides', "") or ""
+            style_expl = out.get('explanation', "") or ""
+            style_token = out.get('style_profile_token', "") or ""
+
+            print(f"Received style_token: {style_token}")
+            if css:
+                # Persist to assets (optional) and inject inline (live)
+                assets_dir = pathlib.Path('assets')
+                assets_dir.mkdir(exist_ok=True)
+                (assets_dir / 'sentient_overrides.css').write_text(css, encoding='utf-8')
+                css_text = css or ""
+                css_html = f"<style>{css_text}</style>"
+
+                print("Wrote CSS to assets/sentient_overrides.css and prepared inline CSS.")
+        except Exception as e:
+            style_expl = f"Style recommendation failed; using defaults. Error: {str(e)}"
+            import traceback
+            print("Error in initial_style_recommendations:", traceback.format_exc())
+
+    # Log start
     log_interaction(experiment_id, mode, 'start_experiment')
 
-    # Hide intro and show training
-    return {'display': 'none'}, {'display': 'block', **styles['training-screen']}, experiment_id, 1
+    # Switch to training view; step 1
+    return (
+        {'display': 'none'},
+        {'display': 'block', **styles['training-screen']},
+        experiment_id,
+        1,
+        profile,
+        style_expl,
+        style_token,
+        css_html
+    )
 
 
 # Set navigation in progress
@@ -630,42 +773,99 @@ def update_visibility_mode(selected_mode):
      Output('assembly-img', 'src'),
      Output('video-player', 'src'),
      Output('short-text-content', 'children'),
-     Output('long-text-content', 'children')],
-    [Input('current-step', 'data'),
-     Input('assembly-data-store', 'data'),
-     Input('experiment-id-store', 'data')]
+     Output('long-text-content', 'children'),
+     Output('short-text-placeholder', 'style'),
+     Output('short-text-content', 'style'),
+     Output('long-text-placeholder', 'style'),
+     Output('long-text-content', 'style'),
+     Output('single-pieces-placeholder', 'style'),
+     Output('single-pieces-img', 'style'),
+     Output('assembly-placeholder', 'style'),
+     Output('assembly-img', 'style'),
+     Output('video-placeholder', 'style'),
+     Output('video-player', 'style'),
+     Output('sentient-last-explanation', 'children')],
+    [Input('current-step', 'data')],
+    [State('assembly-data-store', 'data'),
+     State('experiment-id-store', 'data'),
+     State('visibility-mode-dropdown', 'value'),
+     State('sentient-profile-store', 'data'),
+     State('style-profile-token', 'data'),
+     State('clicked-buttons-store', 'data'),
+     State('user-preferences-store', 'data')],
+    prevent_initial_call=True
 )
-def update_step_content(current_step, assembly_data, experiment_id):
+def update_step_content(current_step, assembly_data, experiment_id, mode, profile, style_token, clicked, prefs):
     if current_step <= 0 or current_step > len(assembly_data):
-        return "", 0, "", "", "", "", "", "", ""
+        return "", 0, "", "", "", "", "", "", "", {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, ""
 
     step = assembly_data[current_step - 1]
-    step_name = step['name']
+    step_type = step.get('category', 'Unknown')
 
-    # Get content
-    short_text = step['adaptive_fields']['short_text']
-    long_text = step['adaptive_fields']['long_text']
+    # defaults from file
+    title = step['name']
+    af = step['adaptive_fields']
+    sp, ap, vp = af['image_single_pieces'], af['image_assembly'], af['video']
 
-    # File paths
-    image_single_pieces = step['adaptive_fields']['image_single_pieces']
-    image_assembly = step['adaptive_fields']['image_assembly']
-    video = step['adaptive_fields']['video']
+    short_text, long_text = af['short_text'], af['long_text']
 
-    # Calculate progress percentage
+    # default visibility: hidden placeholders shown, actual content hidden
+    vis = {"short_text": False, "long_text": False, "single_pieces": False, "assembly": False, "video": False}
+    explanation = ""
+
+    # SENTIENT MODE: Adapt content per step
+    if mode == 'sentient.json' and profile and style_token:
+        log_summary = build_log_summary(prefs, step_type, get_complete_button_states(current_step, clicked))
+        try:
+            out = adapt_step(profile, style_token,
+                             {"name": title, "category": step_type, "adaptive_fields": af},
+                             log_summary)
+            # apply returned changes
+            title = out.get('title', title)
+            patch = out.get('adaptive_fields', {})
+            short_text = patch.get('short_text', short_text)
+            long_text = patch.get('long_text', long_text)
+            sp = patch.get('image_single_pieces', sp)
+            ap = patch.get('image_assembly', ap)
+            vp = patch.get('video', vp)
+            vis = out.get('initial_visibility', vis)
+            explanation = out.get('explanation_of_changes', "")
+            # log the adaptation
+            log_interaction(experiment_id, mode, 'sentient_step_adapted', current_step, title, vis)
+        except Exception as e:
+            explanation = f"Adaptive update failed; using base content. ({e})"
+            import traceback
+            print(f"Error in adapt_step: {traceback.format_exc()}")
+
     progress_value = (current_step / len(assembly_data)) * 100
     step_text = f"Step {current_step} of {len(assembly_data)}"
     experiment_id_display = f"Experiment ID: {experiment_id}"
 
+    short_text = as_markdown(short_text)
+    long_text = as_markdown(long_text)
+
+    def show(h):
+        return {'display': 'block', **styles['image-content']} if h else {'display': 'none', **styles['image-content']}
+
+    def show_txt(h):
+        return {'display': 'block'} if h else {'display': 'none'}
+
+    def hide_txt(h):
+        return {'display': 'none'} if h else {'display': 'block'}
+
     return (
-        f"{step_name} ",
+        f"{title}",
         progress_value,
         step_text,
         experiment_id_display,
-        image_single_pieces,
-        image_assembly,
-        video,
-        short_text,
-        long_text
+        sp, ap, vp,
+        short_text, long_text,
+        hide_txt(vis['short_text']), show_txt(vis['short_text']),
+        hide_txt(vis['long_text']), show_txt(vis['long_text']),
+        show(not vis['single_pieces']), show(vis['single_pieces']),
+        show(not vis['assembly']), show(vis['assembly']),
+        show(not vis['video']), show(vis['video']),
+        explanation
     )
 
 
@@ -1355,7 +1555,14 @@ def ensure_directories_exist():
         os.makedirs(directory, exist_ok=True)
 
 
+@app.callback(
+    Output('sentient-profile-form', 'style'),
+    Input('visibility-mode-dropdown', 'value')
+)
+def show_profile_form(mode_value):
+    return {'display': 'block'} if mode_value == 'sentient.json' else {'display': 'none'}
+
+
 # Run the app
 if __name__ == '__main__':
-    ensure_directories_exist()
     app.run_server(debug=False, host='0.0.0.0', port=3000)
