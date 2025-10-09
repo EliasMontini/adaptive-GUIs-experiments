@@ -1,0 +1,11 @@
+{"experiment_id": "gfdsgfsfdgf", "timestamp": "2025-10-09T09:43:51.286Z", "action": "step_viewed", "step_id": 1, "content_type": null}
+{"experiment_id": "gfdsgfsfdgf", "timestamp": "2025-10-09T09:43:51.309Z", "action": "step_viewed", "step_id": 1, "content_type": null}
+{"experiment_id": "gfdsgfsfdgf", "timestamp": "2025-10-09T09:46:46.659Z", "action": "content_shown", "step_id": 1, "content_type": "long_text"}
+{"experiment_id": "gfdsgfsfdgf", "timestamp": "2025-10-09T09:46:50.130Z", "action": "content_shown", "step_id": 1, "content_type": "assembly"}
+{"experiment_id": "gfdsgfsfdgf", "timestamp": "2025-10-09T09:46:51.136Z", "action": "content_shown", "step_id": 1, "content_type": "single_pieces"}
+{"experiment_id": "gfdsgfsfdgf", "timestamp": "2025-10-09T09:46:51.713Z", "action": "content_shown", "step_id": 1, "content_type": "video"}
+{"experiment_id": "gfdsgfsfdgf", "timestamp": "2025-10-09T09:47:11.798Z", "action": "navigate_next", "step_id": 2, "content_type": null}
+{"experiment_id": "gfdsgfsfdgf", "timestamp": "2025-10-09T09:47:11.819Z", "action": "step_viewed", "step_id": 2, "content_type": null}
+{"experiment_id": "gfdsgfsfdgf", "timestamp": "2025-10-09T09:47:13.020Z", "action": "content_shown", "step_id": 2, "content_type": "long_text"}
+{"experiment_id": "gfdsgfsfdgf", "timestamp": "2025-10-09T09:54:03.819Z", "action": "navigate_previous", "step_id": 1, "content_type": null}
+{"experiment_id": "gfdsgfsfdgf", "timestamp": "2025-10-09T09:54:03.855Z", "action": "step_viewed", "step_id": 1, "content_type": null}

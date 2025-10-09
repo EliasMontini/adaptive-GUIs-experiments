@@ -1,0 +1,4 @@
+{"experiment_id": "testai", "timestamp": "2025-10-09T09:41:39.118Z", "action": "step_viewed", "step_id": 1, "content_type": null}
+{"experiment_id": "testai", "timestamp": "2025-10-09T09:41:39.120Z", "action": "step_viewed", "step_id": 1, "content_type": null}
+{"experiment_id": "testai", "timestamp": "2025-10-09T09:41:46.266Z", "action": "content_shown", "step_id": 1, "content_type": "short_text"}
+{"experiment_id": "testai", "timestamp": "2025-10-09T09:41:47.054Z", "action": "content_shown", "step_id": 1, "content_type": "long_text"}

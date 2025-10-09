@@ -1,0 +1,12 @@
+{"experiment_id": "dsfd", "timestamp": "2025-10-09T09:56:28.141Z", "action": "step_viewed", "step_id": 1, "content_type": null}
+{"experiment_id": "dsfd", "timestamp": "2025-10-09T09:56:28.144Z", "action": "step_viewed", "step_id": 1, "content_type": null}
+{"experiment_id": "dsfd", "timestamp": "2025-10-09T09:56:29.372Z", "action": "content_shown", "step_id": 1, "content_type": "single_pieces"}
+{"experiment_id": "dsfd", "timestamp": "2025-10-09T09:56:32.140Z", "action": "content_shown", "step_id": 1, "content_type": "video"}
+{"experiment_id": "dsfd", "timestamp": "2025-10-09T09:56:34.736Z", "action": "navigate_next", "step_id": 2, "content_type": null}
+{"experiment_id": "dsfd", "timestamp": "2025-10-09T09:56:34.756Z", "action": "step_viewed", "step_id": 2, "content_type": null}
+{"experiment_id": "dsfd", "timestamp": "2025-10-09T10:00:20.541Z", "action": "content_shown", "step_id": 2, "content_type": "assembly"}
+{"experiment_id": "dsfd", "timestamp": "2025-10-09T10:00:44.076Z", "action": "navigate_previous", "step_id": 1, "content_type": null}
+{"experiment_id": "dsfd", "timestamp": "2025-10-09T10:00:44.120Z", "action": "step_viewed", "step_id": 1, "content_type": null}
+{"experiment_id": "dsfd", "timestamp": "2025-10-09T13:33:23.924Z", "action": "step_viewed", "step_id": 1, "content_type": null}
+{"experiment_id": "dsfd", "timestamp": "2025-10-09T13:33:23.928Z", "action": "step_viewed", "step_id": 1, "content_type": null}
+{"experiment_id": "dsfd", "timestamp": "2025-10-09T13:37:17.094Z", "action": "step_viewed", "step_id": 1, "content_type": null}

@@ -1,0 +1,9 @@
+{"experiment_id": "dfgewrgewr", "timestamp": "2025-10-09T10:03:55.514Z", "action": "step_viewed", "step_id": 1, "content_type": null}
+{"experiment_id": "dfgewrgewr", "timestamp": "2025-10-09T10:03:55.516Z", "action": "step_viewed", "step_id": 1, "content_type": null}
+{"experiment_id": "dfgewrgewr", "timestamp": "2025-10-09T10:03:56.812Z", "action": "content_shown", "step_id": 1, "content_type": "video"}
+{"experiment_id": "dfgewrgewr", "timestamp": "2025-10-09T10:03:59.616Z", "action": "navigate_next", "step_id": 2, "content_type": null}
+{"experiment_id": "dfgewrgewr", "timestamp": "2025-10-09T10:03:59.632Z", "action": "step_viewed", "step_id": 2, "content_type": null}
+{"experiment_id": "dfgewrgewr", "timestamp": "2025-10-09T10:04:00.773Z", "action": "content_shown", "step_id": 2, "content_type": "video"}
+{"experiment_id": "dfgewrgewr", "timestamp": "2025-10-09T10:04:16.178Z", "action": "content_shown", "step_id": 2, "content_type": "assembly"}
+{"experiment_id": "dfgewrgewr", "timestamp": "2025-10-09T10:04:17.070Z", "action": "content_shown", "step_id": 2, "content_type": "single_pieces"}
+{"experiment_id": "dfgewrgewr", "timestamp": "2025-10-09T10:04:18.509Z", "action": "content_shown", "step_id": 2, "content_type": "long_text"}

@@ -1,0 +1,8 @@
+{"experiment_id": "test", "timestamp": "2025-10-09T13:22:56.460Z", "action": "step_viewed", "step_id": 1, "content_type": null}
+{"experiment_id": "test", "timestamp": "2025-10-09T13:22:56.465Z", "action": "step_viewed", "step_id": 1, "content_type": null}
+{"experiment_id": "test", "timestamp": "2025-10-09T13:23:06.637Z", "action": "navigate_next", "step_id": 2, "content_type": null}
+{"experiment_id": "test", "timestamp": "2025-10-09T13:23:06.668Z", "action": "step_viewed", "step_id": 2, "content_type": null}
+{"experiment_id": "test", "timestamp": "2025-10-09T13:27:24.739Z", "action": "step_viewed", "step_id": 1, "content_type": null}
+{"experiment_id": "test", "timestamp": "2025-10-09T13:27:26.799Z", "action": "navigate_next", "step_id": 2, "content_type": null}
+{"experiment_id": "test", "timestamp": "2025-10-09T13:27:26.818Z", "action": "step_viewed", "step_id": 2, "content_type": null}
+{"experiment_id": "test", "timestamp": "2025-10-09T13:27:33.171Z", "action": "step_viewed", "step_id": 1, "content_type": null}
