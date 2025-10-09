@@ -473,7 +473,7 @@ app.layout = html.Div([
             html.Div(className="row mb-1", children=[
                 # Short text area
                 html.Div(className="col-md-4", style={'height': '150px'}, children=[
-                    html.Span("Short description", className="h5 d-block mb-1"),
+                    html.Span("Short Description", className="h5 d-block mb-1"),
                     html.Div(style=styles['text-content-area'], children=[
                         html.Div(id="short-text-placeholder", className="placeholder-glow", children=[
                             html.Span(className="placeholder col-5"),
@@ -496,7 +496,7 @@ app.layout = html.Div([
 
                 # Long text area
                 html.Div(className="col-md-8", children=[
-                    html.Span("Long description", className="h5 d-block mb-1"),
+                    html.Span("Long Description", className="h5 d-block mb-1"),
                     html.Div(style=styles['text-content-area'], children=[
                         html.Div(id="long-text-placeholder", className="placeholder-glow", children=[
                             html.Span(className="placeholder col-7"),
@@ -521,7 +521,7 @@ app.layout = html.Div([
             html.Div(className="row", children=[
                 # Individual Parts image
                 html.Div(className="col-md-4 mb-4", children=[
-                    html.Span("Image Single", className="h5 d-block mb-2"),
+                    html.Span("Single Components Image", className="h5 d-block mb-2"),
                     html.Div(style=styles['image-container'], children=[
                         html.Div(style=styles['image-wrapper'], children=[
                             html.Img(id="single-pieces-placeholder",
@@ -543,7 +543,7 @@ app.layout = html.Div([
 
                 # Assembled Parts image
                 html.Div(className="col-md-4 mb-4", children=[
-                    html.Span("Assembled parts", className="h5 d-block mb-2"),
+                    html.Span("Assembly Image", className="h5 d-block mb-2"),
                     html.Div(style=styles['image-container'], children=[
                         html.Div(style=styles['image-wrapper'], children=[
                             html.Img(id="assembly-placeholder",
@@ -635,8 +635,8 @@ app.layout = html.Div([
             # Images Section
 
             html.Div(style=styles['footer-images'], children=[
-                html.Img(src='/assets/logosps.png', style=styles['image-style']),  # Left Image
-                html.Img(src='/assets/logoxr.png', style=styles['image-style'])  # Right Image
+                # html.Img(src='/assets/logosps.png', style=styles['image-style']),  # Left Image
+                # html.Img(src='/assets/logoxr.png', style=styles['image-style'])  # Right Image
             ]),
         ])
 ])
