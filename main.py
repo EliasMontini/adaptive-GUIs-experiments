@@ -1,1568 +1,593 @@
-import datetime
-import json
-import os
-from datetime import datetime
-from typing import Dict, List, Optional
+"""
+FastAPI Backend for Assembly Training Application
+WITH STATIC FILE SERVING FOR IMAGES AND VIDEOS
+"""
 
-from services.sentient_gemini_api import initial_style_recommendations, adapt_step
-import pathlib
-import dash
-import dash_bootstrap_components as dbc
-import flask
-import pandas as pd
-from dash import dcc, html, Input, Output, State
-import shutil
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel, Field
+from typing import Optional, List, Dict, Any
+import os
+import json
+from datetime import datetime
+import uuid
 from pathlib import Path
 
-# Initialize the app with Flask server to handle static files
+# Import Gemini service
+from services.sentient_gemini_api import initial_style_recommendations
+
+app = FastAPI(
+    title="Assembly Training API",
+    description="Backend for adaptive assembly training interface",
+    version="1.0.0"
+)
+
+# CORS middleware for Next.js frontend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:3000",
+        "http://localhost:3001",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# ============================================================================
+# STATIC FILE SERVING - Mount directories for media assets
+# ============================================================================
+
+# Define base paths
+BASE_DIR = Path(__file__).parent
+IMAGES_DIR = BASE_DIR / "images_single_pieces"
+IMAGES_ASSEMBLY_DIR = BASE_DIR / "images_assembly"
+VIDEOS_DIR = BASE_DIR / "videos"
+
+# Create directories if they don't exist
+IMAGES_DIR.mkdir(exist_ok=True)
+IMAGES_ASSEMBLY_DIR.mkdir(exist_ok=True)
+VIDEOS_DIR.mkdir(exist_ok=True)
+
+# Mount static file directories
+app.mount("/static/images", StaticFiles(directory=str(IMAGES_DIR)), name="images_single_pieces")
+app.mount("/static/images_assembly", StaticFiles(directory=str(IMAGES_ASSEMBLY_DIR)), name="images_assembly")
+app.mount("/static/videos", StaticFiles(directory=str(VIDEOS_DIR)), name="videos")
+
+print(f"📁 Serving static files from:")
+print(f"   Images: {IMAGES_DIR}")
+print(f"   Assembly Images: {IMAGES_ASSEMBLY_DIR}")
+print(f"   Videos: {VIDEOS_DIR}")
 
 
-server = flask.Flask(__name__)
-app = dash.Dash(__name__, server=server,
-                external_stylesheets=[
-                    dbc.themes.BOOTSTRAP,
-                    "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-                ],
-                assets_folder='assets',
-                meta_tags=[{'name': 'viewport',
-                            'content': 'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'}])
+# ============================================================================
+# Models
+# ============================================================================
+
+class UserProfile(BaseModel):
+    experience: str = Field(..., description="novice, intermediate, or expert")
+    preferences: List[str] = Field(default_factory=list, description="Preferred content types")
+    nationality: Optional[str] = Field(None, description="User nationality")
+    other: Optional[str] = Field(None, description="Additional information")
 
 
-# Add route to serve dynamically generated CSS
-@server.route('/assets/<path:path>')
-def serve_assets(path):
-    return flask.send_from_directory('./assets', path)
+class InitSessionRequest(BaseModel):
+    experiment_id: str = Field(..., description="Unique experiment identifier")
+    mode: str = Field(..., description="Training mode")
+    profile: Optional[UserProfile] = Field(None, description="User profile for sentient mode")
 
 
-# Create routes for serving static files
-@server.route('/images_single_pieces/<path:path>')
-def serve_single_pieces(path):
-    return flask.send_from_directory('./images_single_pieces', path)
+class InitSessionResponse(BaseModel):
+    session_token: str
+    style_token: str
+    style_explanation: str
+    css_overrides: Optional[str] = None
+    initial_visibility: Optional[Dict[str, bool]] = None
+    mode_config: Optional[Dict[str, Any]] = None
 
 
-@server.route('/images_assembly/<path:path>')
-def serve_assembly(path):
-    return flask.send_from_directory('./images_assembly', path)
+
+class AdaptStepRequest(BaseModel):
+    session_token: str
+    style_token: str
+    step_data: Dict[str, Any]
+    button_configs: Dict[str, Any]
+    current_step: int
+    interaction_history: List[Dict[str, Any]]
 
 
-@server.route('/images/assembly_process/<path:path>')
-def serve_assembly_process(path):
-    return flask.send_from_directory('./images/assembly_process', path)
+class AdaptStepResponse(BaseModel):
+    visibility: Optional[Dict[str, bool]] = None
+    button_configs: Optional[Dict[str, Any]] = None
+    dynamic_styles: Optional[str] = None
+    explanation: Optional[str] = None
 
 
-@server.route('/videos/<path:path>')
-def serve_videos(path):
-    return flask.send_from_directory('./videos', path)
+class OptimizeButtonRequest(BaseModel):
+    session_token: str
+    button_id: str
+    click_count: int
+    interaction_history: List[Dict[str, Any]]
 
 
-# Load JSON data
-def load_assembly_process():
-    with open('settings/steps_sources.json', 'r') as f:
-        data = json.load(f)
-    return data['assembly_process']
+class LogInteractionRequest(BaseModel):
+    experiment_id: str
+    timestamp: str
+    action: str
+    step_id: Optional[int] = None
+    content_type: Optional[str] = None
 
 
-# Initialize log DataFrame
-def init_log_df():
-    if os.path.exists('interaction_logs.csv'):
-        return pd.read_csv('interaction_logs.csv')
-    else:
-        return pd.DataFrame(columns=['experiment_id', 'timestamp', 'action', 'step_id', 'step_name'])
+# ============================================================================
+# In-memory storage
+# ============================================================================
+
+sessions: Dict[str, Dict[str, Any]] = {}
+step_categories: List[str] = []
+mode_configs: Dict[str, Dict[str, Any]] = {}
 
 
-# Log user interaction
-def log_interaction(experiment_id, mode, action, step_id=None, step_name=None, button_states=None):
-    df = init_log_df()
-    # not the best solution :)
-    dropdown_options = [
-        {'label': 'Data Collection', 'value': 'initial_visibility_data_collection.json'},
-        {'label': 'Dynamically Adaptive', 'value': 'initial_visibility_dynamically_adaptive.json'},
-        {'label': 'Rule-Based Adaptive', 'value': 'initial_visibility_rule_based_adaptive.json'},
-        {'label': 'Static', 'value': 'initial_visibility_static_mode.json'},
-        {'label': 'Sentient', 'value': 'sentient.json'}
-    ]
-    mode_to_label = {option['value']: option['label'] for option in dropdown_options}
-    mode = mode_to_label.get(mode, 'Unknown Mode')
-    new_row = {
-        'experiment_id': experiment_id,
-        'mode': mode,
-        'timestamp': datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f"),
-        'action': action,
-        'step_id': step_id if step_id is not None else 'N/A',
-        'step_name': step_name if step_name is not None else 'N/A'
-    }
+# ============================================================================
+# Startup: Load configurations
+# ============================================================================
 
-    # Aggiungi lo stato di tutti i pulsanti se fornito
-    if button_states:
-        for button_name, state in button_states.items():
-            new_row[f'{button_name}_viewed'] = 1 if state else 0
+@app.on_event("startup")
+async def load_configurations():
+    """Load step categories and mode configurations"""
+    global step_categories, mode_configs
 
-    df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
-    df.to_csv('interaction_logs.csv', index=False)
-    return
-
-
-# Inizializzazione del DataFrame di log con colonne aggiuntive
-def init_log_df():
-    columns = [
-        'experiment_id', 'mode', 'timestamp', 'action', 'step_id', 'step_name',
-        'short_text_viewed', 'long_text_viewed', 'single_pieces_viewed',
-        'assembly_viewed', 'video_viewed'
-    ]
-
-    if os.path.exists('interaction_logs.csv'):
-        df = pd.read_csv('interaction_logs.csv')
-        for col in columns:
-            if col not in df.columns:
-                df[col] = 0
-        return df
-    else:
-        return pd.DataFrame(columns=columns)
-
-
-# Funzione di utilità per ottenere lo stato completo dei pulsanti per il passo corrente
-def get_complete_button_states(current_step, clicked_buttons):
-    step_key = str(current_step)
-    step_clicked = clicked_buttons.get(step_key, {})
-
-    return {
-        'short_text': step_clicked.get('short_text', False),
-        'long_text': step_clicked.get('long_text', False),
-        'single_pieces': step_clicked.get('single_pieces', False),
-        'assembly': step_clicked.get('assembly', False),
-        'video': step_clicked.get('video', False)
-    }
-
-
-def load_enabled_interactions():
+    # Load step categories
     try:
-        with open('settings/enabled_interactions.json', 'r') as f:
-            return json.load(f)
-    except FileNotFoundError:
-        # Default to all buttons enabled if file not found
-        return {"steps": [{"step_id": 1, "buttons": {
-            "short_text": True,
-            "long_text": True,
-            "single_pieces": True,
-            "assembly": True,
-            "video": True
-        }}]}
-
-
-def load_initial_visibility():
-    try:
-        with open('settings/visibility/initial_visibility_data_collection.json', 'r') as f:
-            return json.load(f)
-    except FileNotFoundError:
-        # Default to all content hidden
-        return {"steps": [{"step_id": 1, "content": {
-            "short_text": False,
-            "long_text": False,
-            "single_pieces": False,
-            "assembly": False,
-            "video": False
-        }}]}
-
-
-def update_user_preferences(
-        preferences: Dict[str, Dict[str, List[float]]],
-        step_type: str,
-        content_types: List[str],
-        timestamp: Optional[float] = None,
-        is_initial: bool = False
-) -> Dict[str, Dict[str, List[float]]]:
-    """
-    Update user preferences with robust tracking per step type.
-
-    Ensures that preferences are always tracked under the correct step type.
-    """
-    if preferences is None:
-        preferences = {}
-
-    # Ensure the step type exists in preferences
-    if step_type not in preferences:
-        preferences[step_type] = {}
-
-    # Track each requested content type
-    for content_type in content_types:
-        if timestamp is None:
-            timestamp = datetime.datetime.now().timestamp()
-
-        if content_type not in preferences[step_type]:
-            preferences[step_type][content_type] = []
-
-        # For initial visibility, only add if no previous entries
-        if not is_initial or not preferences[step_type][content_type]:
-            preferences[step_type][content_type].append(timestamp)
-
-    # Remove any 'Unknown' key if it exists
-    if 'Unknown' in preferences:
-        del preferences['Unknown']
-
-    return preferences
-
-
-def build_log_summary(preferences_store, step_type, clicked_buttons_for_step):
-    # recent weighted preference of content types for the step category
-    weighted = calculate_weighted_frequencies(preferences_store)  # already in your code
-    recent_pref = (weighted.get(step_type) or {})
-    return {
-        "step_type": step_type,
-        "recent_weighted": recent_pref,
-        "clicked_now": clicked_buttons_for_step  # booleans for short/long/single/assembly/video
-    }
-
-
-def calculate_weighted_frequencies(
-        preferences: Dict[str, Dict[str, List[float]]],
-        decay_factor: float = 0.5,
-        max_history: int = 20
-) -> Dict[str, Dict[str, float]]:
-    """
-    Calculate weighted frequencies with decay for recent selections.
-
-    Filters out any 'Unknown' type preferences.
-    """
-    if not preferences:
-        return {}
-
-    # Remove 'Unknown' type if present
-    filtered_preferences = {
-        k: v for k, v in preferences.items()
-        if k != 'Unknown' and v
-    }
-
-    weighted_frequencies = {}
-
-    for step_type, content_types in filtered_preferences.items():
-        weighted_frequencies[step_type] = {}
-
-        for content_type, timestamps in content_types.items():
-            # Sort timestamps in descending order and take most recent
-            recent_timestamps = sorted(timestamps, reverse=True)[:max_history]
-
-            # Calculate weighted sum with exponential decay
-            weighted_sum = sum(
-                (decay_factor ** i) for i, _ in enumerate(recent_timestamps)
-            )
-
-            weighted_frequencies[step_type][content_type] = weighted_sum
-
-    return weighted_frequencies
-
-
-def as_markdown(s: str) -> str:
-    if not s:
-        return ""
-    # force single newlines to render as <br>
-    return s.replace("\n", "  \n")
-
-
-def get_most_frequent_content(
-        preferences: Dict[str, Dict[str, List[float]]],
-        step_type: str
-) -> Optional[str]:
-    """
-    Determine the most frequently requested content type for a specific step type.
-
-    Args:
-    - preferences: User preferences dictionary
-    - step_type: Type of step to analyze
-
-    Returns:
-    Most frequent content type or None if no preferences exist
-    """
-    if not preferences or step_type not in preferences:
-        return None
-
-    # Calculate weighted frequencies
-    weighted_freqs = calculate_weighted_frequencies(preferences)
-
-    # Check if we have frequencies for this step type
-    if step_type not in weighted_freqs or not weighted_freqs[step_type]:
-        return None
-
-    # Find and return the content type with the highest weighted frequency
-    return max(
-        weighted_freqs[step_type].items(),
-        key=lambda x: x[1]
-    )[0]
-
-
-# Define placeholder image URL
-placeholder_img = "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
-
-# Define custom styles to add to the layout
-styles = {
-    'full-view': {
-        'width': '100%',
-        'height': '100vh',
-        'display': 'flex',
-        'flexDirection': 'column',
-        'overflow': 'hidden'
-    },
-    'intro-screen': {
-        'display': 'flex',
-        'justify-content': 'center',
-        'align-items': 'center',
-        'background-color': '#f8f9fa',
-        'flex': '1',
-        'padding': '10px',
-        'overflow-y': 'auto',
-        'height': '100vh',
-    },
-    'training-screen': {
-        'padding': '10px',
-        'flex': '1',
-        'display': 'flex',
-        'flexDirection': 'column',
-        'overflow-y': 'auto'
-    },
-    'content-container': {
-        'flex': '1',
-        'overflow-y': 'auto',
-        'paddingBottom': '70px'
-    },
-
-    'text-content-area': {
-        'min-height': '150px',
-        'position': 'relative',
-        'overflow': 'auto',
-        'padding-bottom': '60px'
-    },
-    'image-container': {
-        'position': 'relative',
-        'height': '350px',
-        'padding-bottom': '60px'
-    },
-    'image-wrapper': {
-        'flex-grow': '1',
-        'display': 'flex',
-        'justify-content': 'center',
-        'align-items': 'center',
-        'overflow': 'hidden',
-        'position': 'relative',
-        'height': 'calc(100% - 60px)'
-    },
-    'button-container': {
-        'position': 'absolute',
-        'bottom': '0',
-        'left': '0',
-        'width': '100%',
-        'padding': '10px',
-        'background-color': 'rgba(255, 255, 255, 0.9)',
-        'z-index': '10'
-    },
-    'image-content': {
-        'max-width': '100%',
-        'max-height': '200px',
-        'object-fit': 'contain'
-    },
-    'footer-container': {
-        'position': 'fixed',
-        'bottom': '0',
-        'left': '0',
-        'width': '100%',
-        'padding': '10px',
-        'backgroundColor': '#f8f9fa',
-        'textAlign': 'center',
-        'borderTop': '1px solid #e0e0e0',
-        'z-index': '100'
-    },
-    'footer-content': {
-        'display': 'flex',
-        'justifyContent': 'center',
-        'alignItems': 'center',
-        'flexDirection': 'column'
-    },
-    'footer-images': {
-        'display': 'flex',
-        'justifyContent': 'space-between',
-        'alignItems': 'center',
-        'width': '100%',
-        'marginTop': '5px'
-    },
-    'image-style': {
-        'width': '80px',
-        'height': 'auto'
-
-    }}
-
-# App layout
-app.layout = html.Div([
-    # Store components for state management
-    dcc.Store(id='current-step', data=0),  # 0 = intro, 1+ = steps
-    dcc.Store(id='experiment-id-store', data=None),
-    dcc.Store(id='assembly-data-store', data=load_assembly_process()),
-    dcc.Store(id='navigation-in-progress', data=False),  # Store to track navigation state
-    dcc.Store(id='enabled-interactions-store', data=load_enabled_interactions()),
-    dcc.Store(id='initial-visibility-store', data=load_initial_visibility()),
-    dcc.Store(id='clicked-buttons-store', data={}),
-    dcc.Store(id='user-preferences-store', data={}),
-    dcc.Store(id='style-profile-token', data=None),
-
-    html.Div(id="sentient-inline-style", style={"display": "none"}),
-
-    # Introduction page
-    html.Div(id='intro-container',
-             style=styles['intro-screen'],
-             children=[
-                 html.Div(style={'width': '400px', 'padding': '30px', 'border-radius': '8px',
-                                 }, children=[
-                     html.H1("Assembly Training Dashboard", style={'text-align': 'center', 'margin-bottom': '20px'}),
-                     html.P("Welcome to the Assembly Training Dashboard. Please enter an experiment ID to begin.",
-                            style={'margin-bottom': '20px'}),
-                     dbc.Input(id='experiment-id-input', type='text', placeholder='Enter Experiment ID',
-                               style={'margin-bottom': '20px'}),
-
-                     html.P("Choose the UI mode.",
-                            style={'margin-bottom': '5px'}),
-                     dcc.Dropdown(
-                         id='visibility-mode-dropdown',
-                         options=[
-                             {'label': 'Data Collection', 'value': 'initial_visibility_data_collection.json'},
-                             {'label': 'Dynamically Adaptive', 'value': 'initial_visibility_dynamically_adaptive.json'},
-                             {'label': 'Rule-Based Adaptive', 'value': 'initial_visibility_rule_based_adaptive.json'},
-                             {'label': 'Static', 'value': 'initial_visibility_static_mode.json'},
-                             {'label': 'Sentient', 'value': 'sentient.json'}  #
-                         ],
-                         value='initial_visibility_data_collection.json',  # Default selection
-                         clearable=False,
-                         style={'text-align': 'center', 'margin-bottom': '5px'}
-                     ),
-                     html.Div(id='sentient-profile-form', style={'display': 'none', }, children=[
-                         html.Hr(),
-                         html.P("Sentient mode profile"),
-                         dbc.Row([
-                             dbc.Col(dbc.Input(id='profile-experience',
-                                               placeholder='Experience level (e.g., novice, intermediate, expert)')),
-                         ], className="mb-2"),
-                         dbc.Row([
-                             dbc.Col(dbc.Input(id='profile-preferences',
-                                               placeholder='Preferences (comma-separated: video, short_text, etc.)')),
-                         ], className="mb-2"),
-                         dbc.Row([
-                             dbc.Col(dbc.Input(id='profile-nationality', placeholder='Nationality (ISO or free text)')),
-                         ], className="mb-2"),
-                         dbc.Row([
-                             dbc.Col(dbc.Input(id='profile-other', placeholder='Other relevant info (free text)')),
-                         ], className="mb-2"),
-                     ]),
-                     dcc.Store(id='sentient-profile-store', data=None),
-                     dbc.Button("Begin Training", id='begin-button', color='primary', style={'width': '100%'})
-                 ])
-             ]),
-
-    # Training steps page
-    html.Div(id='training-container', style={'display': 'none'}, children=[
-        html.Div(className="container-fluid", children=[
-            # Header
-
-            # Navigation buttons
-            html.Div(className="d-flex justify-content-between align-items-center mb-1", children=[
-                html.H3(id='step-header', className="m-0"),
-                html.Div(className="d-flex gap-2", children=[
-                    dbc.Button("PREVIOUS", id='prev-button', color='secondary',
-                               style={'padding': '20px 20px', 'width': '150px'}),
-                    dbc.Button("NEXT", id='next-button', color='primary',
-                               style={'padding': '20px 20px', 'width': '150px'}),
-                ])
-            ]),
-
-            # Top row: Text descriptions
-            html.Div(className="row mb-1", children=[
-                # Short text area
-                html.Div(className="col-md-4", style={'height': '150px'}, children=[
-                    html.Span("Short description", className="h5 d-block mb-1"),
-                    html.Div(style=styles['text-content-area'], children=[
-                        html.Div(id="short-text-placeholder", className="placeholder-glow", children=[
-                            html.Span(className="placeholder col-5"),
-                            html.Span(className="placeholder col-3"),
-                            html.Span(className="placeholder col-4"),
-                            html.Span(className="placeholder col-4")
-                        ]),
-                        dcc.Markdown(id="short-text-content",
-                                     style={'display': 'none'},
-                                     link_target="_blank",
-                                     dangerously_allow_html=True),
-                        html.Div(style=styles['button-container'], children=[
-                            dbc.Button([
-                                html.I(className="bi bi-eye-fill me-1"),
-                                "Show"
-                            ], id="short-text-btn", color="primary", size="lg", style={"width": "100%"})
-                        ])
-                    ])
-                ]),
-
-                # Long text area
-                html.Div(className="col-md-8", children=[
-                    html.Span("Long description", className="h5 d-block mb-1"),
-                    html.Div(style=styles['text-content-area'], children=[
-                        html.Div(id="long-text-placeholder", className="placeholder-glow", children=[
-                            html.Span(className="placeholder col-7"),
-                            html.Span(className="placeholder col-4"),
-                            html.Span(className="placeholder col-6")
-                        ]),
-                        dcc.Markdown(id="long-text-content",
-                                     style={'display': 'none'},
-                                     link_target="_blank",
-                                     dangerously_allow_html=True),
-                        html.Div(style=styles['button-container'], children=[
-                            dbc.Button([
-                                html.I(className="bi bi-eye-fill me-1"),
-                                "Show"
-                            ], id="long-text-btn", color="primary", size="lg", style={"width": "100%"})
-                        ])
-                    ])
-                ])
-            ]),
-
-            # Bottom row: Visual content
-            html.Div(className="row", children=[
-                # Individual Parts image
-                html.Div(className="col-md-4 mb-4", children=[
-                    html.Span("Image Single", className="h5 d-block mb-2"),
-                    html.Div(style=styles['image-container'], children=[
-                        html.Div(style=styles['image-wrapper'], children=[
-                            html.Img(id="single-pieces-placeholder",
-                                     src=placeholder_img,
-                                     className="img-fluid",
-                                     style=styles['image-content']),
-                            html.Img(id="single-pieces-img",
-                                     style={'display': 'none', **styles['image-content']},
-                                     className="img-fluid")
-                        ]),
-                        html.Div(style=styles['button-container'], children=[
-                            dbc.Button([
-                                html.I(className="bi bi-eye-fill me-1"),
-                                "Show"
-                            ], id="single-pieces-btn", color="primary", size="lg", style={"width": "100%"})
-                        ])
-                    ])
-                ]),
-
-                # Assembled Parts image
-                html.Div(className="col-md-4 mb-4", children=[
-                    html.Span("Assembled parts", className="h5 d-block mb-2"),
-                    html.Div(style=styles['image-container'], children=[
-                        html.Div(style=styles['image-wrapper'], children=[
-                            html.Img(id="assembly-placeholder",
-                                     src=placeholder_img,
-                                     className="img-fluid",
-                                     style=styles['image-content']),
-                            html.Img(id="assembly-img",
-                                     style={'display': 'none', **styles['image-content']},
-                                     className="img-fluid")
-                        ]),
-                        html.Div(style=styles['button-container'], children=[
-                            dbc.Button([
-                                html.I(className="bi bi-eye-fill me-1"),
-                                "Show"
-                            ], id="assembly-btn", color="primary", size="lg", style={"width": "100%"})
-                        ])
-                    ])
-                ]),
-
-                # Video section
-                html.Div(className="col-md-4 mb-4", children=[
-                    html.Span("Video", className="h5 d-block mb-2"),
-                    html.Div(style=styles['image-container'], children=[
-                        html.Div(style=styles['image-wrapper'], children=[
-                            html.Img(id="video-placeholder",
-                                     src=placeholder_img,
-                                     className="img-fluid",
-                                     style=styles['image-content']),
-                            html.Video(id="video-player",
-                                       controls=True,
-                                       autoPlay=False,
-                                       style={'display': 'none', **styles['image-content']},
-                                       className="img-fluid")
-                        ]),
-                        html.Div(style=styles['button-container'], children=[
-                            dbc.Button([
-                                html.I(className="bi bi-eye-fill me-1"),
-                                "Show"
-                            ], id="video-btn", color="primary", size="lg", style={"width": "100%"})
-                        ])
-                    ])
-                ])
-            ]),
-
-        ]),
-
-    ]),
-    # Thank you page
-    html.Div(id='thankyou-container', style={'display': 'none'}, children=[
-        html.Div(className="container-fluid d-flex flex-column justify-content-center align-items-center",
-                 style={'height': '80vh'}, children=[
-                html.H1("Thanks for Partecipating!",
-                        className="mb-5 text-center"),
-                html.Div(className="text-center", children=[
-                    dbc.Button("Restart", id='restart-button', color='primary',
-                               style={'padding': '20px 20px', 'width': '200px'})
-                ])
-            ])
-    ]),
-
-    html.Div(
-        style=styles['footer-container'],
-        children=[
-            # Stack vertically
-            html.Div(
-                className="d-flex flex-column justify-content-start align-items-start",
-                children=[
-                    html.H5("Style explanation:", className="mb-1 text-start"),
-                    html.H6(id='style-explanation', className='small text-muted mb-2'),
-
-                    html.H5("Content explanation:", className="mb-1 text-start"),
-                    html.H6(id='sentient-last-explanation', className='small text-muted mb-6'),
-                ]
-            ),
-
-            html.Div(className="d-flex justify-content-center align-items-center", children=[
-                # Experiment ID
-                html.Div(id='experiment-id-display', className="me-3"),  # Add margin to separate
-
-                # Step Counter with Progress Bar
-                html.Div(id='step-counter', children=[
-                    html.Div(className="d-flex align-items-center", children=[
-                        dbc.Progress(id="step-progress-bar", value=0, style={"width": "200px", "height": "10px"}),
-                        html.Span(id="step-text", className="ms-2 text-muted small")
-                    ])
-                ]),
-            ]),
-
-            # Images Section
-
-            html.Div(style=styles['footer-images'], children=[
-                html.Img(src='/assets/logosps.png', style=styles['image-style']),  # Left Image
-                html.Img(src='/assets/logoxr.png', style=styles['image-style'])  # Right Image
-            ]),
-        ])
-])
-
-
-# Callbacks
-@app.callback(
-    [Output('intro-container', 'style'),
-     Output('training-container', 'style'),
-     Output('experiment-id-store', 'data'),
-     Output('current-step', 'data'),
-     Output('sentient-profile-store', 'data'),
-     Output('style-explanation', 'children'),
-     Output('style-profile-token', 'data'),
-     Output('sentient-inline-style', 'children')],
-    [Input('begin-button', 'n_clicks')],
-    [State('experiment-id-input', 'value'),
-     State('visibility-mode-dropdown', 'value'),
-     State('profile-experience', 'value'),
-     State('profile-preferences', 'value'),
-     State('profile-nationality', 'value'),
-     State('profile-other', 'value'),
-     State('assembly-data-store', 'data')]
-)
-def begin_training(n_clicks, experiment_id, mode, experience, preferences, nationality, other, assembly_data):
-    # First render: return all 8 outputs
-    if not n_clicks:
-        return (
-            styles['intro-screen'],  # intro visible
-            {'display': 'none'},  # training hidden
-            None,  # experiment-id-store
-            0,  # current-step
-            None,  # sentient-profile-store
-            "",  # style-explanation
-            None,  # style-profile-token
-            ""  # sentient-inline-style (no CSS yet)
-        )
-
-    # Normalise experiment id
-    if not experiment_id:
-        experiment_id = 'unknown'
-
-    # Defaults
-    profile = None
-    style_expl = ""
-    style_token = None
-    css_text = ""
-
-    # Sentient mode: build profile and request style overrides
-    if mode == 'sentient.json':
-        profile = {
-            'experience': (experience or '').strip().lower(),
-            'preferences': [p.strip().lower() for p in (preferences or '').split(',') if p.strip()],
-            'nationality': (nationality or '').strip(),
-            'other': (other or '').strip()
-        }
-
-        # Categories present in the current session
-        categories = sorted(list(set(step.get('category', 'Unknown') for step in (assembly_data or []))))
-
-        try:
-            print(f"Calling initial_style_recommendations with profile={profile}, categories={categories}")
-            out = initial_style_recommendations(profile, categories)
-
-            css = out.get('css_overrides', "") or ""
-            style_expl = out.get('explanation', "") or ""
-            style_token = out.get('style_profile_token', "") or ""
-
-            print(f"Received style_token: {style_token}")
-            if css:
-                # Persist to assets (optional) and inject inline (live)
-                assets_dir = pathlib.Path('assets')
-                assets_dir.mkdir(exist_ok=True)
-                (assets_dir / 'sentient_overrides.css').write_text(css, encoding='utf-8')
-                css_text = css or ""
-                css_html = f"<style>{css_text}</style>"
-
-                print("Wrote CSS to assets/sentient_overrides.css and prepared inline CSS.")
-        except Exception as e:
-            style_expl = f"Style recommendation failed; using defaults. Error: {str(e)}"
-            import traceback
-            print("Error in initial_style_recommendations:", traceback.format_exc())
-
-    # Log start
-    log_interaction(experiment_id, mode, 'start_experiment')
-
-    # Switch to training view; step 1
-    return (
-        {'display': 'none'},
-        {'display': 'block', **styles['training-screen']},
-        experiment_id,
-        1,
-        profile,
-        style_expl,
-        style_token,
-        css_html
-    )
-
-
-# Set navigation in progress
-@app.callback(
-    Output('navigation-in-progress', 'data'),
-    [Input('prev-button', 'n_clicks'),
-     Input('next-button', 'n_clicks')]
-)
-def set_navigation_in_progress(prev_clicks, next_clicks):
-    if prev_clicks is None and next_clicks is None:
-        return False
-    return True
-
-
-# Add a new callback to handle visibility mode selection
-@app.callback(
-    Output('initial-visibility-store', 'data'),
-    [Input('visibility-mode-dropdown', 'value')]
-)
-def update_visibility_mode(selected_mode):
-    try:
-        with open(f'settings/visibility/{selected_mode}', 'r') as f:
-            return json.load(f)
-    except FileNotFoundError:
-        # Fallback to data collection mode if file not found
-        with open('settings/visibility/initial_visibility_data_collection.json', 'r') as f:
-            return json.load(f)
-
-
-# Update step content
-@app.callback(
-    [Output('step-header', 'children'),
-     Output('step-progress-bar', 'value'),
-     Output('step-text', 'children'),
-     Output('experiment-id-display', 'children'),
-     Output('single-pieces-img', 'src'),
-     Output('assembly-img', 'src'),
-     Output('video-player', 'src'),
-     Output('short-text-content', 'children'),
-     Output('long-text-content', 'children'),
-     Output('short-text-placeholder', 'style'),
-     Output('short-text-content', 'style'),
-     Output('long-text-placeholder', 'style'),
-     Output('long-text-content', 'style'),
-     Output('single-pieces-placeholder', 'style'),
-     Output('single-pieces-img', 'style'),
-     Output('assembly-placeholder', 'style'),
-     Output('assembly-img', 'style'),
-     Output('video-placeholder', 'style'),
-     Output('video-player', 'style'),
-     Output('sentient-last-explanation', 'children')],
-    [Input('current-step', 'data')],
-    [State('assembly-data-store', 'data'),
-     State('experiment-id-store', 'data'),
-     State('visibility-mode-dropdown', 'value'),
-     State('sentient-profile-store', 'data'),
-     State('style-profile-token', 'data'),
-     State('clicked-buttons-store', 'data'),
-     State('user-preferences-store', 'data')],
-    prevent_initial_call=True
-)
-def update_step_content(current_step, assembly_data, experiment_id, mode, profile, style_token, clicked, prefs):
-    if current_step <= 0 or current_step > len(assembly_data):
-        return "", 0, "", "", "", "", "", "", "", {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, ""
-
-    step = assembly_data[current_step - 1]
-    step_type = step.get('category', 'Unknown')
-
-    # defaults from file
-    title = step['name']
-    af = step['adaptive_fields']
-    sp, ap, vp = af['image_single_pieces'], af['image_assembly'], af['video']
-
-    short_text, long_text = af['short_text'], af['long_text']
-
-    # default visibility: hidden placeholders shown, actual content hidden
-    vis = {"short_text": False, "long_text": False, "single_pieces": False, "assembly": False, "video": False}
-    explanation = ""
-
-    # SENTIENT MODE: Adapt content per step
-    if mode == 'sentient.json' and profile and style_token:
-        log_summary = build_log_summary(prefs, step_type, get_complete_button_states(current_step, clicked))
-        try:
-            out = adapt_step(profile, style_token,
-                             {"name": title, "category": step_type, "adaptive_fields": af},
-                             log_summary)
-            # apply returned changes
-            title = out.get('title', title)
-            patch = out.get('adaptive_fields', {})
-            short_text = patch.get('short_text', short_text)
-            long_text = patch.get('long_text', long_text)
-            sp = patch.get('image_single_pieces', sp)
-            ap = patch.get('image_assembly', ap)
-            vp = patch.get('video', vp)
-            vis = out.get('initial_visibility', vis)
-            explanation = out.get('explanation_of_changes', "")
-            # log the adaptation
-            log_interaction(experiment_id, mode, 'sentient_step_adapted', current_step, title, vis)
-        except Exception as e:
-            explanation = f"Adaptive update failed; using base content. ({e})"
-            import traceback
-            print(f"Error in adapt_step: {traceback.format_exc()}")
-
-    progress_value = (current_step / len(assembly_data)) * 100
-    step_text = f"Step {current_step} of {len(assembly_data)}"
-    experiment_id_display = f"Experiment ID: {experiment_id}"
-
-    short_text = as_markdown(short_text)
-    long_text = as_markdown(long_text)
-
-    def show(h):
-        return {'display': 'block', **styles['image-content']} if h else {'display': 'none', **styles['image-content']}
-
-    def show_txt(h):
-        return {'display': 'block'} if h else {'display': 'none'}
-
-    def hide_txt(h):
-        return {'display': 'none'} if h else {'display': 'block'}
-
-    return (
-        f"{title}",
-        progress_value,
-        step_text,
-        experiment_id_display,
-        sp, ap, vp,
-        short_text, long_text,
-        hide_txt(vis['short_text']), show_txt(vis['short_text']),
-        hide_txt(vis['long_text']), show_txt(vis['long_text']),
-        show(not vis['single_pieces']), show(vis['single_pieces']),
-        show(not vis['assembly']), show(vis['assembly']),
-        show(not vis['video']), show(vis['video']),
-        explanation
-    )
-
-
-#  toggle_short_text callback
-
-@app.callback(
-    [Output('short-text-placeholder', 'style', allow_duplicate=True),
-     Output('short-text-content', 'style', allow_duplicate=True),
-     Output('short-text-btn', 'children'),
-     Output('clicked-buttons-store', 'data', allow_duplicate=True),
-     Output('user-preferences-store', 'data', allow_duplicate=True)],  # Added for adaptive mode
-    [Input('short-text-btn', 'n_clicks')],
-    [State('short-text-placeholder', 'style'),
-     State('experiment-id-store', 'data'),
-     State('visibility-mode-dropdown', 'value'),
-     State('current-step', 'data'),
-     State('assembly-data-store', 'data'),
-     State('clicked-buttons-store', 'data'),
-     State('user-preferences-store', 'data')],  # Added for adaptive mode
-    prevent_initial_call=True
-)
-def toggle_short_text(n_clicks, placeholder_style, experiment_id, mode, current_step,
-                      assembly_data, clicked_buttons, user_preferences):
-    if n_clicks is None:
-        return placeholder_style, {'display': 'none'}, [
-            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, user_preferences
-
-    step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
-    step_type = assembly_data[current_step - 1].get('category', 'Unknown') if 0 < current_step <= len(
-        assembly_data) else 'Unknown'
-
-    is_showing = placeholder_style.get('display') == 'none'
-
-    # Use string keys for steps
-    step_key = str(current_step)
-    if step_key not in clicked_buttons:
-        clicked_buttons[step_key] = {}
-
-    if is_showing:
-        # Hide content
-        clicked_buttons[step_key]['short_text'] = False
-        button_states = get_complete_button_states(current_step, clicked_buttons)
-        log_interaction(experiment_id, mode, "toggle_short_text_none", current_step, step_name, button_states)
-        return {'display': 'block'}, {'display': 'none'}, [
-            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, user_preferences
-    else:
-        # Show content and update preferences
-        clicked_buttons[step_key]['short_text'] = True
-        button_states = get_complete_button_states(current_step, clicked_buttons)
-        log_interaction(experiment_id, mode, "toggle_short_text_block", current_step, step_name, button_states)
-
-        # Update user preferences with timestamp
-        user_preferences = update_user_preferences(
-            user_preferences, step_type, ['short_text'], datetime.now().timestamp(), is_initial=False)
-
-        return {'display': 'none'}, {'display': 'block'}, [
-            html.I(className="bi bi-eye-fill me-1"), "Viewed"], clicked_buttons, user_preferences
-
-
-# toggle long_text
-@app.callback(
-    [Output('long-text-placeholder', 'style', allow_duplicate=True),
-     Output('long-text-content', 'style', allow_duplicate=True),
-     Output('long-text-btn', 'children'),
-     Output('clicked-buttons-store', 'data', allow_duplicate=True),
-     Output('user-preferences-store', 'data', allow_duplicate=True)],  # Added for adaptive mode
-    [Input('long-text-btn', 'n_clicks')],
-    [State('long-text-placeholder', 'style'),
-     State('experiment-id-store', 'data'),
-     State('visibility-mode-dropdown', 'value'),
-     State('current-step', 'data'),
-     State('assembly-data-store', 'data'),
-     State('clicked-buttons-store', 'data'),
-     State('user-preferences-store', 'data')],  # Added for adaptive mode
-    prevent_initial_call=True
-)
-def toggle_long_text(n_clicks, placeholder_style, experiment_id, mode, current_step,
-                     assembly_data, clicked_buttons, user_preferences):
-    if n_clicks is None:
-        return placeholder_style, {'display': 'none'}, [
-            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, user_preferences
-
-    step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
-    step_type = assembly_data[current_step - 1].get('category', 'Unknown') if 0 < current_step <= len(
-        assembly_data) else 'Unknown'
-
-    is_showing = placeholder_style.get('display') == 'none'
-
-    # Update clicked buttons store
-    step_key = str(current_step)
-    if step_key not in clicked_buttons:
-        clicked_buttons[step_key] = {}
-
-    if is_showing:
-        # Hide content
-        clicked_buttons[step_key]['long_text'] = False
-        button_states = get_complete_button_states(current_step, clicked_buttons)
-        log_interaction(experiment_id, mode, "toggle_long_text_none", current_step, step_name, button_states)
-        return {'display': 'block'}, {'display': 'none'}, [
-            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, user_preferences
-    else:
-        # Show content and update preferences
-        clicked_buttons[step_key]['long_text'] = True
-        button_states = get_complete_button_states(current_step, clicked_buttons)
-        log_interaction(experiment_id, mode, "toggle_long_text_block", current_step, step_name, button_states)
-
-        # Update user preferences with timestamp
-        user_preferences = update_user_preferences(
-            user_preferences, step_type, ['long_text'], datetime.now().timestamp(), is_initial=False)
-
-        return {'display': 'none'}, {'display': 'block'}, [
-            html.I(className="bi bi-eye-fill me-1"), "Viewed"], clicked_buttons, user_preferences
-
-
-# toggle single_pieces callback
-@app.callback(
-    [Output('single-pieces-placeholder', 'style', allow_duplicate=True),
-     Output('single-pieces-img', 'style', allow_duplicate=True),
-     Output('single-pieces-btn', 'children'),
-     Output('clicked-buttons-store', 'data', allow_duplicate=True),
-     Output('user-preferences-store', 'data', allow_duplicate=True)],  # Added for adaptive mode
-    [Input('single-pieces-btn', 'n_clicks')],
-    [State('single-pieces-placeholder', 'style'),
-     State('experiment-id-store', 'data'),
-     State('visibility-mode-dropdown', 'value'),
-     State('current-step', 'data'),
-     State('assembly-data-store', 'data'),
-     State('clicked-buttons-store', 'data'),
-     State('user-preferences-store', 'data')],  # Added for adaptive mode
-    prevent_initial_call=True
-)
-def toggle_single_pieces(n_clicks, placeholder_style, experiment_id, mode, current_step,
-                         assembly_data, clicked_buttons, user_preferences):
-    if n_clicks is None:
-        return placeholder_style, {'display': 'none', **styles['image-content']}, [
-            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, user_preferences
-
-    step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
-    step_type = assembly_data[current_step - 1].get('category', 'Unknown') if 0 < current_step <= len(
-        assembly_data) else 'Unknown'
-
-    is_showing = placeholder_style.get('display') == 'none'
-
-    # Update clicked buttons store
-    step_key = str(current_step)
-    if step_key not in clicked_buttons:
-        clicked_buttons[step_key] = {}
-
-    if is_showing:
-        # Hide content
-        clicked_buttons[step_key]['single_pieces'] = False
-        button_states = get_complete_button_states(current_step, clicked_buttons)
-        log_interaction(experiment_id, mode, "toggle_single_pieces_none", current_step, step_name, button_states)
-        return {'display': 'block'}, {'display': 'none', **styles['image-content']}, [
-            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, user_preferences
-    else:
-        # Show content and update preferences
-        clicked_buttons[step_key]['single_pieces'] = True
-        button_states = get_complete_button_states(current_step, clicked_buttons)
-        log_interaction(experiment_id, mode, "toggle_single_pieces_block", current_step, step_name, button_states)
-
-        # Update user preferences with timestamp
-        user_preferences = update_user_preferences(
-            user_preferences, step_type, ['single_pieces'], datetime.now().timestamp(), is_initial=False)
-
-        return {'display': 'none'}, {'display': 'block', **styles['image-content']}, [
-            html.I(className="bi bi-eye-fill me-1"), "Viewed"], clicked_buttons, user_preferences
-
-
-# toggle assembly callback
-@app.callback(
-    [Output('assembly-placeholder', 'style', allow_duplicate=True),
-     Output('assembly-img', 'style', allow_duplicate=True),
-     Output('assembly-btn', 'children'),
-     Output('clicked-buttons-store', 'data', allow_duplicate=True),
-     Output('user-preferences-store', 'data', allow_duplicate=True)],  # Added for adaptive mode
-    [Input('assembly-btn', 'n_clicks')],
-    [State('assembly-placeholder', 'style'),
-     State('experiment-id-store', 'data'),
-     State('visibility-mode-dropdown', 'value'),
-     State('current-step', 'data'),
-     State('assembly-data-store', 'data'),
-     State('clicked-buttons-store', 'data'),
-     State('user-preferences-store', 'data')],  # Added for adaptive mode
-    prevent_initial_call=True
-)
-def toggle_assembly(n_clicks, placeholder_style, experiment_id, mode, current_step,
-                    assembly_data, clicked_buttons, user_preferences):
-    if n_clicks is None:
-        return placeholder_style, {'display': 'none', **styles['image-content']}, [
-            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, user_preferences
-
-    step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
-    step_type = assembly_data[current_step - 1].get('category', 'Unknown') if 0 < current_step <= len(
-        assembly_data) else 'Unknown'
-
-    is_showing = placeholder_style.get('display') == 'none'
-
-    # Update clicked buttons store
-    step_key = str(current_step)
-    if step_key not in clicked_buttons:
-        clicked_buttons[step_key] = {}
-
-    if is_showing:
-        # Hide content
-        clicked_buttons[step_key]['assembly'] = False
-        button_states = get_complete_button_states(current_step, clicked_buttons)
-        log_interaction(experiment_id, mode, "toggle_assembly_none", current_step, step_name, button_states)
-        return {'display': 'block'}, {'display': 'none', **styles['image-content']}, [
-            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, user_preferences
-    else:
-        # Show content and update preferences
-        clicked_buttons[step_key]['assembly'] = True
-        button_states = get_complete_button_states(current_step, clicked_buttons)
-        log_interaction(experiment_id, mode, "toggle_assembly_block", current_step, step_name, button_states)
-
-        # Update user preferences with timestamp
-        user_preferences = update_user_preferences(
-            user_preferences, step_type, ['assembly'], datetime.now().timestamp(), is_initial=False)
-
-        return {'display': 'none'}, {'display': 'block', **styles['image-content']}, [
-            html.I(className="bi bi-eye-fill me-1"), "Viewed"], clicked_buttons, user_preferences
-
-
-# toggle video callback
-@app.callback(
-    [Output('video-placeholder', 'style', allow_duplicate=True),
-     Output('video-player', 'style', allow_duplicate=True),
-     Output('video-btn', 'children'),
-     Output('clicked-buttons-store', 'data', allow_duplicate=True),
-     Output('user-preferences-store', 'data', allow_duplicate=True),  # Added for adaptive mode
-     Output('video-player', 'autoPlay')],
-    [Input('video-btn', 'n_clicks')],
-    [State('video-placeholder', 'style'),
-     State('experiment-id-store', 'data'),
-     State('visibility-mode-dropdown', 'value'),
-     State('current-step', 'data'),
-     State('assembly-data-store', 'data'),
-     State('clicked-buttons-store', 'data'),
-     State('user-preferences-store', 'data')],  # Added for adaptive mode
-    prevent_initial_call=True
-)
-def toggle_video(n_clicks, placeholder_style, experiment_id, mode, current_step,
-                 assembly_data, clicked_buttons, user_preferences):
-    if n_clicks is None:
-        return placeholder_style, {'display': 'none', **styles['image-content']}, [
-            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, user_preferences, False
-
-    step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
-    step_type = assembly_data[current_step - 1].get('category', 'Unknown') if 0 < current_step <= len(
-        assembly_data) else 'Unknown'
-
-    is_showing = placeholder_style.get('display') == 'none'
-
-    # Update clicked buttons store
-    step_key = str(current_step)
-    if step_key not in clicked_buttons:
-        clicked_buttons[step_key] = {}
-
-    if is_showing:
-        # Hide content
-        clicked_buttons[step_key]['video'] = False
-        button_states = get_complete_button_states(current_step, clicked_buttons)
-        log_interaction(experiment_id, mode, "toggle_video_none", current_step, step_name, button_states)
-        return {'display': 'block'}, {'display': 'none', **styles['image-content']}, [
-            html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, user_preferences, False
-    else:
-        # Show content, update preferences, and autoplay
-        clicked_buttons[step_key]['video'] = True
-        button_states = get_complete_button_states(current_step, clicked_buttons)
-        log_interaction(experiment_id, mode, "toggle_video_block", current_step, step_name, button_states)
-
-        # Update user preferences with timestamp
-        user_preferences = update_user_preferences(
-            user_preferences, step_type, ['video'], datetime.now().timestamp(), is_initial=False)
-
-        return {'display': 'none'}, {'display': 'block', **styles['image-content']}, [
-            html.I(className="bi bi-eye-fill me-1"), "Viewed"], clicked_buttons, user_preferences, True
-
-
-# navigation callback
-@app.callback(
-    [Output('current-step', 'data', allow_duplicate=True),
-     Output('navigation-in-progress', 'data', allow_duplicate=True),
-     Output('training-container', 'style', allow_duplicate=True),
-     Output('thankyou-container', 'style', allow_duplicate=True)],
-    [Input('prev-button', 'n_clicks'),
-     Input('next-button', 'n_clicks')],
-    [State('initial-visibility-store', 'data'),
-     State('current-step', 'data'),
-     State('assembly-data-store', 'data'),
-     State('experiment-id-store', 'data'),
-     State('visibility-mode-dropdown', 'value'),
-     State('clicked-buttons-store', 'data'),
-     State('training-container', 'style'),
-     State('thankyou-container', 'style')],
-    prevent_initial_call=True
-)
-def navigate_steps(prev_clicks, next_clicks, initial_visibility, current_step, assembly_data, experiment_id, mode,
-                   clicked_buttons, training_style, thankyou_style):
-    ctx = dash.callback_context
-    if not ctx.triggered:
-        return current_step, False, training_style, thankyou_style
-
-    button_id = ctx.triggered[0]['prop_id'].split('.')[0]
-    step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
-
-    # Get the current state of all buttons for logging
-    button_states = get_complete_button_states(current_step, clicked_buttons)
-
-    # If user clicks previous from the first step, do nothing
-    if button_id == 'prev-button' and current_step > 1:
-        log_interaction(experiment_id, mode, 'navigate_previous', current_step, step_name, button_states)
-        # If we're returning from thank you page to the last step
-        if current_step == len(assembly_data) + 1:
-            return len(assembly_data), False, {'display': 'block', **styles['training-screen']}, {'display': 'none'}
-        return current_step - 1, False, training_style, thankyou_style
-
-    # If user clicks next on the last step, show thank you page
-    elif button_id == 'next-button' and current_step == len(assembly_data):
-        log_interaction(experiment_id, mode, 'navigate_to_thankyou', current_step, step_name, button_states)
-        return len(assembly_data) + 1, False, {'display': 'none'}, {'display': 'block'}
-
-    # Regular next button navigation
-    elif button_id == 'next-button' and current_step < len(assembly_data):
-        log_interaction(experiment_id, mode, 'navigate_next', current_step, step_name, button_states)
-
-        # Defensive programming: ensure data exists
-        if not initial_visibility or 'steps' not in initial_visibility:
-            # Fallback to default visibility
-            initial_visibility = {
-                'steps': [{
-                    'step_id': current_step,
-                    'content': {
-                        'short_text': False,
-                        'long_text': False,
-                        'single_pieces': False,
-                        'assembly': False,
-                        'video': False
-                    }
-                }]
-            }
-
-        # Find the configuration for the current step
-        try:
-            step_config = next(
-                (step for step in initial_visibility['steps'] if step['step_id'] == current_step),
-                initial_visibility['steps'][0]  # Default to first step if no match
-            )
-        except (IndexError, KeyError):
-            # Fallback to default configuration
-            step_config = {
-                'content': {
-                    'short_text': False,
-                    'long_text': False,
-                    'single_pieces': False,
-                    'assembly': False,
-                    'video': False
-                }
-            }
-
-        step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
-        log_interaction(experiment_id, mode, 'initial_suggestion', current_step, step_name, step_config['content'])
-        return current_step + 1, False, training_style, thankyou_style
-
-    return current_step, False, training_style, thankyou_style
-
-
-# state loading callback for every step
-@app.callback(
-    Output('current-step', 'data', allow_duplicate=True),
-    [Input('current-step', 'data')],
-    [State('experiment-id-store', 'data'),
-     State('visibility-mode-dropdown', 'value'),
-     State('assembly-data-store', 'data'),
-     State('clicked-buttons-store', 'data')],
-    prevent_initial_call=True
-)
-def log_step_load(current_step, experiment_id, mode, assembly_data, clicked_buttons):
-    if current_step <= 0 or current_step > len(assembly_data):
-        return current_step
-
-    step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
-    button_states = get_complete_button_states(current_step, clicked_buttons)
-
-    log_interaction(experiment_id, mode, 'step_loaded', current_step, step_name, button_states)
-    return current_step
-
-
-# button state callback
-@app.callback(
-    [Output('short-text-btn', 'disabled', allow_duplicate=True),
-     Output('long-text-btn', 'disabled', allow_duplicate=True),
-     Output('single-pieces-btn', 'disabled', allow_duplicate=True),
-     Output('assembly-btn', 'disabled', allow_duplicate=True),
-     Output('video-btn', 'disabled', allow_duplicate=True)],
-    [Input('current-step', 'data'),
-     Input('enabled-interactions-store', 'data'),
-     Input('clicked-buttons-store', 'data'),
-     Input('short-text-content', 'style'),
-     Input('long-text-content', 'style'),
-     Input('single-pieces-img', 'style'),
-     Input('assembly-img', 'style'),
-     Input('video-player', 'style')],
-    prevent_initial_call=True
-)
-def update_button_states(current_step, enabled_interactions, clicked_buttons,
-                         short_text_style, long_text_style, single_pieces_style,
-                         assembly_style, video_style):
-    # Find the configuration for the current step in enabled interactions
-    step_config = next((step for step in enabled_interactions['steps']
-                        if step['step_id'] == current_step),
-                       {'buttons': {
-                           'short_text': True,
-                           'long_text': True,
-                           'single_pieces': True,
-                           'assembly': True,
-                           'video': True
-                       }})
-
-    buttons = step_config['buttons']
-
-    # Get the clicked state for the current step using string key
-    step_key = str(current_step)
-    step_clicked = clicked_buttons.get(step_key, {})
-
-    # Function to check if content is currently visible
-    def is_content_visible(style):
-        return style.get('display', '') == 'block'
-
-    # A button should be disabled if:
-    # 1. It's disabled in the JSON configuration, or
-    # 2. It has been clicked in the current step, or
-    # 3. It is initially set to be visible (preventing user interaction), or
-    # 4. The content is currently visible
-    return (
-        not buttons.get('short_text', True) or
-        step_clicked.get('short_text', False) or
-        # initial_config.get('short_text', False) or
-        is_content_visible(short_text_style),
-
-        not buttons.get('long_text', True) or
-        step_clicked.get('long_text', False) or
-        # initial_config.get('long_text', False) or
-        is_content_visible(long_text_style),
-
-        not buttons.get('single_pieces', True) or
-        step_clicked.get('single_pieces', False) or
-        # initial_config.get('single_pieces', False) or
-        is_content_visible(single_pieces_style),
-
-        not buttons.get('assembly', True) or
-        step_clicked.get('assembly', False) or
-        # initial_config.get('assembly', False) or
-        is_content_visible(assembly_style),
-
-        not buttons.get('video', True) or
-        step_clicked.get('video', False) or
-        # initial_config.get('video', False) or
-        is_content_visible(video_style)
-    )
-
-
-# Reset button labels and placeholders when changing steps
-@app.callback(
-    [Output('short-text-placeholder', 'style', allow_duplicate=True),
-     Output('short-text-content', 'style', allow_duplicate=True),
-     Output('long-text-placeholder', 'style', allow_duplicate=True),
-     Output('long-text-content', 'style', allow_duplicate=True),
-     Output('single-pieces-placeholder', 'style', allow_duplicate=True),
-     Output('single-pieces-img', 'style', allow_duplicate=True),
-     Output('assembly-placeholder', 'style', allow_duplicate=True),
-     Output('assembly-img', 'style', allow_duplicate=True),
-     Output('video-placeholder', 'style', allow_duplicate=True),
-     Output('video-player', 'style', allow_duplicate=True),
-     Output('short-text-btn', 'children', allow_duplicate=True),
-     Output('long-text-btn', 'children', allow_duplicate=True),
-     Output('single-pieces-btn', 'children', allow_duplicate=True),
-     Output('assembly-btn', 'children', allow_duplicate=True),
-     Output('video-btn', 'children', allow_duplicate=True),
-     Output('video-player', 'autoPlay', allow_duplicate=True),
-     Output('user-preferences-store', 'data', allow_duplicate=True)],
-    [Input('current-step', 'data')],
-    [State('initial-visibility-store', 'data'),
-     State('clicked-buttons-store', 'data'),
-     State('experiment-id-store', 'data'),
-     State('visibility-mode-dropdown', 'value'),
-     State('user-preferences-store', 'data'),
-     State('assembly-data-store', 'data')],
-    prevent_initial_call=True
-)
-def reset_button_states_and_visibility(
-        current_step,
-        initial_visibility,
-        clicked_buttons,
-        experiment_id,
-        mode,
-        user_preferences=None,
-        assembly_data=None
-):
-    # Defensive programming: ensure data exists
-    if not initial_visibility or 'steps' not in initial_visibility:
-        # Fallback to default visibility
-        initial_visibility = {
-            'steps': [{
-                'step_id': current_step,
-                'content': {
-                    'short_text': False,
-                    'long_text': False,
-                    'single_pieces': False,
-                    'assembly': False,
-                    'video': False
-                }
-            }]
-        }
-
-    # Find the configuration for the current step
-    try:
-        step_config = next(
-            (step for step in initial_visibility['steps'] if step['step_id'] == current_step),
-            initial_visibility['steps'][0]  # Default to first step if no match
-        )
-    except (IndexError, KeyError):
-        # Fallback to default configuration
-        step_config = {
-            'content': {
-                'short_text': False,
-                'long_text': False,
-                'single_pieces': False,
-                'assembly': False,
-                'video': False
-            }
-        }
-
-    content = step_config.get('content', {})
-    # Defensive conversion to ensure boolean
-    content = {k: bool(v) for k, v in content.items()}
-
-    # Apply adaptive logic only for dynamically adaptive mode
-    if mode == 'initial_visibility_dynamically_adaptive.json' and current_step > 1:
-        # Ensure user_preferences is initialized
-        if user_preferences is None:
-            user_preferences = {}
-
-        # Robust step type extraction
-        step_type = None
-        if assembly_data and 0 < current_step - 1 < len(assembly_data):
-            step_type = assembly_data[current_step - 1].get('category')
-
-        # Fallback if step_type is not found or is None
-        if step_type:
-            # Ensure step_type is clean and consistent
-            step_type = step_type.strip()
-
-            # Calculate weighted frequencies
-            weighted_freqs = calculate_weighted_frequencies(user_preferences)
-
-            # Debugging print
-            # print(f"Weighted frequencies for step {current_step}: {weighted_freqs}")
-
-            # If we have preferences for this step type, use the most frequent
-            if step_type in weighted_freqs and weighted_freqs[step_type]:
-                # Get the most frequent content type
-                most_frequent = max(
-                    weighted_freqs[step_type].items(),
-                    key=lambda x: x[1]
-                )[0]
-
-                # Reset all content to False
-                content = {k: False for k in content}
-                # Set the most frequent content to True
-                content[most_frequent] = True
-
-                step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
-                log_interaction(experiment_id, mode, 'computed_suggestion', current_step, step_name, content)
-
-            # # Track the initially visible content
-            # initially_visible_content = [k for k, v in content.items() if v]
-            # user_preferences = update_user_preferences(
-            #     user_preferences,
-            #     step_type,  # Use the correctly extracted step type
-            #     initially_visible_content,
-            #     datetime.now().timestamp(),
-            #     is_initial=True
-            # )
-            #
-            # print(f"Updated user preferences at step {current_step} (Type: {step_type}):", user_preferences)
-
-    # Default labels
-    default_label = [html.I(className="bi bi-eye-fill me-1"), "Show"]
-    viewed_label = [html.I(className="bi bi-eye-fill me-1"), "Viewed"]
-
-    # Get the clicked state for the current step
-    step_key = str(current_step)
-    step_clicked = clicked_buttons.get(step_key, {})
-
-    # Helper function to determine visibility and label
-    def get_visibility(content_type):
-        is_initially_visible = content.get(content_type, False)
-        is_clicked = step_clicked.get(content_type, False)
-
-        if is_clicked:
-            # If clicked, always show
-            return (
-                {'display': 'none'},
-                {'display': 'block', **styles['image-content']},
-                viewed_label
-            )
-        elif is_initially_visible:
-            # If initially visible, but not clicked
-            return (
-                {'display': 'none'},
-                {'display': 'block', **styles['image-content']},
-                default_label
-            )
+        steps_file = "settings/steps_sources.json"
+        if os.path.exists(steps_file):
+            with open(steps_file, 'r') as f:
+                data = json.load(f)
+                steps_data = data.get('steps', data.get('assembly_process', []))
+                categories = list(set(
+                    step.get('category', 'Unknown')
+                    for step in steps_data
+                ))
+                step_categories = sorted(categories)
+                print(f"✅ Loaded {len(step_categories)} step categories")
         else:
-            # If not initially visible and not clicked
-            return (
-                {'display': 'block'},
-                {'display': 'none', **styles['image-content']},
-                default_label
+            step_categories = ["foundation", "mechanical", "electrical"]
+            print(f"⚠️  Using fallback categories")
+    except Exception as e:
+        print(f"❌ Error loading categories: {e}")
+        step_categories = ["foundation", "assembly", "testing"]
+
+    # Load visibility configurations for different modes
+    try:
+        visibility_dir = Path("settings/visibility")
+        if visibility_dir.exists():
+            for config_file in visibility_dir.glob("*.json"):
+                mode_name = config_file.stem  # filename without .json
+                with open(config_file, 'r') as f:
+                    mode_configs[mode_name] = json.load(f)
+                print(f"✅ Loaded visibility config for mode: {mode_name}")
+    except Exception as e:
+        print(f"⚠️  Error loading visibility configs: {e}")
+
+
+# ============================================================================
+# Helper function to convert local paths to URLs
+# ============================================================================
+
+def convert_path_to_url(file_path: str) -> str:
+    """
+    Convert local file paths to served URLs
+
+    Example:
+      images/part1.jpg -> http://localhost:8000/static/images/part1.jpg
+      images_assembly/step1.jpg -> http://localhost:8000/static/images_assembly/step1.jpg
+    """
+    if not file_path:
+        return ""
+
+    # Normalize path separators
+    file_path = file_path.replace("\\", "/")
+
+    # Check which directory it belongs to
+    if "images_assembly" in file_path:
+        filename = file_path.split("images_assembly/")[-1]
+        return f"http://localhost:8000/static/images_assembly/{filename}"
+    elif "images" in file_path:
+        filename = file_path.split("images_single_pieces/")[-1]
+        return f"http://localhost:8000/static/images/{filename}"
+    elif "videos" in file_path:
+        filename = file_path.split("videos/")[-1]
+        return f"http://localhost:8000/static/videos/{filename}"
+
+    # If no match, return as-is (will likely fail, but good for debugging)
+    return file_path
+
+
+# ============================================================================
+# API Endpoints
+# ============================================================================
+
+@app.get("/")
+async def root():
+    """Health check endpoint"""
+    return {
+        "status": "running",
+        "service": "Assembly Training API",
+        "version": "1.0.0",
+        "timestamp": datetime.now().isoformat(),
+        "static_files": {
+            "images_single_pieces": str(IMAGES_DIR),
+            "images_assembly": str(IMAGES_ASSEMBLY_DIR),
+            "videos": str(VIDEOS_DIR)
+        }
+    }
+
+
+@app.get("/api/steps")
+async def get_steps():
+    """Load and return assembly steps with converted URLs"""
+    try:
+        steps_file = "settings/steps_sources.json"
+        if os.path.exists(steps_file):
+            with open(steps_file, 'r') as f:
+                data = json.load(f)
+                steps_data = data.get('steps', data.get('assembly_process', []))
+
+                # Convert all file paths to URLs
+                for step in steps_data:
+                    if 'adaptive_fields' in step:
+                        fields = step['adaptive_fields']
+                        if 'image_single_pieces' in fields:
+                            fields['image_single_pieces'] = convert_path_to_url(fields['image_single_pieces'])
+                        if 'image_assembly' in fields:
+                            fields['image_assembly'] = convert_path_to_url(fields['image_assembly'])
+                        if 'video' in fields:
+                            fields['video'] = convert_path_to_url(fields['video'])
+
+                return {"steps": steps_data}
+        else:
+            raise HTTPException(status_code=404, detail=f"Steps file not found")
+    except Exception as e:
+        print(f"Error loading steps: {e}")
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Failed to load steps: {str(e)}")
+
+
+@app.post("/api/v1/session/init", response_model=InitSessionResponse)
+async def initialize_session(request: InitSessionRequest):
+    """Initialize a new training session with mode-specific visibility"""
+
+    session_token = str(uuid.uuid4())
+    style_token = "default"
+    style_explanation = "Using default interface styling"
+    css_overrides = None
+    initial_visibility = {
+        "short_text": False,
+        "long_text": False,
+        "single_pieces": False,
+        "assembly": False,
+        "video": False
+    }
+
+    session_data = {
+        "session_token": session_token,
+        "experiment_id": request.experiment_id,
+        "mode": request.mode,
+        "created_at": datetime.now().isoformat(),
+        "profile": request.profile.dict() if request.profile else None
+    }
+
+    # Load mode configuration if available
+    mode_config = None
+    if request.mode in mode_configs:
+        mode_config = mode_configs[request.mode]
+        style_explanation = f"Using {request.mode} configuration"
+        print(f"📋 Loaded config for mode: {request.mode}")
+
+    # Sentient mode: AI-powered adaptations
+    if request.mode == "sentient":
+        if not request.profile:
+            raise HTTPException(status_code=400, detail="Profile required for sentient mode")
+
+        try:
+            ai_response = initial_style_recommendations(
+                user_profile=request.profile.dict(),
+                step_categories=step_categories
             )
 
-    # Get visibility for each content type
-    short_text_placeholder, short_text_content, short_text_btn = get_visibility('short_text')
-    long_text_placeholder, long_text_content, long_text_btn = get_visibility('long_text')
-    single_pieces_placeholder, single_pieces_content, single_pieces_btn = get_visibility('single_pieces')
-    assembly_placeholder, assembly_content, assembly_btn = get_visibility('assembly')
-    video_placeholder, video_content, video_btn = get_visibility('video')
+            style_token = ai_response.get("style_profile_token", "default")
+            style_explanation = ai_response.get("explanation", "AI-generated styling applied")
+            css_overrides = ai_response.get("css_overrides", None)
+            initial_visibility = _get_initial_visibility_for_profile(request.profile)
 
-    # Return all states
-    return (
-        short_text_placeholder, short_text_content,
-        long_text_placeholder, long_text_content,
-        single_pieces_placeholder, single_pieces_content,
-        assembly_placeholder, assembly_content,
-        video_placeholder, video_content,
-        short_text_btn, long_text_btn,
-        single_pieces_btn, assembly_btn, video_btn,
-        False,  # autoPlay
-        user_preferences
+            session_data["ai_style_token"] = style_token
+            session_data["ai_css"] = css_overrides
+
+        except Exception as e:
+            print(f"Error generating AI recommendations: {e}")
+            style_explanation = f"Using default styling (AI error: {str(e)})"
+
+    # Other modes use loaded configurations
+    elif request.mode == "data_collection":
+        style_explanation = "Data collection mode - all content hidden initially"
+    elif request.mode == "static":
+        style_explanation = "Static mode - all content visible"
+        initial_visibility = {k: True for k in initial_visibility}
+    elif request.mode in ["dynamically_adaptive", "rule_based"]:
+        style_explanation = f"{request.mode.replace('_', ' ').title()} mode active"
+        initial_visibility["short_text"] = True
+
+    sessions[session_token] = session_data
+
+    print(f"✅ Session initialized: {session_token} (mode: {request.mode})")
+
+    return InitSessionResponse(
+        session_token=session_token,
+        style_token=style_token,
+        style_explanation=style_explanation,
+        css_overrides=css_overrides,
+        initial_visibility=initial_visibility,
+        mode_config=mode_config
     )
 
 
-# Restart button callback
-@app.callback(
-    [Output('intro-container', 'style', allow_duplicate=True),
-     Output('training-container', 'style', allow_duplicate=True),
-     Output('thankyou-container', 'style', allow_duplicate=True),
-     Output('experiment-id-store', 'data', allow_duplicate=True),
-     Output('current-step', 'data', allow_duplicate=True),
-     Output('clicked-buttons-store', 'data', allow_duplicate=True),
-     Output('user-preferences-store', 'data', allow_duplicate=True)],  # Add this output
-    [Input('restart-button', 'n_clicks')],
-    [State('experiment-id-store', 'data'),
-     State('visibility-mode-dropdown', 'value')],
-    prevent_initial_call=True
-)
-def restart_application(n_clicks, experiment_id, mode):
-    if n_clicks is None:
-        raise dash.exceptions.PreventUpdate
+@app.post("/api/adapt-step", response_model=AdaptStepResponse)
+async def adapt_step_endpoint(request: AdaptStepRequest):
+    """Adapt step content based on mode and user interactions"""
 
-    # Log restart action
-    log_interaction(experiment_id, mode, 'restart_application')
+    if request.session_token not in sessions:
+        raise HTTPException(status_code=404, detail="Session not found")
 
-    # Reset to intro screen
-    return (
-        styles['intro-screen'],  # Show intro screen
-        {'display': 'none'},  # Hide training screen
-        {'display': 'none'},  # Hide thank you screen
-        None,  # Reset experiment ID
-        0,  # Reset step to 0
-        {},  # Reset clicked buttons
-        {}  # Reset user preferences
+    session_data = sessions[request.session_token]
+    mode = session_data.get("mode")
+    print("mode is", mode)
+    print("content is", mode_configs)
+
+    # Map mode names to config keys
+    mode_mapping = {
+        "data_collection": "initial_visibility_data_collection",
+        "dynamically_adaptive": "initial_visibility_dynamically_adaptive",
+        "rule_based": "initial_visibility_rule_based_adaptive",
+        "static": "initial_visibility_static_mode",
+        "sentient": "sentient"
+    }
+
+    # Get the correct config key for this mode
+    config_key = mode_mapping.get(mode)
+
+    # For modes with pre-defined configurations, use those
+    if config_key and config_key in mode_configs:
+        config = mode_configs[config_key]
+        step_config = next(
+            (s for s in config.get("steps", []) if s["step_id"] == request.step_data.get("id")),
+            None
+        )
+
+        if step_config:
+            print("Step configured!")
+            return AdaptStepResponse(
+                visibility=step_config["content"],
+                explanation=f"{mode} configuration for step {request.step_data.get('id')}"
+            )
+
+    # Sentient mode: Use AI
+    if mode == "sentient":
+        try:
+            log_summary = _analyze_interaction_history(
+                request.interaction_history,
+                request.step_data
+            )
+            user_profile = session_data.get("profile", {
+                "experience": "beginner",
+                "preferences": ["visual"]
+            })
+
+            from services.sentient_gemini_api import adapt_step
+
+            ai_response = adapt_step(
+                user_profile=user_profile,
+                style_profile_token=request.style_token,
+                step_payload=request.step_data,
+                log_summary=log_summary
+            )
+
+            visibility = ai_response.get("initial_visibility", {
+                "short_text": True,
+                "long_text": False,
+                "single_pieces": False,
+                "assembly": False,
+                "video": False
+            })
+
+            button_configs = _adapt_button_configs(request.button_configs, log_summary)
+            explanation = ai_response.get("explanation_of_changes", "AI-adapted content")
+
+            return AdaptStepResponse(
+                visibility=visibility,
+                button_configs=button_configs,
+                explanation=explanation
+            )
+
+        except Exception as e:
+            print(f"Error adapting step: {e}")
+
+    # Default fallback
+    return AdaptStepResponse(
+        visibility={"short_text": True, "long_text": False,
+                    "single_pieces": False, "assembly": False, "video": False},
+        explanation=f"{mode} mode - default visibility"
     )
 
 
-# Ensure the required directories exist
-def ensure_directories_exist():
-    directories = [
-        './images_single_pieces',
-        './images_assembly',
-        './images/assembly_process',
-        './videos'
+@app.post("/api/optimize-button")
+async def optimize_button_endpoint(request: OptimizeButtonRequest):
+    """Optimize button placement/size based on usage"""
+
+    if request.session_token not in sessions:
+        raise HTTPException(status_code=404, detail="Session not found")
+
+    click_analysis = _analyze_button_clicks(request.button_id, request.interaction_history)
+
+    button_config = {
+        "size": "lg" if request.click_count >= 5 else "md",
+        "position": click_analysis.get("suggested_position", {"x": 0, "y": 0}),
+        "priority": click_analysis.get("priority", "normal")
+    }
+
+    return {
+        "button_config": button_config,
+        "explanation": f"Optimized based on {request.click_count} clicks"
+    }
+
+
+@app.post("/api/log-interaction")
+async def log_interaction_endpoint(request: LogInteractionRequest):
+    """Log user interaction"""
+
+    try:
+        os.makedirs("logs", exist_ok=True)
+        interaction_log_file = f"logs/interactions_{request.experiment_id}.jsonl"
+
+        with open(interaction_log_file, 'a') as f:
+            f.write(json.dumps(request.dict()) + '\n')
+
+        return {"status": "logged", "timestamp": request.timestamp}
+
+    except Exception as e:
+        print(f"Error logging interaction: {e}")
+        return {"status": "error", "message": str(e)}
+
+
+# ============================================================================
+# Helper Functions
+# ============================================================================
+
+def _get_initial_visibility_for_profile(profile: UserProfile) -> Dict[str, bool]:
+    """Determine initial content visibility based on user profile"""
+    visibility = {
+        "short_text": False,
+        "long_text": False,
+        "single_pieces": False,
+        "assembly": False,
+        "video": False
+    }
+
+    if profile.experience in ["novice", "beginner"]:
+        visibility["assembly"] = True
+    elif profile.experience == "expert":
+        visibility["short_text"] = True
+    else:
+        visibility["short_text"] = True
+
+    if profile.preferences:
+        for pref in profile.preferences:
+            pref_lower = pref.lower().strip()
+            if pref_lower in ["video", "videos"]:
+                visibility["video"] = True
+            elif pref_lower in ["images", "image", "visual", "pictures"]:
+                visibility["single_pieces"] = True
+                visibility["assembly"] = True
+            elif pref_lower in ["text", "reading", "short_text"]:
+                visibility["short_text"] = True
+            elif pref_lower in ["detailed", "long_text"]:
+                visibility["long_text"] = True
+
+    return visibility
+
+
+def _analyze_interaction_history(interactions: List[Dict[str, Any]],
+                                 current_step: Dict[str, Any]) -> Dict[str, Any]:
+    """Analyze interaction history"""
+    step_category = current_step.get("category", "unknown")
+
+    content_clicks = {
+        "short_text": 0,
+        "long_text": 0,
+        "single_pieces": 0,
+        "assembly": 0,
+        "video": 0
+    }
+
+    recent_interactions = interactions[-10:] if len(interactions) > 10 else interactions
+
+    for interaction in recent_interactions:
+        if interaction.get("action") == "content_shown":
+            content_type = interaction.get("content_type")
+            if content_type in content_clicks:
+                content_clicks[content_type] += 1
+
+    recent_weighted = {}
+    for i, interaction in enumerate(recent_interactions):
+        if interaction.get("action") == "content_shown":
+            content_type = interaction.get("content_type")
+            if content_type:
+                weight = (i + 1) / len(recent_interactions)
+                recent_weighted[content_type] = recent_weighted.get(content_type, 0) + weight
+
+    clicked_now = {k: v > 0 for k, v in content_clicks.items()}
+
+    return {
+        "step_type": step_category,
+        "total_interactions": len(interactions),
+        "recent_weighted": recent_weighted,
+        "clicked_now": clicked_now,
+        "content_preference_order": sorted(
+            content_clicks.items(),
+            key=lambda x: x[1],
+            reverse=True
+        )
+    }
+
+
+def _adapt_button_configs(current_configs: Dict[str, Any],
+                          log_summary: Dict[str, Any]) -> Dict[str, Any]:
+    """Adapt button configurations"""
+    adapted = {}
+    preference_order = log_summary.get("content_preference_order", [])
+
+    for content_type, config in current_configs.items():
+        new_config = config.copy()
+        rank = next((i for i, (ct, _) in enumerate(preference_order) if ct == content_type), 999)
+
+        if rank == 0:
+            new_config["size"] = "lg"
+        elif rank <= 2:
+            new_config["size"] = "md"
+        else:
+            new_config["size"] = "sm"
+
+        adapted[content_type] = new_config
+
+    return adapted
+
+
+def _analyze_button_clicks(button_id: str,
+                           interactions: List[Dict[str, Any]]) -> Dict[str, Any]:
+    """Analyze button click patterns"""
+    button_interactions = [
+        i for i in interactions
+        if i.get("content_type") == button_id
     ]
-    for directory in directories:
-        os.makedirs(directory, exist_ok=True)
+
+    return {
+        "total_clicks": len(button_interactions),
+        "suggested_position": {"x": 0, "y": 0},
+        "priority": "high" if len(button_interactions) >= 5 else "normal"
+    }
 
 
-@app.callback(
-    Output('sentient-profile-form', 'style'),
-    Input('visibility-mode-dropdown', 'value')
-)
-def show_profile_form(mode_value):
-    return {'display': 'block'} if mode_value == 'sentient.json' else {'display': 'none'}
+# ============================================================================
+# Run the application
+# ============================================================================
 
+if __name__ == "__main__":
+    import uvicorn
 
-# Run the app
-if __name__ == '__main__':
-    app.run_server(debug=False, host='0.0.0.0', port=3000)
+    uvicorn.run(
+        "main:app",
+        host="0.0.0.0",
+        port=8000,
+        reload=True,
+        log_level="info"
+    )

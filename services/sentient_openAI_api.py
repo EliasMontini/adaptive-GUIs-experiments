@@ -23,6 +23,7 @@ def _with_backoff(fn, *args, **kwargs):
     raise last
 
 
+
 def initial_style_recommendations(user_profile: Dict[str, Any],
                                   step_categories: List[str]) -> Dict[str, Any]:
     """

@@ -11,7 +11,7 @@ from google.api_core import retry as g_retry
 # -----------------------------------------------------------------------------
 # Configuration
 # -----------------------------------------------------------------------------
-API_KEY = os.getenv("GOOGLE_API_KEY")
+API_KEY = "AIzaSyBH3Vwn10j7iFDswJGUOwZ3pmPLUPme2dE"
 
 if not API_KEY:
     raise RuntimeError("GOOGLE_API_KEY is not set")
