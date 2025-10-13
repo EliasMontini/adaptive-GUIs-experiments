@@ -4,9 +4,9 @@
             "step_id": 1,
             "buttons": {
                 "short_text": true,
-                "long_text": false,
-                "single_pieces": true,
-                "assembly": false,
+                "long_text": true,
+                "single_pieces": false,
+                "assembly": true,
                 "video": false
             }
         },

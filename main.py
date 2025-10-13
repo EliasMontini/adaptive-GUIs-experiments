@@ -521,7 +521,7 @@ app.layout = html.Div([
             html.Div(className="row", children=[
                 # Individual Parts image
                 html.Div(className="col-md-4 mb-4", children=[
-                    html.Span("Single Components Image", className="h5 d-block mb-2"),
+                    html.Span("Teach Pendant Image", className="h5 d-block mb-2"),
                     html.Div(style=styles['image-container'], children=[
                         html.Div(style=styles['image-wrapper'], children=[
                             html.Img(id="single-pieces-placeholder",
@@ -543,7 +543,7 @@ app.layout = html.Div([
 
                 # Assembled Parts image
                 html.Div(className="col-md-4 mb-4", children=[
-                    html.Span("Assembly Image", className="h5 d-block mb-2"),
+                    html.Span("Environmental Image", className="h5 d-block mb-2"),
                     html.Div(style=styles['image-container'], children=[
                         html.Div(style=styles['image-wrapper'], children=[
                             html.Img(id="assembly-placeholder",
