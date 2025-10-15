@@ -1,29 +1,31 @@
-
 # services/sentient_gemini_api.py
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 import json
 import os
 import time
+import re
 
 import google.generativeai as genai
 from google.api_core import retry as g_retry
 
-# -----------------------------------------------------------------------------
 # Configuration
-# -----------------------------------------------------------------------------
 API_KEY = "AIzaSyBH3Vwn10j7iFDswJGUOwZ3pmPLUPme2dE"
 
 if not API_KEY:
-    raise RuntimeError("GOOGLE_API_KEY is not set")
+    raise RuntimeError("GOOGLE_API_KEY environment variable is not set")
 
 genai.configure(api_key=API_KEY)
+MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
-# Choose a Gemini model that supports JSON structured output
-MODEL = os.getenv("GEMINI_MODEL", "gemini-2.0-flash-exp")  # or gemini-1.5-flash for lower latency
 
-# -----------------------------------------------------------------------------
 # Utilities
-# -----------------------------------------------------------------------------
+def _iter_prefs(pref_str: Optional[str]):
+    """Splits a single string like 'visual, video' into normalized tokens."""
+    if not pref_str:
+        return []
+    return [p.strip().lower() for p in re.split(r'[\s,]+', pref_str) if p.strip()]
+
+
 def _with_backoff(fn, *args, **kwargs):
     """Simple linear backoff to keep latency low in UI flows."""
     last = None
@@ -44,130 +46,117 @@ def _gen_model(system_instruction: str):
     )
 
 
-def _generate_json(model, user_content: str, schema: Dict[str, Any], temperature: float = 0.7):
-    """
-    Ask Gemini to return STRICT JSON according to the provided JSON schema.
-    """
-    generation_config = genai.GenerationConfig(
-        temperature=temperature,
-        response_mime_type="application/json",
-        response_schema=schema,  # Gemini validates/structures output to this schema
-    )
-
-    resp = _with_backoff(
-        model.generate_content,
-        user_content,
-        generation_config=generation_config,
-        safety_settings=None,  # use project defaults
-        request_options={"retry": g_retry.Retry(), "timeout": 30},
-    )
-
-    # The SDK returns the JSON as text; parse it.
-    text = resp.text or "{}"
-    try:
-        return json.loads(text)
-    except json.JSONDecodeError:
-        # Fallback: try to extract JSON substring
-        start = text.find("{")
-        end = text.rfind("}")
-        if start != -1 and end != -1 and end > start:
-            return json.loads(text[start : end + 1])
-        raise
-
-
-# -----------------------------------------------------------------------------
-# Public API
-# -----------------------------------------------------------------------------
 def initial_style_recommendations(user_profile: Dict[str, Any],
-                                  step_categories: List[str]) -> Dict[str, Any]:
-    """
-    One-off call before the first step.
-    Returns:
-      {
-        "css_overrides": "/* css ... */",
-        "style_profile_token": "opaque string",
-        "explanation": "why these choices"
-      }
-    """
+                                  step_categories: List[str],
+                                  page_structure: Dict[str, Any]) -> Dict[str, Any]:
+    print("=" * 80)
+    print("🎨 INITIAL STYLE RECOMMENDATIONS - START")
+    print("=" * 80)
 
     system = (
-        "You are adapting UI for an industrial assembly training web app (Dash). "
-        "Based on the user profile, generate CSS overrides to personalise the interface. "
-        "Consider: font sizes, colours, spacing, and contrast for accessibility. "
-        "Add !important to the elements"
-        "Also generate a style_profile_token that summarises the user's style preferences for future use. "
-        "Output strict JSON only."
+        "You are a UI component stylist for an industrial training app built with Next.js and Tailwind CSS. "
+        "Based on the user profile, generate ONLY Tailwind CSS utility classes for each UI component. "
+        "Use ONLY standard Tailwind classes that exist in the base Tailwind stylesheet. "
+        "NO custom CSS, NO CSS overrides - ONLY Tailwind utility class strings. "
+        "Also generate a style_profile_token summarizing the user's preferences. "
+        "Output valid JSON only with no markdown formatting."
     )
+
+    component_properties = {}
+    for component_name in page_structure.get("components", {}):
+        component_properties[component_name] = {
+            "type": "string",
+            "description": f"Space-separated Tailwind utility classes for {component_name}"
+        }
 
     schema: Dict[str, Any] = {
         "type": "object",
         "properties": {
-            "css_overrides": {
-                "type": "string",
-                "description": "CSS rules to override default styles",
-            },
             "style_profile_token": {
                 "type": "string",
-                "description": "Summary of user style preferences",
+                "description": "A concise summary of user style preferences (e.g., 'high-contrast, large-font, visual-first').",
             },
             "explanation": {
                 "type": "string",
-                "description": "Why these style choices were made",
+                "description": "A brief explanation of why these style choices were made for the user.",
+            },
+            "component_classes": {
+                "type": "object",
+                "properties": component_properties,
+                "description": "Tailwind CSS utility classes for each component. Use only standard Tailwind classes."
             },
         },
-        "required": ["css_overrides", "style_profile_token", "explanation"],
+        "required": ["style_profile_token", "explanation", "component_classes"],
     }
 
-    # Provide defaults if profile is empty
-    if not user_profile.get("experience"):
-        user_profile["experience"] = "beginner"
-    if not user_profile.get("preferences"):
-        user_profile["preferences"] = ["visual"]
+    user_preferences_list = _iter_prefs(user_profile.get('preferences', ''))
+    component_descriptions = "\n".join([
+        f"- **{name}**: {desc}"
+        for name, desc in page_structure.get("components", {}).items()
+    ])
 
-    user_content = f"""Generate personalised CSS styling for this user:
+    user_content = f"""Generate Tailwind CSS classes for each UI component based on the user profile.
 
-User Profile:
+**User Profile:**
 - Experience level: {user_profile.get('experience', 'beginner')}
-- Preferred content types: {', '.join(user_profile.get('preferences', ['visual']))}
+- Preferred content types: {', '.join(user_preferences_list) or 'not specified'}
 - Nationality: {user_profile.get('nationality', 'not specified')}
-- Other info: {user_profile.get('other', 'not specified')}
+- Other preferences: {user_profile.get('other', 'not specified')}
 
-Assembly Categories: {', '.join(step_categories)}
+**Page Structure:**
+{page_structure.get('description', 'Industrial assembly training interface')}
 
-Constraints:
-- Provide CSS overrides only (not a complete stylesheet)
-- Respect existing Bootstrap layout
-- Ensure colour-blind safe colours
-- Consider accessibility (WCAG AA)
+**Components to Style:**
+{component_descriptions}
 
-Generate appropriate styling (fonts, colours, spacing) based on the profile."""
+**Requirements:**
+1. Use ONLY standard Tailwind utility classes (e.g., bg-blue-600, text-white, px-4, py-2, rounded-lg)
+2. NO custom CSS or CSS overrides
+3. Match user preferences (e.g., high contrast, large text, dark theme if requested)
+4. Ensure accessibility (proper contrast, readable font sizes)
+
+**Examples:**
+- Dark button: "bg-gray-800 text-white hover:bg-gray-700 px-6 py-3 rounded-lg font-semibold shadow-lg"
+- High contrast card: "bg-white border-4 border-black p-8 rounded-xl shadow-2xl"
+- Large text area: "text-xl leading-relaxed text-gray-900"
+
+Return valid JSON with component_classes, style_profile_token, and explanation."""
 
     try:
         model = _gen_model(system)
         result = _generate_json(model, user_content, schema, temperature=0.7)
+        print(f"✅ Style profile token: {result.get('style_profile_token')}")
+        print(f"🎯 Component classes generated: {list(result.get('component_classes', {}).keys())}")
+        print("=" * 80)
         return result
     except Exception as e:
-        # Return safe defaults on failure
+        print(f"❌ ERROR: {str(e)}")
+        fallback_classes = {
+            name: "bg-white rounded-lg shadow-sm p-4 border border-gray-200"
+            for name in page_structure.get("components", {})
+        }
         return {
-            "css_overrides": "/* No custom styles - using defaults */",
             "style_profile_token": "default_profile",
             "explanation": f"Using default styles due to error: {str(e)}",
+            "component_classes": fallback_classes
         }
 
 
 def adapt_step(user_profile: Dict[str, Any],
                style_profile_token: str,
                step_payload: Dict[str, Any],
-               log_summary: Dict[str, Any]) -> Dict[str, Any]:
-    """
-    Per-step call to adapt content and initial visibility.
-    """
+               log_summary: Dict[str, Any],
+               user_preference: Optional[str] = None) -> Dict[str, Any]:
+    print("=" * 80)
+    print("📄 ADAPT STEP - START")
+    print("=" * 80)
+
     system = (
-        "You adapt training content for an assembly training web app. "
-        "Modify the content based on the user profile and interaction history. "
-        "You can: shorten/expand text, adjust visibility of elements, and modify titles. "
-        "DO NOT change media file paths—keep them exactly as provided. "
-        "Output strict JSON only."
+        "You adapt training content for an industrial assembly web app. "
+        "Modify content based on user profile and interaction history. "
+        "You can: adjust text (shorten/expand), modify visibility flags, and change titles. "
+        "DO NOT modify media file paths - keep them exactly as provided. "
+        "Output valid JSON only with no markdown formatting."
     )
 
     schema: Dict[str, Any] = {
@@ -179,17 +168,8 @@ def adapt_step(user_profile: Dict[str, Any],
                 "properties": {
                     "short_text": {"type": "string"},
                     "long_text": {"type": "string"},
-                    "image_single_pieces": {"type": "string"},
-                    "image_assembly": {"type": "string"},
-                    "video": {"type": "string"},
                 },
-                "required": [
-                    "short_text",
-                    "long_text",
-                    "image_single_pieces",
-                    "image_assembly",
-                    "video",
-                ],
+                "required": ["short_text", "long_text"],
             },
             "initial_visibility": {
                 "type": "object",
@@ -200,78 +180,216 @@ def adapt_step(user_profile: Dict[str, Any],
                     "assembly": {"type": "boolean"},
                     "video": {"type": "boolean"},
                 },
-                "required": [
-                    "short_text",
-                    "long_text",
-                    "single_pieces",
-                    "assembly",
-                    "video",
-                ],
+                "required": ["short_text", "long_text", "single_pieces", "assembly", "video"],
             },
             "explanation_of_changes": {"type": "string"},
         },
-        "required": [
-            "title",
-            "adaptive_fields",
-            "initial_visibility",
-            "explanation_of_changes",
-        ],
+        "required": ["title", "adaptive_fields", "initial_visibility", "explanation_of_changes"],
     }
 
-    user_content = f"""Adapt this assembly training step:
+    # main.py changes:
+    # In InitSessionResponse class, remove:
+    #   css_overrides: Optional[str] = None
+    #
+    # In initialize_session function, remove:
+    #   css_overrides = None
+    #   css_overrides = ai_response.get("css_overrides")
+    #   "ai_css": css_overrides
+    #
+    # In InitSessionResponse return, remove:
+    #   css_overrides=css_overrides
+    #
+    # In get_initial_data return, remove:
+    #   "cssOverrides": session_data.get("ai_css")
+    #   "cssOverrides": session_data.get("ai_css") or ""
+    #
+    # In AdaptStepResponse class, remove:
+    #   dynamic_styles: Optional[str] = None
+    #
+    # In ApplyPreferenceResponse class, remove:
+    #   dynamic_styles: Optional[str]
 
-Style Profile: {style_profile_token}
+    user_preferences_list = _iter_prefs(user_profile.get('preferences', ''))
 
-User Profile:
+    user_content = f"""Adapt this assembly training step for the user.
+
+**User Profile:**
 - Experience: {user_profile.get('experience', 'beginner')}
-- Preferences: {', '.join(user_profile.get('preferences', ['visual']))}
+- Preferences: {', '.join(user_preferences_list) or 'not specified'}
+- Nationality: {user_profile.get('nationality', 'not specified')}
 
-Current Step:
+**User Request:** "{user_preference or 'None'}"
+
+**Current Step:**
 - Title: {step_payload.get('name')}
 - Category: {step_payload.get('category')}
 - Short text: {step_payload['adaptive_fields'].get('short_text')}
 - Long text: {step_payload['adaptive_fields'].get('long_text')}
 
-User Interaction History:
-- Step type: {log_summary.get('step_type')}
-- Recent preferences: {log_summary.get('recent_weighted', {})}
-- Currently clicked: {log_summary.get('clicked_now', {})}
+**Interaction History:**
+- Recent clicks: {log_summary.get('recent_weighted', {})}
+- User prefers: {log_summary.get('content_preference_order', [])}
 
-Rules:
-- Keep titles concise (max 60 chars)
-- If nationality provided, translate.
-- DO NOT modify image/video paths—return them unchanged
-- For experts: prefer short text, hide long text initially
-- For beginners: show more visual content initially
-- Adapt based on what the user clicked in similar steps
+**Rules:**
+- Keep titles under 60 characters
+- If user requests translation and nationality is provided, translate text
+- DO NOT modify image/video paths
+- For experts: prefer short text, use technical language
+- For beginners: show visual content first, use simple language
+- Respect user's explicit request (e.g., "video only" hides everything else)
 
-Return adapted content with visibility settings."""
+Return adapted content with new visibility settings and explanation."""
 
     try:
         model = _gen_model(system)
         result = _generate_json(model, user_content, schema, temperature=0.7)
 
-        # Defensive: ensure media paths are unchanged if present in payload.
-        # (If your upstream always supplies these keys, this is redundant but safe.)
+        # Preserve media paths
         af_in = step_payload.get("adaptive_fields", {})
         af_out = result.get("adaptive_fields", {})
-        for k in ("image_single_pieces", "image_assembly", "video"):
-            if k in af_in and af_in.get(k) and af_out.get(k) != af_in.get(k):
-                af_out[k] = af_in.get(k)
+        af_out["image_single_pieces"] = af_in.get("image_single_pieces", "")
+        af_out["image_assembly"] = af_in.get("image_assembly", "")
+        af_out["video"] = af_in.get("video", "")
         result["adaptive_fields"] = af_out
 
+        print("✅ Step adapted successfully")
+        print("=" * 80)
         return result
     except Exception as e:
-        # Return original content on failure
+        print(f"❌ ERROR: {str(e)}")
         return {
             "title": step_payload.get("name"),
             "adaptive_fields": step_payload.get("adaptive_fields"),
             "initial_visibility": {
-                "short_text": True,
-                "long_text": False,
-                "single_pieces": False,
-                "assembly": False,
-                "video": False,
+                "short_text": True, "long_text": False, "single_pieces": False,
+                "assembly": False, "video": False,
             },
-            "explanation_of_changes": f"No adaptation - error: {str(e)}",
+            "explanation_of_changes": f"No adaptation due to error: {str(e)}",
         }
+
+
+def apply_user_preference(preference: str,
+                          current_context: Dict[str, Any],
+                          session_data: Dict[str, Any]) -> Dict[str, Any]:
+    print("=" * 80)
+    print("🎯 APPLY USER PREFERENCE - START")
+    print("=" * 80)
+
+    system = (
+        "You are a UI adaptation engine. The user provides a natural language request to modify the interface. "
+        "Translate this into Tailwind CSS classes and visibility flags. "
+        "Use ONLY standard Tailwind utility classes - NO custom CSS. "
+        "Output valid JSON only with no markdown formatting."
+    )
+
+    schema = {
+        "type": "object",
+        "properties": {
+            "component_classes": {
+                "type": "object",
+                "properties": {
+                    "container": {"type": "string"},
+                    "header": {"type": "string"},
+                    "content": {"type": "string"},
+                    "button": {"type": "string"},
+                    "text": {"type": "string"},
+                    "card": {"type": "string"},
+                },
+                "description": "Tailwind CSS utility classes for UI components"
+            },
+            "visibility": {
+                "type": "object",
+                "properties": {
+                    "short_text": {"type": "boolean"},
+                    "long_text": {"type": "boolean"},
+                    "single_pieces": {"type": "boolean"},
+                    "assembly": {"type": "boolean"},
+                    "video": {"type": "boolean"},
+                },
+                "description": "Content visibility flags"
+            },
+            "explanation": {
+                "type": "string",
+                "description": "Brief explanation of changes"
+            }
+        },
+        "required": ["component_classes", "visibility", "explanation"]
+    }
+
+    user_content = f"""Apply the user's UI preference request.
+
+**User Request:** "{preference}"
+
+**Current Context:**
+- Step ID: {current_context.get('step_id')}
+- Currently Visible: {current_context.get('visibility', {})}
+- User Style: {session_data.get('ai_style_token', 'default')}
+
+**Task:**
+Generate Tailwind classes and visibility flags to fulfill the request.
+
+**Examples:**
+- "dark mode" → component_classes with bg-gray-800, text-white, border-gray-700
+- "show only pictures" → visibility: all false except single_pieces and assembly true
+- "bigger text" → component_classes.text: "text-lg leading-relaxed"
+- "red buttons" → component_classes.button: "bg-red-600 hover:bg-red-700 text-white"
+
+Use ONLY standard Tailwind utility classes. Return JSON now."""
+
+    try:
+        model = _gen_model(system)
+        result = _generate_json(model, user_content, schema, temperature=0.6)
+        print("✅ Preference applied successfully")
+        print("=" * 80)
+        return result
+    except Exception as e:
+        print(f"❌ ERROR: {str(e)}")
+        return {
+            "component_classes": {},
+            "visibility": current_context.get('visibility', {}),
+            "explanation": f"Could not apply preference due to error: {str(e)}"
+        }
+
+
+def _generate_json(model, user_content: str, schema: Dict[str, Any], temperature: float = 0.7):
+    """Ask Gemini to return strict JSON according to schema."""
+    generation_config = genai.GenerationConfig(
+        temperature=temperature,
+        response_mime_type="application/json",
+        response_schema=schema,
+    )
+
+    resp = _with_backoff(
+        model.generate_content,
+        user_content,
+        generation_config=generation_config,
+        safety_settings=None,
+        request_options={"retry": g_retry.Retry(), "timeout": 60},
+    )
+
+    text = resp.text or "{}"
+
+    try:
+        # Clean the response text
+        text = text.strip()
+        # Remove markdown code blocks if present
+        if text.startswith("```"):
+            text = re.sub(r'^```(?:json)?\s*\n', '', text)
+            text = re.sub(r'\n```\s*$', '', text)
+
+        parsed = json.loads(text)
+        print(f"  ✅ JSON parsed successfully")
+        return parsed
+    except json.JSONDecodeError as e:
+        print(f"  ⚠️ JSON decode error: {str(e)}")
+        print(f"  📄 Response text (first 500 chars): {text[:500]}")
+        # Extract JSON if wrapped in other content
+        start = text.find("{")
+        end = text.rfind("}")
+        if start != -1 and end != -1 and end > start:
+            extracted = text[start: end + 1]
+            try:
+                return json.loads(extracted)
+            except:
+                pass
+        raise
