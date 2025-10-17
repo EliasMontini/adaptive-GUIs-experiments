@@ -9,7 +9,7 @@ import google.generativeai as genai
 from google.api_core import retry as g_retry
 
 # Configuration
-API_KEY = "AIzaSyBH3Vwn10j7iFDswJGUOwZ3pmPLUPme2dE"
+API_KEY = ""
 
 if not API_KEY:
     raise RuntimeError("GOOGLE_API_KEY environment variable is not set")
@@ -55,11 +55,10 @@ def initial_style_recommendations(user_profile: Dict[str, Any],
 
     system = (
         "You are a UI component stylist for an industrial training app built with Next.js and Tailwind CSS. "
-        "Based on the user profile, generate ONLY Tailwind CSS utility classes for each UI component. "
-        "Use ONLY standard Tailwind classes that exist in the base Tailwind stylesheet. "
-        "NO custom CSS, NO CSS overrides - ONLY Tailwind utility class strings. "
+        "Based on UI best design approach and standards, the user requests and profile, generate ONLY Tailwind CSS utility classes for each UI component."
         "Also generate a style_profile_token summarizing the user's preferences. "
         "Output valid JSON only with no markdown formatting."
+        "Organise the page and its structure to fit with the device characteristics, if provided (default: laptop)"
     )
 
     component_properties = {}
@@ -111,9 +110,31 @@ def initial_style_recommendations(user_profile: Dict[str, Any],
 
 **Requirements:**
 1. Use ONLY standard Tailwind utility classes (e.g., bg-blue-600, text-white, px-4, py-2, rounded-lg)
-2. NO custom CSS or CSS overrides
+2. Allowed tokens. 
+   state variants: hover:, focus:, active:, disabled:, motion-safe:
+    colours (all variants apply): bg-, text-, border-, ring-, placeholder-, divide-, stroke-, fill-, from-, via-, to- plus palettes slate, gray, zinc, neutral, stone, red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose combined with levels 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950
+    gradients: bg-gradient-to followed by one of t, tr, r, br, b, bl, l, tl
+    opacity: opacity-0, 5, 10, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90, 95, 100
+    shadows: shadow-sm, md, lg, xl, 2xl, inner, none
+    radius: rounded-none, sm, md, lg, full, xl, 2xl
+    spacing: p, px, py, m, mx, my, gap combined with 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6, 8, 10, 12, 16, 20, 24, 32; negative margins -m, -mx, -my with same scale; mx-auto; space-x, space-y with same scale
+    width: w- followed by 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6, 8, 10, 12, 16, 20, 24, 32, 1/2, 1/3, 2/3, 1/4, 3/4, full, screen, min, max
+    height: h- followed by 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6, 8, 10, 12, 16, 20, 24, 32, full, screen, min, max
+    min/max size: min-w, min-h combined with 0, full, min, max; max-w-xs to max-w-7xl, full; max-h-0, full, screen
+    typography: text-xs to text-8xl; font-thin to font-black; leading-3 to leading-10; tracking-tighter to tracking-widest; whitespace-normal, nowrap, pre, pre-line, pre-wrap
+    overflow and object fit: overflow-auto, hidden, visible, scroll; object-contain, cover, fill, none, scale-down
+    display and visibility: block, inline, inline-block, flex, inline-flex, grid, contents, table, hidden, visible
+    positioning: static, relative, absolute, fixed, sticky; top, right, bottom, left, inset-x, inset-y, -inset, and fractional/full values
+    overflow extras: overscroll-auto, contain, none; scroll-smooth
+    flex and grid: flex-1, auto, initial, none; basis values (0, 1/2, 1/3, 2/3, 1/4, 3/4, full, auto); grow, shrink; flex-row, row-reverse, col, col-reverse, wrap, nowrap, wrap-reverse; grid-cols-1 to 12; col-span-1 to 12; grid-rows-1 to 12; row-span-1 to 12; grid-flow-row, col, dense; auto-rows, auto-cols with min, max, fr
+    alignment and distribution: justify-start, center, end, between, around, evenly; items-start, center, end, baseline, stretch; content-start, center, end, between, around, evenly; place-content and place-items variants
+    layering, transform, motion: z-0,10,20,30,40,50,auto; inset-0,1,2,3,4,5,6,8,10,12,16,20,24,32; translate-0,1,2,3,4,5,6,8,10,12,16; scale-0,50,75,90,95,100,105,110,125,150; rotate-0,45,90,180,270; skew-0,1,2,3,6
+    aspect ratio: aspect-auto, square, video
+    transitions: transition-none, all, colors, opacity, shadow, transform; duration-75,100,150,200,300,500,700,1000; ease-linear, in, out, in-out
+
 3. Match user preferences (e.g., high contrast, large text, dark theme if requested)
-4. Ensure accessibility (proper contrast, readable font sizes)
+4. Apply best practices in UI design (header positioned at the top, interactive buttons).
+5. Match user preferences (e.g., high contrast, large text, dark theme if requested)
 
 **Examples:**
 - Dark button: "bg-gray-800 text-white hover:bg-gray-700 px-6 py-3 rounded-lg font-semibold shadow-lg"
@@ -124,7 +145,7 @@ Return valid JSON with component_classes, style_profile_token, and explanation."
 
     try:
         model = _gen_model(system)
-        result = _generate_json(model, user_content, schema, temperature=0.7)
+        result = _generate_json(model, user_content, schema, temperature=0.5)
         print(f"✅ Style profile token: {result.get('style_profile_token')}")
         print(f"🎯 Component classes generated: {list(result.get('component_classes', {}).keys())}")
         print("=" * 80)

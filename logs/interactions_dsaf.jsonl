@@ -1,0 +1,6 @@
+{"experiment_id": "dsaf", "timestamp": "2025-10-14T07:58:21.917Z", "action": "step_viewed", "step_id": 1, "content_type": null}
+{"experiment_id": "dsaf", "timestamp": "2025-10-14T08:00:29.769Z", "action": "content_shown", "step_id": 1, "content_type": "single_pieces"}
+{"experiment_id": "dsaf", "timestamp": "2025-10-14T08:00:40.460Z", "action": "navigate_next", "step_id": 2, "content_type": null}
+{"experiment_id": "dsaf", "timestamp": "2025-10-14T08:00:42.238Z", "action": "step_viewed", "step_id": 2, "content_type": null}
+{"experiment_id": "dsaf", "timestamp": "2025-10-14T08:01:16.387Z", "action": "content_shown", "step_id": 2, "content_type": "long_text"}
+{"experiment_id": "dsaf", "timestamp": "2025-10-14T08:21:56.887Z", "action": "step_viewed", "step_id": 1, "content_type": null}

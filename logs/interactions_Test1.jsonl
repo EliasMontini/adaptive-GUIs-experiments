@@ -1,0 +1,10 @@
+{"experiment_id": "Test1", "timestamp": "2025-10-10T10:24:44.564Z", "action": "step_viewed", "step_id": 1, "content_type": null}
+{"experiment_id": "Test1", "timestamp": "2025-10-10T10:24:54.913Z", "action": "navigate_next", "step_id": 2, "content_type": null}
+{"experiment_id": "Test1", "timestamp": "2025-10-10T10:24:56.578Z", "action": "step_viewed", "step_id": 2, "content_type": null}
+{"experiment_id": "Test1", "timestamp": "2025-10-10T10:25:01.564Z", "action": "content_shown", "step_id": 2, "content_type": "long_text"}
+{"experiment_id": "Test1", "timestamp": "2025-10-10T10:25:10.018Z", "action": "navigate_next", "step_id": 3, "content_type": null}
+{"experiment_id": "Test1", "timestamp": "2025-10-10T10:25:11.630Z", "action": "content_shown", "step_id": 3, "content_type": "short_text"}
+{"experiment_id": "Test1", "timestamp": "2025-10-10T10:25:11.657Z", "action": "step_viewed", "step_id": 3, "content_type": null}
+{"experiment_id": "Test1", "timestamp": "2025-10-10T10:37:21.600Z", "action": "step_viewed", "step_id": 1, "content_type": null}
+{"experiment_id": "Test1", "timestamp": "2025-10-10T10:37:36.246Z", "action": "step_viewed", "step_id": 1, "content_type": null}
+{"experiment_id": "Test1", "timestamp": "2025-10-10T10:37:54.335Z", "action": "step_viewed", "step_id": 1, "content_type": null}

@@ -1,0 +1,4 @@
+{"experiment_id": "tetet", "timestamp": "2025-10-10T10:00:06.856Z", "action": "step_viewed", "step_id": 1, "content_type": null}
+{"experiment_id": "tetet", "timestamp": "2025-10-10T10:00:28.484Z", "action": "navigate_next", "step_id": 2, "content_type": null}
+{"experiment_id": "tetet", "timestamp": "2025-10-10T10:00:28.501Z", "action": "step_viewed", "step_id": 2, "content_type": null}
+{"experiment_id": "tetet", "timestamp": "2025-10-10T10:00:30.749Z", "action": "content_shown", "step_id": 2, "content_type": "long_text"}

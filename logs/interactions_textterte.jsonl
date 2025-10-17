@@ -1,0 +1,5 @@
+{"experiment_id": "textterte", "timestamp": "2025-10-15T07:20:23.692Z", "action": "step_viewed", "step_id": 1, "content_type": null}
+{"experiment_id": "textterte", "timestamp": "2025-10-15T07:20:25.893Z", "action": "step_viewed", "step_id": 1, "content_type": null}
+{"experiment_id": "textterte", "timestamp": "2025-10-15T07:21:31.773Z", "action": "navigate_next", "step_id": 2, "content_type": null}
+{"experiment_id": "textterte", "timestamp": "2025-10-15T07:21:33.447Z", "action": "step_viewed", "step_id": 2, "content_type": null}
+{"experiment_id": "textterte", "timestamp": "2025-10-15T07:23:23.797Z", "action": "preference_applied", "step_id": 2, "content_type": "the buttons are not green"}

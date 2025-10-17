@@ -1,0 +1,15 @@
+{"experiment_id": "sdfsdf", "timestamp": "2025-10-10T11:42:28.425Z", "action": "step_viewed", "step_id": 1, "content_type": null}
+{"experiment_id": "sdfsdf", "timestamp": "2025-10-10T11:42:50.782Z", "action": "preference_applied", "step_id": 1, "content_type": "i like red colours and big font"}
+{"experiment_id": "sdfsdf", "timestamp": "2025-10-10T11:42:54.036Z", "action": "navigate_next", "step_id": 2, "content_type": null}
+{"experiment_id": "sdfsdf", "timestamp": "2025-10-10T11:42:55.960Z", "action": "step_viewed", "step_id": 2, "content_type": null}
+{"experiment_id": "sdfsdf", "timestamp": "2025-10-10T11:43:01.881Z", "action": "content_shown", "step_id": 2, "content_type": "long_text"}
+{"experiment_id": "sdfsdf", "timestamp": "2025-10-10T11:43:03.562Z", "action": "content_shown", "step_id": 2, "content_type": "single_pieces"}
+{"experiment_id": "sdfsdf", "timestamp": "2025-10-10T11:43:05.436Z", "action": "navigate_next", "step_id": 3, "content_type": null}
+{"experiment_id": "sdfsdf", "timestamp": "2025-10-10T11:43:07.049Z", "action": "navigate_next", "step_id": 4, "content_type": null}
+{"experiment_id": "sdfsdf", "timestamp": "2025-10-10T11:43:07.805Z", "action": "navigate_next", "step_id": 5, "content_type": null}
+{"experiment_id": "sdfsdf", "timestamp": "2025-10-10T11:43:07.479Z", "action": "step_viewed", "step_id": 3, "content_type": null}
+{"experiment_id": "sdfsdf", "timestamp": "2025-10-10T11:43:08.691Z", "action": "navigate_next", "step_id": 6, "content_type": null}
+{"experiment_id": "sdfsdf", "timestamp": "2025-10-10T11:43:09.382Z", "action": "step_viewed", "step_id": 4, "content_type": null}
+{"experiment_id": "sdfsdf", "timestamp": "2025-10-10T11:43:11.303Z", "action": "step_viewed", "step_id": 5, "content_type": null}
+{"experiment_id": "sdfsdf", "timestamp": "2025-10-10T11:43:13.380Z", "action": "step_viewed", "step_id": 6, "content_type": null}
+{"experiment_id": "sdfsdf", "timestamp": "2025-10-10T11:43:13.490Z", "action": "content_shown", "step_id": 6, "content_type": "long_text"}

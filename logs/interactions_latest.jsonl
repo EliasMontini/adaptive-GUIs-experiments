@@ -1,0 +1,8 @@
+{"experiment_id": "latest", "timestamp": "2025-10-09T14:02:18.861Z", "action": "step_viewed", "step_id": 1, "content_type": null}
+{"experiment_id": "latest", "timestamp": "2025-10-09T14:02:18.878Z", "action": "step_viewed", "step_id": 1, "content_type": null}
+{"experiment_id": "latest", "timestamp": "2025-10-09T14:02:33.158Z", "action": "content_shown", "step_id": 1, "content_type": "short_text"}
+{"experiment_id": "latest", "timestamp": "2025-10-09T14:02:38.337Z", "action": "navigate_next", "step_id": 2, "content_type": null}
+{"experiment_id": "latest", "timestamp": "2025-10-09T14:02:38.400Z", "action": "step_viewed", "step_id": 2, "content_type": null}
+{"experiment_id": "latest", "timestamp": "2025-10-10T08:20:57.426Z", "action": "content_shown", "step_id": 2, "content_type": "short_text"}
+{"experiment_id": "latest", "timestamp": "2025-10-10T08:21:00.075Z", "action": "content_shown", "step_id": 2, "content_type": "long_text"}
+{"experiment_id": "latest", "timestamp": "2025-10-10T08:21:05.679Z", "action": "content_shown", "step_id": 2, "content_type": "single_pieces"}
