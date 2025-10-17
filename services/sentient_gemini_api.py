@@ -9,7 +9,7 @@ import google.generativeai as genai
 from google.api_core import retry as g_retry
 
 # Configuration
-API_KEY = "AIzaSyBH3Vwn10j7iFDswJGUOwZ3pmPLUPme2dE"
+API_KEY = ""
 
 if not API_KEY:
     raise RuntimeError("GOOGLE_API_KEY environment variable is not set")
