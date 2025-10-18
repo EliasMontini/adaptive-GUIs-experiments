@@ -2,93 +2,93 @@
   "assembly_process": [
   {
     "id": 1,
-    "name": "Safety Check",
-    "category": "control",
+    "name": "",
+    "category": "",
     "target_cycle_time": 10,
     "adaptive_fields": {
-      "short_text": "Ensure the workspace is clear and locate E-Stops.",
-      "long_text": "Before starting, ensure the working area is clear of obstructions and personnel. Locate and familiarize yourself with the **Emergency Stop (E-Stop)** buttons on the Teach Pendant and Controller Box, ready to use them immediately if needed.",
-      "image_single_pieces": "",
-      "image_assembly": "/images_assembly/safety.png",
+      "short_text": "",
+      "long_text": "",
+      "image_teach_pendant": "",
+      "image_cobot": "",
       "video": ""
     }
   },
   {
     "id": 2,
-    "name": "Mount Screwdriver",
-    "category": "assembly",
+    "name": "",
+    "category": "",
     "target_cycle_time": 60,
     "adaptive_fields": {
-      "short_text": "Install the screwdriver onto the UR5e tool flange.",
-      "long_text": "Carefully align the screwdriver's mounting plate with the UR5e's tool flange (the circular plate at the end of the wrist). Ensure the locating pin engages correctly for proper orientation. **Verification:** Gently try to wiggle the screwdriver; it should feel absolutely solid with no play or movement.",
-      "image_single_pieces": "",
-      "image_assembly": "/images_assembly/screwdriver.png",
-      "video": "videos/operazione_1.mp4"
+      "short_text": "",
+      "long_text": "",
+      "image_teach_pendant": "",
+      "image_cobot": "",
+      "video": ""
     }
   },
   {
     "id": 3,
-    "name": "Power Up & Check",
-    "category": "control",
+    "name": "",
+    "category": "",
     "target_cycle_time": 45,
     "adaptive_fields": {
-      "short_text": "Power ON the system and activate the robot motors.",
-      "long_text": "Press the **Power Button** on the Teach Pendant and wait for the system to boot up. Next, activate the **robot motors** by tapping the red button in the lower left: select **ON -> START**. Listen for any unusual noises and watch for any immediate errors on the screen. Address any errors before proceeding.",
-      "image_single_pieces": "/images_single_pieces/power.png",
-      "image_assembly": "",
-      "video": "videos/operazione_2.mov"
+      "short_text": "",
+      "long_text": "",
+      "image_teach_pendant": "",
+      "image_cobot": "",
+      "video": ""
     }
   },
   {
     "id": 4,
-    "name": "Create Installation File",
-    "category": "setup",
+    "name": "",
+    "category": "",
     "target_cycle_time": 30,
     "adaptive_fields": {
-      "short_text": "Create and save a new Installation file.",
-      "long_text": "Navigate to the **Installation** tab (cobot icon). Tap **\"New\" > \"Installation\"**. Then, tap **\"Save\" > \"Save Installation As...\"** and give it a descriptive name (e.g., *Screwing_Installation*). This file will store hardware configurations (Payload, TCP, etc.).",
-      "image_single_pieces": "/images_single_pieces/installation.png",
-      "image_assembly": "",
-      "video": "videos/operazione_2.mov"
+      "short_text": "",
+      "long_text": "",
+      "image_teach_pendant": "",
+      "image_cobot": "",
+      "video": ""
     }
   },
   {
     "id": 5,
-    "name": "Create Program File",
-    "category": "setup",
+    "name": "",
+    "category": "",
     "target_cycle_time": 30,
     "adaptive_fields": {
-      "short_text": "Create and save a new Program file.",
-      "long_text": "Navigate to the **Program** tab (diagram icon). Tap **\"New\" > \"Program\"**. Then, tap **\"Save\" > \"Save Program As...\"** and give it a descriptive name (e.g., *Screwing_Program*). This file is where the sequence of robot movements will be built.",
-      "image_single_pieces": "/images_single_pieces/program.png",
-      "image_assembly": "",
-      "video": "videos/operazione_2.mov"
+      "short_text": "",
+      "long_text": "",
+      "image_teach_pendant": "",
+      "image_cobot": "",
+      "video": ""
     }
   },
   {
     "id": 6,
-    "name": "Verify Linkage",
-    "category": "control",
+    "name": "",
+    "category": "",
     "target_cycle_time": 15,
     "adaptive_fields": {
-      "short_text": "Verify the program is linked to the correct Installation.",
-      "long_text": "Ensure your new Program is using the correct active Installation file. Verify this connection in the top status bar of the Teach Pendant or in the program settings. If it is not, go to **\"Open\" > \"Program\"** and select the program you just created.",
-      "image_single_pieces": "/images_single_pieces/link.png",
-      "image_assembly": "",
-      "video": "videos/operazione_2.mov"
+      "short_text": "",
+      "long_text": "",
+      "image_teach_pendant": "",
+      "image_cobot": "",
+      "video": ""
     }
   },
   {
     "id": 7,
-    "name": "Set Payload",
-    "category": "setup",
+    "name": "",
+    "category": "",
     "target_cycle_time": 45,
     "adaptive_fields": {
-      "short_text": "Navigate to the Payload settings to input tool mass and CoG.",
-      "long_text": "It is crucial to tell the robot the **weight (mass)** and **Center of Gravity (CoG)** of the new tool. Navigate to the **Payload** settings within the Installation file. Enter the correct values. This data is essential for accurate, safe (protective stops), and optimal performance.",
-      "image_single_pieces": "/images_single_pieces/payload.png",
-      "image_assembly": "",
-      "video": "videos/operazione_2.mov"
+      "short_text": "",
+      "long_text": "",
+      "image_teach_pendant": "",
+      "image_cobot": "",
+      "video": ""
     }
   }
 ]
