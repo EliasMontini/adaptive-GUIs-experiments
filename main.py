@@ -817,9 +817,20 @@ def update_step_content(current_step, assembly_data, experiment_id, mode, profil
     if mode == 'sentient.json' and profile and style_token:
         log_summary = build_log_summary(prefs, step_type, get_complete_button_states(current_step, clicked))
         try:
+            enabled_interactions = load_enabled_interactions()
+
+            # AGGIUNGI step_id al payload
+            step_with_id = {
+                "step_id": current_step,  # Aggiungi questa riga
+                "name": title,
+                "category": step_type,
+                "adaptive_fields": af
+            }
+
             out = adapt_step(profile, style_token,
-                             {"name": title, "category": step_type, "adaptive_fields": af},
-                             log_summary)
+                             step_with_id,
+                             log_summary,
+                             enabled_interactions)
             # apply returned changes
             title = out.get('title', title)
             patch = out.get('adaptive_fields', {})
@@ -852,6 +863,13 @@ def update_step_content(current_step, assembly_data, experiment_id, mode, profil
 
     def hide_txt(h):
         return {'display': 'none'} if h else {'display': 'block'}
+
+    if sp and sp.strip():
+        sp = f"/images_teach_pendant/{sp}"
+    if ap and ap.strip():
+        ap = f"/images_cobot/{ap}"
+    if vp and vp.strip():
+        vp = f"/videos/{vp}"
 
     return (
         f"{title}",

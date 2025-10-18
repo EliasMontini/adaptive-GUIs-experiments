@@ -197,9 +197,13 @@ Generate appropriate styling (fonts, colours, spacing) based on the profile."""
 def adapt_step(user_profile: Dict[str, Any],
                style_profile_token: str,
                step_payload: Dict[str, Any],
-               log_summary: Dict[str, Any]) -> Dict[str, Any]:
+               log_summary: Dict[str, Any],
+               enabled_interactions: Dict[str, Any] = None) -> Dict[str, Any]:
     """
     Per-step call to adapt content and initial visibility.
+
+    Args:
+        enabled_interactions: Dict with 'steps' array indicating which media are available
     """
     system = (
         "You must adapt the content displayed to the participants on the UI (User Interface) by adjusting the visibility of text, images, and videos."
@@ -210,6 +214,7 @@ def adapt_step(user_profile: Dict[str, Any],
         "You can modify the short and long text if you think is necessary. Do not show both long text and short text at the same time for the initial visibility, if you want to make a text visible choose only one of them. Your task is to develop the final visibility configuration JSON that determines whether each element is visible (true) or not (false). It must be true at least one element per step, so it is visible."
         "Modify the content based on the user profile that is given and the interaction history. If you see a participant is requesting a certain info multiple times and anticipate it and show it immediately in the next visibility configuration"
         "Thus you can shorten/expand text, adjust visibility of elements, and modify titles. Rephrase the text provided if needed in order to match the skill, expertise, etc of the participant"
+        "IMPORTANT: Do not set visibility to true for a media type if it is marked as unavailable (false) in the AVAILABLE_MEDIA section. "
         "Don't change media file paths—keep them exactly as provided. Do not invent paths for images or video that do not exist. If a certain information is missing then the boolean for the visibility is false."
         "You need also to provide a reasoning of why you choose to make visible something instead of others. Output strict JSON only."
     )
@@ -262,13 +267,38 @@ def adapt_step(user_profile: Dict[str, Any],
         ],
     }
 
+    # Get available media for this step
+    available_media = {
+        "teach_pendant": True,
+        "cobot": True,
+        "video": True
+    }
+
+    if enabled_interactions and 'steps' in enabled_interactions:
+        step_id = step_payload.get('step_id', 0)
+        for step_config in enabled_interactions['steps']:
+            if step_config.get('step_id') == step_id:
+                available_media = step_config.get('buttons', {})
+                # Extract only media types (not short_text/long_text)
+                available_media = {
+                    'teach_pendant': available_media.get('teach_pendant', False),
+                    'cobot': available_media.get('cobot', False),
+                    'video': available_media.get('video', False)
+                }
+                break
+
     user_content = f"""Adapt this assembly training step:
 
 Style Profile: {style_profile_token}
 
 User Profile:
 - Experience: {user_profile.get('experience', 'beginner')}
-- Preferences: {', '.join(user_profile.get('preferences', ['visual']))}
+- Preferences: {', '.join(user_profile.get('preferences', ['no preferencies']))}
+
+AVAILABLE_MEDIA for this step (can only show what's marked true):
+- teach_pendant image available: {available_media.get('teach_pendant', False)}
+- cobot image available: {available_media.get('cobot', False)}
+- video available: {available_media.get('video', False)}
 
 Current Step:
 - Title: {step_payload.get('name')}
@@ -285,6 +315,9 @@ Rules:
 - Keep titles concise (max 60 chars)
 - If nationality provided, translate.
 - DO NOT modify image/video paths—return them unchanged
+- ONLY set teach_pendant visibility to true if {available_media.get('teach_pendant', False)} is true
+- ONLY set cobot visibility to true if {available_media.get('cobot', False)} is true
+- ONLY set video visibility to true if {available_media.get('video', False)} is true
 - For experts: prefer short text, hide long text initially
 - For beginners: show more visual content initially
 - Adapt based on what the user clicked in similar steps
@@ -296,10 +329,29 @@ Return adapted content with visibility settings."""
         print(model)
         result = _generate_json(model, user_content, schema, temperature=0.7)
         print(result)
-        # Defensive: ensure media paths are unchanged if present in payload.
-        # (If your upstream always supplies these keys, this is redundant but safe.)
-        af_in = step_payload.get("adaptive_fields", {})
+
+        # CRITICAL: Enforce available_media constraints BEFORE returning
+        # If media is not available, force BOTH visibility to false AND clear the path
+        initial_vis = result.get('initial_visibility', {})
         af_out = result.get("adaptive_fields", {})
+
+        if not available_media.get('teach_pendant', False):
+            initial_vis['teach_pendant'] = False
+            af_out['image_teach_pendant'] = ""
+
+        if not available_media.get('cobot', False):
+            initial_vis['cobot'] = False
+            af_out['image_cobot'] = ""
+
+        if not available_media.get('video', False):
+            initial_vis['video'] = False
+            af_out['video'] = ""
+
+        result['initial_visibility'] = initial_vis
+        result["adaptive_fields"] = af_out
+
+        # Defensive: ensure media paths are unchanged if present in payload.
+        af_in = step_payload.get("adaptive_fields", {})
         for k in ("image_teach_pendant", "image_cobot", "video"):
             if k in af_in and af_in.get(k) and af_out.get(k) != af_in.get(k):
                 af_out[k] = af_in.get(k)
