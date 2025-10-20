@@ -3,14 +3,39 @@ import json
 import os
 from datetime import datetime
 from typing import Dict, List, Optional
-
+import subprocess
+import sys
+from pathlib import Path
+import pathlib
 import dash
 import dash_bootstrap_components as dbc
 import flask
 import pandas as pd
 from dash import dcc, html, Input, Output, State
 
+# Auto-run setup_media_assets.py before anything else
+print("Setting up media assets...")
+try:
+    result = subprocess.run([sys.executable, 'setup_media_assets.py'],
+                          capture_output=True,
+                          text=True,
+                          check=False)
+    if result.returncode == 0:
+        print("✓ Media assets setup completed")
+    else:
+        print(f"⚠ Media assets setup had issues:\n{result.stderr}")
+except Exception as e:
+    print(f"⚠ Could not run media assets setup: {e}")
+    print("Continuing anyway...")
+
+from services.sentient_gemini_api import initial_style_recommendations, adapt_step
+
+import shutil
+from pathlib import Path
+
 # Initialize the app with Flask server to handle static files
+
+
 server = flask.Flask(__name__)
 app = dash.Dash(__name__, server=server,
                 external_stylesheets=[
@@ -22,15 +47,21 @@ app = dash.Dash(__name__, server=server,
                             'content': 'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'}])
 
 
+# Add route to serve dynamically generated CSS
+@server.route('/assets/<path:path>')
+def serve_assets(path):
+    return flask.send_from_directory('./assets', path)
+
+
 # Create routes for serving static files
-@server.route('/images_single_pieces/<path:path>')
-def serve_single_pieces(path):
-    return flask.send_from_directory('./images_single_pieces', path)
+@server.route('/images_teach_pendant/<path:path>')
+def serve_teach_pendant(path):
+    return flask.send_from_directory('images_teach_pendant', path)
 
 
-@server.route('/images_assembly/<path:path>')
-def serve_assembly(path):
-    return flask.send_from_directory('./images_assembly', path)
+@server.route('/images_cobot/<path:path>')
+def serve_cobot(path):
+    return flask.send_from_directory('images_cobot', path)
 
 
 @server.route('/images/assembly_process/<path:path>')
@@ -45,9 +76,9 @@ def serve_videos(path):
 
 # Load JSON data
 def load_assembly_process():
-    with open('settings/steps_sources.json', 'r') as f:
+    with open('settings/completed_steps.json', 'r') as f:
         data = json.load(f)
-    return data['assembly_process']
+    return data['steps']
 
 
 # Initialize log DataFrame
@@ -63,6 +94,7 @@ def log_interaction(experiment_id, mode, action, step_id=None, step_name=None, b
     df = init_log_df()
     # not the best solution :)
     dropdown_options = [
+        {'label': 'Sentient', 'value': 'sentient.json'},
         {'label': 'Data Collection', 'value': 'initial_visibility_data_collection.json'},
         {'label': 'Dynamically Adaptive', 'value': 'initial_visibility_dynamically_adaptive.json'},
         {'label': 'Rule-Based Adaptive', 'value': 'initial_visibility_rule_based_adaptive.json'},
@@ -93,8 +125,8 @@ def log_interaction(experiment_id, mode, action, step_id=None, step_name=None, b
 def init_log_df():
     columns = [
         'experiment_id', 'mode', 'timestamp', 'action', 'step_id', 'step_name',
-        'short_text_viewed', 'long_text_viewed', 'single_pieces_viewed',
-        'assembly_viewed', 'video_viewed'
+        'short_text_viewed', 'long_text_viewed', 'teach_pendant_viewed',
+        'cobot_viewed', 'video_viewed'
     ]
 
     if os.path.exists('interaction_logs.csv'):
@@ -115,8 +147,8 @@ def get_complete_button_states(current_step, clicked_buttons):
     return {
         'short_text': step_clicked.get('short_text', False),
         'long_text': step_clicked.get('long_text', False),
-        'single_pieces': step_clicked.get('single_pieces', False),
-        'assembly': step_clicked.get('assembly', False),
+        'teach_pendant': step_clicked.get('teach_pendant', False),
+        'cobot': step_clicked.get('cobot', False),
         'video': step_clicked.get('video', False)
     }
 
@@ -130,8 +162,8 @@ def load_enabled_interactions():
         return {"steps": [{"step_id": 1, "buttons": {
             "short_text": True,
             "long_text": True,
-            "single_pieces": True,
-            "assembly": True,
+            "teach_pendant": True,
+            "cobot": True,
             "video": True
         }}]}
 
@@ -145,8 +177,8 @@ def load_initial_visibility():
         return {"steps": [{"step_id": 1, "content": {
             "short_text": False,
             "long_text": False,
-            "single_pieces": False,
-            "assembly": False,
+            "teach_pendant": False,
+            "cobot": False,
             "video": False
         }}]}
 
@@ -189,6 +221,17 @@ def update_user_preferences(
     return preferences
 
 
+def build_log_summary(preferences_store, step_type, clicked_buttons_for_step):
+    # recent weighted preference of content types for the step category
+    weighted = calculate_weighted_frequencies(preferences_store)  # already in your code
+    recent_pref = (weighted.get(step_type) or {})
+    return {
+        "step_type": step_type,
+        "recent_weighted": recent_pref,
+        "clicked_now": clicked_buttons_for_step  # booleans for short/long/single/assembly/video
+    }
+
+
 def calculate_weighted_frequencies(
         preferences: Dict[str, Dict[str, List[float]]],
         decay_factor: float = 0.5,
@@ -225,6 +268,13 @@ def calculate_weighted_frequencies(
             weighted_frequencies[step_type][content_type] = weighted_sum
 
     return weighted_frequencies
+
+
+def as_markdown(s: str) -> str:
+    if not s:
+        return ""
+    # force single newlines to render as <br>
+    return s.replace("\n", "  \n")
 
 
 def get_most_frequent_content(
@@ -368,6 +418,9 @@ app.layout = html.Div([
     dcc.Store(id='initial-visibility-store', data=load_initial_visibility()),
     dcc.Store(id='clicked-buttons-store', data={}),
     dcc.Store(id='user-preferences-store', data={}),
+    dcc.Store(id='style-profile-token', data=None),
+
+    html.Div(id="sentient-inline-style", style={"display": "none"}),
 
     # Introduction page
     html.Div(id='intro-container',
@@ -375,8 +428,8 @@ app.layout = html.Div([
              children=[
                  html.Div(style={'width': '400px', 'padding': '30px', 'border-radius': '8px',
                                  }, children=[
-                     html.H1("Assembly Training Dashboard", style={'text-align': 'center', 'margin-bottom': '20px'}),
-                     html.P("Welcome to the Assembly Training Dashboard. Please enter an experiment ID to begin.",
+                     html.H1("Cobot Screwdriving Application Training", style={'text-align': 'center', 'margin-bottom': '20px'}),
+                     html.P("Welcome to the Cobot Training Dashboard. Please enter an experiment ID to begin.",
                             style={'margin-bottom': '20px'}),
                      dbc.Input(id='experiment-id-input', type='text', placeholder='Enter Experiment ID',
                                style={'margin-bottom': '20px'}),
@@ -386,15 +439,35 @@ app.layout = html.Div([
                      dcc.Dropdown(
                          id='visibility-mode-dropdown',
                          options=[
+                             {'label': 'Sentient', 'value': 'sentient.json'},
                              {'label': 'Data Collection', 'value': 'initial_visibility_data_collection.json'},
                              {'label': 'Dynamically Adaptive', 'value': 'initial_visibility_dynamically_adaptive.json'},
                              {'label': 'Rule-Based Adaptive', 'value': 'initial_visibility_rule_based_adaptive.json'},
                              {'label': 'Static', 'value': 'initial_visibility_static_mode.json'}
                          ],
-                         value='initial_visibility_data_collection.json',  # Default selection
+                         value='sentient.json',  # Default selection
                          clearable=False,
                          style={'text-align': 'center', 'margin-bottom': '5px'}
                      ),
+                     html.Div(id='sentient-profile-form', style={'display': 'none', }, children=[
+                         html.Hr(),
+                         html.P("Sentient mode profile"),
+                         dbc.Row([
+                             dbc.Col(dbc.Input(id='profile-experience',
+                                               placeholder='Experience Level')),
+                         ], className="mb-2"),
+                         dbc.Row([
+                             dbc.Col(dbc.Input(id='profile-preferences',
+                                               placeholder='Preferences (comma-separated: video, short_text, etc.)')),
+                         ], className="mb-2"),
+                         dbc.Row([
+                             dbc.Col(dbc.Input(id='profile-nationality', placeholder='Nationality')),
+                         ], className="mb-2"),
+                         dbc.Row([
+                             dbc.Col(dbc.Input(id='profile-other', placeholder='Other Info (free text)')),
+                         ], className="mb-2"),
+                     ]),
+                     dcc.Store(id='sentient-profile-store', data=None),
                      dbc.Button("Begin Training", id='begin-button', color='primary', style={'width': '100%'})
                  ])
              ]),
@@ -419,7 +492,7 @@ app.layout = html.Div([
             html.Div(className="row mb-1", children=[
                 # Short text area
                 html.Div(className="col-md-4", style={'height': '150px'}, children=[
-                    html.Span("Short description", className="h5 d-block mb-1"),
+                    html.Span("Short Description", className="h5 d-block mb-1"),
                     html.Div(style=styles['text-content-area'], children=[
                         html.Div(id="short-text-placeholder", className="placeholder-glow", children=[
                             html.Span(className="placeholder col-5"),
@@ -427,7 +500,10 @@ app.layout = html.Div([
                             html.Span(className="placeholder col-4"),
                             html.Span(className="placeholder col-4")
                         ]),
-                        html.Div(id="short-text-content", style={'display': 'none'}),
+                        dcc.Markdown(id="short-text-content",
+                                     style={'display': 'none'},
+                                     link_target="_blank",
+                                     dangerously_allow_html=True),
                         html.Div(style=styles['button-container'], children=[
                             dbc.Button([
                                 html.I(className="bi bi-eye-fill me-1"),
@@ -439,14 +515,17 @@ app.layout = html.Div([
 
                 # Long text area
                 html.Div(className="col-md-8", children=[
-                    html.Span("Long description", className="h5 d-block mb-1"),
+                    html.Span("Long Description", className="h5 d-block mb-1"),
                     html.Div(style=styles['text-content-area'], children=[
                         html.Div(id="long-text-placeholder", className="placeholder-glow", children=[
                             html.Span(className="placeholder col-7"),
                             html.Span(className="placeholder col-4"),
                             html.Span(className="placeholder col-6")
                         ]),
-                        html.Div(id="long-text-content", style={'display': 'none'}),
+                        dcc.Markdown(id="long-text-content",
+                                     style={'display': 'none'},
+                                     link_target="_blank",
+                                     dangerously_allow_html=True),
                         html.Div(style=styles['button-container'], children=[
                             dbc.Button([
                                 html.I(className="bi bi-eye-fill me-1"),
@@ -461,14 +540,14 @@ app.layout = html.Div([
             html.Div(className="row", children=[
                 # Individual Parts image
                 html.Div(className="col-md-4 mb-4", children=[
-                    html.Span("Image Single", className="h5 d-block mb-2"),
+                    html.Span("Teach Pendant Image", className="h5 d-block mb-2"),
                     html.Div(style=styles['image-container'], children=[
                         html.Div(style=styles['image-wrapper'], children=[
-                            html.Img(id="single-pieces-placeholder",
+                            html.Img(id="teach-pendant-placeholder",
                                      src=placeholder_img,
                                      className="img-fluid",
                                      style=styles['image-content']),
-                            html.Img(id="single-pieces-img",
+                            html.Img(id="teach-pendant-img",
                                      style={'display': 'none', **styles['image-content']},
                                      className="img-fluid")
                         ]),
@@ -476,21 +555,21 @@ app.layout = html.Div([
                             dbc.Button([
                                 html.I(className="bi bi-eye-fill me-1"),
                                 "Show"
-                            ], id="single-pieces-btn", color="primary", size="lg", style={"width": "100%"})
+                            ], id="teach-pendant-btn", color="primary", size="lg", style={"width": "100%"})
                         ])
                     ])
                 ]),
 
                 # Assembled Parts image
                 html.Div(className="col-md-4 mb-4", children=[
-                    html.Span("Assembled parts", className="h5 d-block mb-2"),
+                    html.Span("Cobot Workplace Image", className="h5 d-block mb-2"),
                     html.Div(style=styles['image-container'], children=[
                         html.Div(style=styles['image-wrapper'], children=[
-                            html.Img(id="assembly-placeholder",
+                            html.Img(id="cobot-placeholder",
                                      src=placeholder_img,
                                      className="img-fluid",
                                      style=styles['image-content']),
-                            html.Img(id="assembly-img",
+                            html.Img(id="cobot-img",
                                      style={'display': 'none', **styles['image-content']},
                                      className="img-fluid")
                         ]),
@@ -498,7 +577,7 @@ app.layout = html.Div([
                             dbc.Button([
                                 html.I(className="bi bi-eye-fill me-1"),
                                 "Show"
-                            ], id="assembly-btn", color="primary", size="lg", style={"width": "100%"})
+                            ], id="cobot-btn", color="primary", size="lg", style={"width": "100%"})
                         ])
                     ])
                 ]),
@@ -527,6 +606,7 @@ app.layout = html.Div([
                     ])
                 ])
             ]),
+
         ]),
 
     ]),
@@ -543,54 +623,136 @@ app.layout = html.Div([
             ])
     ]),
 
-    html.Div(style=styles['footer-container'], children=[
-        html.Div(className="d-flex justify-content-center align-items-center", children=[
-            # Experiment ID
-            html.Div(id='experiment-id-display', className="me-3"),  # Add margin to separate
+    html.Div(
+        style=styles['footer-container'],
+        children=[
+            # Stack vertically
+            html.Div(
+                className="d-flex flex-column justify-content-start align-items-start",
+                children=[
+                    html.H5("Style explanation:", className="mb-1 text-start"),
+                    html.H6(id='style-explanation', className='small text-muted mb-2'),
 
-            # Step Counter with Progress Bar
-            html.Div(id='step-counter', children=[
-                html.Div(className="d-flex align-items-center", children=[
-                    dbc.Progress(id="step-progress-bar", value=0, style={"width": "200px", "height": "10px"}),
-                    html.Span(id="step-text", className="ms-2 text-muted small")
-                ])
+                    html.H5("Content explanation:", className="mb-1 text-start"),
+                    html.H6(id='sentient-last-explanation', className='small text-muted mb-6'),
+                ]
+            ),
+
+            html.Div(className="d-flex justify-content-center align-items-center", children=[
+                # Experiment ID
+                html.Div(id='experiment-id-display', className="me-3"),  # Add margin to separate
+
+                # Step Counter with Progress Bar
+                html.Div(id='step-counter', children=[
+                    html.Div(className="d-flex align-items-center", children=[
+                        dbc.Progress(id="step-progress-bar", value=0, style={"width": "200px", "height": "10px"}),
+                        html.Span(id="step-text", className="ms-2 text-muted small")
+                    ])
+                ]),
             ]),
-        ]),
 
-        # Images Section
-        html.Div(style=styles['footer-images'], children=[
-            html.Img(src='/assets/logosps.png', style=styles['image-style']),  # Left Image
-            html.Img(src='/assets/logoxr.png', style=styles['image-style'])  # Right Image
-        ]),
-    ])
+            # Images Section
+
+            html.Div(style=styles['footer-images'], children=[
+                # html.Img(src='/assets/logosps.png', style=styles['image-style']),  # Left Image
+                # html.Img(src='/assets/logoxr.png', style=styles['image-style'])  # Right Image
+            ]),
+        ])
 ])
 
 
 # Callbacks
-
-# Begin button callback
 @app.callback(
     [Output('intro-container', 'style'),
      Output('training-container', 'style'),
      Output('experiment-id-store', 'data'),
-     Output('current-step', 'data')],
+     Output('current-step', 'data'),
+     Output('sentient-profile-store', 'data'),
+     Output('style-explanation', 'children'),
+     Output('style-profile-token', 'data'),
+     Output('sentient-inline-style', 'children')],
     [Input('begin-button', 'n_clicks')],
     [State('experiment-id-input', 'value'),
-     State('visibility-mode-dropdown', 'value')]
+     State('visibility-mode-dropdown', 'value'),
+     State('profile-experience', 'value'),
+     State('profile-preferences', 'value'),
+     State('profile-nationality', 'value'),
+     State('profile-other', 'value'),
+     State('assembly-data-store', 'data')]
 )
-def begin_training(n_clicks, experiment_id, mode):
-    # Only proceed if button has been clicked
-    if n_clicks is None:
-        return styles['intro-screen'], {'display': 'none'}, None, 0
+def begin_training(n_clicks, experiment_id, mode, experience, preferences, nationality, other, assembly_data):
+    # First render: return all 8 outputs
+    if not n_clicks:
+        return (
+            styles['intro-screen'],  # intro visible
+            {'display': 'none'},  # training hidden
+            None,  # experiment-id-store
+            0,  # current-step
+            None,  # sentient-profile-store
+            "",  # style-explanation
+            None,  # style-profile-token
+            ""  # sentient-inline-style (no CSS yet)
+        )
 
+    # Normalise experiment id
     if not experiment_id:
         experiment_id = 'unknown'
 
-    # Log the start of the experiment
+    # Defaults
+    profile = None
+    style_expl = ""
+    style_token = None
+    css_text = ""
+
+    # Sentient mode: build profile and request style overrides
+    if mode == 'sentient.json':
+        profile = {
+            'experience': (experience or '').strip().lower(),
+            'preferences': [p.strip().lower() for p in (preferences or '').split(',') if p.strip()],
+            'nationality': (nationality or '').strip(),
+            'other': (other or '').strip()
+        }
+
+        # Categories present in the current session
+        categories = sorted(list(set(step.get('category', 'Unknown') for step in (assembly_data or []))))
+
+        try:
+            print(f"Calling initial_style_recommendations with profile={profile}, categories={categories}")
+            out = initial_style_recommendations(profile, categories)
+
+            css = out.get('css_overrides', "") or ""
+            style_expl = out.get('explanation', "") or ""
+            style_token = out.get('style_profile_token', "") or ""
+
+            print(f"Received style_token: {style_token}")
+            if css:
+                # Persist to assets (optional) and inject inline (live)
+                assets_dir = pathlib.Path('assets')
+                assets_dir.mkdir(exist_ok=True)
+                (assets_dir / 'sentient_overrides.css').write_text(css, encoding='utf-8')
+                css_text = css or ""
+                css_html = f"<style>{css_text}</style>"
+
+                print("Wrote CSS to assets/sentient_overrides.css and prepared inline CSS.")
+        except Exception as e:
+            style_expl = f"Style recommendation failed; using defaults. Error: {str(e)}"
+            import traceback
+            print("Error in initial_style_recommendations:", traceback.format_exc())
+
+    # Log start
     log_interaction(experiment_id, mode, 'start_experiment')
 
-    # Hide intro and show training
-    return {'display': 'none'}, {'display': 'block', **styles['training-screen']}, experiment_id, 1
+    # Switch to training view; step 1
+    return (
+        {'display': 'none'},
+        {'display': 'block', **styles['training-screen']},
+        experiment_id,
+        1,
+        profile,
+        style_expl,
+        style_token,
+        css_html
+    )
 
 
 # Set navigation in progress
@@ -626,46 +788,121 @@ def update_visibility_mode(selected_mode):
      Output('step-progress-bar', 'value'),
      Output('step-text', 'children'),
      Output('experiment-id-display', 'children'),
-     Output('single-pieces-img', 'src'),
-     Output('assembly-img', 'src'),
+     Output('teach-pendant-img', 'src'),
+     Output('cobot-img', 'src'),
      Output('video-player', 'src'),
      Output('short-text-content', 'children'),
-     Output('long-text-content', 'children')],
-    [Input('current-step', 'data'),
-     Input('assembly-data-store', 'data'),
-     Input('experiment-id-store', 'data')]
+     Output('long-text-content', 'children'),
+     Output('short-text-placeholder', 'style'),
+     Output('short-text-content', 'style'),
+     Output('long-text-placeholder', 'style'),
+     Output('long-text-content', 'style'),
+     Output('teach-pendant-placeholder', 'style'),
+     Output('teach-pendant-img', 'style'),
+     Output('cobot-placeholder', 'style'),
+     Output('cobot-img', 'style'),
+     Output('video-placeholder', 'style'),
+     Output('video-player', 'style'),
+     Output('sentient-last-explanation', 'children')],
+    [Input('current-step', 'data')],
+    [State('assembly-data-store', 'data'),
+     State('experiment-id-store', 'data'),
+     State('visibility-mode-dropdown', 'value'),
+     State('sentient-profile-store', 'data'),
+     State('style-profile-token', 'data'),
+     State('clicked-buttons-store', 'data'),
+     State('user-preferences-store', 'data')],
+    prevent_initial_call=True
 )
-def update_step_content(current_step, assembly_data, experiment_id):
+def update_step_content(current_step, assembly_data, experiment_id, mode, profile, style_token, clicked, prefs):
     if current_step <= 0 or current_step > len(assembly_data):
-        return "", 0, "", "", "", "", "", "", ""
+        return "", 0, "", "", "", "", "", "", "", {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, ""
 
     step = assembly_data[current_step - 1]
-    step_name = step['name']
+    step_type = step.get('category', 'Unknown')
 
-    # Get content
-    short_text = step['adaptive_fields']['short_text']
-    long_text = step['adaptive_fields']['long_text']
+    # defaults from file
+    title = step['name']
+    af = step['adaptive_fields']
+    sp, ap, vp = af['image_teach_pendant'], af['image_cobot'], af['video']
 
-    # File paths
-    image_single_pieces = step['adaptive_fields']['image_single_pieces']
-    image_assembly = step['adaptive_fields']['image_assembly']
-    video = step['adaptive_fields']['video']
+    short_text, long_text = af['short_text'], af['long_text']
 
-    # Calculate progress percentage
+    # default visibility: hidden placeholders shown, actual content hidden
+    vis = {"short_text": False, "long_text": False, "teach_pendant": False, "cobot": False, "video": False}
+    explanation = ""
+
+    # SENTIENT MODE: Adapt content per step
+    if mode == 'sentient.json' and profile and style_token:
+        log_summary = build_log_summary(prefs, step_type, get_complete_button_states(current_step, clicked))
+        try:
+            enabled_interactions = load_enabled_interactions()
+
+            # AGGIUNGI step_id al payload
+            step_with_id = {
+                "step_id": current_step,  # Aggiungi questa riga
+                "name": title,
+                "category": step_type,
+                "adaptive_fields": af
+            }
+
+            out = adapt_step(profile, style_token,
+                             step_with_id,
+                             log_summary,
+                             enabled_interactions)
+            # apply returned changes
+            title = out.get('title', title)
+            patch = out.get('adaptive_fields', {})
+            short_text = patch.get('short_text', short_text)
+            long_text = patch.get('long_text', long_text)
+            sp = patch.get('image_teach_pendant', sp)
+            ap = patch.get('image_cobot', ap)
+            vp = patch.get('video', vp)
+            vis = out.get('initial_visibility', vis)
+            explanation = out.get('explanation_of_changes', "")
+            # log the adaptation
+            log_interaction(experiment_id, mode, 'sentient_step_adapted', current_step, title, vis)
+        except Exception as e:
+            explanation = f"Adaptive update failed; using base content. ({e})"
+            import traceback
+            print(f"Error in adapt_step: {traceback.format_exc()}")
+
     progress_value = (current_step / len(assembly_data)) * 100
     step_text = f"Step {current_step} of {len(assembly_data)}"
     experiment_id_display = f"Experiment ID: {experiment_id}"
 
+    short_text = as_markdown(short_text)
+    long_text = as_markdown(long_text)
+
+    def show(h):
+        return {'display': 'block', **styles['image-content']} if h else {'display': 'none', **styles['image-content']}
+
+    def show_txt(h):
+        return {'display': 'block'} if h else {'display': 'none'}
+
+    def hide_txt(h):
+        return {'display': 'none'} if h else {'display': 'block'}
+
+    if sp and sp.strip():
+        sp = f"/images_teach_pendant/{sp}"
+    if ap and ap.strip():
+        ap = f"/images_cobot/{ap}"
+    if vp and vp.strip():
+        vp = f"/videos/{vp}"
+
     return (
-        f"{step_name} ",
+        f"{title}",
         progress_value,
         step_text,
         experiment_id_display,
-        image_single_pieces,
-        image_assembly,
-        video,
-        short_text,
-        long_text
+        sp, ap, vp,
+        short_text, long_text,
+        hide_txt(vis['short_text']), show_txt(vis['short_text']),
+        hide_txt(vis['long_text']), show_txt(vis['long_text']),
+        show(not vis['teach_pendant']), show(vis['teach_pendant']),
+        show(not vis['cobot']), show(vis['cobot']),
+        show(not vis['video']), show(vis['video']),
+        explanation
     )
 
 
@@ -780,15 +1017,15 @@ def toggle_long_text(n_clicks, placeholder_style, experiment_id, mode, current_s
             html.I(className="bi bi-eye-fill me-1"), "Viewed"], clicked_buttons, user_preferences
 
 
-# toggle single_pieces callback
+# toggle teach_pendant callback
 @app.callback(
     [Output('single-pieces-placeholder', 'style', allow_duplicate=True),
-     Output('single-pieces-img', 'style', allow_duplicate=True),
-     Output('single-pieces-btn', 'children'),
+     Output('teach-pendant-img', 'style', allow_duplicate=True),
+     Output('teach-pendant-btn', 'children'),
      Output('clicked-buttons-store', 'data', allow_duplicate=True),
      Output('user-preferences-store', 'data', allow_duplicate=True)],  # Added for adaptive mode
-    [Input('single-pieces-btn', 'n_clicks')],
-    [State('single-pieces-placeholder', 'style'),
+    [Input('teach-pendant-btn', 'n_clicks')],
+    [State('teach-pendant-placeholder', 'style'),
      State('experiment-id-store', 'data'),
      State('visibility-mode-dropdown', 'value'),
      State('current-step', 'data'),
@@ -797,7 +1034,7 @@ def toggle_long_text(n_clicks, placeholder_style, experiment_id, mode, current_s
      State('user-preferences-store', 'data')],  # Added for adaptive mode
     prevent_initial_call=True
 )
-def toggle_single_pieces(n_clicks, placeholder_style, experiment_id, mode, current_step,
+def toggle_teach_pendant(n_clicks, placeholder_style, experiment_id, mode, current_step,
                          assembly_data, clicked_buttons, user_preferences):
     if n_clicks is None:
         return placeholder_style, {'display': 'none', **styles['image-content']}, [
@@ -816,20 +1053,20 @@ def toggle_single_pieces(n_clicks, placeholder_style, experiment_id, mode, curre
 
     if is_showing:
         # Hide content
-        clicked_buttons[step_key]['single_pieces'] = False
+        clicked_buttons[step_key]['teach_pendant'] = False
         button_states = get_complete_button_states(current_step, clicked_buttons)
-        log_interaction(experiment_id, mode, "toggle_single_pieces_none", current_step, step_name, button_states)
+        log_interaction(experiment_id, mode, "toggle_teach_pendant_none", current_step, step_name, button_states)
         return {'display': 'block'}, {'display': 'none', **styles['image-content']}, [
             html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, user_preferences
     else:
         # Show content and update preferences
-        clicked_buttons[step_key]['single_pieces'] = True
+        clicked_buttons[step_key]['teach_pendant'] = True
         button_states = get_complete_button_states(current_step, clicked_buttons)
-        log_interaction(experiment_id, mode, "toggle_single_pieces_block", current_step, step_name, button_states)
+        log_interaction(experiment_id, mode, "toggle_teach_pendant_block", current_step, step_name, button_states)
 
         # Update user preferences with timestamp
         user_preferences = update_user_preferences(
-            user_preferences, step_type, ['single_pieces'], datetime.now().timestamp(), is_initial=False)
+            user_preferences, step_type, ['teach_pendant'], datetime.now().timestamp(), is_initial=False)
 
         return {'display': 'none'}, {'display': 'block', **styles['image-content']}, [
             html.I(className="bi bi-eye-fill me-1"), "Viewed"], clicked_buttons, user_preferences
@@ -837,13 +1074,13 @@ def toggle_single_pieces(n_clicks, placeholder_style, experiment_id, mode, curre
 
 # toggle assembly callback
 @app.callback(
-    [Output('assembly-placeholder', 'style', allow_duplicate=True),
-     Output('assembly-img', 'style', allow_duplicate=True),
-     Output('assembly-btn', 'children'),
+    [Output('cobot-placeholder', 'style', allow_duplicate=True),
+     Output('cobot-img', 'style', allow_duplicate=True),
+     Output('cobot-btn', 'children'),
      Output('clicked-buttons-store', 'data', allow_duplicate=True),
      Output('user-preferences-store', 'data', allow_duplicate=True)],  # Added for adaptive mode
-    [Input('assembly-btn', 'n_clicks')],
-    [State('assembly-placeholder', 'style'),
+    [Input('cobot-btn', 'n_clicks')],
+    [State('cobot-placeholder', 'style'),
      State('experiment-id-store', 'data'),
      State('visibility-mode-dropdown', 'value'),
      State('current-step', 'data'),
@@ -852,7 +1089,7 @@ def toggle_single_pieces(n_clicks, placeholder_style, experiment_id, mode, curre
      State('user-preferences-store', 'data')],  # Added for adaptive mode
     prevent_initial_call=True
 )
-def toggle_assembly(n_clicks, placeholder_style, experiment_id, mode, current_step,
+def toggle_cobot(n_clicks, placeholder_style, experiment_id, mode, current_step,
                     assembly_data, clicked_buttons, user_preferences):
     if n_clicks is None:
         return placeholder_style, {'display': 'none', **styles['image-content']}, [
@@ -871,20 +1108,20 @@ def toggle_assembly(n_clicks, placeholder_style, experiment_id, mode, current_st
 
     if is_showing:
         # Hide content
-        clicked_buttons[step_key]['assembly'] = False
+        clicked_buttons[step_key]['cobot'] = False
         button_states = get_complete_button_states(current_step, clicked_buttons)
-        log_interaction(experiment_id, mode, "toggle_assembly_none", current_step, step_name, button_states)
+        log_interaction(experiment_id, mode, "toggle_cobot_none", current_step, step_name, button_states)
         return {'display': 'block'}, {'display': 'none', **styles['image-content']}, [
             html.I(className="bi bi-eye-fill me-1"), "Show"], clicked_buttons, user_preferences
     else:
         # Show content and update preferences
-        clicked_buttons[step_key]['assembly'] = True
+        clicked_buttons[step_key]['cobot'] = True
         button_states = get_complete_button_states(current_step, clicked_buttons)
-        log_interaction(experiment_id, mode, "toggle_assembly_block", current_step, step_name, button_states)
+        log_interaction(experiment_id, mode, "toggle_cobot_block", current_step, step_name, button_states)
 
         # Update user preferences with timestamp
         user_preferences = update_user_preferences(
-            user_preferences, step_type, ['assembly'], datetime.now().timestamp(), is_initial=False)
+            user_preferences, step_type, ['cobot'], datetime.now().timestamp(), is_initial=False)
 
         return {'display': 'none'}, {'display': 'block', **styles['image-content']}, [
             html.I(className="bi bi-eye-fill me-1"), "Viewed"], clicked_buttons, user_preferences
@@ -1002,8 +1239,8 @@ def navigate_steps(prev_clicks, next_clicks, initial_visibility, current_step, a
                     'content': {
                         'short_text': False,
                         'long_text': False,
-                        'single_pieces': False,
-                        'assembly': False,
+                        'teach_pendant': False,
+                        'cobot': False,
                         'video': False
                     }
                 }]
@@ -1021,8 +1258,8 @@ def navigate_steps(prev_clicks, next_clicks, initial_visibility, current_step, a
                 'content': {
                     'short_text': False,
                     'long_text': False,
-                    'single_pieces': False,
-                    'assembly': False,
+                    'teach_pendant': False,
+                    'cobot': False,
                     'video': False
                 }
             }
@@ -1059,30 +1296,30 @@ def log_step_load(current_step, experiment_id, mode, assembly_data, clicked_butt
 @app.callback(
     [Output('short-text-btn', 'disabled', allow_duplicate=True),
      Output('long-text-btn', 'disabled', allow_duplicate=True),
-     Output('single-pieces-btn', 'disabled', allow_duplicate=True),
-     Output('assembly-btn', 'disabled', allow_duplicate=True),
+     Output('teach-pendant-btn', 'disabled', allow_duplicate=True),
+     Output('cobot-btn', 'disabled', allow_duplicate=True),
      Output('video-btn', 'disabled', allow_duplicate=True)],
     [Input('current-step', 'data'),
      Input('enabled-interactions-store', 'data'),
      Input('clicked-buttons-store', 'data'),
      Input('short-text-content', 'style'),
      Input('long-text-content', 'style'),
-     Input('single-pieces-img', 'style'),
-     Input('assembly-img', 'style'),
+     Input('teach-pendant-img', 'style'),
+     Input('cobot-img', 'style'),
      Input('video-player', 'style')],
     prevent_initial_call=True
 )
 def update_button_states(current_step, enabled_interactions, clicked_buttons,
-                         short_text_style, long_text_style, single_pieces_style,
-                         assembly_style, video_style):
+                         short_text_style, long_text_style, teach_pendant_style,
+                         cobot_style, video_style):
     # Find the configuration for the current step in enabled interactions
     step_config = next((step for step in enabled_interactions['steps']
                         if step['step_id'] == current_step),
                        {'buttons': {
                            'short_text': True,
                            'long_text': True,
-                           'single_pieces': True,
-                           'assembly': True,
+                           'teach_pendant': True,
+                           'cobot': True,
                            'video': True
                        }})
 
@@ -1112,15 +1349,15 @@ def update_button_states(current_step, enabled_interactions, clicked_buttons,
         # initial_config.get('long_text', False) or
         is_content_visible(long_text_style),
 
-        not buttons.get('single_pieces', True) or
-        step_clicked.get('single_pieces', False) or
-        # initial_config.get('single_pieces', False) or
-        is_content_visible(single_pieces_style),
+        not buttons.get('teach_pendant', True) or
+        step_clicked.get('teach_pendant', False) or
+        # initial_config.get('steach_pendant', False) or
+        is_content_visible(teach_pendant_style),
 
-        not buttons.get('assembly', True) or
-        step_clicked.get('assembly', False) or
+        not buttons.get('cobot', True) or
+        step_clicked.get('cobot', False) or
         # initial_config.get('assembly', False) or
-        is_content_visible(assembly_style),
+        is_content_visible(cobot_style),
 
         not buttons.get('video', True) or
         step_clicked.get('video', False) or
@@ -1135,16 +1372,16 @@ def update_button_states(current_step, enabled_interactions, clicked_buttons,
      Output('short-text-content', 'style', allow_duplicate=True),
      Output('long-text-placeholder', 'style', allow_duplicate=True),
      Output('long-text-content', 'style', allow_duplicate=True),
-     Output('single-pieces-placeholder', 'style', allow_duplicate=True),
-     Output('single-pieces-img', 'style', allow_duplicate=True),
-     Output('assembly-placeholder', 'style', allow_duplicate=True),
-     Output('assembly-img', 'style', allow_duplicate=True),
+     Output('teach-pendant-placeholder', 'style', allow_duplicate=True),
+     Output('teach-pendant-img', 'style', allow_duplicate=True),
+     Output('cobot-placeholder', 'style', allow_duplicate=True),
+     Output('cobot-img', 'style', allow_duplicate=True),
      Output('video-placeholder', 'style', allow_duplicate=True),
      Output('video-player', 'style', allow_duplicate=True),
      Output('short-text-btn', 'children', allow_duplicate=True),
      Output('long-text-btn', 'children', allow_duplicate=True),
-     Output('single-pieces-btn', 'children', allow_duplicate=True),
-     Output('assembly-btn', 'children', allow_duplicate=True),
+     Output('teach-pendant-btn', 'children', allow_duplicate=True),
+     Output('cobot-btn', 'children', allow_duplicate=True),
      Output('video-btn', 'children', allow_duplicate=True),
      Output('video-player', 'autoPlay', allow_duplicate=True),
      Output('user-preferences-store', 'data', allow_duplicate=True)],
@@ -1175,8 +1412,8 @@ def reset_button_states_and_visibility(
                 'content': {
                     'short_text': False,
                     'long_text': False,
-                    'single_pieces': False,
-                    'assembly': False,
+                    'teach_pendant': False,
+                    'cobot': False,
                     'video': False
                 }
             }]
@@ -1194,8 +1431,8 @@ def reset_button_states_and_visibility(
             'content': {
                 'short_text': False,
                 'long_text': False,
-                'single_pieces': False,
-                'assembly': False,
+                'teach_pendant': False,
+                'cobot': False,
                 'video': False
             }
         }
@@ -1292,19 +1529,19 @@ def reset_button_states_and_visibility(
     # Get visibility for each content type
     short_text_placeholder, short_text_content, short_text_btn = get_visibility('short_text')
     long_text_placeholder, long_text_content, long_text_btn = get_visibility('long_text')
-    single_pieces_placeholder, single_pieces_content, single_pieces_btn = get_visibility('single_pieces')
-    assembly_placeholder, assembly_content, assembly_btn = get_visibility('assembly')
+    teach_pendant_placeholder, teach_pendant_content, teach_pendant_btn = get_visibility('teach_pendant')
+    cobot_placeholder, cobot_content, cobot_btn = get_visibility('cobot')
     video_placeholder, video_content, video_btn = get_visibility('video')
 
     # Return all states
     return (
         short_text_placeholder, short_text_content,
         long_text_placeholder, long_text_content,
-        single_pieces_placeholder, single_pieces_content,
-        assembly_placeholder, assembly_content,
+        teach_pendant_placeholder, teach_pendant_content,
+        cobot_placeholder, cobot_content,
         video_placeholder, video_content,
         short_text_btn, long_text_btn,
-        single_pieces_btn, assembly_btn, video_btn,
+        teach_pendant_btn, cobot_btn, video_btn,
         False,  # autoPlay
         user_preferences
     )
@@ -1346,8 +1583,8 @@ def restart_application(n_clicks, experiment_id, mode):
 # Ensure the required directories exist
 def ensure_directories_exist():
     directories = [
-        './images_single_pieces',
-        './images_assembly',
+        './images_teach_pendant',
+        './images_cobot',
         './images/assembly_process',
         './videos'
     ]
@@ -1355,7 +1592,14 @@ def ensure_directories_exist():
         os.makedirs(directory, exist_ok=True)
 
 
+@app.callback(
+    Output('sentient-profile-form', 'style'),
+    Input('visibility-mode-dropdown', 'value')
+)
+def show_profile_form(mode_value):
+    return {'display': 'block'} if mode_value == 'sentient.json' else {'display': 'none'}
+
+
 # Run the app
 if __name__ == '__main__':
-    ensure_directories_exist()
     app.run_server(debug=False, host='0.0.0.0', port=3000)

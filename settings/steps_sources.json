@@ -1,212 +1,95 @@
 {
   "assembly_process": [
-    {
-      "id": 1,
-      "name": "Withdraw Components for PIECE 1",
-      "category": "withdraw",
-      "target_cycle_time": 5,
-      "adaptive_fields": {
-        "short_text": "Withdraw SNP1 (2 pieces) from shelf B2 and PG1 (2 pieces) from shelf B4",
-        "long_text": "",
-        "image_single_pieces": "./images_single_pieces/pezzi_iniziali_1.png",
-        "image_assembly": "",
-        "video": ""
-      }
-    },
-    {
-      "id": 2,
-      "name": "Assembly PIECE 1",
-      "category": "assembly",
-      "target_cycle_time": 15,
-      "adaptive_fields": {
-        "short_text": "Insert the two PG1 pieces into the holes of the two SNP1 pieces",
-        "long_text": "Position the two SNP1 pieces so that the two 'L' shapes are mirrored, meaning, pointing in the same direction. \n Insert the two PG1 pieces into the cross-shaped holes located at the ends of the SNP1 pieces. The two gray axes should be centered into the two L-shaped pieces",
-        "image_single_pieces": "./images_single_pieces/pezzi_iniziali_1_assembly.png",
-        "image_assembly": "./images_assembly/pezzo_1.png",
-        "video": "./videos/operazione_1.mp4"
-      }
-    },
-    {
-      "id": 3,
-      "name": "Withdraw Components for PIECE 2",
-      "category": "withdraw",
-      "target_cycle_time": 5,
-      "adaptive_fields": {
-        "short_text": "Withdraw GNE22 (2 pieces) from shelf C3",
-        "long_text": "",
-        "image_single_pieces": "./images_single_pieces/pezzi_iniziali_2.png",
-        "image_assembly": "",
-        "video": ""
-      }
-    },
-    {
-      "id": 4,
-      "name": "Assembly PIECE 2",
-      "category": "assembly",
-      "target_cycle_time": 15,
-      "adaptive_fields": {
-        "short_text": "Insert the upper horizontal axis of PIECE 1 into the cross holes of the two GNE22 pieces",
-        "long_text": "Fully insert the two GNE22 pieces at the left and right ends of the upper axis. \n Protruding parts should be facing you and parallel to the axis of the workpiece SNP1",
-        "image_single_pieces": "./images_single_pieces/pezzi_iniziali_2_con_pezzo_1.png",
-        "image_assembly": "./images_assembly/pezzo_2.png",
-        "video": "./videos/operazione_2.mov"
-      }
-    },
-    {
-      "id": 5,
-      "name": "Withdraw Components for PIECE 3",
-      "category": "withdraw",
-      "target_cycle_time": 10,
-      "adaptive_fields": {
-        "short_text": "Withdraw GPP11 (2 pieces) from shelf B3",
-        "long_text": "",
-        "image_single_pieces": "./images_single_pieces/pezzi_iniziali_3.png",
-        "image_assembly": "",
-        "video": ""
-      }
-    },
-    {
-      "id": 6,
-      "name": "Assembly PIECE 3",
-      "category": "assembly",
-      "target_cycle_time": 15,
-      "adaptive_fields": {
-        "short_text": "Insert the lower horizontal axis of PIECE 2 into the cross holes of the two pieces GPP11",
-        "long_text": "Place the of the two GPP11 pieces at the left and right ends of the lower axis and insert them completely. \n Make sure that the hole in the protruding part of each GPP11 piece aligns with the protruding axis of PIECE 2, so that the hole is on the same line as the L-shaped piece",
-        "image_single_pieces": "./images_single_pieces/pezzi_iniziali_3_con_pezzo_2.png",
-        "image_assembly": "./images_assembly/pezzo_3.png",
-        "video": "./videos/operazione_3.mov"
-      }
-    },
-    {
-      "id": 7,
-      "name": "Withdraw Components for PIECE 4",
-      "category": "withdraw",
-      "target_cycle_time": 10,
-      "adaptive_fields": {
-        "short_text": "Withdraw PN3 (2 pieces) from shelf D1 and GNP21 from shelf A1",
-        "long_text": "",
-        "image_single_pieces": "./images_single_pieces/pezzi_iniziali_4.png",
-        "image_assembly": "",
-        "video": ""
-      }
-    },
-    {
-      "id": 8,
-      "name": "Assembly PIECE 4",
-      "category": "assembly",
-      "target_cycle_time": 15,
-      "adaptive_fields": {
-        "short_text": "Insert the two PN3 pieces into the holes of GNP21",
-        "long_text": "Fully insert the 2 PN3 pieces into the 2 holes of GNP21. Once fitted, the 2 PN3 pieces should be parallel to each other and perpendicular to the GNP21 piece",
-        "image_single_pieces": "./images_single_pieces/pezzi_iniziali_4.png",
-        "image_assembly": "./images_assembly/pezzo_4.png",
-        "video": "./videos/operazione_4.mov"
-      }
-    },
-    {
-      "id": 9,
-      "name": "Withdraw Components for PIECE 5",
-      "category": "withdraw",
-      "target_cycle_time": 10,
-      "adaptive_fields": {
-        "short_text": "Withdraw PON from shelf C1",
-        "long_text": "",
-        "image_single_pieces": "./images_single_pieces/pezzi_iniziali_5.png",
-        "image_assembly": "",
-        "video": ""
-      }
-    },
-    {
-      "id": 10,
-      "name": "Assembly PIECE 5",
-      "category": "assembly",
-      "target_cycle_time": 15,
-      "adaptive_fields": {
-        "short_text": "Insert PON into PIECE 4",
-        "long_text": "Insert PON completely into the center hole of PIECE 4 so that only the round part protrudes. \n Ensure that when mounted, PON is perpendicular to PIECE 4",
-        "image_single_pieces": "./images_single_pieces/pezzi_iniziali_5_con_pezzo_4.png",
-        "image_assembly": "./images_assembly/pezzo_5.png",
-        "video": "./videos/operazione_5.mov"
-      }
-    },
-    {
-      "id": 11,
-      "name": "Assembly PIECE 6",
-      "category": "assembly",
-      "target_cycle_time": 15,
-      "adaptive_fields": {
-        "short_text": "Join PIECE 3 with PIECE 5",
-        "long_text": "Fully insert the two long sides of PIECE 5 into the remaining cross holes of PIECE 3",
-        "image_single_pieces": "./images_single_pieces/pezzo_3_con_pezzo_5.png",
-        "image_assembly": "./images_assembly/pezzo_6.png",
-        "video": "./videos/operazione_6.mov"
-      }
-    },
-    {
-      "id": 12,
-      "name": "Withdraw Components for PIECE 7",
-      "category": "withdraw",
-      "target_cycle_time": 10,
-      "adaptive_fields": {
-        "short_text": "Withdraw ELA from shelf A3",
-        "long_text": "",
-        "image_single_pieces": "./images_single_pieces/pezzi_iniziali_7.png",
-        "image_assembly": "",
-        "video": ""
-      }
-    },
-    {
-      "id": 13,
-      "name": "Assembly PIECE 7",
-      "category": "assembly",
-      "target_cycle_time": 15,
-      "adaptive_fields": {
-        "short_text": "Attach ELA to PIECE 6",
-        "long_text": "Attach ELA by joining one end to the round part of PIECE 6 and pulling it to the bottom. \n Pass ELA around the two pieces in the center and have it rest on the bottom of the L shape",
-        "image_single_pieces": "./images_single_pieces/pezzi_iniziali_7_con_pezzo_6.png",
-        "image_assembly": "./images_assembly/pezzo_7.png",
-        "video": "./videos/operazione_7.mov"
-      }
-    },
-    {
-      "id": 14,
-      "name": "Withdraw Components for PIECE 8",
-      "category": "withdraw",
-      "target_cycle_time": 10,
-      "adaptive_fields": {
-        "short_text": "Withdraw F1 (2 pieces) from shelf D2",
-        "long_text": "",
-        "image_single_pieces": "./images_single_pieces/pezzi_iniziali_8.png",
-        "image_assembly": "",
-        "video": ""
-      }
-    },
-    {
-      "id": 15,
-      "name": "Assembly PIECE 8",
-      "category": "assembly",
-      "target_cycle_time": 15,
-      "adaptive_fields": {
-        "short_text": "Insert the two F1 pieces into PIECE 7",
-        "long_text": "Fully insert the two F1 pieces into the front holes of PIECE 7. \n Be sure to insert the side of the planks that has a small overhang",
-        "image_single_pieces": "./images_single_pieces/pezzi_iniziali_8_con_pezzo_7.png",
-        "image_assembly": "./images_single_pieces/pezzo_finale.png",
-        "video": "./videos/operazione_8.mov"
-      }
-    },
-    {
-      "id": 16,
-      "name": "Final Control",
-      "category": "control",
-      "target_cycle_time": 15,
-      "adaptive_fields": {
-        "short_text": "Control that ELA has been inserted properly",
-        "long_text": "Push down the part where the two gray axles were inserted and check that the movement creates tension in the elastic ELA. \n If the rubber band does not create enough tension, make sure that all pieces are properly assembled and that the rubber band is not loose",
-        "image_single_pieces": "./images_single_pieces/pezzo_finale.png",
-        "image_assembly": "",
-        "video": "./videos/test.mov"
-      }
+  {
+    "id": 1,
+    "name": "",
+    "category": "",
+    "target_cycle_time": 10,
+    "adaptive_fields": {
+      "short_text": "",
+      "long_text": "",
+      "image_teach_pendant": "",
+      "image_cobot": "",
+      "video": ""
     }
-  ]
+  },
+  {
+    "id": 2,
+    "name": "",
+    "category": "",
+    "target_cycle_time": 60,
+    "adaptive_fields": {
+      "short_text": "",
+      "long_text": "",
+      "image_teach_pendant": "",
+      "image_cobot": "",
+      "video": ""
+    }
+  },
+  {
+    "id": 3,
+    "name": "",
+    "category": "",
+    "target_cycle_time": 45,
+    "adaptive_fields": {
+      "short_text": "",
+      "long_text": "",
+      "image_teach_pendant": "",
+      "image_cobot": "",
+      "video": ""
+    }
+  },
+  {
+    "id": 4,
+    "name": "",
+    "category": "",
+    "target_cycle_time": 30,
+    "adaptive_fields": {
+      "short_text": "",
+      "long_text": "",
+      "image_teach_pendant": "",
+      "image_cobot": "",
+      "video": ""
+    }
+  },
+  {
+    "id": 5,
+    "name": "",
+    "category": "",
+    "target_cycle_time": 30,
+    "adaptive_fields": {
+      "short_text": "",
+      "long_text": "",
+      "image_teach_pendant": "",
+      "image_cobot": "",
+      "video": ""
+    }
+  },
+  {
+    "id": 6,
+    "name": "",
+    "category": "",
+    "target_cycle_time": 15,
+    "adaptive_fields": {
+      "short_text": "",
+      "long_text": "",
+      "image_teach_pendant": "",
+      "image_cobot": "",
+      "video": ""
+    }
+  },
+  {
+    "id": 7,
+    "name": "",
+    "category": "",
+    "target_cycle_time": 45,
+    "adaptive_fields": {
+      "short_text": "",
+      "long_text": "",
+      "image_teach_pendant": "",
+      "image_cobot": "",
+      "video": ""
+    }
+  }
+]
 }
