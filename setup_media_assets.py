@@ -26,6 +26,12 @@ media_library.add_image(
 )
 
 media_library.add_image(
+    "teach_pendant_installation_file.png",
+    "teach_pendant",
+    "Show how to create installation file using teach pendant controls"
+)
+
+media_library.add_image(
     "teach_pendant_joint_movement.png",
     "teach_pendant",
     "Moving individual robot joints with the teach pendant"

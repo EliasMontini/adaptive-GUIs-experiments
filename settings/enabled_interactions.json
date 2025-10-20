@@ -25,7 +25,7 @@
       "buttons": {
         "short_text": true,
         "long_text": true,
-        "teach_pendant": false,
+        "teach_pendant": true,
         "cobot": false,
         "video": false
       }
@@ -135,7 +135,7 @@
       "buttons": {
         "short_text": true,
         "long_text": true,
-        "teach_pendant": false,
+        "teach_pendant": true,
         "cobot": false,
         "video": false
       }
@@ -146,7 +146,7 @@
         "short_text": true,
         "long_text": true,
         "teach_pendant": false,
-        "cobot": false,
+        "cobot": true,
         "video": false
       }
     },
@@ -156,8 +156,8 @@
         "short_text": true,
         "long_text": true,
         "teach_pendant": false,
-        "cobot": false,
-        "video": false
+        "cobot": true,
+        "video": true
       }
     },
     {
@@ -182,86 +182,6 @@
     },
     {
       "step_id": 19,
-      "buttons": {
-        "short_text": true,
-        "long_text": true,
-        "teach_pendant": false,
-        "cobot": false,
-        "video": false
-      }
-    },
-    {
-      "step_id": 20,
-      "buttons": {
-        "short_text": true,
-        "long_text": true,
-        "teach_pendant": false,
-        "cobot": false,
-        "video": false
-      }
-    },
-    {
-      "step_id": 21,
-      "buttons": {
-        "short_text": true,
-        "long_text": true,
-        "teach_pendant": true,
-        "cobot": false,
-        "video": false
-      }
-    },
-    {
-      "step_id": 22,
-      "buttons": {
-        "short_text": true,
-        "long_text": true,
-        "teach_pendant": false,
-        "cobot": true,
-        "video": false
-      }
-    },
-    {
-      "step_id": 23,
-      "buttons": {
-        "short_text": true,
-        "long_text": true,
-        "teach_pendant": false,
-        "cobot": true,
-        "video": true
-      }
-    },
-    {
-      "step_id": 24,
-      "buttons": {
-        "short_text": true,
-        "long_text": true,
-        "teach_pendant": false,
-        "cobot": false,
-        "video": false
-      }
-    },
-    {
-      "step_id": 25,
-      "buttons": {
-        "short_text": true,
-        "long_text": true,
-        "teach_pendant": false,
-        "cobot": false,
-        "video": false
-      }
-    },
-    {
-      "step_id": 26,
-      "buttons": {
-        "short_text": true,
-        "long_text": true,
-        "teach_pendant": false,
-        "cobot": false,
-        "video": false
-      }
-    },
-    {
-      "step_id": 27,
       "buttons": {
         "short_text": true,
         "long_text": true,

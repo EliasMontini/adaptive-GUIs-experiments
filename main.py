@@ -3,14 +3,33 @@ import json
 import os
 from datetime import datetime
 from typing import Dict, List, Optional
-
-from services.sentient_gemini_api import initial_style_recommendations, adapt_step
+import subprocess
+import sys
+from pathlib import Path
 import pathlib
 import dash
 import dash_bootstrap_components as dbc
 import flask
 import pandas as pd
 from dash import dcc, html, Input, Output, State
+
+# Auto-run setup_media_assets.py before anything else
+print("Setting up media assets...")
+try:
+    result = subprocess.run([sys.executable, 'setup_media_assets.py'],
+                          capture_output=True,
+                          text=True,
+                          check=False)
+    if result.returncode == 0:
+        print("✓ Media assets setup completed")
+    else:
+        print(f"⚠ Media assets setup had issues:\n{result.stderr}")
+except Exception as e:
+    print(f"⚠ Could not run media assets setup: {e}")
+    print("Continuing anyway...")
+
+from services.sentient_gemini_api import initial_style_recommendations, adapt_step
+
 import shutil
 from pathlib import Path
 

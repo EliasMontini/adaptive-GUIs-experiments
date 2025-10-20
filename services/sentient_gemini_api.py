@@ -8,7 +8,7 @@ from utils.enabled_interactions_generator import EnabledInteractionsGenerator
 
 import google.generativeai as genai
 from google.api_core import retry as g_retry
-
+from utils.media_assets_manager import MediaAssetsLibrary
 from utils.documentation_utils import DocumentationService
 
 # Configuration
