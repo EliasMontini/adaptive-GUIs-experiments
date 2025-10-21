@@ -12,11 +12,11 @@ from utils.media_assets_manager import MediaAssetsLibrary
 from utils.documentation_utils import DocumentationService
 
 # Configuration
-DOCX_PATH = "/Users/davidematteri/PycharmProjects/adaptive-GUIs-experiments/documentation/Cobot_Documentation.docx"
-TEMPLATE_PATH = "/Users/davidematteri/PycharmProjects/adaptive-GUIs-experiments/settings/steps_sources.json"
-OUTPUT_PATH = "/Users/davidematteri/PycharmProjects/adaptive-GUIs-experiments/settings/completed_steps.json"
-ENABLED_INTERACTIONS_PATH = "/Users/davidematteri/PycharmProjects/adaptive-GUIs-experiments/settings/enabled_interactions.json"
-MEDIA_LIBRARY_PATH = "/Users/davidematteri/PycharmProjects/adaptive-GUIs-experiments/settings/media_library.json"
+DOCX_PATH = "documentation/Cobot_Documentation.docx"
+TEMPLATE_PATH = "settings/steps_sources.json"
+OUTPUT_PATH = "settings/completed_steps.json"
+ENABLED_INTERACTIONS_PATH = "settings/enabled_interactions.json"
+MEDIA_LIBRARY_PATH = "settings/media_library.json"
 
 # Configure logging
 logger = logging.getLogger(__name__)
