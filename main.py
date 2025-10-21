@@ -76,7 +76,7 @@ def serve_videos(path):
 
 # Load JSON data
 def load_assembly_process():
-    with open('settings/completed_steps.json', 'r') as f:
+    with open('settings/completed_steps.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
     return data['steps']
 
@@ -155,7 +155,7 @@ def get_complete_button_states(current_step, clicked_buttons):
 
 def load_enabled_interactions():
     try:
-        with open('settings/enabled_interactions.json', 'r') as f:
+        with open('settings/enabled_interactions.json', 'r', encoding='utf-8') as f:
             return json.load(f)
     except FileNotFoundError:
         # Default to all buttons enabled if file not found
@@ -170,7 +170,7 @@ def load_enabled_interactions():
 
 def load_initial_visibility():
     try:
-        with open('settings/visibility/initial_visibility_data_collection.json', 'r') as f:
+        with open('settings/visibility/initial_visibility_data_collection.json', 'r', encoding='utf-8') as f:
             return json.load(f)
     except FileNotFoundError:
         # Default to all content hidden
@@ -774,11 +774,11 @@ def set_navigation_in_progress(prev_clicks, next_clicks):
 )
 def update_visibility_mode(selected_mode):
     try:
-        with open(f'settings/visibility/{selected_mode}', 'r') as f:
+        with open(f'settings/visibility/{selected_mode}', 'r', encoding='utf-8') as f:
             return json.load(f)
     except FileNotFoundError:
         # Fallback to data collection mode if file not found
-        with open('settings/visibility/initial_visibility_data_collection.json', 'r') as f:
+        with open('settings/visibility/initial_visibility_data_collection.json', 'r', encoding='utf-8') as f:
             return json.load(f)
 
 
@@ -1602,4 +1602,4 @@ def show_profile_form(mode_value):
 
 # Run the app
 if __name__ == '__main__':
-    app.run_server(debug=False, host='0.0.0.0', port=3000)
+    app.run(debug=False, host='0.0.0.0', port=3000)
