@@ -8,14 +8,16 @@ This module handles:
 - Parsing and saving the results
 """
 
-from typing import Dict, Any, Optional
 import json
 import os
-import logging
+from typing import Dict, Any, Optional
+
 import requests
 from docx import Document
-from utils.media_assets_manager import MediaAssetsLibrary, MediaMatcher
-from utils.json_validator import StepsValidator
+from docx.opc.exceptions import OpcError
+import logging
+
+from utils.media_assets_manager import MediaAssetsLibrary
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
@@ -28,9 +30,6 @@ class DocumentationProcessor:
     def __init__(self, docx_path: str):
         """
         Initialize the processor with a DOCX file path.
-
-        Args:
-            docx_path: Path to the DOCX documentation file
         """
         self.docx_path = docx_path
 
@@ -38,19 +37,52 @@ class DocumentationProcessor:
         """
         Extract text from DOCX file, filtering out empty paragraphs.
 
+        Gestisce esplicitamente FileNotFoundError, UnicodeDecodeError, e OpcError.
+
         Returns:
-            Extracted text as a single string
+            Extracted text as a single string, o stringa di errore in caso di fallimento.
         """
-        logger.info(f"Loading documentation from {self.docx_path}")
-        doc = Document(self.docx_path)
+        logger.info(f"Attempting to load documentation from {self.docx_path}")
 
-        # Extract non-empty paragraphs
-        text_content = "\n".join(
-            [para.text for para in doc.paragraphs if para.text.strip()]
-        )
+        try:
+            # Tenta di aprire il documento.
+            # Questo è il punto in cui l'UnicodeDecodeError si verifica su Windows.
+            doc = Document(self.docx_path)
 
-        logger.info(f"Successfully extracted {len(text_content)} characters")
-        return text_content
+            # Estrai paragrafi non vuoti
+            text_content = "\n".join(
+                [para.text for para in doc.paragraphs if para.text.strip()]
+            )
+
+            logger.info(f"Successfully extracted {len(text_content)} characters.")
+            return text_content
+
+        except FileNotFoundError:
+            error_msg = f"ERRORE: File '{self.docx_path}' non trovato."
+            logger.error(error_msg)
+            return error_msg
+
+        except UnicodeDecodeError as e:
+            # GESTIONE SPECIFICA DEL TUO ERRORE:
+            error_msg = (
+                f"ERRORE: Problema di codifica (UnicodeDecodeError) durante l'apertura di '{self.docx_path}'. "
+                f"Causa probabile: Caratteri speciali non UTF-8 (es. virgolette curve). Errore: {e}. "
+                f"Soluzione: Pulisci il file Word o configura PYTHONIOENCODING=utf-8."
+            )
+            logger.critical(error_msg)
+            return error_msg
+
+        except OpcError as e:
+            # Questo gestisce file DOCX danneggiati o non standard (es. file .doc rinominati)
+            error_msg = f"ERRORE: Formato DOCX non valido o file danneggiato: {e}"
+            logger.error(error_msg)
+            return error_msg
+
+        except Exception as e:
+            # Cattura qualsiasi altro errore imprevisto
+            error_msg = f"ERRORE inatteso durante la lettura del DOCX: {e}"
+            logger.error(error_msg)
+            return error_msg
 
 
 class TemplateLoader:
