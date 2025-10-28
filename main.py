@@ -11,9 +11,11 @@ import dash_bootstrap_components as dbc
 import flask
 import pandas as pd
 from dash import dcc, html, Input, Output, State
+from utils.historical_data_manager import HistoricalDataManager
 import shutil
 from pathlib import Path
 
+historical_manager = HistoricalDataManager('analysis_first_round_of_test.csv')
 # Initialize the app with Flask server to handle static files
 
 
@@ -816,10 +818,22 @@ def update_step_content(current_step, assembly_data, experiment_id, mode, profil
     # SENTIENT MODE: Adapt content per step
     if mode == 'sentient.json' and profile and style_token:
         log_summary = build_log_summary(prefs, step_type, get_complete_button_states(current_step, clicked))
+
+        # Genera contesto storico
+        historical_context = historical_manager.format_for_prompt(experiment_id, current_step)
+
         try:
+            enabled_interactions = load_enabled_interactions()
+
+            step_with_id = {
+                "step_id": current_step,
+                "name": title,
+                "category": step_type,
+                "adaptive_fields": af
+            }
             out = adapt_step(profile, style_token,
-                             {"name": title, "category": step_type, "adaptive_fields": af},
-                             log_summary)
+                             step_with_id,
+                             log_summary, enabled_interactions, historical_context)
             # apply returned changes
             title = out.get('title', title)
             patch = out.get('adaptive_fields', {})
