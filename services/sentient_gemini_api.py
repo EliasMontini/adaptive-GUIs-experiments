@@ -158,9 +158,14 @@ Generate appropriate styling (fonts, colours, spacing) based on the profile."""
 def adapt_step(user_profile: Dict[str, Any],
                style_profile_token: str,
                step_payload: Dict[str, Any],
-               log_summary: Dict[str, Any]) -> Dict[str, Any]:
+               log_summary: Dict[str, Any],
+               enabled_interactions: Dict[str, Any] = None,
+               historical_context: str = "") -> Dict[str, Any]:
     """
     Per-step call to adapt content and initial visibility.
+
+    Args:
+        enabled_interactions: Dict with 'steps' array indicating which media are available
     """
     system = (
         "We are developing an experiment of an assembly of a LEGO fork. You have to adapt the content that is shown to the participants on the UI to show them text, images or videos"
@@ -173,7 +178,7 @@ def adapt_step(user_profile: Dict[str, Any],
         "The interface consists of a series of elements that can be customized in terms of visibility. To understand whether an element is visible, each element is assigned a value of true or false to understand whether the element is made visible or not."
         "To each step the participants can have access to a short text, a long text more detailed than the previous one, an image of the components used in that specific operation (in case of a withdraw also the position of the component in the warehouse), an image of the assembled components after the operation and a video of the operation"
         "For withdraw operations there are only the short text and the image of the single components so all the other elements must be set to false. For quality control there is no image of the assembled components. For assembly operations there are no constraints"
-        "This are all the steps that participants have to do to assembly the fork: position two SNP1 pieces so that the two 'L' shapes are mirrored, meaning, pointing in the same direction. Insert the two PG1 pieces into the cross-shaped holes located at the ends of the SNP1 pieces. The two gray axes should be centered into the two L-shaped pieces"
+        "These are all the steps that participants have to do to assembly the fork: position two SNP1 pieces so that the two 'L' shapes are mirrored, meaning, pointing in the same direction. Insert the two PG1 pieces into the cross-shaped holes located at the ends of the SNP1 pieces. The two gray axes should be centered into the two L-shaped pieces"
         "Fully insert the two GNE22 pieces at the left and right ends of the upper axis. Protruding parts should be facing you and parallel to the axis of the workpiece SNP1"
         "Place the two GPP11 pieces at the left and right ends of the lower axis and insert them completely. Make sure that the hole in the protruding part of each GPP11 piece aligns with the protruding axis of PIECE 2, so that the hole is on the same line as the L-shaped piece"
         "Fully insert the 2 PN3 pieces into the 2 holes of GNP21. Once fitted, the 2 PN3 pieces should be parallel to each other and perpendicular to the GNP21 piece. Fully insert the two long sides of PIECE 5 into the remaining cross holes of PIECE 3"
@@ -182,7 +187,7 @@ def adapt_step(user_profile: Dict[str, Any],
         "Fully insert the two F1 pieces into the front holes of PIECE 7. Be sure to insert the side of the planks that has a small overhang"
         "Push down the part where the two gray axles were inserted and check that the movement creates tension in the elastic ELA. If the rubber band does not create enough tension, make sure that all pieces are properly assembled and that the rubber band is not loose"
         "PIECE is the assembled components after the operation. You can use other words to express this concept to the participants"
-        "Modify the content based on the user profile and interaction history. "
+        "You are asked to understand what the user would like to see and for doing so I will also provide you with what the user really wanted in the previous interactions"
         "You can: shorten/expand text, adjust visibility of elements, and modify titles. Rephrase the text provided if needed in order to match the skill, expertise, etc of the participant"
         "DO NOT change media file paths—keep them exactly as provided. If a certain information is missing then the boolean for the visibility is false. "
         "Output strict JSON only."
