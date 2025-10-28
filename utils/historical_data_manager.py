@@ -278,3 +278,14 @@ class HistoricalDataManager:
 
 
 __all__ = ['HistoricalDataManager', 'History', 'UserHistory', 'Step', 'Content', 'Action']
+
+if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
+    manager = HistoricalDataManager('../first_round_of_test.csv')
+    print('full history\n', manager.history, '\n')
+    print('user 1 history\n', manager.history.users['1'], '\n')
+    print('user 1 overall preferences\n', manager.history.users['1'].overall_viewed_content, '\n')
+    print('user 1 history until step\n', manager.get_user_history('1', 4), '\n')
+    print('aggregated preferences for step 2\n', manager.get_aggregated_preferences_for_step(2), '\n')
+    print('aggregated preferences by step (all users)\n', manager.get_aggregated_preferences_by_step(), '\n')
+    print('prompt format for user 1 at step 4\n', manager.format_for_prompt('1', 4), '\n')
