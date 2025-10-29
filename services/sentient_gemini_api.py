@@ -1,4 +1,3 @@
-
 # services/sentient_gemini_api.py
 from typing import Dict, Any, List
 import json
@@ -18,8 +17,7 @@ if not API_KEY:
 
 genai.configure(api_key=API_KEY)
 
-# Choose a Gemini model that supports JSON structured output
-MODEL = os.getenv("GEMINI_MODEL", "gemini-2.0-flash-exp")  # or gemini-1.5-flash for lower latency
+MODEL = os.getenv("GEMINI_MODEL", "gemini-2.0-flash-exp")
 
 # -----------------------------------------------------------------------------
 # Utilities
@@ -51,23 +49,21 @@ def _generate_json(model, user_content: str, schema: Dict[str, Any], temperature
     generation_config = genai.GenerationConfig(
         temperature=temperature,
         response_mime_type="application/json",
-        response_schema=schema,  # Gemini validates/structures output to this schema
+        response_schema=schema,
     )
 
     resp = _with_backoff(
         model.generate_content,
         user_content,
         generation_config=generation_config,
-        safety_settings=None,  # use project defaults
+        safety_settings=None,
         request_options={"retry": g_retry.Retry(), "timeout": 30},
     )
 
-    # The SDK returns the JSON as text; parse it.
     text = resp.text or "{}"
     try:
         return json.loads(text)
     except json.JSONDecodeError:
-        # Fallback: try to extract JSON substring
         start = text.find("{")
         end = text.rfind("}")
         if start != -1 and end != -1 and end > start:
@@ -94,7 +90,7 @@ def initial_style_recommendations(user_profile: Dict[str, Any],
         "You are adapting UI for an industrial assembly training web app (Dash). "
         "Based on the user profile, generate CSS overrides to personalise the interface. "
         "Consider: font sizes, colours, spacing, and contrast for accessibility. "
-        "Add !important to the elements"
+        "Add !important to the elements. "
         "Also generate a style_profile_token that summarises the user's style preferences for future use. "
         "Output strict JSON only."
     )
@@ -118,11 +114,10 @@ def initial_style_recommendations(user_profile: Dict[str, Any],
         "required": ["css_overrides", "style_profile_token", "explanation"],
     }
 
-    # Provide defaults if profile is empty
-    if not user_profile.get("experience"):
-        user_profile["experience"] = "beginner"
-    if not user_profile.get("preferences"):
-        user_profile["preferences"] = ["visual"]
+    # if not user_profile.get("experience"):
+    #     user_profile["experience"] = "beginner"
+    # if not user_profile.get("preferences"):
+    #     user_profile["preferences"] = ["visual"]
 
     user_content = f"""Generate personalised CSS styling for this user:
 
@@ -147,7 +142,6 @@ Generate appropriate styling (fonts, colours, spacing) based on the profile."""
         result = _generate_json(model, user_content, schema, temperature=0.7)
         return result
     except Exception as e:
-        # Return safe defaults on failure
         return {
             "css_overrides": "/* No custom styles - using defaults */",
             "style_profile_token": "default_profile",
@@ -158,38 +152,64 @@ Generate appropriate styling (fonts, colours, spacing) based on the profile."""
 def adapt_step(user_profile: Dict[str, Any],
                style_profile_token: str,
                step_payload: Dict[str, Any],
-               log_summary: Dict[str, Any],
-               enabled_interactions: Dict[str, Any] = None,
-               historical_context: str = "") -> Dict[str, Any]:
+               user_history_formatted: str,
+               aggregated_preferences: Dict[str, float] = None) -> Dict[str, Any]:
     """
     Per-step call to adapt content and initial visibility.
 
     Args:
-        enabled_interactions: Dict with 'steps' array indicating which media are available
+        user_profile: User profile dictionary
+        style_profile_token: Style profile token from initial_style_recommendations
+        step_payload: Current step data
+        user_history_formatted: Formatted history from HistoricalDataManager.format_for_prompt()
+        aggregated_preferences: Optional dict of aggregated preferences for current step
     """
     system = (
-        "We are developing an experiment of an assembly of a LEGO fork. You have to adapt the content that is shown to the participants on the UI to show them text, images or videos"
-        "The participants are asked to withdraw components from a warehouse, assembly them and control if the fork is qualitatevely good"
-        "The components are in a small warehouse divided in 4 columns (identified by a number) and 4 rows (identified by a letter). Almost all warehouse slot have a specific piece which has different names"
-        "So for example in the slot A1 (which is on the top left) there is the piece GNP21, a little black piece with an hole in the middle. In the slot B2 there is the piece SNP1, a L-shaped black piece"
-        "In the slot B4 (on the right, just above the middle) there is the piece PG1, a grey straight piece. In the slot C3 there is GNE22, a black piece with a double hole, one on the horizontal axis and one on the vertical axis"
-        "In B3 there is GPP11, a small black piece and in D1 there is PN3, a straight black piece, the longest of all. In C1 there is PON, a black piece with a small 'sphere'"
-        "In A3 there is ELA, an elastic band. And finally in D2 there is F1, a grey straigth piece, the second logest of all."
-        "The interface consists of a series of elements that can be customized in terms of visibility. To understand whether an element is visible, each element is assigned a value of true or false to understand whether the element is made visible or not."
-        "To each step the participants can have access to a short text, a long text more detailed than the previous one, an image of the components used in that specific operation (in case of a withdraw also the position of the component in the warehouse), an image of the assembled components after the operation and a video of the operation"
-        "For withdraw operations there are only the short text and the image of the single components so all the other elements must be set to false. For quality control there is no image of the assembled components. For assembly operations there are no constraints"
-        "These are all the steps that participants have to do to assembly the fork: position two SNP1 pieces so that the two 'L' shapes are mirrored, meaning, pointing in the same direction. Insert the two PG1 pieces into the cross-shaped holes located at the ends of the SNP1 pieces. The two gray axes should be centered into the two L-shaped pieces"
-        "Fully insert the two GNE22 pieces at the left and right ends of the upper axis. Protruding parts should be facing you and parallel to the axis of the workpiece SNP1"
-        "Place the two GPP11 pieces at the left and right ends of the lower axis and insert them completely. Make sure that the hole in the protruding part of each GPP11 piece aligns with the protruding axis of PIECE 2, so that the hole is on the same line as the L-shaped piece"
-        "Fully insert the 2 PN3 pieces into the 2 holes of GNP21. Once fitted, the 2 PN3 pieces should be parallel to each other and perpendicular to the GNP21 piece. Fully insert the two long sides of PIECE 5 into the remaining cross holes of PIECE 3"
-        "Insert PON completely into the center hole of PIECE 4 so that only the round part protrudes. Ensure that when mounted, PON is perpendicular to PIECE 4"
-        "Attach ELA by joining one end to the round part of PIECE 6 and pulling it to the bottom. Pass ELA around the two pieces in the center and have it rest on the bottom of the L shape"
-        "Fully insert the two F1 pieces into the front holes of PIECE 7. Be sure to insert the side of the planks that has a small overhang"
-        "Push down the part where the two gray axles were inserted and check that the movement creates tension in the elastic ELA. If the rubber band does not create enough tension, make sure that all pieces are properly assembled and that the rubber band is not loose"
-        "PIECE is the assembled components after the operation. You can use other words to express this concept to the participants"
-        "You are asked to understand what the user would like to see and for doing so I will also provide you with what the user really wanted in the previous interactions"
-        "You can: shorten/expand text, adjust visibility of elements, and modify titles. Rephrase the text provided if needed in order to match the skill, expertise, etc of the participant"
-        "DO NOT change media file paths—keep them exactly as provided. If a certain information is missing then the boolean for the visibility is false. "
+        "You are an AI assistant helping to personalize an assembly training interface for LEGO fork assembly.\n\n"
+        "CONTEXT:\n"
+        "Participants withdraw components from a warehouse (4 columns × 4 rows), assemble them, and check quality.\n"
+        "The warehouse layout:\n"
+        "- A1: GNP21 (small black piece with hole)\n"
+        "- B2: SNP1 (L-shaped black piece)\n"
+        "- B4: PG1 (grey straight piece)\n"
+        "- C3: GNE22 (black piece with double hole)\n"
+        "- B3: GPP11 (small black piece)\n"
+        "- D1: PN3 (longest straight black piece)\n"
+        "- C1: PON (black piece with small sphere)\n"
+        "- A3: ELA (elastic band)\n"
+        "- D2: F1 (second longest grey straight piece)\n\n"
+        "ASSEMBLY STEPS:\n"
+        "1. Position two SNP1 pieces mirrored (L shapes pointing same direction)\n"
+        "2. Insert two PG1 pieces into cross holes at SNP1 ends (centered)\n"
+        "3. Insert two GNE22 pieces at left/right ends of upper axis (protruding parts facing you)\n"
+        "4. Place two GPP11 pieces at left/right ends of lower axis (align holes)\n"
+        "5. Insert two PN3 pieces into GNP21 holes (parallel to each other, perpendicular to GNP21)\n"
+        "6. Insert long sides of PIECE 5 into remaining cross holes of PIECE 3\n"
+        "7. Insert PON into center hole of PIECE 4 (round part protrudes, perpendicular)\n"
+        "8. Attach ELA from PON round part, pull down, pass around center pieces, rest on L bottom\n"
+        "9. Insert two F1 pieces into front holes of PIECE 7 (small overhang side)\n"
+        "10. Push down where grey axles inserted, check ELA tension\n\n"
+        "AVAILABLE CONTENT TYPES:\n"
+        "- short_text: Brief instruction\n"
+        "- long_text: Detailed instruction\n"
+        "- single_pieces: Image of components (withdraw: shows warehouse position)\n"
+        "- assembly: Image of assembled result\n"
+        "- video: Video demonstration\n\n"
+        "CONSTRAINTS BY STEP TYPE:\n"
+        "- WITHDRAW: Only short_text + single_pieces available\n"
+        "- QUALITY CONTROL: No assembly image available\n"
+        "- ASSEMBLY: All content types available\n\n"
+        "YOUR TASK:\n"
+        "Based on user profile, interaction history, and aggregated preferences from other users:\n"
+        "1. Determine which content should be INITIALLY VISIBLE (set to true)\n"
+        "2. Adapt text complexity to user expertise\n"
+        "3. Translate if nationality specified\n"
+        "4. Keep titles concise (max 60 chars)\n"
+        "5. DO NOT modify media file paths\n\n"
+        "ADAPTATION STRATEGY:\n"
+        "- Consider what user clicked in previous similar steps\n"
+        "- Consider what majority of users preferred for this step\n"
+        "- Balance user preferences with pedagogical effectiveness\n\n"
         "Output strict JSON only."
     )
 
@@ -241,45 +261,53 @@ def adapt_step(user_profile: Dict[str, Any],
         ],
     }
 
+    # Format aggregated preferences if provided
+    aggregated_prefs_text = ""
+    if aggregated_preferences:
+        aggregated_prefs_text = "\nAGGREGATED PREFERENCES FOR THIS STEP (from other users):\n"
+        for content_type, percentage in aggregated_preferences.items():
+            # Handle both Content enum and dict values
+            content_name = content_type.value if hasattr(content_type, 'value') else str(content_type)
+            # Ensure percentage is a number
+            pct_value = percentage if isinstance(percentage, (int, float)) else 0
+            if pct_value > 0:
+                aggregated_prefs_text += f"  - {content_name}: {pct_value*100:.1f}% of users viewed this\n"
+
     user_content = f"""Adapt this assembly training step:
 
-Style Profile: {style_profile_token}
+STYLE PROFILE: {style_profile_token}
 
-User Profile:
-- Experience: {user_profile.get('experience', 'beginner')}
-- Preferences: {', '.join(user_profile.get('preferences', ['visual']))}
+USER PROFILE:
+- Experience: {user_profile.get('experience', 'not specified')}
+- Preferences: {', '.join(user_profile.get('preferences', ['not specified']))}
+- Nationality: {user_profile.get('nationality', 'not specified')}
 
-Current Step:
+CURRENT STEP:
 - Title: {step_payload.get('name')}
 - Category: {step_payload.get('category')}
-- Short text: {step_payload['adaptive_fields'].get('short_text')}
-- Long text: {step_payload['adaptive_fields'].get('long_text')}
+- Short text: {step_payload['adaptive_fields'].get('short_text', '')}
+- Long text: {step_payload['adaptive_fields'].get('long_text', '')}
 
-User Interaction History:
-- Step type: {log_summary.get('step_type')}
-- Recent preferences: {log_summary.get('recent_weighted', {})}
-- Currently clicked: {log_summary.get('clicked_now', {})}
+{user_history_formatted}
 
-Rules:
-- Keep titles concise (max 60 chars)
-- If nationality provided, translate.
-- DO NOT modify image/video paths—return them unchanged
-- For experts: prefer short text, hide long text initially
-- For beginners: show more visual content initially
-- Adapt based on what the user clicked in similar steps
+{aggregated_prefs_text}
 
-Return adapted content with visibility settings."""
+Based on the user's history and aggregated preferences, determine:
+1. Which content types should be INITIALLY VISIBLE
+2. How to adapt the text complexity
+3. Whether to translate (if nationality specified)
+
+Return adapted content with visibility settings and explanation."""
 
     try:
         model = _gen_model(system)
         result = _generate_json(model, user_content, schema, temperature=0.7)
 
-        # Defensive: ensure media paths are unchanged if present in payload.
-        # (If your upstream always supplies these keys, this is redundant but safe.)
+        # Ensure media paths are unchanged
         af_in = step_payload.get("adaptive_fields", {})
         af_out = result.get("adaptive_fields", {})
         for k in ("image_single_pieces", "image_assembly", "video"):
-            if k in af_in and af_in.get(k) and af_out.get(k) != af_in.get(k):
+            if k in af_in and af_in.get(k):
                 af_out[k] = af_in.get(k)
         result["adaptive_fields"] = af_out
 

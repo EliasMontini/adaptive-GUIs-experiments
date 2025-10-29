@@ -72,12 +72,12 @@ class History(BaseModel):
 class HistoricalDataManager:
 
     def __init__(self, csv_path: str = 'interaction_logs.csv'):
-        self._csv_path = csv_path
-        self._history = self._build_history()
+        self.csv_path = csv_path
+        self.history = self._build_history()
 
     def _load_data(self) -> pd.DataFrame:
         try:
-            df = pd.read_csv(self._csv_path)
+            df = pd.read_csv(self.csv_path)
             df['experiment_id'] = df['experiment_id'].astype(str)
             df['step_id'] = df['step_id'].fillna(0).astype(int)
             df['short_text_viewed'] = df['short_text_viewed'].astype(bool)
@@ -88,7 +88,7 @@ class HistoricalDataManager:
             logger.info(f"✓ Loaded {len(df)} interaction records")
             return df
         except FileNotFoundError:
-            logger.warning(f"CSV file not found: {self._csv_path}")
+            logger.warning(f"CSV file not found: {self.csv_path}")
             return pd.DataFrame()
         except Exception as e:
             logger.error(f"Error loading CSV: {e}")
@@ -157,25 +157,10 @@ class HistoricalDataManager:
                 steps=steps
             )
 
-        self._history = History(users=all_histories)
-        return self._history
+        self.history = History(users=all_histories)
+        return self.history
 
-    def get_user_history(self, user_id: str):
-        """
-        Get interaction history for a specific user.
-
-        Args:
-            user_id: The experiment/user ID
-
-        Returns:
-            List of dictionaries with step interactions
-        """
-        if user_id not in self._history.users:
-            return UserHistory(experiment_id=user_id, steps={})
-
-        return self._history.users[user_id]
-
-    def get_user_history_up_to_step(self, user_id: str, current_step: int) -> UserHistory:
+    def get_user_history(self, user_id: str, current_step: int) -> UserHistory:
         """
         Get interaction history for a specific user up to (but not including) current_step.
 
@@ -184,12 +169,12 @@ class HistoricalDataManager:
             current_step: Current step number (excluded from history)
 
         Returns:
-            List of dictionaries with step interactions
+            UserHistory object with steps before current_step
         """
-        if user_id not in self._history.users:
+        if user_id not in self.history.users:
             return UserHistory(experiment_id=user_id, steps={})
 
-        user_history = self.get_user_history(user_id)
+        user_history = self.history.users[user_id]
         return UserHistory(
             experiment_id=user_history.experiment_id,
             steps={k: v for k, v in user_history.steps.items() if k < current_step}
@@ -209,14 +194,14 @@ class HistoricalDataManager:
 
         overall_viewed_content = {content: 0 for content in Content}
 
-        for user_id in self._history.users:
-            user_history = self._history.users[user_id]
+        for user_id in self.history.users:
+            user_history = self.history.users[user_id]
             if step_id in user_history.steps:
                 step = user_history.steps[step_id]
                 for content in set(step.viewed_content) | set(step.displayed_content):
                     overall_viewed_content[content] += 1
 
-        total_users = len(self._history.users)
+        total_users = len(self.history.users)
 
         return {content: (count / total_users) if total_users > 0 else 0.0
                 for content, count in overall_viewed_content.items()}
@@ -225,7 +210,11 @@ class HistoricalDataManager:
         """
         Get aggregated preferences across all users for each step.
 
-        :return: Dictionary with step_id -> (content_type -> percentage)
+        Args:
+            exclude_user_ids: Optional list of user IDs to exclude
+
+        Returns:
+            Dictionary with step_id -> (content_type -> percentage)
         """
         aggregated_preferences = {}
 
@@ -249,11 +238,11 @@ class HistoricalDataManager:
         """
 
         if exclude_user_ids is None:
-            return self._history
+            return self.history
 
         return History(users={
-            user_id: self._history.users[user_id]
-            for user_id in self._history.users if user_id not in exclude_user_ids
+            user_id: self.history.users[user_id]
+            for user_id in self.history.users if user_id not in exclude_user_ids
         })
 
     def format_for_prompt(self, user_id: str, current_step: int) -> str:
@@ -271,43 +260,40 @@ class HistoricalDataManager:
         prompt_text = ""
 
         # Get current user's history
-        user_history = self.get_user_history_up_to_step(user_id, current_step)
+        user_history = self.get_user_history(user_id, current_step)
 
         # Current user history
-        if user_history:
+        if user_history.steps:
             prompt_text += f"CURRENT USER ({user_id}) PREVIOUS INTERACTIONS:\n"
             for step_id, step_content in user_history.steps.items():
                 viewed_items = [c.value for c in step_content.viewed_content]
                 displayed_items = [c.value for c in step_content.displayed_content]
                 prompt_text += f"  Step {step_id}: displayed [{', '.join(displayed_items)}] viewed [{', '.join(viewed_items)}]\n"
             prompt_text += "\n"
+        else:
+            prompt_text += f"CURRENT USER ({user_id}): No previous interactions\n\n"
 
         # Other users' aggregated patterns
+        prompt_text += "OTHER USERS' AGGREGATED PATTERNS:\n"
         preferences_by_step = self.get_aggregated_preferences_by_step(exclude_user_ids=[user_id])
-        for step_id, preferences_for_step in preferences_by_step.items():
-            prompt_text += f"  Step {step_id}: "
-            for content_type, views in preferences_for_step.items():
-                pct = views / sum([views for views in preferences_for_step.values()]) * 100 if views else 0
-                if pct > 50:  # Only mention if majority viewed
-                    prompt_text += f"{content_type.value}({pct:.0f}%) "
-            prompt_text += "\n"
+
+        if preferences_by_step:
+            for step_id, preferences_for_step in sorted(preferences_by_step.items()):
+                total_views = sum(preferences_for_step.values())
+                if total_views > 0:
+                    prompt_text += f"  Step {step_id}: "
+                    high_preference_items = []
+                    for content_type, count in preferences_for_step.items():
+                        pct = (count / total_views) * 100 if total_views > 0 else 0
+                        if pct > 30:  # Mention if >30% viewed
+                            high_preference_items.append(f"{content_type.value}({pct:.0f}%)")
+                    prompt_text += ", ".join(
+                        high_preference_items) if high_preference_items else "no strong preferences"
+                    prompt_text += "\n"
+        else:
+            prompt_text += "  No historical data available from other users\n"
 
         return prompt_text
 
 
 __all__ = ['HistoricalDataManager', 'History', 'UserHistory', 'Step', 'Content', 'Action']
-
-if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)
-    manager = HistoricalDataManager('../first_round_of_test.csv')
-    print('full history\n', manager._history, '\n')
-    for step_id in [2, 99]:
-        print(f'aggregated preferences for step {step_id}\n', manager.get_aggregated_preferences_for_step(step_id), '\n')
-    print('aggregated preferences by step (all users)\n', manager.get_aggregated_preferences_by_step(), '\n')
-    for user_id in ['1', 'not existing user']:
-        user_history = manager.get_user_history(user_id)
-        print(f'user "{user_id}" history\n', user_history, '\n')
-        print(f'user "{user_id}" overall preferences\n', user_history.overall_viewed_content, '\n')
-        for step_id in [2, 99, -1]:
-            print(f'user "{user_id}" history until step {step_id}\n', manager.get_user_history_up_to_step(user_id, step_id), '\n')
-            print(f'prompt format for user "{user_id}" at step {step_id}\n', manager.format_for_prompt(user_id, step_id), '\n')

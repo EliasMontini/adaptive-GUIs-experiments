@@ -765,7 +765,45 @@ def update_visibility_mode(selected_mode):
             return json.load(f)
 
 
-# Update step content
+def convert_aggregated_preferences(aggregated_prefs):
+    """
+    Converte le chiavi Content enum in stringhe per la compatibilità con Gemini
+
+    Args:
+        aggregated_prefs: Dict con chiavi Content enum
+
+    Returns:
+        Dict con chiavi stringa
+    """
+    if not aggregated_prefs:
+        return {}
+
+    converted = {}
+    for content_type, percentage in aggregated_prefs.items():
+        # Converti Content enum in stringa
+        if hasattr(content_type, 'value'):
+            key = content_type.value
+        else:
+            key = str(content_type)
+
+        # Assicurati che percentage sia un numero
+        if isinstance(percentage, (list, tuple)):
+            # Se è una lista/tupla, prendi il primo elemento
+            value = float(percentage[0]) if percentage else 0.0
+        elif isinstance(percentage, (int, float)):
+            value = float(percentage)
+        else:
+            value = 0.0
+
+        converted[key] = value
+
+    return converted
+
+
+# ============================================================================
+# CALLBACK update_step_content - VERSIONE CORRETTA
+# ============================================================================
+
 @app.callback(
     [Output('step-header', 'children'),
      Output('step-progress-bar', 'value'),
@@ -817,23 +855,37 @@ def update_step_content(current_step, assembly_data, experiment_id, mode, profil
 
     # SENTIENT MODE: Adapt content per step
     if mode == 'sentient.json' and profile and style_token:
-        log_summary = build_log_summary(prefs, step_type, get_complete_button_states(current_step, clicked))
-
-        # Genera contesto storico
-        historical_context = historical_manager.format_for_prompt(experiment_id, current_step)
-
         try:
-            enabled_interactions = load_enabled_interactions()
+            # Genera il contesto storico formattato
+            user_history_formatted = historical_manager.format_for_prompt(experiment_id, current_step)
+            print(user_history_formatted)
+            # Ottieni le preferenze aggregate per questo step e convertile
+            aggregated_prefs_raw = historical_manager.get_aggregated_preferences_for_step(current_step)
+            aggregated_prefs = convert_aggregated_preferences(aggregated_prefs_raw)
 
-            step_with_id = {
-                "step_id": current_step,
+            # Prepara il payload dello step
+            step_payload = {
                 "name": title,
                 "category": step_type,
                 "adaptive_fields": af
             }
-            out = adapt_step(profile, style_token,
-                             step_with_id,
-                             log_summary, enabled_interactions, historical_context)
+
+            print(f"\n=== Calling adapt_step for step {current_step} ===")
+            print(f"Step type: {step_type}")
+            print(f"User history preview: {user_history_formatted[:300]}...")
+            print(f"Aggregated prefs: {aggregated_prefs}")
+
+            # Chiama adapt_step con i parametri corretti
+            out = adapt_step(
+                user_profile=profile,
+                style_profile_token=style_token,
+                step_payload=step_payload,
+                user_history_formatted=user_history_formatted,
+                aggregated_preferences=aggregated_prefs
+            )
+
+            print(f"Received adaptation: {out.get('explanation_of_changes', 'No explanation')}")
+
             # apply returned changes
             title = out.get('title', title)
             patch = out.get('adaptive_fields', {})
@@ -844,12 +896,15 @@ def update_step_content(current_step, assembly_data, experiment_id, mode, profil
             vp = patch.get('video', vp)
             vis = out.get('initial_visibility', vis)
             explanation = out.get('explanation_of_changes', "")
+
             # log the adaptation
             log_interaction(experiment_id, mode, 'sentient_step_adapted', current_step, title, vis)
+
         except Exception as e:
-            explanation = f"Adaptive update failed; using base content. ({e})"
+            explanation = f"Adaptive update failed; using base content. Error: {str(e)}"
             import traceback
-            print(f"Error in adapt_step: {traceback.format_exc()}")
+            print(f"\n!!! Error in adapt_step !!!")
+            print(traceback.format_exc())
 
     progress_value = (current_step / len(assembly_data)) * 100
     step_text = f"Step {current_step} of {len(assembly_data)}"
@@ -881,7 +936,6 @@ def update_step_content(current_step, assembly_data, experiment_id, mode, profil
         show(not vis['video']), show(vis['video']),
         explanation
     )
-
 
 #  toggle_short_text callback
 
@@ -1567,7 +1621,6 @@ def ensure_directories_exist():
     ]
     for directory in directories:
         os.makedirs(directory, exist_ok=True)
-
 
 @app.callback(
     Output('sentient-profile-form', 'style'),
