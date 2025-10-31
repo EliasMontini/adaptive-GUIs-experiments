@@ -15,7 +15,7 @@ from utils.historical_data_manager import HistoricalDataManager
 import shutil
 from pathlib import Path
 
-historical_manager = HistoricalDataManager('analysis_first_round_of_test.csv')
+historical_manager = HistoricalDataManager('first_round_of_test.csv')
 # Initialize the app with Flask server to handle static files
 
 
@@ -75,6 +75,7 @@ def init_log_df():
 # Log user interaction
 def log_interaction(experiment_id, mode, action, step_id=None, step_name=None, button_states=None):
     df = init_log_df()
+
     # not the best solution :)
     dropdown_options = [
         {'label': 'Data Collection', 'value': 'initial_visibility_data_collection.json'},
@@ -85,22 +86,41 @@ def log_interaction(experiment_id, mode, action, step_id=None, step_name=None, b
     ]
     mode_to_label = {option['value']: option['label'] for option in dropdown_options}
     mode = mode_to_label.get(mode, 'Unknown Mode')
+
+    # ✅ CRITICO: Inizializza SEMPRE tutti i campi viewed (anche se 0)
     new_row = {
         'experiment_id': experiment_id,
         'mode': mode,
         'timestamp': datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f"),
         'action': action,
         'step_id': step_id if step_id is not None else 'N/A',
-        'step_name': step_name if step_name is not None else 'N/A'
+        'step_name': step_name if step_name is not None else 'N/A',
+        # 🆕 SEMPRE presenti
+        'short_text_viewed': 0,
+        'long_text_viewed': 0,
+        'single_pieces_viewed': 0,
+        'assembly_viewed': 0,
+        'video_viewed': 0
     }
 
-    # Aggiungi lo stato di tutti i pulsanti se fornito
+    # ✅ Sovrascrivi con i valori effettivi se forniti
     if button_states:
-        for button_name, state in button_states.items():
-            new_row[f'{button_name}_viewed'] = 1 if state else 0
+        if isinstance(button_states, dict):
+            # Caso 1: button_states è un dict con chiavi boolean
+            new_row['short_text_viewed'] = 1 if button_states.get('short_text', False) else 0
+            new_row['long_text_viewed'] = 1 if button_states.get('long_text', False) else 0
+            new_row['single_pieces_viewed'] = 1 if button_states.get('single_pieces', False) else 0
+            new_row['assembly_viewed'] = 1 if button_states.get('assembly', False) else 0
+            new_row['video_viewed'] = 1 if button_states.get('video', False) else 0
+        else:
+            # Caso 2: button_states potrebbe essere passato in altro formato
+            # (per retrocompatibilità con vecchie chiamate)
+            for button_name, state in button_states.items():
+                new_row[f'{button_name}_viewed'] = 1 if state else 0
 
     df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
     df.to_csv('interaction_logs.csv', index=False)
+
     return
 
 
@@ -849,7 +869,7 @@ def update_step_content(current_step, assembly_data, experiment_id, mode, profil
 
     short_text, long_text = af['short_text'], af['long_text']
 
-    # default visibility: hidden placeholders shown, actual content hidden
+    # default visibility
     vis = {"short_text": False, "long_text": False, "single_pieces": False, "assembly": False, "video": False}
     explanation = ""
 
@@ -858,9 +878,19 @@ def update_step_content(current_step, assembly_data, experiment_id, mode, profil
         try:
             # Genera il contesto storico formattato
             user_history_formatted = historical_manager.format_for_prompt(experiment_id, current_step)
+
+            print(f"\n{'=' * 80}")
+            print(f"USER {experiment_id} - STEP {current_step}")
+            print(f"{'=' * 80}")
             print(user_history_formatted)
-            # Ottieni le preferenze aggregate per questo step e convertile
-            aggregated_prefs_raw = historical_manager.get_aggregated_preferences_for_step(current_step)
+            print(f"{'=' * 80}\n")
+
+            # Passa user_id e current_step per ottenere preferenze aggregate
+            aggregated_prefs_raw = historical_manager.get_aggregated_preferences_for_step(
+                experiment_id,
+                current_step,
+                current_step  # Preferenze per lo step corrente
+            )
             aggregated_prefs = convert_aggregated_preferences(aggregated_prefs_raw)
 
             # Prepara il payload dello step
@@ -870,12 +900,9 @@ def update_step_content(current_step, assembly_data, experiment_id, mode, profil
                 "adaptive_fields": af
             }
 
-            print(f"\n=== Calling adapt_step for step {current_step} ===")
-            print(f"Step type: {step_type}")
-            print(f"User history preview: {user_history_formatted[:300]}...")
-            print(f"Aggregated prefs: {aggregated_prefs}")
+            print(f"Aggregated prefs for step {current_step}: {aggregated_prefs}")
 
-            # Chiama adapt_step con i parametri corretti
+            # Chiama adapt_step
             out = adapt_step(
                 user_profile=profile,
                 style_profile_token=style_token,
@@ -884,7 +911,7 @@ def update_step_content(current_step, assembly_data, experiment_id, mode, profil
                 aggregated_preferences=aggregated_prefs
             )
 
-            print(f"Received adaptation: {out.get('explanation_of_changes', 'No explanation')}")
+            print(f"Gemini adaptation: {out.get('explanation_of_changes', 'No explanation')}")
 
             # apply returned changes
             title = out.get('title', title)
@@ -894,7 +921,18 @@ def update_step_content(current_step, assembly_data, experiment_id, mode, profil
             sp = patch.get('image_single_pieces', sp)
             ap = patch.get('image_assembly', ap)
             vp = patch.get('video', vp)
-            vis = out.get('initial_visibility', vis)
+            # ⚠️ CRITICAL: Valida e forza i vincoli DOPO la risposta di Gemini
+            vis_suggested = out.get('initial_visibility', vis)
+            vis = validate_and_enforce_visibility(
+                vis_suggested,
+                current_step,
+                load_enabled_interactions(),  # Ricarica la config
+                step_type
+            )
+
+            print(f"After validation: {vis}")
+            print(f"{'=' * 80}\n")
+
             explanation = out.get('explanation_of_changes', "")
 
             # log the adaptation
@@ -1510,17 +1548,6 @@ def reset_button_states_and_visibility(
                 step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
                 log_interaction(experiment_id, mode, 'computed_suggestion', current_step, step_name, content)
 
-            # # Track the initially visible content
-            # initially_visible_content = [k for k, v in content.items() if v]
-            # user_preferences = update_user_preferences(
-            #     user_preferences,
-            #     step_type,  # Use the correctly extracted step type
-            #     initially_visible_content,
-            #     datetime.now().timestamp(),
-            #     is_initial=True
-            # )
-            #
-            # print(f"Updated user preferences at step {current_step} (Type: {step_type}):", user_preferences)
 
     # Default labels
     default_label = [html.I(className="bi bi-eye-fill me-1"), "Show"]
@@ -1630,6 +1657,143 @@ def show_profile_form(mode_value):
     return {'display': 'block'} if mode_value == 'sentient.json' else {'display': 'none'}
 
 
-# Run the app
+def validate_and_enforce_visibility(
+        visibility: dict,
+        step_id: int,
+        enabled_interactions: dict,
+        step_category: str
+) -> dict:
+    """
+    Valida e forza i vincoli di visibilità basati su:
+    1. enabled_interactions.json (vincoli tecnici per step)
+    2. Regole per categoria (WITHDRAW, ASSEMBLY, CONTROL)
+
+    Args:
+        visibility: Dict con le visibilità suggerite da Gemini
+        step_id: ID dello step corrente
+        enabled_interactions: Configurazione da enabled_interactions.json
+        step_category: Categoria dello step (withdraw, assembly, control)
+
+    Returns:
+        Dict con visibilità corrette e validate
+    """
+
+    # Trova la configurazione per questo step
+    step_config = next(
+        (step for step in enabled_interactions['steps'] if step['step_id'] == step_id),
+        None
+    )
+
+    if not step_config:
+        # Fallback: disabilita tutto se non trovato
+        print(f"⚠️ No config found for step {step_id}, disabling all content")
+        return {k: False for k in visibility.keys()}
+
+    buttons = step_config.get('buttons', {})
+    validated = {}
+
+    # Regole specifiche per categoria
+    category_rules = {
+        'withdraw': {
+            # WITHDRAW: Solo short_text e single_pieces disponibili
+            'long_text': False,
+            'assembly': False,
+            'video': False
+        },
+        'control': {
+            # CONTROL: NO assembly image
+            'assembly': False
+        },
+        'assembly': {
+            # ASSEMBLY: Tutti disponibili (se abilitati in buttons)
+        }
+    }
+
+    category_lower = step_category.lower() if step_category else ''
+    rules = category_rules.get(category_lower, {})
+
+    for content_type, suggested_visibility in visibility.items():
+        # Check 1: Il bottone è abilitato in enabled_interactions.json?
+        button_enabled = buttons.get(content_type, False)
+
+        # Check 2: La categoria lo permette?
+        category_allowed = rules.get(content_type, True)  # Default: allowed
+
+        # La visibilità finale è: suggerita AND abilitata AND permessa dalla categoria
+        final_visibility = suggested_visibility and button_enabled and category_allowed
+
+        validated[content_type] = final_visibility
+
+        # Log se c'è stata una modifica
+        if suggested_visibility and not final_visibility:
+            reason = []
+            if not button_enabled:
+                reason.append(f"button disabled in config")
+            if not category_allowed:
+                reason.append(f"not allowed for {category_lower} steps")
+
+            print(f"🚫 Overriding {content_type} visibility for step {step_id}: {', '.join(reason)}")
+
+    return validated
+
+
+def test_log_interaction():
+    """Test che verifica che il logging funzioni correttamente"""
+    import os
+
+    # Crea un CSV di test
+    test_csv = 'test_interaction_logs.csv'
+    if os.path.exists(test_csv):
+        os.remove(test_csv)
+
+    # Backup del manager originale
+    original_csv = 'interaction_logs.csv'
+    import shutil
+    if os.path.exists(original_csv):
+        shutil.copy(original_csv, f'{original_csv}.backup')
+
+    # Test 1: Log senza button_states
+    log_interaction('test_user', 'sentient.json', 'start_experiment', 0, 'Start')
+
+    # Test 2: Log con button_states
+    log_interaction(
+        'test_user',
+        'sentient.json',
+        'step_loaded',
+        1,
+        'Step 1',
+        button_states={
+            'short_text': True,
+            'long_text': False,
+            'single_pieces': True,
+            'assembly': False,
+            'video': False
+        }
+    )
+
+    # Verifica che il CSV abbia le colonne corrette
+    df = pd.read_csv('interaction_logs.csv')
+    required_cols = ['experiment_id', 'mode', 'timestamp', 'action', 'step_id', 'step_name',
+                     'short_text_viewed', 'long_text_viewed', 'single_pieces_viewed',
+                     'assembly_viewed', 'video_viewed']
+
+    missing = set(required_cols) - set(df.columns)
+    if missing:
+        print(f"❌ Missing columns: {missing}")
+        return False
+
+    print(f"✅ All required columns present!")
+    print(f"✅ CSV has {len(df)} rows")
+    print(df.head())
+
+    # Test che HistoricalDataManager possa caricare i dati
+    manager = HistoricalDataManager('interaction_logs.csv')
+    print(f"✅ HistoricalDataManager loaded {len(manager.history.users)} users")
+
+    return True
+
+
+# Esegui il test solo se eseguito direttamente
 if __name__ == '__main__':
-    app.run_server(debug=False, host='0.0.0.0', port=3000)
+    # test_log_interaction()  # Decommentare per testare
+    app.run(debug=False, host='0.0.0.0', port=3000)

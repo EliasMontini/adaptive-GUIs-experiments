@@ -188,7 +188,7 @@ def adapt_step(user_profile: Dict[str, Any],
         "7. Insert PON into center hole of PIECE 4 (round part protrudes, perpendicular)\n"
         "8. Attach ELA from PON round part, pull down, pass around center pieces, rest on L bottom\n"
         "9. Insert two F1 pieces into front holes of PIECE 7 (small overhang side)\n"
-        "10. Push down where grey axles inserted, check ELA tension\n\n"
+        "10. (and QUALITY CONTROL STEP) Push down where grey axles inserted, check ELA tension\n\n"
         "AVAILABLE CONTENT TYPES:\n"
         "- short_text: Brief instruction\n"
         "- long_text: Detailed instruction\n"
