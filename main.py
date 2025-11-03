@@ -706,6 +706,7 @@ def begin_training(n_clicks, experiment_id, mode, experience, preferences, natio
     style_expl = ""
     style_token = None
     css_text = ""
+    css_html = ""
 
     # Sentient mode: build profile and request style overrides
     if mode == 'sentient.json':
@@ -858,7 +859,7 @@ def convert_aggregated_preferences(aggregated_prefs):
 def update_step_content(current_step, assembly_data, experiment_id, mode, profile, style_token, clicked, prefs):
     if current_step <= 0 or current_step > len(assembly_data):
         return "", 0, "", "", "", "", "", "", "", {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, ""
-
+    enabled_interactions = load_enabled_interactions()
     step = assembly_data[current_step - 1]
     step_type = step.get('category', 'Unknown')
 
@@ -895,6 +896,7 @@ def update_step_content(current_step, assembly_data, experiment_id, mode, profil
 
             # Prepara il payload dello step
             step_payload = {
+                "step_id": current_step,
                 "name": title,
                 "category": step_type,
                 "adaptive_fields": af
@@ -908,7 +910,8 @@ def update_step_content(current_step, assembly_data, experiment_id, mode, profil
                 style_profile_token=style_token,
                 step_payload=step_payload,
                 user_history_formatted=user_history_formatted,
-                aggregated_preferences=aggregated_prefs
+                aggregated_preferences=aggregated_prefs,
+                enabled_interactions=enabled_interactions
             )
 
             print(f"Gemini adaptation: {out.get('explanation_of_changes', 'No explanation')}")
@@ -926,7 +929,7 @@ def update_step_content(current_step, assembly_data, experiment_id, mode, profil
             vis = validate_and_enforce_visibility(
                 vis_suggested,
                 current_step,
-                load_enabled_interactions(),  # Ricarica la config
+                enabled_interactions,  # Ricarica la config
                 step_type
             )
 

@@ -153,7 +153,8 @@ def adapt_step(user_profile: Dict[str, Any],
                style_profile_token: str,
                step_payload: Dict[str, Any],
                user_history_formatted: str,
-               aggregated_preferences: Dict[str, float] = None) -> Dict[str, Any]:
+               aggregated_preferences: Dict[str, float],
+               enabled_interactions: Dict[str, Any] = None) -> Dict[str, Any]:
     """
     Per-step call to adapt content and initial visibility.
 
@@ -165,36 +166,17 @@ def adapt_step(user_profile: Dict[str, Any],
         aggregated_preferences: Optional dict of aggregated preferences for current step
     """
     system = (
-        "You are an AI assistant helping to personalize an assembly training interface for LEGO fork assembly.\n\n"
-        "CONTEXT:\n"
-        "Participants withdraw components from a warehouse (4 columns × 4 rows), assemble them, and check quality.\n"
-        "The warehouse layout:\n"
-        "- A1: GNP21 (small black piece with hole)\n"
-        "- B2: SNP1 (L-shaped black piece)\n"
-        "- B4: PG1 (grey straight piece)\n"
-        "- C3: GNE22 (black piece with double hole)\n"
-        "- B3: GPP11 (small black piece)\n"
-        "- D1: PN3 (longest straight black piece)\n"
-        "- C1: PON (black piece with small sphere)\n"
-        "- A3: ELA (elastic band)\n"
-        "- D2: F1 (second longest grey straight piece)\n\n"
-        "ASSEMBLY STEPS:\n"
-        "1. Position two SNP1 pieces mirrored (L shapes pointing same direction)\n"
-        "2. Insert two PG1 pieces into cross holes at SNP1 ends (centered)\n"
-        "3. Insert two GNE22 pieces at left/right ends of upper axis (protruding parts facing you)\n"
-        "4. Place two GPP11 pieces at left/right ends of lower axis (align holes)\n"
-        "5. Insert two PN3 pieces into GNP21 holes (parallel to each other, perpendicular to GNP21)\n"
-        "6. Insert long sides of PIECE 5 into remaining cross holes of PIECE 3\n"
-        "7. Insert PON into center hole of PIECE 4 (round part protrudes, perpendicular)\n"
-        "8. Attach ELA from PON round part, pull down, pass around center pieces, rest on L bottom\n"
-        "9. Insert two F1 pieces into front holes of PIECE 7 (small overhang side)\n"
-        "10. (and QUALITY CONTROL STEP) Push down where grey axles inserted, check ELA tension\n\n"
-        "AVAILABLE CONTENT TYPES:\n"
-        "- short_text: Brief instruction\n"
-        "- long_text: Detailed instruction\n"
-        "- single_pieces: Image of components (withdraw: shows warehouse position)\n"
-        "- assembly: Image of assembled result\n"
-        "- video: Video demonstration\n\n"
+        "You must adapt the content displayed to the participants on the UI (User Interface) by adjusting the visibility of text, images, and videos."
+        "The interface includes the following elements for each step, which can be set to visible (true) or hidden (false):"
+        "short_text: A concise, one-line summary of the task. long_text: A detailed, multi-step explanation. image_single_pieces: Image of components (withdraw: shows warehouse position) "
+        "image_assembly: Image of assembled result. video: A dynamic video demonstration of the operation."
+        "If a certain information (image or video) is missing, then the boolean for its visibility must be false."
+        "You cann't modify the short and long text, keep them as they are. Do not show both long text and short text at the same time for the initial visibility, if you want to make a text visible choose only one of them. Your task is to develop the final visibility configuration JSON that determines whether each element is visible (true) or not (false). It must be true at least one element per step, so it is visible."
+        "Modify the content based on the user profile that is given and the interaction history. If you see a participant is requesting a certain info multiple times and anticipate it and show it immediately in the next visibility configuration"
+        "Thus you can adjust visibility of elements"
+        "IMPORTANT: Do not set visibility to true for a media type if it is marked as unavailable (false)"
+        "Don't change media file paths—keep them exactly as provided. Do not invent paths for images or video that do not exist. If a certain information is missing then the boolean for the visibility is false."
+        "You need also to provide a reasoning of why you choose to make visible something instead of others. Output strict JSON only.\n\n"
         "CONSTRAINTS BY STEP TYPE:\n"
         "- WITHDRAW: Only short_text + single_pieces available\n"
         "- QUALITY CONTROL: No assembly image available\n"
@@ -202,10 +184,8 @@ def adapt_step(user_profile: Dict[str, Any],
         "YOUR TASK:\n"
         "Based on user profile, interaction history, and aggregated preferences from other users:\n"
         "1. Determine which content should be INITIALLY VISIBLE (set to true)\n"
-        "2. Adapt text complexity to user expertise\n"
-        "3. Translate if nationality specified\n"
-        "4. Keep titles concise (max 60 chars)\n"
-        "5. DO NOT modify media file paths\n\n"
+        "2. Translate if nationality specified\n"
+        "3. DO NOT modify media file paths\n\n"
         "ADAPTATION STRATEGY:\n"
         "- Consider what user clicked in previous similar steps\n"
         "- Consider what majority of users preferred for this step\n"
@@ -260,6 +240,26 @@ def adapt_step(user_profile: Dict[str, Any],
             "explanation_of_changes",
         ],
     }
+
+    # Get available media for this step
+    available_media = {
+        "single_pieces": True,
+        "assembly": True,
+        "video": True
+    }
+
+    if enabled_interactions and 'steps' in enabled_interactions:
+        step_id = step_payload.get('step_id', 0)
+        for step_config in enabled_interactions['steps']:
+            if step_config.get('step_id') == step_id:
+                available_media = step_config.get('buttons', {})
+                # Extract only media types (not short_text/long_text)
+                available_media = {
+                    'single_pieces': available_media.get('single_pieces', False),
+                    'assembly': available_media.get('assembly', False),
+                    'video': available_media.get('video', False)
+                }
+                break
 
     # Format aggregated preferences if provided
     aggregated_prefs_text = ""
