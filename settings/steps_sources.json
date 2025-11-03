@@ -99,7 +99,7 @@
       "adaptive_fields": {
         "short_text": "Insert the two PN3 pieces into the holes of GNP21",
         "long_text": "Fully insert the 2 PN3 pieces into the 2 holes of GNP21. Once fitted, the 2 PN3 pieces should be parallel to each other and perpendicular to the GNP21 piece",
-        "image_single_pieces": "./images_single_pieces/pezzi_iniziali_4.png",
+        "image_single_pieces": "./images_single_pieces/pezzi_iniziali_4_senza_magazzino.png",
         "image_assembly": "./images_assembly/pezzo_4.png",
         "video": "./videos/operazione_4.mov"
       }
