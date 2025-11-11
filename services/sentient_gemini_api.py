@@ -4,8 +4,12 @@ import json
 import os
 import time
 
+
 import google.generativeai as genai
 from google.api_core import retry as g_retry
+
+_last_api_call = None
+_MIN_DELAY_BETWEEN_CALLS = 2.0  # secondi tra chiamat# e
 
 # -----------------------------------------------------------------------------
 # Configuration
@@ -17,20 +21,41 @@ if not API_KEY:
 
 genai.configure(api_key=API_KEY)
 
-MODEL = os.getenv("GEMINI_MODEL", "gemini-2.0-flash-exp")
+MODEL = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
 
 # -----------------------------------------------------------------------------
 # Utilities
 # -----------------------------------------------------------------------------
 def _with_backoff(fn, *args, **kwargs):
-    """Simple linear backoff to keep latency low in UI flows."""
+    """Simple linear backoff with rate limiting."""
+    global _last_api_call
+
+    # Rate limiting: aspetta se l'ultima chiamata è troppo recente
+    if _last_api_call:
+        elapsed = time.time() - _last_api_call
+        if elapsed < _MIN_DELAY_BETWEEN_CALLS:
+            wait_time = _MIN_DELAY_BETWEEN_CALLS - elapsed
+            print(f"⏳ Rate limiting: waiting {wait_time:.1f}s before API call")
+            time.sleep(wait_time)
+
     last = None
-    for delay in (0, 0.5, 1.0):
+    for delay in (0, 1.0, 2.0, 5.0):  # ⚠️ Aumentati i delay
         try:
-            return fn(*args, **kwargs)
+            result = fn(*args, **kwargs)
+            _last_api_call = time.time()
+            return result
         except Exception as e:
             last = e
-            time.sleep(delay)
+            error_str = str(e)
+
+            # Se è un errore 429, aspetta di più
+            if "429" in error_str or "quota" in error_str.lower():
+                print(f"❌ Quota exceeded. Waiting 60s before retry...")
+                time.sleep(60)  # Aspetta 1 minuto
+            else:
+                print(f"⚠️ API error: {error_str}. Retrying in {delay}s...")
+                time.sleep(delay)
+
     raise last
 
 
