@@ -1,0 +1,107 @@
+experiment_id,mode,timestamp,action,step_id,step_name,short_text_viewed,long_text_viewed,single_pieces_viewed,assembly_viewed,video_viewed
+9,Sentient,2025-11-12 14:16:32.115713,start_experiment,,,0,0,0,0,0
+9,Sentient,2025-11-12 14:16:32.204751,step_loaded,1.0,Withdraw Components for PIECE 1,0,0,0,0,0
+9,Sentient,2025-11-12 14:16:43.943751,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,0,0,0
+9,Sentient,2025-11-12 14:16:44.984885,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,0,0,0
+9,Sentient,2025-11-12 14:20:03.793671,toggle_single_pieces_block,1.0,Withdraw Components for PIECE 1,0,0,1,0,0
+9,Sentient,2025-11-12 14:22:44.684699,navigate_next,1.0,Withdraw Components for PIECE 1,0,0,1,0,0
+9,Sentient,2025-11-12 14:22:44.723283,initial_suggestion,1.0,Withdraw Components for PIECE 1,1,0,0,0,0
+9,Sentient,2025-11-12 14:22:44.832474,step_loaded,2.0,Assembly PIECE 1,0,0,0,0,0
+9,Sentient,2025-11-12 14:22:55.937112,sentient_step_adapted,2.0,Assembly PIECE 1,1,0,1,1,0
+9,Sentient,2025-11-12 14:23:06.515262,sentient_step_adapted,2.0,Assembly PIECE 1,1,0,0,0,0
+9,Sentient,2025-11-12 14:25:37.458117,toggle_single_pieces_block,2.0,Assembly PIECE 1,0,0,1,0,0
+9,Sentient,2025-11-12 14:25:39.431229,toggle_assembly_block,2.0,Assembly PIECE 1,0,0,1,1,0
+8,Sentient,2025-11-12 14:50:04.053167,start_experiment,,,0,0,0,0,0
+8,Sentient,2025-11-12 14:50:04.113868,step_loaded,1.0,Withdraw Components for PIECE 1,0,0,0,0,0
+7,Sentient,2025-11-12 14:50:49.071824,start_experiment,,,0,0,0,0,0
+7,Sentient,2025-11-12 14:50:49.160698,step_loaded,1.0,Withdraw Components for PIECE 1,0,0,0,0,0
+7,Sentient,2025-11-12 14:51:01.502460,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,0,0,0
+7,Sentient,2025-11-12 14:56:45.341625,navigate_next,1.0,Withdraw Components for PIECE 1,0,0,0,0,0
+7,Sentient,2025-11-12 14:56:45.361398,initial_suggestion,1.0,Withdraw Components for PIECE 1,1,0,0,0,0
+7,Sentient,2025-11-12 14:56:45.404125,step_loaded,2.0,Assembly PIECE 1,0,0,0,0,0
+7,Sentient,2025-11-12 14:56:51.770864,sentient_step_adapted,2.0,Assembly PIECE 1,1,0,0,0,0
+7,Sentient,2025-11-12 14:56:51.882158,sentient_step_adapted,2.0,Assembly PIECE 1,1,0,0,0,0
+7,Sentient,2025-11-12 14:59:05.679156,navigate_next,2.0,Assembly PIECE 1,0,0,0,0,0
+7,Sentient,2025-11-12 14:59:05.693493,initial_suggestion,2.0,Assembly PIECE 1,1,0,0,0,0
+7,Sentient,2025-11-12 14:59:05.753661,step_loaded,3.0,Withdraw Components for PIECE 2,0,0,0,0,0
+7,Sentient,2025-11-12 14:59:13.422229,sentient_step_adapted,3.0,Withdraw Components for PIECE 2,1,0,0,0,0
+7,Sentient,2025-11-12 14:59:19.701885,sentient_step_adapted,3.0,Withdraw Components for PIECE 2,1,0,0,0,0
+10,Sentient,2025-11-12 15:08:59.121988,start_experiment,,,0,0,0,0,0
+10,Sentient,2025-11-12 15:09:00.349067,step_loaded,1.0,Withdraw Components for PIECE 1,0,0,0,0,0
+10,Sentient,2025-11-12 15:09:13.093574,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,1,0,0
+10,Sentient,2025-11-12 15:09:22.765793,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,1,0,0
+10,Sentient,2025-11-12 15:12:27.903218,navigate_next,1.0,Withdraw Components for PIECE 1,0,0,0,0,0
+10,Sentient,2025-11-12 15:12:27.920145,initial_suggestion,1.0,Withdraw Components for PIECE 1,1,0,0,0,0
+10,Sentient,2025-11-12 15:12:28.043876,step_loaded,2.0,Assembly PIECE 1,0,0,0,0,0
+10,Sentient,2025-11-12 15:12:38.563993,sentient_step_adapted,2.0,Assembly PIECE 1,1,0,1,1,0
+10,Sentient,2025-11-12 15:12:40.543542,sentient_step_adapted,2.0,Assembly PIECE 1,1,0,1,1,0
+10,Sentient,2025-11-12 15:16:44.106045,navigate_next,2.0,Assembly PIECE 1,0,0,0,0,0
+10,Sentient,2025-11-12 15:16:44.124700,initial_suggestion,2.0,Assembly PIECE 1,1,0,0,0,0
+10,Sentient,2025-11-12 15:16:44.190376,step_loaded,3.0,Withdraw Components for PIECE 2,0,0,0,0,0
+10,Sentient,2025-11-12 15:16:59.089784,sentient_step_adapted,3.0,Withdraw Components for PIECE 2,1,0,1,0,0
+10,Sentient,2025-11-12 15:17:03.644859,sentient_step_adapted,3.0,Withdraw Components for PIECE 2,1,0,1,0,0
+10,Sentient,2025-11-12 15:17:31.070036,navigate_next,3.0,Withdraw Components for PIECE 2,0,0,0,0,0
+10,Sentient,2025-11-12 15:17:31.086721,initial_suggestion,3.0,Withdraw Components for PIECE 2,1,0,0,0,0
+10,Sentient,2025-11-12 15:17:31.144708,step_loaded,4.0,Assembly PIECE 2,0,0,0,0,0
+10,Sentient,2025-11-12 15:17:40.428793,sentient_step_adapted,4.0,Assembly PIECE 2,0,1,0,1,1
+10,Sentient,2025-11-12 15:17:58.831659,sentient_step_adapted,4.0,Assembly PIECE 2,1,0,0,1,0
+10,Sentient,2025-11-12 15:19:44.780244,navigate_next,4.0,Assembly PIECE 2,0,0,0,0,0
+10,Sentient,2025-11-12 15:19:44.810397,initial_suggestion,4.0,Assembly PIECE 2,1,0,0,0,0
+10,Sentient,2025-11-12 15:19:44.847483,step_loaded,5.0,Withdraw Components for PIECE 3,0,0,0,0,0
+10,Sentient,2025-11-12 15:19:55.235078,sentient_step_adapted,5.0,Withdraw Components for PIECE 3,1,0,1,0,0
+10,Sentient,2025-11-12 15:19:55.944247,sentient_step_adapted,5.0,Withdraw Components for PIECE 3,1,0,1,0,0
+10,Sentient,2025-11-12 15:22:36.560465,navigate_next,5.0,Withdraw Components for PIECE 3,0,0,0,0,0
+10,Sentient,2025-11-12 15:22:36.583883,initial_suggestion,5.0,Withdraw Components for PIECE 3,1,0,0,0,0
+10,Sentient,2025-11-12 15:22:36.695887,step_loaded,6.0,Assembly PIECE 3,0,0,0,0,0
+10,Sentient,2025-11-12 15:22:45.528168,sentient_step_adapted,6.0,Assembly PIECE 3,1,0,0,1,0
+10,Sentient,2025-11-12 15:22:52.664050,sentient_step_adapted,6.0,Assembly PIECE 3,1,0,0,1,0
+10,Sentient,2025-11-12 15:27:11.274268,navigate_next,6.0,Assembly PIECE 3,0,0,0,0,0
+10,Sentient,2025-11-12 15:27:11.296457,initial_suggestion,6.0,Assembly PIECE 3,1,0,0,0,0
+10,Sentient,2025-11-12 15:27:11.389702,step_loaded,7.0,Withdraw Components for PIECE 4,0,0,0,0,0
+10,Sentient,2025-11-12 15:27:21.473655,sentient_step_adapted,7.0,Withdraw Components for PIECE 4,1,0,1,0,0
+10,Sentient,2025-11-12 15:27:25.205237,sentient_step_adapted,7.0,Withdraw Components for PIECE 4,1,0,1,0,0
+10,Sentient,2025-11-12 15:27:30.582849,navigate_next,7.0,Withdraw Components for PIECE 4,0,0,0,0,0
+10,Sentient,2025-11-12 15:27:30.600096,initial_suggestion,7.0,Withdraw Components for PIECE 4,1,0,0,0,0
+10,Sentient,2025-11-12 15:27:30.692300,step_loaded,8.0,Assembly PIECE 4,0,0,0,0,0
+10,Sentient,2025-11-12 15:27:39.179370,sentient_step_adapted,8.0,Assembly PIECE 4,1,0,0,1,0
+10,Sentient,2025-11-12 15:27:43.469783,sentient_step_adapted,8.0,Assembly PIECE 4,1,0,0,1,0
+10,Sentient,2025-11-12 15:31:24.663385,navigate_next,8.0,Assembly PIECE 4,0,0,0,0,0
+10,Sentient,2025-11-12 15:31:24.686993,initial_suggestion,8.0,Assembly PIECE 4,1,0,0,0,0
+10,Sentient,2025-11-12 15:31:24.850599,step_loaded,9.0,Withdraw Components for PIECE 5,0,0,0,0,0
+10,Sentient,2025-11-12 15:32:04.515423,sentient_step_adapted,9.0,Withdraw Components for PIECE 5,1,0,1,0,0
+10,Sentient,2025-11-12 15:33:24.950183,sentient_step_adapted,9.0,Withdraw Components for PIECE 5,1,0,1,0,0
+10,Sentient,2025-11-12 15:33:41.927789,navigate_next,9.0,Withdraw Components for PIECE 5,0,0,0,0,0
+10,Sentient,2025-11-12 15:33:41.947642,initial_suggestion,9.0,Withdraw Components for PIECE 5,1,0,0,0,0
+10,Sentient,2025-11-12 15:33:41.987463,step_loaded,10.0,Assembly PIECE 5,0,0,0,0,0
+10,Sentient,2025-11-12 15:33:50.094094,sentient_step_adapted,10.0,Assembly PIECE 5,1,0,0,1,0
+10,Sentient,2025-11-12 15:33:51.238714,sentient_step_adapted,10.0,Assembly PIECE 5,1,0,0,1,0
+10,Sentient,2025-11-12 15:34:44.765732,navigate_next,10.0,Assembly PIECE 5,0,0,0,0,0
+10,Sentient,2025-11-12 15:34:44.792128,initial_suggestion,10.0,Assembly PIECE 5,1,0,0,0,0
+10,Sentient,2025-11-12 15:34:44.912153,step_loaded,11.0,Assembly PIECE 6,0,0,0,0,0
+10,Sentient,2025-11-12 15:35:00.141605,sentient_step_adapted,11.0,Assembly PIECE 6,1,0,0,1,0
+10,Sentient,2025-11-12 15:35:12.210506,sentient_step_adapted,11.0,Assembly PIECE 6,1,0,0,1,0
+10,Sentient,2025-11-12 15:39:06.303355,navigate_next,11.0,Assembly PIECE 6,0,0,0,0,0
+10,Sentient,2025-11-12 15:39:06.334037,initial_suggestion,11.0,Assembly PIECE 6,1,0,0,0,0
+10,Sentient,2025-11-12 15:39:06.451205,step_loaded,12.0,Withdraw Components for PIECE 7,0,0,0,0,0
+10,Sentient,2025-11-12 15:39:15.488203,sentient_step_adapted,12.0,Withdraw Components for PIECE 7,1,0,1,0,0
+10,Sentient,2025-11-12 15:39:17.349702,sentient_step_adapted,12.0,Withdraw Components for PIECE 7,1,0,1,0,0
+10,Sentient,2025-11-12 15:39:25.174653,navigate_next,12.0,Withdraw Components for PIECE 7,0,0,0,0,0
+10,Sentient,2025-11-12 15:39:25.237603,initial_suggestion,12.0,Withdraw Components for PIECE 7,1,0,0,0,0
+10,Sentient,2025-11-12 15:39:25.601493,step_loaded,13.0,Assembly PIECE 7,0,0,0,0,0
+10,Sentient,2025-11-12 15:39:43.600527,sentient_step_adapted,13.0,Assembly PIECE 7,1,0,0,1,0
+10,Sentient,2025-11-12 15:39:45.888767,sentient_step_adapted,13.0,Assembly PIECE 7,0,1,0,1,1
+10,Sentient,2025-11-12 15:39:52.035903,navigate_next,13.0,Assembly PIECE 7,0,0,0,0,0
+10,Sentient,2025-11-12 15:39:52.055639,initial_suggestion,13.0,Assembly PIECE 7,1,0,0,0,0
+10,Sentient,2025-11-12 15:39:52.156266,step_loaded,14.0,Withdraw Components for PIECE 8,0,0,0,0,0
+10,Sentient,2025-11-12 15:40:01.528096,sentient_step_adapted,14.0,Withdraw Components for PIECE 8,1,0,1,0,0
+10,Sentient,2025-11-12 15:40:05.440883,navigate_next,14.0,Withdraw Components for PIECE 8,0,0,0,0,0
+10,Sentient,2025-11-12 15:40:05.461241,initial_suggestion,14.0,Withdraw Components for PIECE 8,1,0,0,0,0
+10,Sentient,2025-11-12 15:40:05.553312,step_loaded,15.0,Assembly PIECE 8,0,0,0,0,0
+10,Sentient,2025-11-12 15:40:06.019406,sentient_step_adapted,14.0,Withdraw Components for PIECE 8,1,0,1,0,0
+10,Sentient,2025-11-12 15:40:17.654441,sentient_step_adapted,15.0,Assembly PIECE 8,1,0,0,1,0
+10,Sentient,2025-11-12 15:40:20.813196,sentient_step_adapted,15.0,Assembly PIECE 8,1,0,0,1,0
+10,Sentient,2025-11-12 15:41:33.744531,navigate_next,15.0,Assembly PIECE 8,0,0,0,0,0
+10,Sentient,2025-11-12 15:41:33.764453,initial_suggestion,15.0,Assembly PIECE 8,1,0,0,0,0
+10,Sentient,2025-11-12 15:41:33.915934,step_loaded,16.0,Final Control,0,0,0,0,0
+10,Sentient,2025-11-12 15:41:49.854665,sentient_step_adapted,16.0,Final Control,0,1,0,0,1
+10,Sentient,2025-11-12 15:41:49.974656,sentient_step_adapted,16.0,Final Control,0,1,0,0,1

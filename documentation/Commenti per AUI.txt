@@ -1,0 +1,4 @@
+Commenti per AUI:
+tenere un json con definiti il numero di step, il name e la category --> questo per mantenere l'efficienza, permettendo a Gemini di concentrarsi sull'adattamento piuttosto che sull'inferenza del tipo di step
+
+Va tolto l'obbligo di avere almeno una istruzione per iscritto

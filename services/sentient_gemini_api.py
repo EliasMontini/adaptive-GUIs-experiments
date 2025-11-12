@@ -21,7 +21,7 @@ if not API_KEY:
 
 genai.configure(api_key=API_KEY)
 
-MODEL = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
+MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
 # -----------------------------------------------------------------------------
 # Utilities
@@ -196,10 +196,10 @@ def adapt_step(user_profile: Dict[str, Any],
         "short_text: A concise, one-line summary of the task. long_text: A detailed, multi-step explanation. image_single_pieces: Image of components (withdraw: shows warehouse position) "
         "image_assembly: Image of assembled result. video: A dynamic video demonstration of the operation."
         "If a certain information (image or video) is missing, then the boolean for its visibility must be false."
-        "You cann't modify the short and long text, keep them as they are. Do not show both long text and short text at the same time for the initial visibility, if you want to make a text visible choose only one of them. Your task is to develop the final visibility configuration JSON that determines whether each element is visible (true) or not (false). It must be true at least one element per step, so it is visible."
+        "You can't modify the short and long text, keep them as they are. Do not show both long text and short text at the same time for the initial visibility, if you want to make a text visible choose only one of them. Your task is to develop the final visibility configuration JSON that determines whether each element is visible (true) or not (false). It must be true at least one element per step, so it is visible."
         "Modify the content based on the user profile that is given and the interaction history. If you see a participant is requesting a certain info multiple times and anticipate it and show it immediately in the next visibility configuration"
         "Thus you can adjust visibility of elements"
-        "IMPORTANT: Do not set visibility to true for a media type if it is marked as unavailable (false)"
+        "IMPORTANT: Do not set visibility to true for a media type if its corresponding path in the CURRENT STEP payload is an EMPTY STRING. If the path is provided (i.e., the string is NOT empty), the content is AVAILABLE for adaptation, provided it respects the CONSTRAINTS BY STEP TYPE below.."
         "Don't change media file paths—keep them exactly as provided. Do not invent paths for images or video that do not exist. If a certain information is missing then the boolean for the visibility is false."
         "You need also to provide a reasoning of why you choose to make visible something instead of others. Output strict JSON only.\n\n"
         "CONSTRAINTS BY STEP TYPE:\n"
@@ -298,7 +298,20 @@ def adapt_step(user_profile: Dict[str, Any],
             if pct_value > 0:
                 aggregated_prefs_text += f"  - {content_name}: {pct_value*100:.1f}% of users viewed this\n"
 
+
+    media_availability_text = "AVAILABLE MEDIA PATHS:\n"
+    af_in = step_payload.get("adaptive_fields", {})
+    if af_in.get('image_single_pieces'):
+        media_availability_text += f"- single_pieces: {af_in['image_single_pieces']}\n"
+    if af_in.get('image_assembly'):
+        media_availability_text += f"- assembly: {af_in['image_assembly']}\n"
+    if af_in.get('video'):
+        media_availability_text += f"- video: {af_in['video']}\n"
+    if media_availability_text == "AVAILABLE MEDIA PATHS:\n":
+        media_availability_text += "NONE."
+
     user_content = f"""Adapt this assembly training step:
+
 
 STYLE PROFILE: {style_profile_token}
 
@@ -316,6 +329,8 @@ CURRENT STEP:
 {user_history_formatted}
 
 {aggregated_prefs_text}
+
+{media_availability_text}
 
 Based on the user's history and aggregated preferences, determine:
 1. Which content types should be INITIALLY VISIBLE
