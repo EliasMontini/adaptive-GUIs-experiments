@@ -105,3 +105,686 @@ experiment_id,mode,timestamp,action,step_id,step_name,short_text_viewed,long_tex
 10,Sentient,2025-11-12 15:41:33.915934,step_loaded,16.0,Final Control,0,0,0,0,0
 10,Sentient,2025-11-12 15:41:49.854665,sentient_step_adapted,16.0,Final Control,0,1,0,0,1
 10,Sentient,2025-11-12 15:41:49.974656,sentient_step_adapted,16.0,Final Control,0,1,0,0,1
+unknown,Sentient,2025-11-13 08:36:55.503965,start_experiment,,,0,0,0,0,0
+unknown,Sentient,2025-11-13 08:36:55.638516,step_loaded,1.0,Withdraw Components for PIECE 1,0,0,0,0,0
+unknown,Sentient,2025-11-13 08:37:02.248849,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,1,0,0
+unknown,Sentient,2025-11-13 08:37:03.544563,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,1,0,0
+1,Sentient,2025-11-13 09:27:53.619874,start_experiment,,,0,0,0,0,0
+1,Sentient,2025-11-13 09:27:53.740168,step_loaded,1.0,Withdraw Components for PIECE 1,0,0,0,0,0
+1,Sentient,2025-11-13 09:28:05.808749,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,1,0,0
+1,Sentient,2025-11-13 09:28:09.439084,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,1,0,0
+1,Sentient,2025-11-13 09:42:23.011527,navigate_next,1.0,Withdraw Components for PIECE 1,0,0,0,0,0
+1,Sentient,2025-11-13 09:42:23.042331,initial_suggestion,1.0,Withdraw Components for PIECE 1,1,0,0,0,0
+1,Sentient,2025-11-13 09:42:23.097687,step_loaded,2.0,Assembly PIECE 1,0,0,0,0,0
+1,Sentient,2025-11-13 09:42:31.176893,sentient_step_adapted,2.0,Assembly PIECE 1,1,0,1,1,1
+1,Sentient,2025-11-13 09:42:32.959535,sentient_step_adapted,2.0,Assembly PIECE 1,1,0,1,1,1
+1,Sentient,2025-11-13 09:46:25.366863,navigate_next,2.0,Assembly PIECE 1,0,0,0,0,0
+1,Sentient,2025-11-13 09:46:25.459129,initial_suggestion,2.0,Assembly PIECE 1,1,0,0,0,0
+1,Sentient,2025-11-13 09:46:25.638822,step_loaded,3.0,Withdraw Components for PIECE 2,0,0,0,0,0
+1,Sentient,2025-11-13 09:46:31.704215,sentient_step_adapted,3.0,Withdraw Components for PIECE 2,1,0,1,0,0
+1,Sentient,2025-11-13 09:46:33.628649,sentient_step_adapted,3.0,Withdraw Components for PIECE 2,1,0,1,0,0
+1,Sentient,2025-11-13 09:49:12.836003,navigate_next,3.0,Withdraw Components for PIECE 2,0,0,0,0,0
+1,Sentient,2025-11-13 09:49:12.865249,initial_suggestion,3.0,Withdraw Components for PIECE 2,1,0,0,0,0
+1,Sentient,2025-11-13 09:49:12.968208,step_loaded,4.0,Assembly PIECE 2,0,0,0,0,0
+1,Sentient,2025-11-13 09:49:22.278709,sentient_step_adapted,4.0,Assembly PIECE 2,1,0,1,1,1
+1,Sentient,2025-11-13 09:49:38.117434,sentient_step_adapted,4.0,Assembly PIECE 2,1,0,1,1,1
+1,Sentient,2025-11-13 09:52:55.197537,navigate_next,4.0,Assembly PIECE 2,0,0,0,0,0
+1,Sentient,2025-11-13 09:52:55.235982,initial_suggestion,4.0,Assembly PIECE 2,1,0,0,0,0
+1,Sentient,2025-11-13 09:52:55.331549,step_loaded,5.0,Withdraw Components for PIECE 3,0,0,0,0,0
+1,Sentient,2025-11-13 09:53:00.848388,sentient_step_adapted,5.0,Withdraw Components for PIECE 3,1,0,1,0,0
+1,Sentient,2025-11-13 09:53:15.733899,sentient_step_adapted,5.0,Withdraw Components for PIECE 3,1,0,1,0,0
+1,Sentient,2025-11-13 09:55:24.486844,navigate_next,5.0,Withdraw Components for PIECE 3,0,0,0,0,0
+1,Sentient,2025-11-13 09:55:24.536114,initial_suggestion,5.0,Withdraw Components for PIECE 3,1,0,0,0,0
+1,Sentient,2025-11-13 09:55:24.635853,step_loaded,6.0,Assembly PIECE 3,0,0,0,0,0
+1,Sentient,2025-11-13 09:55:44.374589,sentient_step_adapted,6.0,Assembly PIECE 3,1,0,1,1,1
+1,Sentient,2025-11-13 09:55:46.762723,sentient_step_adapted,6.0,Assembly PIECE 3,0,0,1,1,1
+1,Sentient,2025-11-13 09:57:06.789768,navigate_next,6.0,Assembly PIECE 3,0,0,0,0,0
+1,Sentient,2025-11-13 09:57:06.833276,initial_suggestion,6.0,Assembly PIECE 3,1,0,0,0,0
+1,Sentient,2025-11-13 09:57:06.924799,step_loaded,7.0,Withdraw Components for PIECE 4,0,0,0,0,0
+1,Sentient,2025-11-13 09:57:12.899468,sentient_step_adapted,7.0,Withdraw Components for PIECE 4,1,0,1,0,0
+1,Sentient,2025-11-13 09:57:20.538820,sentient_step_adapted,7.0,Withdraw Components for PIECE 4,1,0,1,0,0
+1,Sentient,2025-11-13 09:58:45.785149,navigate_next,7.0,Withdraw Components for PIECE 4,0,0,0,0,0
+1,Sentient,2025-11-13 09:58:45.818077,initial_suggestion,7.0,Withdraw Components for PIECE 4,1,0,0,0,0
+1,Sentient,2025-11-13 09:58:45.919942,step_loaded,8.0,Assembly PIECE 4,0,0,0,0,0
+1,Sentient,2025-11-13 09:58:56.789807,sentient_step_adapted,8.0,Assembly PIECE 4,1,0,1,1,1
+1,Sentient,2025-11-13 09:59:28.419565,sentient_step_adapted,8.0,Assembly PIECE 4,1,0,1,1,1
+1,Sentient,2025-11-13 09:59:37.318154,navigate_next,8.0,Assembly PIECE 4,0,0,0,0,0
+1,Sentient,2025-11-13 09:59:37.351330,initial_suggestion,8.0,Assembly PIECE 4,1,0,0,0,0
+1,Sentient,2025-11-13 09:59:37.452659,step_loaded,9.0,Withdraw Components for PIECE 5,0,0,0,0,0
+1,Sentient,2025-11-13 09:59:47.747507,sentient_step_adapted,9.0,Withdraw Components for PIECE 5,1,0,1,0,0
+1,Sentient,2025-11-13 09:59:54.252277,sentient_step_adapted,9.0,Withdraw Components for PIECE 5,1,0,1,0,0
+1,Sentient,2025-11-13 10:02:26.057654,navigate_next,9.0,Withdraw Components for PIECE 5,0,0,0,0,0
+1,Sentient,2025-11-13 10:02:26.111980,initial_suggestion,9.0,Withdraw Components for PIECE 5,1,0,0,0,0
+1,Sentient,2025-11-13 10:02:26.250969,step_loaded,10.0,Assembly PIECE 5,0,0,0,0,0
+1,Sentient,2025-11-13 10:04:38.499135,sentient_step_adapted,10.0,Assembly PIECE 5,0,0,1,1,0
+1,Sentient,2025-11-13 10:05:35.668593,sentient_step_adapted,10.0,Assembly PIECE 5,1,0,0,1,0
+1,Sentient,2025-11-13 10:40:50.316461,start_experiment,,,0,0,0,0,0
+1,Sentient,2025-11-13 10:40:50.488510,step_loaded,1.0,Withdraw Components for PIECE 1,0,0,0,0,0
+1,Sentient,2025-11-13 10:46:21.406313,start_experiment,,,0,0,0,0,0
+1,Sentient,2025-11-13 10:46:22.555408,step_loaded,1.0,Withdraw Components for PIECE 1,0,0,0,0,0
+1,Sentient,2025-11-13 10:46:44.084707,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,1,0,0
+1,Sentient,2025-11-13 10:47:27.642084,navigate_next,1.0,Withdraw Components for PIECE 1,0,0,0,0,0
+1,Sentient,2025-11-13 10:47:27.675245,initial_suggestion,1.0,Withdraw Components for PIECE 1,1,0,0,0,0
+1,Sentient,2025-11-13 10:47:27.768465,step_loaded,2.0,Assembly PIECE 1,0,0,0,0,0
+1,Sentient,2025-11-13 10:47:40.144009,sentient_step_adapted,2.0,Assembly PIECE 1,1,0,1,1,0
+1,Sentient,2025-11-13 10:47:41.754022,sentient_step_adapted,2.0,Assembly PIECE 1,1,0,1,1,1
+1,Sentient,2025-11-13 10:47:43.923885,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,1,0,0
+1,Sentient,2025-11-13 11:06:19.109229,start_experiment,,,0,0,0,0,0
+1,Sentient,2025-11-13 11:06:33.251256,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,1,0,0
+1,Sentient,2025-11-13 11:06:51.462846,navigate_next,1.0,Withdraw Components for PIECE 1,0,0,0,0,0
+1,Sentient,2025-11-13 11:06:51.498202,initial_suggestion,1.0,Withdraw Components for PIECE 1,1,0,0,0,0
+1,Sentient,2025-11-13 11:07:03.897750,sentient_step_adapted,2.0,Assembly PIECE 1,1,0,1,1,1
+1,Sentient,2025-11-13 11:09:08.614916,navigate_next,2.0,Assembly PIECE 1,0,0,0,0,0
+1,Sentient,2025-11-13 11:09:08.655133,initial_suggestion,2.0,Assembly PIECE 1,1,0,0,0,0
+1,Sentient,2025-11-13 11:09:19.498985,sentient_step_adapted,3.0,Withdraw Components for PIECE 2,1,0,1,0,0
+1,Sentient,2025-11-13 11:09:50.039834,navigate_next,3.0,Withdraw Components for PIECE 2,0,0,0,0,0
+1,Sentient,2025-11-13 11:09:50.074471,initial_suggestion,3.0,Withdraw Components for PIECE 2,1,0,0,0,0
+1,Sentient,2025-11-13 11:10:05.554847,sentient_step_adapted,4.0,Assembly PIECE 2,1,0,1,0,1
+1,Sentient,2025-11-13 11:11:40.912080,navigate_next,4.0,Assembly PIECE 2,0,0,0,0,0
+1,Sentient,2025-11-13 11:11:40.948787,initial_suggestion,4.0,Assembly PIECE 2,1,0,0,0,0
+1,Sentient,2025-11-13 11:11:45.576839,sentient_step_adapted,5.0,Withdraw Components for PIECE 3,1,0,1,0,0
+1,Sentient,2025-11-13 11:19:25.842851,navigate_next,5.0,Withdraw Components for PIECE 3,0,0,0,0,0
+1,Sentient,2025-11-13 11:19:25.875506,initial_suggestion,5.0,Withdraw Components for PIECE 3,1,0,0,0,0
+1,Sentient,2025-11-13 11:19:37.154554,sentient_step_adapted,6.0,Assembly PIECE 3,1,0,1,1,1
+1,Sentient,2025-11-13 11:25:31.872520,navigate_next,6.0,Assembly PIECE 3,0,0,0,0,0
+1,Sentient,2025-11-13 11:25:31.942453,initial_suggestion,6.0,Assembly PIECE 3,1,0,0,0,0
+1,Sentient,2025-11-13 11:25:41.562021,sentient_step_adapted,7.0,Withdraw Components for PIECE 4,1,0,1,0,0
+1,Sentient,2025-11-13 11:25:58.261112,navigate_next,7.0,Withdraw Components for PIECE 4,0,0,0,0,0
+1,Sentient,2025-11-13 11:25:58.305857,initial_suggestion,7.0,Withdraw Components for PIECE 4,1,0,0,0,0
+1,Sentient,2025-11-13 11:26:12.282783,sentient_step_adapted,8.0,Assembly PIECE 4,0,0,1,1,1
+1,Sentient,2025-11-13 11:27:15.583071,navigate_next,8.0,Assembly PIECE 4,0,0,0,0,0
+1,Sentient,2025-11-13 11:27:15.750294,initial_suggestion,8.0,Assembly PIECE 4,1,0,0,0,0
+1,Sentient,2025-11-13 11:27:24.455520,sentient_step_adapted,9.0,Withdraw Components for PIECE 5,1,0,1,0,0
+1,Sentient,2025-11-13 11:27:47.841371,navigate_next,9.0,Withdraw Components for PIECE 5,0,0,0,0,0
+1,Sentient,2025-11-13 11:27:47.882751,initial_suggestion,9.0,Withdraw Components for PIECE 5,1,0,0,0,0
+1,Sentient,2025-11-13 11:27:57.539736,sentient_step_adapted,10.0,Assembly PIECE 5,0,0,1,1,1
+1,Sentient,2025-11-13 11:29:53.794479,navigate_next,10.0,Assembly PIECE 5,0,0,0,0,0
+1,Sentient,2025-11-13 11:29:53.853048,initial_suggestion,10.0,Assembly PIECE 5,1,0,0,0,0
+1,Sentient,2025-11-13 11:30:11.069821,sentient_step_adapted,11.0,Assembly PIECE 6,0,1,1,1,0
+1,Sentient,2025-11-13 11:32:06.800107,navigate_next,11.0,Assembly PIECE 6,0,0,0,0,0
+1,Sentient,2025-11-13 11:32:06.821014,initial_suggestion,11.0,Assembly PIECE 6,1,0,0,0,0
+1,Sentient,2025-11-13 11:32:14.211027,sentient_step_adapted,12.0,Withdraw Components for PIECE 7,1,0,1,0,0
+1,Sentient,2025-11-13 11:32:40.361504,navigate_next,12.0,Withdraw Components for PIECE 7,0,0,0,0,0
+1,Sentient,2025-11-13 11:32:40.381333,initial_suggestion,12.0,Withdraw Components for PIECE 7,1,0,0,0,0
+1,Sentient,2025-11-13 11:32:50.082169,sentient_step_adapted,13.0,Assembly PIECE 7,1,0,1,1,0
+1,Sentient,2025-11-13 11:33:49.934630,navigate_next,13.0,Assembly PIECE 7,0,0,0,0,0
+1,Sentient,2025-11-13 11:33:49.958771,initial_suggestion,13.0,Assembly PIECE 7,1,0,0,0,0
+1,Sentient,2025-11-13 11:33:55.513187,sentient_step_adapted,14.0,Withdraw Components for PIECE 8,1,0,1,0,0
+1,Sentient,2025-11-13 11:34:32.667518,navigate_next,14.0,Withdraw Components for PIECE 8,0,0,0,0,0
+1,Sentient,2025-11-13 11:34:32.687320,initial_suggestion,14.0,Withdraw Components for PIECE 8,1,0,0,0,0
+1,Sentient,2025-11-13 11:34:42.564009,sentient_step_adapted,15.0,Assembly PIECE 8,1,0,1,1,1
+1,Sentient,2025-11-13 11:35:37.116480,navigate_next,15.0,Assembly PIECE 8,0,0,0,0,0
+1,Sentient,2025-11-13 11:35:37.136216,initial_suggestion,15.0,Assembly PIECE 8,1,0,0,0,0
+1,Sentient,2025-11-13 11:35:45.666822,sentient_step_adapted,16.0,Final Control,1,0,1,0,1
+1,Sentient,2025-11-13 11:37:22.518826,navigate_to_thankyou,16.0,Final Control,0,0,0,0,0
+2,Sentient,2025-11-13 14:26:55.681135,start_experiment,,,0,0,0,0,0
+2,Sentient,2025-11-13 14:27:01.284055,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,1,0,0
+2,Sentient,2025-11-13 14:27:32.327391,navigate_next,1.0,Withdraw Components for PIECE 1,0,0,0,0,0
+2,Sentient,2025-11-13 14:27:32.372383,initial_suggestion,1.0,Withdraw Components for PIECE 1,1,0,0,0,0
+2,Sentient,2025-11-13 14:28:25.016062,sentient_step_adapted,2.0,Assembly PIECE 1,1,0,0,0,1
+2,Sentient,2025-11-13 14:30:49.045446,navigate_next,2.0,Assembly PIECE 1,0,0,0,0,0
+2,Sentient,2025-11-13 14:30:49.080922,initial_suggestion,2.0,Assembly PIECE 1,1,0,0,0,0
+2,Sentient,2025-11-13 14:33:05.825615,sentient_step_adapted,3.0,Withdraw Components for PIECE 2,1,0,1,0,0
+2,Sentient,2025-11-13 15:01:08.130140,start_experiment,,,0,0,0,0,0
+2,Sentient,2025-11-13 15:16:51.302302,start_experiment,,,0,0,0,0,0
+3,Sentient,2025-11-13 15:28:11.563714,start_experiment,,,0,0,0,0,0
+3,Sentient,2025-11-13 15:28:15.703212,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,1,0,0
+3,Sentient,2025-11-13 15:29:53.859478,navigate_next,1.0,Withdraw Components for PIECE 1,0,0,0,0,0
+3,Sentient,2025-11-13 15:29:53.900877,initial_suggestion,1.0,Withdraw Components for PIECE 1,1,0,0,0,0
+3,Sentient,2025-11-13 15:29:56.240931,sentient_step_adapted,2.0,Assembly PIECE 1,0,1,1,1,1
+3,Sentient,2025-11-13 15:32:14.198620,navigate_next,2.0,Assembly PIECE 1,0,0,0,0,0
+3,Sentient,2025-11-13 15:32:14.226895,initial_suggestion,2.0,Assembly PIECE 1,1,0,0,0,0
+3,Sentient,2025-11-13 15:32:20.525422,sentient_step_adapted,3.0,Withdraw Components for PIECE 2,1,0,1,0,0
+3,Sentient,2025-11-13 15:32:35.237232,navigate_next,3.0,Withdraw Components for PIECE 2,0,0,0,0,0
+3,Sentient,2025-11-13 15:32:35.270935,initial_suggestion,3.0,Withdraw Components for PIECE 2,1,0,0,0,0
+3,Sentient,2025-11-13 15:32:37.535195,sentient_step_adapted,4.0,Assembly PIECE 2,0,0,0,0,1
+3,Sentient,2025-11-13 15:34:51.183126,navigate_next,4.0,Assembly PIECE 2,0,0,0,0,0
+3,Sentient,2025-11-13 15:34:51.225180,initial_suggestion,4.0,Assembly PIECE 2,1,0,0,0,0
+3,Sentient,2025-11-13 15:34:53.322811,sentient_step_adapted,5.0,Withdraw Components for PIECE 3,0,0,1,0,0
+3,Sentient,2025-11-13 15:36:20.018714,navigate_next,5.0,Withdraw Components for PIECE 3,0,0,0,0,0
+3,Sentient,2025-11-13 15:36:20.041732,initial_suggestion,5.0,Withdraw Components for PIECE 3,1,0,0,0,0
+3,Sentient,2025-11-13 15:36:22.399428,sentient_step_adapted,6.0,Assembly PIECE 3,0,0,0,1,1
+3,Sentient,2025-11-13 16:14:32.924252,start_experiment,,,0,0,0,0,0
+3,Sentient,2025-11-13 16:20:34.324044,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,1,0,0
+3,Sentient,2025-11-13 16:22:17.767987,start_experiment,,,0,0,0,0,0
+3,Sentient,2025-11-13 16:24:22.449852,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,1,0,0
+3,Sentient,2025-11-13 16:27:57.876871,navigate_next,1.0,Withdraw Components for PIECE 1,0,0,0,0,0
+3,Sentient,2025-11-13 16:27:57.914063,initial_suggestion,1.0,Withdraw Components for PIECE 1,1,0,0,0,0
+3,Sentient,2025-11-13 16:33:17.015760,start_experiment,,,0,0,0,0,0
+3,Sentient,2025-11-13 16:35:32.293522,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,1,0,0
+3,Sentient,2025-11-13 16:36:15.776126,navigate_next,1.0,Withdraw Components for PIECE 1,0,0,0,0,0
+3,Sentient,2025-11-13 16:36:15.802289,initial_suggestion,1.0,Withdraw Components for PIECE 1,1,0,0,0,0
+3,Sentient,2025-11-13 16:38:02.100651,sentient_step_adapted,2.0,Assembly PIECE 1,1,0,1,1,0
+3,Sentient,2025-11-13 16:39:34.315671,navigate_next,2.0,Assembly PIECE 1,0,0,0,0,0
+3,Sentient,2025-11-13 16:39:34.377840,initial_suggestion,2.0,Assembly PIECE 1,1,0,0,0,0
+3,Sentient,2025-11-13 16:40:39.697617,sentient_step_adapted,3.0,Withdraw Components for PIECE 2,1,0,1,0,0
+3,Sentient,2025-11-13 16:41:19.104339,navigate_next,3.0,Withdraw Components for PIECE 2,0,0,0,0,0
+3,Sentient,2025-11-13 16:41:19.135617,initial_suggestion,3.0,Withdraw Components for PIECE 2,1,0,0,0,0
+3,Sentient,2025-11-13 16:43:07.362858,sentient_step_adapted,4.0,Assembly PIECE 2,1,0,1,1,1
+3,Sentient,2025-11-13 16:44:30.077549,navigate_next,4.0,Assembly PIECE 2,0,0,0,0,0
+3,Sentient,2025-11-13 16:44:30.102408,initial_suggestion,4.0,Assembly PIECE 2,1,0,0,0,0
+3,Sentient,2025-11-13 16:45:17.408501,sentient_step_adapted,5.0,Withdraw Components for PIECE 3,1,0,1,0,0
+3,Sentient,2025-11-13 16:45:35.825343,navigate_next,5.0,Withdraw Components for PIECE 3,0,0,0,0,0
+3,Sentient,2025-11-13 16:45:35.865025,initial_suggestion,5.0,Withdraw Components for PIECE 3,1,0,0,0,0
+3,Sentient,2025-11-13 16:46:32.777946,sentient_step_adapted,6.0,Assembly PIECE 3,1,0,1,1,0
+3,Sentient,2025-11-13 16:46:45.756203,navigate_next,6.0,Assembly PIECE 3,0,0,0,0,0
+3,Sentient,2025-11-13 16:46:45.800634,initial_suggestion,6.0,Assembly PIECE 3,1,0,0,0,0
+3,Sentient,2025-11-13 16:47:02.058965,sentient_step_adapted,7.0,Withdraw Components for PIECE 4,1,0,1,0,0
+3,Sentient,2025-11-13 16:49:32.497915,navigate_next,7.0,Withdraw Components for PIECE 4,0,0,0,0,0
+3,Sentient,2025-11-13 16:49:32.520821,initial_suggestion,7.0,Withdraw Components for PIECE 4,1,0,0,0,0
+3,Sentient,2025-11-13 16:50:01.572564,sentient_step_adapted,8.0,Assembly PIECE 4,1,0,0,1,0
+3,Sentient,2025-11-13 16:50:57.784812,navigate_next,8.0,Assembly PIECE 4,0,0,0,0,0
+3,Sentient,2025-11-13 16:50:57.813954,initial_suggestion,8.0,Assembly PIECE 4,1,0,0,0,0
+3,Sentient,2025-11-13 16:51:05.862325,sentient_step_adapted,9.0,Withdraw Components for PIECE 5,1,0,1,0,0
+3,Sentient,2025-11-13 16:51:22.157770,navigate_next,9.0,Withdraw Components for PIECE 5,0,0,0,0,0
+3,Sentient,2025-11-13 16:51:22.182424,initial_suggestion,9.0,Withdraw Components for PIECE 5,1,0,0,0,0
+3,Sentient,2025-11-13 16:51:47.673506,sentient_step_adapted,10.0,Assembly PIECE 5,1,0,1,1,0
+3,Sentient,2025-11-13 16:52:18.342399,navigate_next,10.0,Assembly PIECE 5,0,0,0,0,0
+3,Sentient,2025-11-13 16:52:18.364142,initial_suggestion,10.0,Assembly PIECE 5,1,0,0,0,0
+3,Sentient,2025-11-13 16:52:30.648894,sentient_step_adapted,11.0,Assembly PIECE 6,1,0,1,1,0
+3,Sentient,2025-11-13 16:53:00.134480,navigate_next,11.0,Assembly PIECE 6,0,0,0,0,0
+3,Sentient,2025-11-13 16:53:00.156925,initial_suggestion,11.0,Assembly PIECE 6,1,0,0,0,0
+3,Sentient,2025-11-13 16:53:21.052880,sentient_step_adapted,12.0,Withdraw Components for PIECE 7,1,0,1,0,0
+3,Sentient,2025-11-13 16:53:44.043888,navigate_next,12.0,Withdraw Components for PIECE 7,0,0,0,0,0
+3,Sentient,2025-11-13 16:53:44.068384,initial_suggestion,12.0,Withdraw Components for PIECE 7,1,0,0,0,0
+3,Sentient,2025-11-13 16:54:01.206770,sentient_step_adapted,13.0,Assembly PIECE 7,1,0,0,1,0
+3,Sentient,2025-11-13 16:54:28.592749,navigate_next,13.0,Assembly PIECE 7,0,0,0,0,0
+3,Sentient,2025-11-13 16:54:28.613950,initial_suggestion,13.0,Assembly PIECE 7,1,0,0,0,0
+3,Sentient,2025-11-13 16:55:29.053306,sentient_step_adapted,14.0,Withdraw Components for PIECE 8,1,0,1,0,0
+3,Sentient,2025-11-13 16:55:40.103751,navigate_next,14.0,Withdraw Components for PIECE 8,0,0,0,0,0
+3,Sentient,2025-11-13 16:55:40.140756,initial_suggestion,14.0,Withdraw Components for PIECE 8,1,0,0,0,0
+3,Sentient,2025-11-13 16:55:55.890590,sentient_step_adapted,15.0,Assembly PIECE 8,1,0,0,1,1
+3,Sentient,2025-11-13 16:56:37.444263,navigate_next,15.0,Assembly PIECE 8,0,0,0,0,0
+3,Sentient,2025-11-13 16:56:37.481361,initial_suggestion,15.0,Assembly PIECE 8,1,0,0,0,0
+3,Sentient,2025-11-13 17:01:24.035086,sentient_step_adapted,16.0,Final Control,1,0,0,0,0
+3,Sentient,2025-11-13 17:02:17.568526,navigate_previous,16.0,Final Control,0,0,0,0,0
+3,Sentient,2025-11-13 17:07:21.773511,sentient_step_adapted,15.0,Assembly PIECE 8,1,0,0,0,0
+3,Sentient,2025-11-13 17:07:28.679736,navigate_next,15.0,Assembly PIECE 8,0,0,0,0,0
+3,Sentient,2025-11-13 17:07:28.717575,initial_suggestion,15.0,Assembly PIECE 8,1,0,0,0,0
+3,Sentient,2025-11-13 17:08:16.968068,sentient_step_adapted,16.0,Final Control,0,1,1,0,1
+3,Sentient,2025-11-13 17:09:58.009538,navigate_to_thankyou,16.0,Final Control,0,0,0,0,0
+2,Sentient,2025-11-14 07:42:02.362276,start_experiment,,,0,0,0,0,0
+2,Sentient,2025-11-14 07:42:10.212455,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,1,0,0
+2,Sentient,2025-11-14 07:42:39.636270,navigate_next,1.0,Withdraw Components for PIECE 1,0,0,0,0,0
+2,Sentient,2025-11-14 07:42:39.673129,initial_suggestion,1.0,Withdraw Components for PIECE 1,1,0,0,0,0
+2,Sentient,2025-11-14 07:42:48.105832,sentient_step_adapted,2.0,Assembly PIECE 1,1,0,1,1,1
+2,Sentient,2025-11-14 07:46:57.004049,navigate_next,2.0,Assembly PIECE 1,0,0,0,0,0
+2,Sentient,2025-11-14 07:46:57.027747,initial_suggestion,2.0,Assembly PIECE 1,1,0,0,0,0
+2,Sentient,2025-11-14 07:47:06.095972,sentient_step_adapted,3.0,Withdraw Components for PIECE 2,1,0,1,0,0
+2,Sentient,2025-11-14 07:51:20.415953,navigate_next,3.0,Withdraw Components for PIECE 2,0,0,0,0,0
+2,Sentient,2025-11-14 07:51:20.471198,initial_suggestion,3.0,Withdraw Components for PIECE 2,1,0,0,0,0
+2,Sentient,2025-11-14 07:51:31.919281,sentient_step_adapted,4.0,Assembly PIECE 2,0,1,1,1,1
+2,Sentient,2025-11-14 07:53:35.979560,navigate_next,4.0,Assembly PIECE 2,0,0,0,0,0
+2,Sentient,2025-11-14 07:53:36.022874,initial_suggestion,4.0,Assembly PIECE 2,1,0,0,0,0
+2,Sentient,2025-11-14 07:53:43.276708,sentient_step_adapted,5.0,Withdraw Components for PIECE 3,1,0,1,0,0
+2,Sentient,2025-11-14 07:53:53.730409,navigate_next,5.0,Withdraw Components for PIECE 3,0,0,0,0,0
+2,Sentient,2025-11-14 07:53:53.783943,initial_suggestion,5.0,Withdraw Components for PIECE 3,1,0,0,0,0
+2,Sentient,2025-11-14 07:54:04.863418,sentient_step_adapted,6.0,Assembly PIECE 3,1,0,1,1,1
+2,Sentient,2025-11-14 07:55:55.208548,navigate_next,6.0,Assembly PIECE 3,0,0,0,0,0
+2,Sentient,2025-11-14 07:55:55.229399,initial_suggestion,6.0,Assembly PIECE 3,1,0,0,0,0
+2,Sentient,2025-11-14 07:56:03.340929,sentient_step_adapted,7.0,Withdraw Components for PIECE 4,1,0,1,0,0
+2,Sentient,2025-11-14 07:56:12.317604,navigate_next,7.0,Withdraw Components for PIECE 4,0,0,0,0,0
+2,Sentient,2025-11-14 07:56:12.341932,initial_suggestion,7.0,Withdraw Components for PIECE 4,1,0,0,0,0
+2,Sentient,2025-11-14 07:56:20.704950,sentient_step_adapted,8.0,Assembly PIECE 4,1,0,1,1,1
+2,Sentient,2025-11-14 07:56:34.531242,navigate_next,8.0,Assembly PIECE 4,0,0,0,0,0
+2,Sentient,2025-11-14 07:56:34.569670,initial_suggestion,8.0,Assembly PIECE 4,1,0,0,0,0
+2,Sentient,2025-11-14 07:56:43.403522,sentient_step_adapted,9.0,Withdraw Components for PIECE 5,1,0,1,0,0
+2,Sentient,2025-11-14 07:56:52.235710,navigate_next,9.0,Withdraw Components for PIECE 5,0,0,0,0,0
+2,Sentient,2025-11-14 07:56:52.274405,initial_suggestion,9.0,Withdraw Components for PIECE 5,1,0,0,0,0
+2,Sentient,2025-11-14 07:56:59.827755,sentient_step_adapted,10.0,Assembly PIECE 5,1,0,0,1,0
+2,Sentient,2025-11-14 07:57:37.658431,navigate_next,10.0,Assembly PIECE 5,0,0,0,0,0
+2,Sentient,2025-11-14 07:57:37.697915,initial_suggestion,10.0,Assembly PIECE 5,1,0,0,0,0
+2,Sentient,2025-11-14 07:57:46.642903,sentient_step_adapted,11.0,Assembly PIECE 6,1,0,1,1,0
+2,Sentient,2025-11-14 07:58:00.987665,navigate_next,11.0,Assembly PIECE 6,0,0,0,0,0
+2,Sentient,2025-11-14 07:58:01.014292,initial_suggestion,11.0,Assembly PIECE 6,1,0,0,0,0
+2,Sentient,2025-11-14 07:58:10.759125,sentient_step_adapted,12.0,Withdraw Components for PIECE 7,1,0,1,0,0
+2,Sentient,2025-11-14 07:58:25.931812,navigate_next,12.0,Withdraw Components for PIECE 7,0,0,0,0,0
+2,Sentient,2025-11-14 07:58:25.963531,initial_suggestion,12.0,Withdraw Components for PIECE 7,1,0,0,0,0
+2,Sentient,2025-11-14 07:58:36.246336,sentient_step_adapted,13.0,Assembly PIECE 7,1,0,0,1,1
+2,Sentient,2025-11-14 07:58:59.147007,navigate_next,13.0,Assembly PIECE 7,0,0,0,0,0
+2,Sentient,2025-11-14 07:58:59.180329,initial_suggestion,13.0,Assembly PIECE 7,1,0,0,0,0
+2,Sentient,2025-11-14 07:59:06.074885,sentient_step_adapted,14.0,Withdraw Components for PIECE 8,1,0,1,0,0
+2,Sentient,2025-11-14 07:59:25.535701,navigate_next,14.0,Withdraw Components for PIECE 8,0,0,0,0,0
+2,Sentient,2025-11-14 07:59:25.558222,initial_suggestion,14.0,Withdraw Components for PIECE 8,1,0,0,0,0
+2,Sentient,2025-11-14 07:59:33.862156,sentient_step_adapted,15.0,Assembly PIECE 8,1,0,1,1,1
+2,Sentient,2025-11-14 08:00:41.430791,navigate_next,15.0,Assembly PIECE 8,0,0,0,0,0
+2,Sentient,2025-11-14 08:00:41.449075,initial_suggestion,15.0,Assembly PIECE 8,1,0,0,0,0
+2,Sentient,2025-11-14 08:00:49.221206,sentient_step_adapted,16.0,Final Control,1,0,1,0,1
+4,Sentient,2025-11-14 08:13:18.261589,start_experiment,,,0,0,0,0,0
+4,Sentient,2025-11-14 08:13:25.978511,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,1,0,0
+4,Sentient,2025-11-14 08:13:52.957525,navigate_next,1.0,Withdraw Components for PIECE 1,0,0,0,0,0
+4,Sentient,2025-11-14 08:13:52.975170,initial_suggestion,1.0,Withdraw Components for PIECE 1,1,0,0,0,0
+4,Sentient,2025-11-14 08:14:00.277643,sentient_step_adapted,2.0,Assembly PIECE 1,1,0,1,1,0
+4,Sentient,2025-11-14 08:15:14.017258,navigate_next,2.0,Assembly PIECE 1,0,0,0,0,0
+4,Sentient,2025-11-14 08:15:14.036996,initial_suggestion,2.0,Assembly PIECE 1,1,0,0,0,0
+4,Sentient,2025-11-14 08:15:21.714202,sentient_step_adapted,3.0,Withdraw Components for PIECE 2,1,0,1,0,0
+4,Sentient,2025-11-14 08:15:32.043874,navigate_next,3.0,Withdraw Components for PIECE 2,0,0,0,0,0
+4,Sentient,2025-11-14 08:15:32.084045,initial_suggestion,3.0,Withdraw Components for PIECE 2,1,0,0,0,0
+4,Sentient,2025-11-14 08:15:51.564222,sentient_step_adapted,4.0,Assembly PIECE 2,1,0,0,1,1
+4,Sentient,2025-11-14 08:16:32.929005,navigate_next,4.0,Assembly PIECE 2,0,0,0,0,0
+4,Sentient,2025-11-14 08:16:32.948689,initial_suggestion,4.0,Assembly PIECE 2,1,0,0,0,0
+4,Sentient,2025-11-14 08:16:40.345737,sentient_step_adapted,5.0,Withdraw Components for PIECE 3,1,0,1,0,0
+4,Sentient,2025-11-14 08:17:24.076981,navigate_next,5.0,Withdraw Components for PIECE 3,0,0,0,0,0
+4,Sentient,2025-11-14 08:17:24.115365,initial_suggestion,5.0,Withdraw Components for PIECE 3,1,0,0,0,0
+4,Sentient,2025-11-14 08:17:32.032618,sentient_step_adapted,6.0,Assembly PIECE 3,1,0,1,1,0
+4,Sentient,2025-11-14 08:19:37.656289,navigate_next,6.0,Assembly PIECE 3,0,0,0,0,0
+4,Sentient,2025-11-14 08:19:37.674681,initial_suggestion,6.0,Assembly PIECE 3,1,0,0,0,0
+4,Sentient,2025-11-14 08:19:44.332683,sentient_step_adapted,7.0,Withdraw Components for PIECE 4,1,0,1,0,0
+4,Sentient,2025-11-14 08:20:01.238045,navigate_next,7.0,Withdraw Components for PIECE 4,0,0,0,0,0
+4,Sentient,2025-11-14 08:20:01.272915,initial_suggestion,7.0,Withdraw Components for PIECE 4,1,0,0,0,0
+4,Sentient,2025-11-14 08:20:11.095201,sentient_step_adapted,8.0,Assembly PIECE 4,0,0,1,1,0
+4,Sentient,2025-11-14 08:22:04.670854,navigate_next,8.0,Assembly PIECE 4,0,0,0,0,0
+4,Sentient,2025-11-14 08:22:04.688751,initial_suggestion,8.0,Assembly PIECE 4,1,0,0,0,0
+4,Sentient,2025-11-14 08:22:10.339459,sentient_step_adapted,9.0,Withdraw Components for PIECE 5,1,0,1,0,0
+4,Sentient,2025-11-14 08:22:26.590031,navigate_next,9.0,Withdraw Components for PIECE 5,0,0,0,0,0
+4,Sentient,2025-11-14 08:22:26.615024,initial_suggestion,9.0,Withdraw Components for PIECE 5,1,0,0,0,0
+4,Sentient,2025-11-14 08:22:35.301003,sentient_step_adapted,10.0,Assembly PIECE 5,1,0,0,1,0
+4,Sentient,2025-11-14 08:23:53.581567,navigate_next,10.0,Assembly PIECE 5,0,0,0,0,0
+4,Sentient,2025-11-14 08:23:53.618837,initial_suggestion,10.0,Assembly PIECE 5,1,0,0,0,0
+4,Sentient,2025-11-14 08:24:03.544460,sentient_step_adapted,11.0,Assembly PIECE 6,1,0,0,1,1
+4,Sentient,2025-11-14 08:26:05.605373,navigate_next,11.0,Assembly PIECE 6,0,0,0,0,0
+4,Sentient,2025-11-14 08:26:05.648261,initial_suggestion,11.0,Assembly PIECE 6,1,0,0,0,0
+4,Sentient,2025-11-14 08:26:12.751465,sentient_step_adapted,12.0,Withdraw Components for PIECE 7,1,0,1,0,0
+4,Sentient,2025-11-14 08:26:18.286685,navigate_next,12.0,Withdraw Components for PIECE 7,0,0,0,0,0
+4,Sentient,2025-11-14 08:26:18.337321,initial_suggestion,12.0,Withdraw Components for PIECE 7,1,0,0,0,0
+4,Sentient,2025-11-14 08:26:29.070847,sentient_step_adapted,13.0,Assembly PIECE 7,0,0,0,1,1
+4,Sentient,2025-11-14 08:28:08.878257,navigate_next,13.0,Assembly PIECE 7,0,0,0,0,0
+4,Sentient,2025-11-14 08:28:08.896835,initial_suggestion,13.0,Assembly PIECE 7,1,0,0,0,0
+4,Sentient,2025-11-14 08:28:16.929496,sentient_step_adapted,14.0,Withdraw Components for PIECE 8,1,0,1,0,0
+4,Sentient,2025-11-14 08:28:30.769196,navigate_next,14.0,Withdraw Components for PIECE 8,0,0,0,0,0
+4,Sentient,2025-11-14 08:28:30.817112,initial_suggestion,14.0,Withdraw Components for PIECE 8,1,0,0,0,0
+4,Sentient,2025-11-14 08:28:39.196652,sentient_step_adapted,15.0,Assembly PIECE 8,1,0,1,1,0
+4,Sentient,2025-11-14 08:31:08.321583,navigate_next,15.0,Assembly PIECE 8,0,0,0,0,0
+4,Sentient,2025-11-14 08:31:08.365164,initial_suggestion,15.0,Assembly PIECE 8,1,0,0,0,0
+4,Sentient,2025-11-14 08:31:18.028121,sentient_step_adapted,16.0,Final Control,1,0,1,0,1
+5,Sentient,2025-11-14 08:47:06.183245,start_experiment,,,0,0,0,0,0
+5,Sentient,2025-11-14 08:47:13.094814,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,1,0,0
+5,Sentient,2025-11-14 08:47:38.195536,navigate_next,1.0,Withdraw Components for PIECE 1,0,0,0,0,0
+5,Sentient,2025-11-14 08:47:38.216545,initial_suggestion,1.0,Withdraw Components for PIECE 1,1,0,0,0,0
+5,Sentient,2025-11-14 08:47:44.228128,sentient_step_adapted,2.0,Assembly PIECE 1,1,0,1,1,0
+5,Sentient,2025-11-14 08:48:44.512978,navigate_next,2.0,Assembly PIECE 1,0,0,0,0,0
+5,Sentient,2025-11-14 08:48:44.537243,initial_suggestion,2.0,Assembly PIECE 1,1,0,0,0,0
+5,Sentient,2025-11-14 08:48:50.760822,sentient_step_adapted,3.0,Withdraw Components for PIECE 2,1,0,1,0,0
+5,Sentient,2025-11-14 08:50:12.612805,navigate_next,3.0,Withdraw Components for PIECE 2,0,0,0,0,0
+5,Sentient,2025-11-14 08:50:12.635085,initial_suggestion,3.0,Withdraw Components for PIECE 2,1,0,0,0,0
+5,Sentient,2025-11-14 08:50:25.718581,sentient_step_adapted,4.0,Assembly PIECE 2,0,0,0,1,0
+5,Sentient,2025-11-14 08:52:31.890552,navigate_next,4.0,Assembly PIECE 2,0,0,0,0,0
+5,Sentient,2025-11-14 08:52:31.911482,initial_suggestion,4.0,Assembly PIECE 2,1,0,0,0,0
+5,Sentient,2025-11-14 08:52:37.422404,sentient_step_adapted,5.0,Withdraw Components for PIECE 3,1,0,1,0,0
+5,Sentient,2025-11-14 08:52:41.937833,navigate_next,5.0,Withdraw Components for PIECE 3,0,0,0,0,0
+5,Sentient,2025-11-14 08:52:41.955499,initial_suggestion,5.0,Withdraw Components for PIECE 3,1,0,0,0,0
+5,Sentient,2025-11-14 08:52:53.012908,sentient_step_adapted,6.0,Assembly PIECE 3,1,0,0,1,0
+5,Sentient,2025-11-14 08:53:33.717659,navigate_next,6.0,Assembly PIECE 3,0,0,0,0,0
+5,Sentient,2025-11-14 08:53:33.746367,initial_suggestion,6.0,Assembly PIECE 3,1,0,0,0,0
+5,Sentient,2025-11-14 08:53:39.961943,sentient_step_adapted,7.0,Withdraw Components for PIECE 4,1,0,1,0,0
+5,Sentient,2025-11-14 08:53:53.941906,navigate_next,7.0,Withdraw Components for PIECE 4,0,0,0,0,0
+5,Sentient,2025-11-14 08:53:53.958789,initial_suggestion,7.0,Withdraw Components for PIECE 4,1,0,0,0,0
+5,Sentient,2025-11-14 08:54:04.408889,sentient_step_adapted,8.0,Assembly PIECE 4,1,0,0,1,1
+5,Sentient,2025-11-14 08:55:22.628434,navigate_next,8.0,Assembly PIECE 4,0,0,0,0,0
+5,Sentient,2025-11-14 08:55:22.647202,initial_suggestion,8.0,Assembly PIECE 4,1,0,0,0,0
+5,Sentient,2025-11-14 08:55:28.256661,sentient_step_adapted,9.0,Withdraw Components for PIECE 5,1,0,1,0,0
+5,Sentient,2025-11-14 08:55:33.506024,navigate_next,9.0,Withdraw Components for PIECE 5,0,0,0,0,0
+5,Sentient,2025-11-14 08:55:33.528276,initial_suggestion,9.0,Withdraw Components for PIECE 5,1,0,0,0,0
+5,Sentient,2025-11-14 08:55:41.972297,sentient_step_adapted,10.0,Assembly PIECE 5,0,0,0,1,0
+5,Sentient,2025-11-14 08:57:24.438974,navigate_next,10.0,Assembly PIECE 5,0,0,0,0,0
+5,Sentient,2025-11-14 08:57:24.460870,initial_suggestion,10.0,Assembly PIECE 5,1,0,0,0,0
+5,Sentient,2025-11-14 08:57:33.669082,sentient_step_adapted,11.0,Assembly PIECE 6,0,0,0,1,0
+5,Sentient,2025-11-14 08:58:36.370998,navigate_next,11.0,Assembly PIECE 6,0,0,0,0,0
+5,Sentient,2025-11-14 08:58:36.413752,initial_suggestion,11.0,Assembly PIECE 6,1,0,0,0,0
+5,Sentient,2025-11-14 08:58:41.970630,sentient_step_adapted,12.0,Withdraw Components for PIECE 7,1,0,1,0,0
+5,Sentient,2025-11-14 08:58:46.456811,navigate_next,12.0,Withdraw Components for PIECE 7,0,0,0,0,0
+5,Sentient,2025-11-14 08:58:46.505809,initial_suggestion,12.0,Withdraw Components for PIECE 7,1,0,0,0,0
+5,Sentient,2025-11-14 08:58:54.658454,sentient_step_adapted,13.0,Assembly PIECE 7,1,0,0,1,1
+5,Sentient,2025-11-14 08:59:14.658871,navigate_next,13.0,Assembly PIECE 7,0,0,0,0,0
+5,Sentient,2025-11-14 08:59:14.697483,initial_suggestion,13.0,Assembly PIECE 7,1,0,0,0,0
+5,Sentient,2025-11-14 08:59:22.239367,sentient_step_adapted,14.0,Withdraw Components for PIECE 8,1,0,1,0,0
+5,Sentient,2025-11-14 08:59:32.557530,navigate_next,14.0,Withdraw Components for PIECE 8,0,0,0,0,0
+5,Sentient,2025-11-14 08:59:32.578743,initial_suggestion,14.0,Withdraw Components for PIECE 8,1,0,0,0,0
+5,Sentient,2025-11-14 08:59:42.745673,sentient_step_adapted,15.0,Assembly PIECE 8,1,0,0,1,1
+5,Sentient,2025-11-14 09:00:51.895205,navigate_next,15.0,Assembly PIECE 8,0,0,0,0,0
+5,Sentient,2025-11-14 09:00:51.918115,initial_suggestion,15.0,Assembly PIECE 8,1,0,0,0,0
+5,Sentient,2025-11-14 09:01:03.237404,sentient_step_adapted,16.0,Final Control,1,0,1,0,1
+6,Sentient,2025-11-14 09:42:23.645304,start_experiment,,,0,0,0,0,0
+6,Sentient,2025-11-14 09:42:31.016507,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,1,0,0
+6,Sentient,2025-11-14 09:42:49.864307,navigate_next,1.0,Withdraw Components for PIECE 1,0,0,0,0,0
+6,Sentient,2025-11-14 09:42:49.885144,initial_suggestion,1.0,Withdraw Components for PIECE 1,1,0,0,0,0
+6,Sentient,2025-11-14 09:42:59.097530,sentient_step_adapted,2.0,Assembly PIECE 1,1,0,1,1,0
+6,Sentient,2025-11-14 09:43:23.589831,navigate_next,2.0,Assembly PIECE 1,0,0,0,0,0
+6,Sentient,2025-11-14 09:43:23.608309,initial_suggestion,2.0,Assembly PIECE 1,1,0,0,0,0
+6,Sentient,2025-11-14 09:43:29.259570,sentient_step_adapted,3.0,Withdraw Components for PIECE 2,1,0,1,0,0
+6,Sentient,2025-11-14 09:43:33.921434,navigate_next,3.0,Withdraw Components for PIECE 2,0,0,0,0,0
+6,Sentient,2025-11-14 09:43:33.939516,initial_suggestion,3.0,Withdraw Components for PIECE 2,1,0,0,0,0
+6,Sentient,2025-11-14 09:43:43.341470,sentient_step_adapted,4.0,Assembly PIECE 2,0,1,1,1,1
+6,Sentient,2025-11-14 09:45:11.646369,navigate_next,4.0,Assembly PIECE 2,0,0,0,0,0
+6,Sentient,2025-11-14 09:45:11.663623,initial_suggestion,4.0,Assembly PIECE 2,1,0,0,0,0
+6,Sentient,2025-11-14 09:45:19.354640,sentient_step_adapted,5.0,Withdraw Components for PIECE 3,1,0,1,0,0
+6,Sentient,2025-11-14 09:45:22.929604,navigate_next,5.0,Withdraw Components for PIECE 3,0,0,0,0,0
+6,Sentient,2025-11-14 09:45:22.954299,initial_suggestion,5.0,Withdraw Components for PIECE 3,1,0,0,0,0
+6,Sentient,2025-11-14 09:45:37.155472,sentient_step_adapted,6.0,Assembly PIECE 3,1,0,0,1,0
+6,Sentient,2025-11-14 09:46:03.226286,navigate_next,6.0,Assembly PIECE 3,0,0,0,0,0
+6,Sentient,2025-11-14 09:46:03.290484,initial_suggestion,6.0,Assembly PIECE 3,1,0,0,0,0
+6,Sentient,2025-11-14 09:46:29.144280,sentient_step_adapted,7.0,Withdraw Components for PIECE 4,1,0,1,0,0
+6,Sentient,2025-11-14 09:46:32.732574,navigate_next,7.0,Withdraw Components for PIECE 4,0,0,0,0,0
+6,Sentient,2025-11-14 09:46:32.750718,initial_suggestion,7.0,Withdraw Components for PIECE 4,1,0,0,0,0
+6,Sentient,2025-11-14 09:46:42.266042,sentient_step_adapted,8.0,Assembly PIECE 4,1,0,0,1,0
+6,Sentient,2025-11-14 09:46:54.237673,navigate_next,8.0,Assembly PIECE 4,0,0,0,0,0
+6,Sentient,2025-11-14 09:46:54.279062,initial_suggestion,8.0,Assembly PIECE 4,1,0,0,0,0
+6,Sentient,2025-11-14 09:47:01.354879,sentient_step_adapted,9.0,Withdraw Components for PIECE 5,1,0,1,0,0
+6,Sentient,2025-11-14 09:47:05.487514,navigate_next,9.0,Withdraw Components for PIECE 5,0,0,0,0,0
+6,Sentient,2025-11-14 09:47:05.512439,initial_suggestion,9.0,Withdraw Components for PIECE 5,1,0,0,0,0
+6,Sentient,2025-11-14 09:47:14.247399,sentient_step_adapted,10.0,Assembly PIECE 5,1,0,0,1,0
+6,Sentient,2025-11-14 09:47:26.965804,navigate_next,10.0,Assembly PIECE 5,0,0,0,0,0
+6,Sentient,2025-11-14 09:47:27.007400,initial_suggestion,10.0,Assembly PIECE 5,1,0,0,0,0
+6,Sentient,2025-11-14 09:47:37.281352,sentient_step_adapted,11.0,Assembly PIECE 6,1,0,0,1,0
+6,Sentient,2025-11-14 09:48:53.139625,navigate_next,11.0,Assembly PIECE 6,0,0,0,0,0
+6,Sentient,2025-11-14 09:48:53.180893,initial_suggestion,11.0,Assembly PIECE 6,1,0,0,0,0
+6,Sentient,2025-11-14 09:49:01.623775,sentient_step_adapted,12.0,Withdraw Components for PIECE 7,1,0,1,0,0
+6,Sentient,2025-11-14 09:49:12.522712,navigate_next,12.0,Withdraw Components for PIECE 7,0,0,0,0,0
+6,Sentient,2025-11-14 09:49:12.555900,initial_suggestion,12.0,Withdraw Components for PIECE 7,1,0,0,0,0
+6,Sentient,2025-11-14 09:50:04.500390,sentient_step_adapted,13.0,Assembly PIECE 7,0,1,0,1,1
+6,Sentient,2025-11-14 09:51:57.165797,navigate_next,13.0,Assembly PIECE 7,0,0,0,0,0
+6,Sentient,2025-11-14 09:51:57.197705,initial_suggestion,13.0,Assembly PIECE 7,1,0,0,0,0
+6,Sentient,2025-11-14 09:52:03.625571,sentient_step_adapted,14.0,Withdraw Components for PIECE 8,1,0,1,0,0
+6,Sentient,2025-11-14 09:52:13.386736,navigate_next,14.0,Withdraw Components for PIECE 8,0,0,0,0,0
+6,Sentient,2025-11-14 09:52:13.420819,initial_suggestion,14.0,Withdraw Components for PIECE 8,1,0,0,0,0
+6,Sentient,2025-11-14 09:52:51.716990,sentient_step_adapted,15.0,Assembly PIECE 8,1,0,0,1,0
+6,Sentient,2025-11-14 09:53:06.658935,navigate_next,15.0,Assembly PIECE 8,0,0,0,0,0
+6,Sentient,2025-11-14 09:53:06.680021,initial_suggestion,15.0,Assembly PIECE 8,1,0,0,0,0
+6,Sentient,2025-11-14 09:53:15.058465,sentient_step_adapted,16.0,Final Control,1,0,1,0,1
+10,Sentient,2025-11-14 09:58:43.808811,start_experiment,,,0,0,0,0,0
+10,Sentient,2025-11-14 09:58:52.281248,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,1,0,0
+10,Sentient,2025-11-14 09:59:33.979962,navigate_next,1.0,Withdraw Components for PIECE 1,0,0,0,0,0
+10,Sentient,2025-11-14 09:59:33.999577,initial_suggestion,1.0,Withdraw Components for PIECE 1,1,0,0,0,0
+10,Sentient,2025-11-14 09:59:46.154858,sentient_step_adapted,2.0,Assembly PIECE 1,1,0,1,1,0
+10,Sentient,2025-11-14 10:00:20.250820,navigate_next,2.0,Assembly PIECE 1,0,0,0,0,0
+10,Sentient,2025-11-14 10:00:20.273737,initial_suggestion,2.0,Assembly PIECE 1,1,0,0,0,0
+10,Sentient,2025-11-14 10:00:40.412372,sentient_step_adapted,3.0,Withdraw Components for PIECE 2,1,0,1,0,0
+10,Sentient,2025-11-14 10:00:56.190446,navigate_next,3.0,Withdraw Components for PIECE 2,0,0,0,0,0
+10,Sentient,2025-11-14 10:00:56.211874,initial_suggestion,3.0,Withdraw Components for PIECE 2,1,0,0,0,0
+10,Sentient,2025-11-14 10:01:10.073167,sentient_step_adapted,4.0,Assembly PIECE 2,1,0,0,1,0
+10,Sentient,2025-11-14 10:03:48.379355,navigate_next,4.0,Assembly PIECE 2,0,0,0,0,0
+10,Sentient,2025-11-14 10:03:48.402916,initial_suggestion,4.0,Assembly PIECE 2,1,0,0,0,0
+10,Sentient,2025-11-14 10:04:02.129615,sentient_step_adapted,5.0,Withdraw Components for PIECE 3,1,0,1,0,0
+10,Sentient,2025-11-14 10:04:20.605030,navigate_next,5.0,Withdraw Components for PIECE 3,0,0,0,0,0
+10,Sentient,2025-11-14 10:04:20.632071,initial_suggestion,5.0,Withdraw Components for PIECE 3,1,0,0,0,0
+10,Sentient,2025-11-14 10:04:28.297599,sentient_step_adapted,6.0,Assembly PIECE 3,1,0,0,1,0
+10,Sentient,2025-11-14 10:04:40.419129,navigate_next,6.0,Assembly PIECE 3,0,0,0,0,0
+10,Sentient,2025-11-14 10:04:40.439296,initial_suggestion,6.0,Assembly PIECE 3,1,0,0,0,0
+10,Sentient,2025-11-14 10:04:50.023522,sentient_step_adapted,7.0,Withdraw Components for PIECE 4,1,0,1,0,0
+10,Sentient,2025-11-14 10:04:57.554534,navigate_next,7.0,Withdraw Components for PIECE 4,0,0,0,0,0
+10,Sentient,2025-11-14 10:04:57.589385,initial_suggestion,7.0,Withdraw Components for PIECE 4,1,0,0,0,0
+10,Sentient,2025-11-14 10:07:07.911311,sentient_step_adapted,8.0,Assembly PIECE 4,1,0,0,1,0
+10,Sentient,2025-11-14 10:07:41.122572,navigate_next,8.0,Assembly PIECE 4,0,0,0,0,0
+10,Sentient,2025-11-14 10:07:41.153455,initial_suggestion,8.0,Assembly PIECE 4,1,0,0,0,0
+10,Sentient,2025-11-14 10:07:47.936728,sentient_step_adapted,9.0,Withdraw Components for PIECE 5,1,0,1,0,0
+10,Sentient,2025-11-14 10:08:28.667045,navigate_next,9.0,Withdraw Components for PIECE 5,0,0,0,0,0
+10,Sentient,2025-11-14 10:08:28.731808,initial_suggestion,9.0,Withdraw Components for PIECE 5,1,0,0,0,0
+10,Sentient,2025-11-14 10:08:38.989026,sentient_step_adapted,10.0,Assembly PIECE 5,0,0,0,1,0
+10,Sentient,2025-11-14 10:09:25.015987,navigate_next,10.0,Assembly PIECE 5,0,0,0,0,0
+10,Sentient,2025-11-14 10:09:25.042629,initial_suggestion,10.0,Assembly PIECE 5,1,0,0,0,0
+10,Sentient,2025-11-14 10:09:32.737653,sentient_step_adapted,11.0,Assembly PIECE 6,0,0,0,1,0
+10,Sentient,2025-11-14 10:10:05.011368,navigate_next,11.0,Assembly PIECE 6,0,0,0,0,0
+10,Sentient,2025-11-14 10:10:05.030554,initial_suggestion,11.0,Assembly PIECE 6,1,0,0,0,0
+10,Sentient,2025-11-14 10:10:14.515161,sentient_step_adapted,12.0,Withdraw Components for PIECE 7,1,0,1,0,0
+10,Sentient,2025-11-14 10:10:19.995671,navigate_next,12.0,Withdraw Components for PIECE 7,0,0,0,0,0
+10,Sentient,2025-11-14 10:10:20.025826,initial_suggestion,12.0,Withdraw Components for PIECE 7,1,0,0,0,0
+10,Sentient,2025-11-14 10:12:29.485926,sentient_step_adapted,13.0,Assembly PIECE 7,0,1,0,1,1
+10,Sentient,2025-11-14 10:13:23.166831,navigate_next,13.0,Assembly PIECE 7,0,0,0,0,0
+10,Sentient,2025-11-14 10:13:23.224211,initial_suggestion,13.0,Assembly PIECE 7,1,0,0,0,0
+10,Sentient,2025-11-14 10:15:16.403672,sentient_step_adapted,14.0,Withdraw Components for PIECE 8,1,0,1,0,0
+10,Sentient,2025-11-14 10:16:14.190704,navigate_next,14.0,Withdraw Components for PIECE 8,0,0,0,0,0
+10,Sentient,2025-11-14 10:16:14.229928,initial_suggestion,14.0,Withdraw Components for PIECE 8,1,0,0,0,0
+10,Sentient,2025-11-14 10:16:28.764027,sentient_step_adapted,15.0,Assembly PIECE 8,0,0,0,1,0
+10,Sentient,2025-11-14 10:17:38.126666,navigate_next,15.0,Assembly PIECE 8,0,0,0,0,0
+10,Sentient,2025-11-14 10:17:38.158782,initial_suggestion,15.0,Assembly PIECE 8,1,0,0,0,0
+10,Sentient,2025-11-14 10:17:53.908474,sentient_step_adapted,16.0,Final Control,1,0,0,0,1
+7,Sentient,2025-11-14 11:37:22.886674,start_experiment,,,0,0,0,0,0
+7,Sentient,2025-11-14 11:37:29.599354,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,1,0,0
+7,Sentient,2025-11-14 11:37:54.881003,navigate_next,1.0,Withdraw Components for PIECE 1,0,0,0,0,0
+7,Sentient,2025-11-14 11:37:54.901168,initial_suggestion,1.0,Withdraw Components for PIECE 1,1,0,0,0,0
+7,Sentient,2025-11-14 11:38:03.457211,sentient_step_adapted,2.0,Assembly PIECE 1,1,0,1,1,0
+7,Sentient,2025-11-14 11:38:55.010227,navigate_next,2.0,Assembly PIECE 1,0,0,0,0,0
+7,Sentient,2025-11-14 11:38:55.031807,initial_suggestion,2.0,Assembly PIECE 1,1,0,0,0,0
+7,Sentient,2025-11-14 11:39:00.375257,sentient_step_adapted,3.0,Withdraw Components for PIECE 2,1,0,1,0,0
+7,Sentient,2025-11-14 11:39:04.963851,navigate_next,3.0,Withdraw Components for PIECE 2,0,0,0,0,0
+7,Sentient,2025-11-14 11:39:05.042852,initial_suggestion,3.0,Withdraw Components for PIECE 2,1,0,0,0,0
+7,Sentient,2025-11-14 11:39:16.733366,sentient_step_adapted,4.0,Assembly PIECE 2,0,1,0,1,1
+7,Sentient,2025-11-14 11:40:18.308189,navigate_next,4.0,Assembly PIECE 2,0,0,0,0,0
+7,Sentient,2025-11-14 11:40:18.335565,initial_suggestion,4.0,Assembly PIECE 2,1,0,0,0,0
+7,Sentient,2025-11-14 11:40:25.915118,sentient_step_adapted,5.0,Withdraw Components for PIECE 3,1,0,1,0,0
+7,Sentient,2025-11-14 11:40:29.435296,navigate_next,5.0,Withdraw Components for PIECE 3,0,0,0,0,0
+7,Sentient,2025-11-14 11:40:29.454140,initial_suggestion,5.0,Withdraw Components for PIECE 3,1,0,0,0,0
+7,Sentient,2025-11-14 11:40:49.034599,sentient_step_adapted,6.0,Assembly PIECE 3,0,1,0,1,1
+7,Sentient,2025-11-14 11:43:01.730137,navigate_next,6.0,Assembly PIECE 3,0,0,0,0,0
+7,Sentient,2025-11-14 11:43:01.747907,initial_suggestion,6.0,Assembly PIECE 3,1,0,0,0,0
+7,Sentient,2025-11-14 11:43:08.996016,sentient_step_adapted,7.0,Withdraw Components for PIECE 4,1,0,1,0,0
+7,Sentient,2025-11-14 11:43:12.076252,navigate_next,7.0,Withdraw Components for PIECE 4,0,0,0,0,0
+7,Sentient,2025-11-14 11:43:12.093375,initial_suggestion,7.0,Withdraw Components for PIECE 4,1,0,0,0,0
+7,Sentient,2025-11-14 11:43:21.568973,sentient_step_adapted,8.0,Assembly PIECE 4,0,1,0,1,1
+7,Sentient,2025-11-14 11:46:02.380645,navigate_next,8.0,Assembly PIECE 4,0,0,0,0,0
+7,Sentient,2025-11-14 11:46:02.401977,initial_suggestion,8.0,Assembly PIECE 4,1,0,0,0,0
+7,Sentient,2025-11-14 11:46:11.417657,sentient_step_adapted,9.0,Withdraw Components for PIECE 5,1,0,1,0,0
+7,Sentient,2025-11-14 11:46:14.658758,navigate_next,9.0,Withdraw Components for PIECE 5,0,0,0,0,0
+7,Sentient,2025-11-14 11:46:14.678170,initial_suggestion,9.0,Withdraw Components for PIECE 5,1,0,0,0,0
+7,Sentient,2025-11-14 11:46:24.362050,sentient_step_adapted,10.0,Assembly PIECE 5,0,0,0,1,1
+7,Sentient,2025-11-14 11:47:59.832419,navigate_next,10.0,Assembly PIECE 5,0,0,0,0,0
+7,Sentient,2025-11-14 11:47:59.862819,initial_suggestion,10.0,Assembly PIECE 5,1,0,0,0,0
+7,Sentient,2025-11-14 11:48:40.331713,sentient_step_adapted,11.0,Assembly PIECE 6,0,1,0,1,1
+7,Sentient,2025-11-14 11:49:29.542239,navigate_next,11.0,Assembly PIECE 6,0,0,0,0,0
+7,Sentient,2025-11-14 11:49:29.561972,initial_suggestion,11.0,Assembly PIECE 6,1,0,0,0,0
+7,Sentient,2025-11-14 11:49:39.846076,sentient_step_adapted,12.0,Withdraw Components for PIECE 7,1,0,1,0,0
+7,Sentient,2025-11-14 11:49:45.561955,navigate_next,12.0,Withdraw Components for PIECE 7,0,0,0,0,0
+7,Sentient,2025-11-14 11:49:45.582498,initial_suggestion,12.0,Withdraw Components for PIECE 7,1,0,0,0,0
+7,Sentient,2025-11-14 11:49:55.317919,sentient_step_adapted,13.0,Assembly PIECE 7,0,1,0,1,1
+7,Sentient,2025-11-14 11:50:17.717798,navigate_next,13.0,Assembly PIECE 7,0,0,0,0,0
+7,Sentient,2025-11-14 11:50:17.759799,initial_suggestion,13.0,Assembly PIECE 7,1,0,0,0,0
+7,Sentient,2025-11-14 11:51:03.816650,sentient_step_adapted,14.0,Withdraw Components for PIECE 8,1,0,1,0,0
+7,Sentient,2025-11-14 11:51:18.556111,navigate_next,14.0,Withdraw Components for PIECE 8,0,0,0,0,0
+7,Sentient,2025-11-14 11:51:18.572121,initial_suggestion,14.0,Withdraw Components for PIECE 8,1,0,0,0,0
+7,Sentient,2025-11-14 11:51:29.200244,sentient_step_adapted,15.0,Assembly PIECE 8,1,0,1,1,0
+7,Sentient,2025-11-14 11:55:26.259740,navigate_next,15.0,Assembly PIECE 8,0,0,0,0,0
+7,Sentient,2025-11-14 11:55:26.313296,initial_suggestion,15.0,Assembly PIECE 8,1,0,0,0,0
+7,Sentient,2025-11-14 11:55:37.281543,sentient_step_adapted,16.0,Final Control,0,1,1,0,1
+8,Sentient,2025-11-14 13:42:59.084005,start_experiment,,,0,0,0,0,0
+8,Sentient,2025-11-14 13:44:52.718471,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,1,0,0
+8,Sentient,2025-11-14 14:21:34.280774,start_experiment,,,0,0,0,0,0
+8,Sentient,2025-11-14 14:21:40.906218,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,1,0,0
+8,Sentient,2025-11-14 14:22:06.290463,navigate_next,1.0,Withdraw Components for PIECE 1,0,0,0,0,0
+8,Sentient,2025-11-14 14:22:06.314273,initial_suggestion,1.0,Withdraw Components for PIECE 1,1,0,0,0,0
+8,Sentient,2025-11-14 14:22:14.589214,sentient_step_adapted,2.0,Assembly PIECE 1,1,0,1,1,0
+8,Sentient,2025-11-14 14:22:58.526168,navigate_next,2.0,Assembly PIECE 1,0,0,0,0,0
+8,Sentient,2025-11-14 14:22:58.548641,initial_suggestion,2.0,Assembly PIECE 1,1,0,0,0,0
+8,Sentient,2025-11-14 14:24:21.697863,sentient_step_adapted,3.0,Withdraw Components for PIECE 2,1,0,1,0,0
+8,Sentient,2025-11-14 14:24:35.475365,navigate_next,3.0,Withdraw Components for PIECE 2,0,0,0,0,0
+8,Sentient,2025-11-14 14:24:35.497897,initial_suggestion,3.0,Withdraw Components for PIECE 2,1,0,0,0,0
+8,Sentient,2025-11-14 14:24:48.325576,sentient_step_adapted,4.0,Assembly PIECE 2,0,1,0,1,1
+8,Sentient,2025-11-14 14:26:31.787457,navigate_next,4.0,Assembly PIECE 2,0,0,0,0,0
+8,Sentient,2025-11-14 14:26:31.809302,initial_suggestion,4.0,Assembly PIECE 2,1,0,0,0,0
+8,Sentient,2025-11-14 14:26:41.805455,sentient_step_adapted,5.0,Withdraw Components for PIECE 3,1,0,1,0,0
+8,Sentient,2025-11-14 14:28:57.518829,navigate_next,5.0,Withdraw Components for PIECE 3,0,0,0,0,0
+8,Sentient,2025-11-14 14:28:57.541957,initial_suggestion,5.0,Withdraw Components for PIECE 3,1,0,0,0,0
+8,Sentient,2025-11-14 14:29:04.970318,sentient_step_adapted,6.0,Assembly PIECE 3,1,0,1,1,0
+8,Sentient,2025-11-14 14:30:19.315528,navigate_next,6.0,Assembly PIECE 3,0,0,0,0,0
+8,Sentient,2025-11-14 14:30:19.337966,initial_suggestion,6.0,Assembly PIECE 3,1,0,0,0,0
+8,Sentient,2025-11-14 14:30:32.063400,sentient_step_adapted,7.0,Withdraw Components for PIECE 4,1,0,1,0,0
+8,Sentient,2025-11-14 14:32:23.236956,navigate_next,7.0,Withdraw Components for PIECE 4,0,0,0,0,0
+8,Sentient,2025-11-14 14:32:23.259420,initial_suggestion,7.0,Withdraw Components for PIECE 4,1,0,0,0,0
+8,Sentient,2025-11-14 14:32:36.115681,sentient_step_adapted,8.0,Assembly PIECE 4,1,0,0,1,0
+8,Sentient,2025-11-14 14:33:34.548887,navigate_next,8.0,Assembly PIECE 4,0,0,0,0,0
+8,Sentient,2025-11-14 14:33:34.575478,initial_suggestion,8.0,Assembly PIECE 4,1,0,0,0,0
+8,Sentient,2025-11-14 14:33:42.101727,sentient_step_adapted,9.0,Withdraw Components for PIECE 5,1,0,1,0,0
+8,Sentient,2025-11-14 14:35:33.959832,navigate_next,9.0,Withdraw Components for PIECE 5,0,0,0,0,0
+8,Sentient,2025-11-14 14:35:33.995425,initial_suggestion,9.0,Withdraw Components for PIECE 5,1,0,0,0,0
+8,Sentient,2025-11-14 14:35:51.512225,sentient_step_adapted,10.0,Assembly PIECE 5,1,0,0,1,0
+8,Sentient,2025-11-14 14:39:33.685138,navigate_next,10.0,Assembly PIECE 5,0,0,0,0,0
+8,Sentient,2025-11-14 14:39:33.708803,initial_suggestion,10.0,Assembly PIECE 5,1,0,0,0,0
+8,Sentient,2025-11-14 14:39:49.247785,sentient_step_adapted,11.0,Assembly PIECE 6,1,0,0,1,0
+8,Sentient,2025-11-14 14:40:29.545576,navigate_next,11.0,Assembly PIECE 6,0,0,0,0,0
+8,Sentient,2025-11-14 14:40:29.565668,initial_suggestion,11.0,Assembly PIECE 6,1,0,0,0,0
+8,Sentient,2025-11-14 14:41:27.858330,sentient_step_adapted,12.0,Withdraw Components for PIECE 7,1,0,1,0,0
+8,Sentient,2025-11-14 14:41:47.277021,navigate_next,12.0,Withdraw Components for PIECE 7,0,0,0,0,0
+8,Sentient,2025-11-14 14:41:47.304808,initial_suggestion,12.0,Withdraw Components for PIECE 7,1,0,0,0,0
+8,Sentient,2025-11-14 14:43:44.003737,sentient_step_adapted,13.0,Assembly PIECE 7,1,0,0,1,1
+8,Sentient,2025-11-14 14:45:46.326683,navigate_next,13.0,Assembly PIECE 7,0,0,0,0,0
+8,Sentient,2025-11-14 14:45:46.352654,initial_suggestion,13.0,Assembly PIECE 7,1,0,0,0,0
+8,Sentient,2025-11-14 14:46:04.483626,sentient_step_adapted,14.0,Withdraw Components for PIECE 8,1,0,1,0,0
+8,Sentient,2025-11-14 14:46:25.217904,navigate_next,14.0,Withdraw Components for PIECE 8,0,0,0,0,0
+8,Sentient,2025-11-14 14:46:25.249266,initial_suggestion,14.0,Withdraw Components for PIECE 8,1,0,0,0,0
+8,Sentient,2025-11-14 14:46:36.957965,sentient_step_adapted,15.0,Assembly PIECE 8,1,0,0,1,0
+8,Sentient,2025-11-14 14:47:38.190097,navigate_next,15.0,Assembly PIECE 8,0,0,0,0,0
+8,Sentient,2025-11-14 14:47:38.209505,initial_suggestion,15.0,Assembly PIECE 8,1,0,0,0,0
+8,Sentient,2025-11-14 14:47:49.342813,sentient_step_adapted,16.0,Final Control,0,1,1,0,1
+9,Sentient,2025-11-14 15:11:46.734064,start_experiment,,,0,0,0,0,0
+9,Data Collection,2025-11-17 08:29:52.158342,start_experiment,,,0,0,0,0,0
+9,Sentient,2025-11-17 08:31:27.341173,start_experiment,,,0,0,0,0,0
+9,Sentient,2025-11-17 08:31:35.946619,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,1,0,0
+9,Sentient,2025-11-17 08:31:58.692132,navigate_next,1.0,Withdraw Components for PIECE 1,0,0,0,0,0
+9,Sentient,2025-11-17 08:31:58.724990,initial_suggestion,1.0,Withdraw Components for PIECE 1,1,0,0,0,0
+9,Sentient,2025-11-17 08:32:05.160179,sentient_step_adapted,2.0,Assembly PIECE 1,1,0,1,1,0
+9,Sentient,2025-11-17 08:33:02.721383,navigate_next,2.0,Assembly PIECE 1,0,0,0,0,0
+9,Sentient,2025-11-17 08:33:02.743958,initial_suggestion,2.0,Assembly PIECE 1,1,0,0,0,0
+9,Sentient,2025-11-17 08:33:07.635512,sentient_step_adapted,3.0,Withdraw Components for PIECE 2,1,0,1,0,0
+9,Sentient,2025-11-17 08:33:35.496391,navigate_next,3.0,Withdraw Components for PIECE 2,0,0,0,0,0
+9,Sentient,2025-11-17 08:33:35.515514,initial_suggestion,3.0,Withdraw Components for PIECE 2,1,0,0,0,0
+9,Sentient,2025-11-17 08:33:49.201992,sentient_step_adapted,4.0,Assembly PIECE 2,0,1,1,1,1
+9,Sentient,2025-11-17 08:34:34.192621,navigate_next,4.0,Assembly PIECE 2,0,0,0,0,0
+9,Sentient,2025-11-17 08:34:34.221466,initial_suggestion,4.0,Assembly PIECE 2,1,0,0,0,0
+9,Sentient,2025-11-17 08:34:42.968228,sentient_step_adapted,5.0,Withdraw Components for PIECE 3,1,0,1,0,0
+9,Sentient,2025-11-17 08:36:07.152227,navigate_next,5.0,Withdraw Components for PIECE 3,0,0,0,0,0
+9,Sentient,2025-11-17 08:36:07.167827,initial_suggestion,5.0,Withdraw Components for PIECE 3,1,0,0,0,0
+9,Sentient,2025-11-17 08:36:18.911387,sentient_step_adapted,6.0,Assembly PIECE 3,0,1,0,1,0
+9,Sentient,2025-11-17 08:38:28.342984,navigate_next,6.0,Assembly PIECE 3,0,0,0,0,0
+9,Sentient,2025-11-17 08:38:28.359768,initial_suggestion,6.0,Assembly PIECE 3,1,0,0,0,0
+9,Sentient,2025-11-17 08:39:03.231594,sentient_step_adapted,7.0,Withdraw Components for PIECE 4,1,0,1,0,0
+9,Sentient,2025-11-17 08:42:47.225540,navigate_next,7.0,Withdraw Components for PIECE 4,0,0,0,0,0
+9,Sentient,2025-11-17 08:42:47.245155,initial_suggestion,7.0,Withdraw Components for PIECE 4,1,0,0,0,0
+9,Sentient,2025-11-17 08:42:56.503640,sentient_step_adapted,8.0,Assembly PIECE 4,1,0,0,1,0
+9,Sentient,2025-11-17 08:44:54.405661,navigate_next,8.0,Assembly PIECE 4,0,0,0,0,0
+9,Sentient,2025-11-17 08:44:54.432893,initial_suggestion,8.0,Assembly PIECE 4,1,0,0,0,0
+9,Sentient,2025-11-17 08:45:03.793311,sentient_step_adapted,9.0,Withdraw Components for PIECE 5,1,0,1,0,0
+9,Sentient,2025-11-17 08:47:36.966912,navigate_next,9.0,Withdraw Components for PIECE 5,0,0,0,0,0
+9,Sentient,2025-11-17 08:47:36.995273,initial_suggestion,9.0,Withdraw Components for PIECE 5,1,0,0,0,0
+9,Sentient,2025-11-17 08:47:53.657319,sentient_step_adapted,10.0,Assembly PIECE 5,0,1,0,1,0
+9,Sentient,2025-11-17 08:48:21.500858,navigate_next,10.0,Assembly PIECE 5,0,0,0,0,0
+9,Sentient,2025-11-17 08:48:21.532619,initial_suggestion,10.0,Assembly PIECE 5,1,0,0,0,0
+9,Sentient,2025-11-17 08:48:41.841852,sentient_step_adapted,11.0,Assembly PIECE 6,0,1,0,1,0
+9,Sentient,2025-11-17 08:49:31.949787,navigate_next,11.0,Assembly PIECE 6,0,0,0,0,0
+9,Sentient,2025-11-17 08:49:31.979662,initial_suggestion,11.0,Assembly PIECE 6,1,0,0,0,0
+9,Sentient,2025-11-17 08:49:39.104009,sentient_step_adapted,12.0,Withdraw Components for PIECE 7,1,0,1,0,0
+9,Sentient,2025-11-17 08:50:15.156861,navigate_next,12.0,Withdraw Components for PIECE 7,0,0,0,0,0
+9,Sentient,2025-11-17 08:50:15.202829,initial_suggestion,12.0,Withdraw Components for PIECE 7,1,0,0,0,0
+9,Sentient,2025-11-17 08:50:27.210883,sentient_step_adapted,13.0,Assembly PIECE 7,0,1,1,1,1
+9,Sentient,2025-11-17 08:50:50.445420,navigate_next,13.0,Assembly PIECE 7,0,0,0,0,0
+9,Sentient,2025-11-17 08:50:50.473679,initial_suggestion,13.0,Assembly PIECE 7,1,0,0,0,0
+9,Sentient,2025-11-17 08:50:56.977228,sentient_step_adapted,14.0,Withdraw Components for PIECE 8,1,0,1,0,0
+9,Sentient,2025-11-17 08:51:13.513509,navigate_next,14.0,Withdraw Components for PIECE 8,0,0,0,0,0
+9,Sentient,2025-11-17 08:51:13.544608,initial_suggestion,14.0,Withdraw Components for PIECE 8,1,0,0,0,0
+9,Sentient,2025-11-17 08:51:28.596356,sentient_step_adapted,15.0,Assembly PIECE 8,0,1,1,1,1
+9,Sentient,2025-11-17 08:53:59.966643,navigate_next,15.0,Assembly PIECE 8,0,0,0,0,0
+9,Sentient,2025-11-17 08:53:59.986943,initial_suggestion,15.0,Assembly PIECE 8,1,0,0,0,0
+9,Sentient,2025-11-17 08:54:14.627252,sentient_step_adapted,16.0,Final Control,0,1,1,0,1
+8,Sentient,2025-11-17 09:33:54.166956,start_experiment,,,0,0,0,0,0
+8,Sentient,2025-11-17 09:34:07.054448,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,1,0,0
+8,Sentient,2025-11-17 09:34:14.608727,navigate_next,1.0,Withdraw Components for PIECE 1,0,0,0,0,0
+8,Sentient,2025-11-17 09:34:14.762377,initial_suggestion,1.0,Withdraw Components for PIECE 1,1,0,0,0,0
+8,Sentient,2025-11-17 09:34:23.077174,sentient_step_adapted,2.0,Assembly PIECE 1,1,0,1,1,0
+8,Sentient,2025-11-17 09:35:12.912633,navigate_next,2.0,Assembly PIECE 1,0,0,0,0,0
+8,Sentient,2025-11-17 09:35:12.999492,initial_suggestion,2.0,Assembly PIECE 1,1,0,0,0,0
+8,Sentient,2025-11-17 09:35:34.623131,sentient_step_adapted,3.0,Withdraw Components for PIECE 2,1,0,1,0,0
+8,Sentient,2025-11-17 09:36:18.149250,navigate_next,3.0,Withdraw Components for PIECE 2,0,0,0,0,0
+8,Sentient,2025-11-17 09:36:18.204930,initial_suggestion,3.0,Withdraw Components for PIECE 2,1,0,0,0,0
+8,Sentient,2025-11-17 09:36:29.736942,sentient_step_adapted,4.0,Assembly PIECE 2,0,1,1,1,1
+8,Sentient,2025-11-17 09:40:18.288934,navigate_next,4.0,Assembly PIECE 2,0,0,0,0,0
+8,Sentient,2025-11-17 09:40:18.347924,initial_suggestion,4.0,Assembly PIECE 2,1,0,0,0,0
+8,Sentient,2025-11-17 09:40:26.281459,sentient_step_adapted,5.0,Withdraw Components for PIECE 3,1,0,1,0,0
+8,Sentient,2025-11-17 09:41:36.073757,navigate_next,5.0,Withdraw Components for PIECE 3,0,0,0,0,0
+8,Sentient,2025-11-17 09:41:36.140451,initial_suggestion,5.0,Withdraw Components for PIECE 3,1,0,0,0,0
+8,Sentient,2025-11-17 09:41:47.162125,sentient_step_adapted,6.0,Assembly PIECE 3,1,0,1,1,0
+8,Sentient,2025-11-17 09:42:17.950952,navigate_next,6.0,Assembly PIECE 3,0,0,0,0,0
+8,Sentient,2025-11-17 09:42:18.029997,initial_suggestion,6.0,Assembly PIECE 3,1,0,0,0,0
+8,Sentient,2025-11-17 09:42:25.579189,sentient_step_adapted,7.0,Withdraw Components for PIECE 4,1,0,1,0,0
+8,Sentient,2025-11-17 09:42:55.842456,navigate_next,7.0,Withdraw Components for PIECE 4,0,0,0,0,0
+8,Sentient,2025-11-17 09:42:55.907458,initial_suggestion,7.0,Withdraw Components for PIECE 4,1,0,0,0,0
+8,Sentient,2025-11-17 09:43:10.078046,sentient_step_adapted,8.0,Assembly PIECE 4,1,0,1,1,0
+8,Sentient,2025-11-17 09:43:48.702339,navigate_next,8.0,Assembly PIECE 4,0,0,0,0,0
+8,Sentient,2025-11-17 09:43:48.766350,initial_suggestion,8.0,Assembly PIECE 4,1,0,0,0,0
+8,Sentient,2025-11-17 09:43:56.378759,sentient_step_adapted,9.0,Withdraw Components for PIECE 5,1,0,1,0,0
+8,Sentient,2025-11-17 09:44:02.302746,navigate_next,9.0,Withdraw Components for PIECE 5,0,0,0,0,0
+8,Sentient,2025-11-17 09:44:02.406912,initial_suggestion,9.0,Withdraw Components for PIECE 5,1,0,0,0,0
+8,Sentient,2025-11-17 09:44:15.589407,sentient_step_adapted,10.0,Assembly PIECE 5,1,0,0,1,0
+8,Sentient,2025-11-17 09:44:34.384904,navigate_next,10.0,Assembly PIECE 5,0,0,0,0,0
+8,Sentient,2025-11-17 09:44:34.452727,initial_suggestion,10.0,Assembly PIECE 5,1,0,0,0,0
+8,Sentient,2025-11-17 09:44:47.435348,sentient_step_adapted,11.0,Assembly PIECE 6,1,0,0,1,0
+8,Sentient,2025-11-17 09:45:34.657675,navigate_next,11.0,Assembly PIECE 6,0,0,0,0,0
+8,Sentient,2025-11-17 09:45:34.727883,initial_suggestion,11.0,Assembly PIECE 6,1,0,0,0,0
+8,Sentient,2025-11-17 09:45:50.039470,sentient_step_adapted,12.0,Withdraw Components for PIECE 7,1,0,1,0,0
+8,Sentient,2025-11-17 09:46:03.408190,navigate_next,12.0,Withdraw Components for PIECE 7,0,0,0,0,0
+8,Sentient,2025-11-17 09:46:03.459642,initial_suggestion,12.0,Withdraw Components for PIECE 7,1,0,0,0,0
+8,Sentient,2025-11-17 09:46:15.969967,sentient_step_adapted,13.0,Assembly PIECE 7,1,0,0,1,1
+8,Sentient,2025-11-17 09:46:28.740812,navigate_next,13.0,Assembly PIECE 7,0,0,0,0,0
+8,Sentient,2025-11-17 09:46:28.801725,initial_suggestion,13.0,Assembly PIECE 7,1,0,0,0,0
+8,Sentient,2025-11-17 09:46:41.781006,sentient_step_adapted,14.0,Withdraw Components for PIECE 8,1,0,1,0,0
+8,Sentient,2025-11-17 09:46:47.030131,navigate_next,14.0,Withdraw Components for PIECE 8,0,0,0,0,0
+8,Sentient,2025-11-17 09:46:47.083146,initial_suggestion,14.0,Withdraw Components for PIECE 8,1,0,0,0,0
+8,Sentient,2025-11-17 09:46:56.856280,sentient_step_adapted,15.0,Assembly PIECE 8,1,0,1,1,0
+8,Sentient,2025-11-17 09:47:17.058042,navigate_next,15.0,Assembly PIECE 8,0,0,0,0,0
+8,Sentient,2025-11-17 09:47:17.158057,initial_suggestion,15.0,Assembly PIECE 8,1,0,0,0,0
+8,Sentient,2025-11-17 09:47:25.056028,sentient_step_adapted,16.0,Final Control,1,0,1,0,1
+1,Sentient,2025-11-17 14:14:58.756483,start_experiment,,,0,0,0,0,0
+1,Sentient,2025-11-17 14:15:06.179992,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,1,0,0
+1,Sentient,2025-11-17 14:15:12.321494,navigate_next,1.0,Withdraw Components for PIECE 1,0,0,0,0,0
+1,Sentient,2025-11-17 14:15:12.342190,initial_suggestion,1.0,Withdraw Components for PIECE 1,1,0,0,0,0
+1,Sentient,2025-11-17 14:15:24.336975,sentient_step_adapted,2.0,Assembly PIECE 1,1,0,1,1,0
+1,Sentient,2025-11-17 14:16:05.066497,navigate_next,2.0,Assembly PIECE 1,0,0,0,0,0
+1,Sentient,2025-11-17 14:16:05.084939,initial_suggestion,2.0,Assembly PIECE 1,1,0,0,0,0
+1,Sentient,2025-11-17 14:18:50.352551,sentient_step_adapted,3.0,Withdraw Components for PIECE 2,1,0,1,0,0
+1,Sentient,2025-11-17 14:19:36.448970,navigate_next,3.0,Withdraw Components for PIECE 2,0,0,0,0,0
+1,Sentient,2025-11-17 14:19:36.467997,initial_suggestion,3.0,Withdraw Components for PIECE 2,1,0,0,0,0
+1,Sentient,2025-11-17 14:19:48.460254,sentient_step_adapted,4.0,Assembly PIECE 2,1,0,1,1,1
+1,Sentient,2025-11-17 14:23:16.650878,navigate_next,4.0,Assembly PIECE 2,0,0,0,0,0
+1,Sentient,2025-11-17 14:23:16.667166,initial_suggestion,4.0,Assembly PIECE 2,1,0,0,0,0
+1,Sentient,2025-11-17 14:23:22.562798,sentient_step_adapted,5.0,Withdraw Components for PIECE 3,1,0,1,0,0
+1,Sentient,2025-11-17 14:23:27.775717,navigate_next,5.0,Withdraw Components for PIECE 3,0,0,0,0,0
+1,Sentient,2025-11-17 14:23:27.797574,initial_suggestion,5.0,Withdraw Components for PIECE 3,1,0,0,0,0
+1,Sentient,2025-11-17 14:23:37.402906,sentient_step_adapted,6.0,Assembly PIECE 3,0,0,1,1,1
+1,Sentient,2025-11-17 14:23:40.839438,navigate_next,6.0,Assembly PIECE 3,0,0,0,0,0
+1,Sentient,2025-11-17 14:23:40.854641,initial_suggestion,6.0,Assembly PIECE 3,1,0,0,0,0
+1,Sentient,2025-11-17 14:23:46.097739,sentient_step_adapted,7.0,Withdraw Components for PIECE 4,1,0,1,0,0
+1,Sentient,2025-11-17 14:23:54.647823,navigate_next,7.0,Withdraw Components for PIECE 4,0,0,0,0,0
+1,Sentient,2025-11-17 14:23:54.667581,initial_suggestion,7.0,Withdraw Components for PIECE 4,1,0,0,0,0
+1,Sentient,2025-11-17 14:24:12.677666,sentient_step_adapted,8.0,Assembly PIECE 4,0,0,1,0,1
+1,Sentient,2025-11-17 14:39:53.612019,navigate_next,8.0,Assembly PIECE 4,0,0,0,0,0
+1,Sentient,2025-11-17 14:39:53.627286,initial_suggestion,8.0,Assembly PIECE 4,1,0,0,0,0
+1,Sentient,2025-11-17 14:40:43.998696,navigate_next,9.0,Withdraw Components for PIECE 5,0,0,0,0,0
+1,Sentient,2025-11-17 14:40:44.021078,initial_suggestion,9.0,Withdraw Components for PIECE 5,1,0,0,0,0
+1,Sentient,2025-11-17 14:42:04.472779,sentient_step_adapted,9.0,Withdraw Components for PIECE 5,1,0,1,0,0
+1,Sentient,2025-11-17 14:43:24.822708,sentient_step_adapted,10.0,Assembly PIECE 5,1,0,1,1,1
+1,Sentient,2025-11-17 14:45:36.574130,navigate_next,10.0,Assembly PIECE 5,0,0,0,0,0
+1,Sentient,2025-11-17 14:45:36.595558,initial_suggestion,10.0,Assembly PIECE 5,1,0,0,0,0
+1,Sentient,2025-11-17 14:45:49.830993,sentient_step_adapted,11.0,Assembly PIECE 6,0,0,1,1,0
+1,Sentient,2025-11-17 14:45:56.734167,navigate_next,11.0,Assembly PIECE 6,0,0,0,0,0
+1,Sentient,2025-11-17 14:45:56.757870,initial_suggestion,11.0,Assembly PIECE 6,1,0,0,0,0
+1,Sentient,2025-11-17 14:46:11.446734,sentient_step_adapted,12.0,Withdraw Components for PIECE 7,1,0,1,0,0
+1,Sentient,2025-11-17 14:46:20.032121,navigate_next,12.0,Withdraw Components for PIECE 7,0,0,0,0,0
+1,Sentient,2025-11-17 14:46:20.052571,initial_suggestion,12.0,Withdraw Components for PIECE 7,1,0,0,0,0
+1,Sentient,2025-11-17 14:46:43.688141,sentient_step_adapted,13.0,Assembly PIECE 7,0,1,1,1,0
+1,Sentient,2025-11-17 14:47:16.238568,navigate_next,13.0,Assembly PIECE 7,0,0,0,0,0
+1,Sentient,2025-11-17 14:47:16.254953,initial_suggestion,13.0,Assembly PIECE 7,1,0,0,0,0
+1,Sentient,2025-11-17 14:50:31.191249,sentient_step_adapted,14.0,Withdraw Components for PIECE 8,1,0,1,0,0
+1,Sentient,2025-11-17 14:51:56.275605,navigate_next,14.0,Withdraw Components for PIECE 8,0,0,0,0,0
+1,Sentient,2025-11-17 14:51:56.296122,initial_suggestion,14.0,Withdraw Components for PIECE 8,1,0,0,0,0
+1,Sentient,2025-11-17 14:52:25.091462,sentient_step_adapted,15.0,Assembly PIECE 8,0,1,1,1,1
+1,Sentient,2025-11-17 14:52:41.055182,navigate_next,15.0,Assembly PIECE 8,0,0,0,0,0
+1,Sentient,2025-11-17 14:52:41.072505,initial_suggestion,15.0,Assembly PIECE 8,1,0,0,0,0
+1,Sentient,2025-11-17 14:52:51.680076,sentient_step_adapted,16.0,Final Control,0,0,1,0,1
+7,Sentient,2025-11-17 15:31:27.724130,start_experiment,,,0,0,0,0,0
+7,Sentient,2025-11-17 15:38:47.996220,start_experiment,,,0,0,0,0,0
+7,Sentient,2025-11-17 15:43:40.384259,start_experiment,,,0,0,0,0,0
+7,Sentient,2025-11-17 15:43:56.185953,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1,0,1,0,0
+7,Sentient,2025-11-17 15:44:56.109654,navigate_next,1.0,Withdraw Components for PIECE 1,0,0,0,0,0
+7,Sentient,2025-11-17 15:44:56.131606,initial_suggestion,1.0,Withdraw Components for PIECE 1,1,0,0,0,0
+7,Sentient,2025-11-17 15:44:56.329452,navigate_next,2.0,Assembly PIECE 1,0,0,0,0,0
+7,Sentient,2025-11-17 15:44:56.350607,initial_suggestion,2.0,Assembly PIECE 1,1,0,0,0,0
+7,Sentient,2025-11-17 15:45:04.518381,sentient_step_adapted,2.0,Assembly PIECE 1,1,0,1,1,0
+7,Sentient,2025-11-17 15:45:34.280463,sentient_step_adapted,3.0,Withdraw Components for PIECE 2,1,0,1,0,0
+1,Sentient,2025-11-17 15:49:46.834773,start_experiment,N/A,N/A,0,0,0,0,0

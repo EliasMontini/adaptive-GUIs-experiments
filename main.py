@@ -853,10 +853,17 @@ def convert_aggregated_preferences(aggregated_prefs):
      State('sentient-profile-store', 'data'),
      State('style-profile-token', 'data'),
      State('clicked-buttons-store', 'data'),
-     State('user-preferences-store', 'data')],
+     State('user-preferences-store', 'data'),
+     State('navigation-in-progress', 'data')],
     prevent_initial_call=True
 )
-def update_step_content(current_step, assembly_data, experiment_id, mode, profile, style_token, clicked, prefs):
+
+def update_step_content(current_step, assembly_data, experiment_id, mode, profile, style_token, clicked, prefs, navigation_in_progress):
+    # 🛑 CONTROLLO CRITICO: Impedisci l'esecuzione se la navigazione è in corso.
+    # Questo filtro blocca le chiamate in cascata veloci che avvengono durante la navigazione.
+    if navigation_in_progress is True:
+        # PreventUpdate interrompe immediatamente il callback senza sprecare API
+        raise dash.exceptions.PreventUpdate
     if current_step <= 0 or current_step > len(assembly_data):
         return "", 0, "", "", "", "", "", "", "", {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, ""
     enabled_interactions = load_enabled_interactions()
@@ -1343,25 +1350,25 @@ def navigate_steps(prev_clicks, next_clicks, initial_visibility, current_step, a
     return current_step, False, training_style, thankyou_style
 
 
-# state loading callback for every step
-@app.callback(
-    Output('current-step', 'data', allow_duplicate=True),
-    [Input('current-step', 'data')],
-    [State('experiment-id-store', 'data'),
-     State('visibility-mode-dropdown', 'value'),
-     State('assembly-data-store', 'data'),
-     State('clicked-buttons-store', 'data')],
-    prevent_initial_call=True
-)
-def log_step_load(current_step, experiment_id, mode, assembly_data, clicked_buttons):
-    if current_step <= 0 or current_step > len(assembly_data):
-        return current_step
-
-    step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
-    button_states = get_complete_button_states(current_step, clicked_buttons)
-
-    log_interaction(experiment_id, mode, 'step_loaded', current_step, step_name, button_states)
-    return current_step
+# # state loading callback for every step
+# @app.callback(
+#     Output('current-step', 'data', allow_duplicate=True),
+#     [Input('current-step', 'data')],
+#     [State('experiment-id-store', 'data'),
+#      State('visibility-mode-dropdown', 'value'),
+#      State('assembly-data-store', 'data'),
+#      State('clicked-buttons-store', 'data')],
+#     prevent_initial_call=True
+# )
+# def log_step_load(current_step, experiment_id, mode, assembly_data, clicked_buttons):
+#     if current_step <= 0 or current_step > len(assembly_data):
+#         return current_step
+#
+#     step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
+#     button_states = get_complete_button_states(current_step, clicked_buttons)
+#
+#     log_interaction(experiment_id, mode, 'step_loaded', current_step, step_name, button_states)
+#     return current_step
 
 
 # button state callback

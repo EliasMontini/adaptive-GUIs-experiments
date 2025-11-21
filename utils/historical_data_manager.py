@@ -282,7 +282,7 @@ class HistoricalDataManager:
             prompt_text += f"  Based on data from {other_users_count} previous users:\n"
 
             # Calcola pattern per alcuni step chiave
-            for target_step in range(1, min(current_step, 17)):  # Max 16 step
+            for target_step in range(1, min(current_step+1, 17)):  # Max 16 step
                 prefs = self.get_aggregated_preferences_for_step(user_id, current_step, target_step)
 
                 high_prefs = {c: p for c, p in prefs.items() if p > 0.3}
