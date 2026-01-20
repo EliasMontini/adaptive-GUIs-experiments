@@ -115,8 +115,11 @@ def initial_style_recommendations(user_profile: Dict[str, Any],
         "You are adapting UI for an industrial assembly training web app (Dash). "
         "Based on the user profile, generate CSS overrides to personalise the interface. "
         "Consider: font sizes, colours, spacing, and contrast for accessibility. "
+        "If 'high_contrast' is true, use high contrast colors. If 'large_text' is true, increase font sizes to 1.5rem."
         "Add !important to the elements. "
         "Also generate a style_profile_token that summarises the user's style preferences for future use. "
+        "IMPORTANT: You must provide an 'explanation' field detailing why these style choices were made "
+        "based on the user's objective, skills, and visual preferences"
         "Output strict JSON only."
     )
 
@@ -144,15 +147,19 @@ def initial_style_recommendations(user_profile: Dict[str, Any],
     # if not user_profile.get("preferences"):
     #     user_profile["preferences"] = ["visual"]
 
-    user_content = f"""Generate personalised CSS styling for this user:
+    # Estrazione nuovi campi dal profilo
+    skills = ", ".join(user_profile.get('prior_experience', ['none']))
+    visual = user_profile.get('visual_comfort', {})
 
-User Profile:
-- Experience level: {user_profile.get('experience', 'beginner')}
-- Preferred content types: {', '.join(user_profile.get('preferences', ['visual']))}
-- Nationality: {user_profile.get('nationality', 'not specified')}
-- Other info: {user_profile.get('other', 'not specified')}
+    user_content = f"""Generate personalised CSS styling for:
+    - Language: {user_profile.get('language', 'English')}
+    - Training Objective: {user_profile.get('training_objective', 'Learning')}
+    - Prior Experience: {skills}
+    - High Contrast: {visual.get('high_contrast', False)}
+    - Large Text Mode: {visual.get('large_text', False)}
 
 Assembly Categories: {', '.join(step_categories)}
+Other info: {user_profile.get('other_requests', 'not specified')}
 
 Constraints:
 - Provide CSS overrides only (not a complete stylesheet)
@@ -211,13 +218,17 @@ def adapt_step(user_profile: Dict[str, Any],
         "YOUR TASK:\n"
         "Based on user profile, interaction history, and aggregated preferences from other users:\n"
         "1. Determine which content should be INITIALLY VISIBLE (set to true)\n"
-        "2. Translate if nationality specified\n"
+        "2. You must translate all text if nationality or requested 'Instruction Language' is specified\n"
         "3. DO NOT modify media file paths\n\n"
         "ADAPTATION STRATEGY:\n"
         "- Consider what user clicked in previous similar steps\n"
         "- Consider what majority of users preferred for this step\n"
         "- Balance user preferences with pedagogical effectiveness\n\n"
-        "Output strict JSON only."
+        "- If 'Warehouse Picking' is in skills, assume they know the bin system: keep WITHDRAW instructions minimal.\n"
+        "- If 'Color-Blind Assist' is true, you MUST add text labels to colors in the text, e.g., 'Red [R]' or 'Black [B]'.\n"
+        "- If objective is 'Speed', prioritize 'short_text' and hide 'long_text'.\n"
+        "- If objective is 'Learning', prioritize 'long_text' and 'video'.\n"
+            "Output strict JSON only."
     )
 
     schema: Dict[str, Any] = {
@@ -312,15 +323,21 @@ def adapt_step(user_profile: Dict[str, Any],
     if media_availability_text == "AVAILABLE MEDIA PATHS:\n":
         media_availability_text += "NONE."
 
+    # Estrazione nuovi campi per il contenuto utente
+    skills = ", ".join(user_profile.get('prior_experience', ['none']))
+    visual = user_profile.get('visual_comfort', {})
+
     user_content = f"""Adapt this assembly training step:
 
 
 STYLE PROFILE: {style_profile_token}
 
 USER PROFILE:
-- Experience: {user_profile.get('experience', 'not specified')}
-- Preferences: {', '.join(user_profile.get('preferences', ['not specified']))}
-- Nationality: {user_profile.get('nationality', 'not specified')}
+- Language: {user_profile.get('language', 'English')}
+- Objective: {user_profile.get('training_objective', 'Learning')}
+- Skills: {skills}
+- Color-Blind Assist: {visual.get('color_blind_assist', False)}
+- Other Requests: {user_profile.get('other_requests', 'None')}
 
 CURRENT STEP:
 - Title: {step_payload.get('name')}
@@ -337,7 +354,7 @@ CURRENT STEP:
 Based on the user's history and aggregated preferences, determine:
 1. Which content types should be INITIALLY VISIBLE
 2. How to adapt the text complexity
-3. Whether to translate (if nationality specified)
+3. Whether to translate (if language specified)
 
 Return adapted content with visibility settings and explanation."""
 

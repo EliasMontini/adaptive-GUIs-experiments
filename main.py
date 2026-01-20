@@ -429,49 +429,114 @@ app.layout = html.Div([
     html.Div(id='intro-container',
              style=styles['intro-screen'],
              children=[
-                 html.Div(style={'width': '400px', 'padding': '30px', 'border-radius': '8px',
+                 html.Div(style={'width': '900px', 'padding': '30px', 'border-radius': '8px',
                                  }, children=[
-                     html.H1("Assembly Training Dashboard", style={'text-align': 'center', 'margin-bottom': '20px'}),
-                     html.P("Welcome to the Assembly Training Dashboard. Please enter an experiment ID to begin.",
-                            style={'margin-bottom': '20px'}),
+                     html.H1("Assembly Training Dashboard", style={'text-align': 'center', 'margin-bottom': '30px', 'fontSize': '2.5rem', 'fontWeight': 'bold'}),
+                     html.P("Welcome! Enter your experiment ID to start your personalized training.",
+                            style={'margin-bottom': '25px', 'fontSize': '1.4rem'}),
                      dbc.Input(id='experiment-id-input', type='text', placeholder='Enter Experiment ID',
-                               style={'margin-bottom': '20px'}),
+                               style={'margin-bottom': '30px', 'fontSize': '1.3rem', 'height': '50px'}),
 
-                     html.P("Choose the UI mode.",
-                            style={'margin-bottom': '5px'}),
+                     html.P("Select the interface style you’d like to use.",
+                            style={'margin-bottom': '10px', 'fontSize': '1.3rem', 'fontWeight': 'bold'}),
                      dcc.Dropdown(
                          id='visibility-mode-dropdown',
                          options=[
-                             {'label': 'Data Collection', 'value': 'initial_visibility_data_collection.json'},
+                             {'label': 'Data Collection – standard interface', 'value': 'initial_visibility_data_collection.json'},
                              {'label': 'Dynamically Adaptive', 'value': 'initial_visibility_dynamically_adaptive.json'},
                              {'label': 'Rule-Based Adaptive', 'value': 'initial_visibility_rule_based_adaptive.json'},
-                             {'label': 'Static', 'value': 'initial_visibility_static_mode.json'},
-                             {'label': 'Sentient', 'value': 'sentient.json'}  #
+                             {'label': 'Static – standard interface', 'value': 'initial_visibility_static_mode.json'},
+                             {'label': 'Sentient – personalized guidance based on your profile', 'value': 'sentient.json'}  #
                          ],
                          value='initial_visibility_data_collection.json',  # Default selection
                          clearable=False,
-                         style={'text-align': 'center', 'margin-bottom': '5px'}
+                         style={'text-align': 'center', 'margin-bottom': '20px', 'fontSize': '1.2rem','height': '50px'},
+                         className="mb-4"
                      ),
-                     html.Div(id='sentient-profile-form', style={'display': 'none', }, children=[
+                     html.Div(id='sentient-profile-form', style={'display': 'none'}, children=[
                          html.Hr(),
-                         html.P("Sentient mode profile"),
-                         dbc.Row([
-                             dbc.Col(dbc.Input(id='profile-experience',
-                                               placeholder='Experience level (e.g., novice, intermediate, expert)')),
-                         ], className="mb-2"),
-                         dbc.Row([
-                             dbc.Col(dbc.Input(id='profile-preferences',
-                                               placeholder='Preferences (comma-separated: video, short_text, etc.)')),
-                         ], className="mb-2"),
-                         dbc.Row([
-                             dbc.Col(dbc.Input(id='profile-nationality', placeholder='Nationality (ISO or free text)')),
-                         ], className="mb-2"),
-                         dbc.Row([
-                             dbc.Col(dbc.Input(id='profile-other', placeholder='Other relevant info (free text)')),
-                         ], className="mb-2"),
+                         html.H5("Sentient Training Profile", className="text-primary mb-3"),
+
+                         # Lingua
+                         html.P("Instruction Language", className="mb-1 small fw-bold"),
+                         dcc.Dropdown(
+                             id='profile-language',
+                             options=[
+                                 {'label': 'Italiano', 'value': 'Italian'},
+                                 {'label': 'English', 'value': 'English'},
+                                 {'label': 'Deutsch', 'value': 'German'},
+                                 {'label': 'Français', 'value': 'French'}
+                             ],
+                             value='English',
+                             className="mb-3"
+                         ),
+
+                         # Esperienza (Checklist Strategica)
+                         html.P("Prior Experience ",style={'fontSize': '1.5rem', 'fontWeight': 'bold'}, className="mb-1 small fw-bold"),
+                         dbc.Checklist(
+                             id='profile-experience-checklist',
+                             options=[
+                                 {'label': html.Div([
+                                            html.B("Advanced LEGO Building:"),
+                                            html.Br(),
+                                            html.I("I’ve assembled complex LEGO sets or Technic models with moving parts and gears.")
+                                             ]), 'value': 'lego_advanced'},
+                                 {'label': html.Div([
+                                            html.B("Industrial Assembly/Maintenance (Non-LEGO):"),
+                                            html.Br(),
+                                            html.I("I’ve worked on mechanical assemblies or used tools while following technical instructions or diagrams.")
+                                        ]), 'value': 'industrial_mech'},
+                                 {'label': html.Div([
+                                            html.B("Warehouse Picking (Bin systems):"),
+                                            html.Br(),
+                                            html.I("I’m familiar with locating items using bin or location codes (e.g., A1-B03).")
+                                        ]), 'value': 'warehouse_picking'},
+                                 {'label': html.Div([
+                                            html.B("No prior experience:"),
+                                            html.Br(),
+                                            html.I("I prefer clear, step-by-step guidance for every action.")
+                                        ]), 'value': 'none'}
+                             ],
+                             value=[],
+                             #id="profile-experience-checklist",
+
+                             className="mb-3 small"
+                         ),
+
+                         # Obiettivo
+                         html.P("Training Objective", style={'fontSize': '1.5rem', 'fontWeight': 'bold'},className="mb-1 small fw-bold"),
+                         dcc.Dropdown(
+                             id='profile-objective',
+                             options=[
+                                 {'label': 'Speed (Efficiency): I prefer concise instructions and quick steps.', 'value': 'Speed'},
+                                 {'label': 'Learning (Precision focus): I prefer detailed guidance', 'value': 'Learning'}
+                             ],
+                             value='Learning',
+                             className="mb-3"
+                         ),
+
+                         # Comfort Visivo
+                         html.P("Visual Comfort & Accessibility", style={'fontSize': '1.5rem', 'fontWeight': 'bold'},className="mb-1 small fw-bold"),
+                         dbc.Checklist(
+                             id='profile-visual-comfort',
+                             options=[
+                                 {'label': 'High Contrast Mode', 'value': 'high_contrast'},
+                                 {'label': 'Large Text Mode', 'value': 'large_text'},
+                                 {'label': 'Color-Blind Assist (Text labels for colors)', 'value': 'color_blind_assist'}
+                             ],
+                             value=[],
+                             inline=True,
+                             className="mb-3 small"
+                         ),
+
+                         # Note Libere
+                         html.P("Other Requests", style={'fontSize': '1.5rem', 'fontWeight': 'bold'},className="mb-1 small fw-bold"),
+                         dbc.Textarea(id='profile-other', placeholder='e.g. Prefer short sentences...',
+                                        style={'fontSize': '1.2rem', 'minHeight': '100px'},
+                                      className="mb-3"),
                      ]),
                      dcc.Store(id='sentient-profile-store', data=None),
-                     dbc.Button("Begin Training", id='begin-button', color='primary', style={'width': '100%'})
+                     dbc.Button("Begin Training", id='begin-button', color='primary', style={'width': '100%', 'fontSize': '1.8rem', 'padding': '20px', 'fontWeight': 'bold', 'borderRadius': '10px'})
                  ])
              ]),
 
@@ -677,13 +742,14 @@ app.layout = html.Div([
     [Input('begin-button', 'n_clicks')],
     [State('experiment-id-input', 'value'),
      State('visibility-mode-dropdown', 'value'),
-     State('profile-experience', 'value'),
-     State('profile-preferences', 'value'),
-     State('profile-nationality', 'value'),
+     State('profile-language', 'value'),
+     State('profile-experience-checklist', 'value'),
+     State('profile-objective', 'value'),
+     State('profile-visual-comfort', 'value'),
      State('profile-other', 'value'),
      State('assembly-data-store', 'data')]
 )
-def begin_training(n_clicks, experiment_id, mode, experience, preferences, nationality, other, assembly_data):
+def begin_training(n_clicks, experiment_id, mode, lang, exp_list, obj, visual_list, other, assembly_data):
     # First render: return all 8 outputs
     if not n_clicks:
         return (
@@ -711,10 +777,15 @@ def begin_training(n_clicks, experiment_id, mode, experience, preferences, natio
     # Sentient mode: build profile and request style overrides
     if mode == 'sentient.json':
         profile = {
-            'experience': (experience or '').strip().lower(),
-            'preferences': [p.strip().lower() for p in (preferences or '').split(',') if p.strip()],
-            'nationality': (nationality or '').strip(),
-            'other': (other or '').strip()
+            'language': lang,
+            'prior_experience': exp_list if exp_list else ['none'],
+            'training_objective': obj,
+            'visual_comfort': {
+                'high_contrast': 'high_contrast' in visual_list,
+                'large_text': 'large_text' in visual_list,
+                'color_blind_assist': 'color_blind_assist' in visual_list
+            },
+            'other_requests': (other or '').strip()
         }
 
         # Categories present in the current session
