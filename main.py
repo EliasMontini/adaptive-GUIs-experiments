@@ -440,7 +440,6 @@ app.layout = html.Div([
                      'boxSizing': 'border-box',
                      'position': 'relative',
 
-
                  }, children=[
                      html.H1("LEGO Assembly Training",
                              style={'text-align': 'center', 'margin-bottom': '30px', 'fontSize': '3rem',
@@ -478,94 +477,139 @@ app.layout = html.Div([
 
                          # Lingua
                          html.P([html.I(className="bi bi-translate me-2"), "Instruction Language"],
-                                "Instruction Language", style={'fontSize': '1.3rem', 'fontWeight': 'bold'},
+                                style={'fontSize': '1.3rem', 'fontWeight': 'bold'},
                                 className="mb-2"),
-                         dcc.Dropdown(
-                             id='profile-language',
-                             options=[
-                                 {'label': 'Italiano', 'value': 'Italian'},
-                                 {'label': 'English', 'value': 'English'},
-                                 {'label': 'Deutsch', 'value': 'German'},
-                                 {'label': 'Français', 'value': 'French'}
-                             ],
-                             value='English',
-                             style={'fontSize': '1.1rem', 'borderRadius': '8px'},
-                             className="mb-3"
+                         dbc.Input(
+                             id='profile-language',  # Manteniamo lo stesso ID per non rompere le callback
+                             type='text',
+                             placeholder='e.g., English, Italian, etc...',
+                             style={
+                                 'borderRadius': '10px',
+                                 'borderColor': '#ced4da',
+                                 'padding': '15px',
+                                 'fontSize': '1.1rem',
+                                 'height': '50px'
+                             },
+                             className="mb-4"
                          ),
+                         html.Div([
+                             html.P([html.I(className="bi bi-person-workspace me-2"),
+                                     "Tell us about your history with LEGO: is this a familiar hobby for you or a brand-new experience?"],
+                                    style={'fontSize': '1.3rem', 'fontWeight': 'bold', 'color': '#2c3e50'},
+                                    className="mb-2"),
+                             html.P(
+                             #    "I am an expert, I love Technic.",
+                                 style={'color': '#666', 'fontSize': '1.1rem'}),
+                             dbc.Textarea(
+                                 id='profile-experience',  # Maintaining this ID for general user narrative
+                                 placeholder='e.g., I am an expert, I love Technic; Totally new, I am afraid to fail;...',
+                                 style={'borderRadius': '12px', 'minHeight': '100px', 'fontSize': '1.1rem',
+                                        'padding': '15px'}
+                             ),
+                             # Nuova domanda sul Setup Ambientale
+                             html.Div([
+                                 html.P([html.I(className="bi bi-display me-2"),
+                                         "Where will your screen be positioned during assembly, and how easy will it be to read?"],
+                                        style={'fontSize': '1.3rem', 'fontWeight': 'bold', 'color': '#2c3e50'},
+                                        className="mb-2"),
+                                 html.P(
+                                     "Tell us if you'll hold it in your hand or if it will be on a table far from you.",
+                                     style={'color': '#666', 'fontSize': '1.1rem'}),
+                                 dbc.Textarea(
+                                     id='distance-setup',  # ID univoco per questa domanda
+                                     placeholder='e.g., On a table 1 meter away; In my hands; Propped up on a shelf...',
+                                     style={'borderRadius': '12px', 'minHeight': '100px', 'fontSize': '1.1rem',
+                                            'padding': '15px'}
+                                 ),
+                             ], className="mb-4"),
+                         # dcc.Dropdown(
+                         ], className="mb-4"),
+                         #     id='profile-language',
+                         #     options=[
+                         #         {'label': 'Italiano', 'value': 'Italian'},
+                         #         {'label': 'English', 'value': 'English'},
+                         #         {'label': 'Deutsch', 'value': 'German'},
+                         #         {'label': 'Français', 'value': 'French'}
+                         #     ],
+                         #     value='English',
+                         #     style={'fontSize': '1.1rem', 'borderRadius': '8px'},
+                         #     className="mb-3"
+                         # ),
 
                          # Esperienza (Checklist Strategica)
-                         html.P([html.I(className="bi bi-person-workspace me-2"), "Prior Experience"],
-                                "Prior Experience ", style={'fontSize': '1.3rem', 'fontWeight': 'bold'},
-                                className="mb-2"),
-                         dbc.Checklist(
-                             id='profile-experience-checklist',
-                             style={'backgroundColor': '#f8f9fa', 'padding': '20px', 'borderRadius': '20px',
-                                    'border': '1px solid #dee2e6'},
-                             options=[
-                                 {'label': html.Div([
-                                     html.B("Advanced LEGO Building:"),
-                                     html.Br(),
-                                     html.I(
-                                         "I’ve assembled complex LEGO sets or Technic models with moving parts and gears.")
-                                 ]), 'value': 'lego_advanced'},
-                                 {'label': html.Div([
-                                     html.B("Industrial Assembly/Maintenance (Non-LEGO):"),
-                                     html.Br(),
-                                     html.I(
-                                         "I’ve worked on mechanical assemblies or used tools while following technical instructions or diagrams.")
-                                 ]), 'value': 'industrial_mech'},
-                                 {'label': html.Div([
-                                     html.B("Warehouse Picking (Bin systems):"),
-                                     html.Br(),
-                                     html.I(
-                                         "I’m familiar with locating items using bin or location codes (e.g., A1-B03).")
-                                 ]), 'value': 'warehouse_picking'},
-                                 {'label': html.Div([
-                                     html.B("No prior experience:"),
-                                     html.Br(),
-                                     html.I("I prefer clear, step-by-step guidance for every action.")
-                                 ]), 'value': 'none'}
-                             ],
-                             value=[],
-                             label_style={'marginBottom': '15px', 'display': 'block', 'fontSize': '1.1rem'},
-                             # Crea spazio tra le opzioni
-                             input_style={'marginRight': '10px', 'transform': 'scale(1.2)'},
-                             # Allontana e ingrandisce il quadratino
-                             # id="profile-experience-checklist",
-
-                             className="mb-3"
-                         ),
-
-                         # Obiettivo
-                         html.P("Training Objective", style={'fontSize': '1.3rem', 'fontWeight': 'bold'},
-                                className="mb-2"),
-                         dcc.Dropdown(
-                             id='profile-objective',
-                             options=[
-                                 {'label': 'Focus on speed and efficiency', 'value': 'Speed'},
-                                 {'label': 'Focus on learning and precision', 'value': 'Learning'}
-                             ],
-                             value='Learning',
-                             style={'fontSize': '1.1rem', 'borderRadius': '8px'},
-                             className="mb-3"
-                         ),
-
-                         # Comfort Visivo
-                         html.P([html.I(className="bi bi-eye me-2"), "Visual Comfort & Accessibility"],
-                                style={'fontSize': '1.3rem', 'fontWeight': 'bold'}, className="mb-2"),
-                         dbc.Checklist(
-                             id='profile-visual-comfort',
-                             options=[
-                                 {'label': 'High Contrast Mode', 'value': 'high_contrast'},
-                                 {'label': 'Large Text Mode', 'value': 'large_text'},
-                                 # {'label': 'Color-Blind Assist (Text labels for colors)', 'value': 'color_blind_assist'}
-                             ],
-                             value=[],
-                             inline=True,
-                             label_style={'fontSize': '1.1rem', 'marginRight': '20px'},
-                             input_style={'transform': 'scale(1.2)', 'marginRight': '8px'},
-                             className="mb-3"
-                         ),
+                         # html.P([html.I(className="bi bi-person-workspace me-2"), "Prior Experience"],
+                         #        "Prior Experience ", style={'fontSize': '1.3rem', 'fontWeight': 'bold'},
+                         #        className="mb-2"),
+                         # dbc.Checklist(
+                         #     id='profile-experience-checklist',
+                         #     style={'backgroundColor': '#f8f9fa', 'padding': '20px', 'borderRadius': '20px',
+                         #            'border': '1px solid #dee2e6'},
+                         #     options=[
+                         #         {'label': html.Div([
+                         #             html.B("Advanced LEGO Building:"),
+                         #             html.Br(),
+                         #             html.I(
+                         #                 "I’ve assembled complex LEGO sets or Technic models with moving parts and gears.")
+                         #         ]), 'value': 'lego_advanced'},
+                         #         {'label': html.Div([
+                         #             html.B("Industrial Assembly/Maintenance (Non-LEGO):"),
+                         #             html.Br(),
+                         #             html.I(
+                         #                 "I’ve worked on mechanical assemblies or used tools while following technical instructions or diagrams.")
+                         #         ]), 'value': 'industrial_mech'},
+                         #         {'label': html.Div([
+                         #             html.B("Warehouse Picking (Bin systems):"),
+                         #             html.Br(),
+                         #             html.I(
+                         #                 "I’m familiar with locating items using bin or location codes (e.g., A1-B03).")
+                         #         ]), 'value': 'warehouse_picking'},
+                         #         {'label': html.Div([
+                         #             html.B("No prior experience:"),
+                         #             html.Br(),
+                         #             html.I("I prefer clear, step-by-step guidance for every action.")
+                         #         ]), 'value': 'none'}
+                         #     ],
+                         #     value=[],
+                         #     label_style={'marginBottom': '15px', 'display': 'block', 'fontSize': '1.1rem'},
+                         #     # Crea spazio tra le opzioni
+                         #     input_style={'marginRight': '10px', 'transform': 'scale(1.2)'},
+                         #     # Allontana e ingrandisce il quadratino
+                         #     # id="profile-experience-checklist",
+                         #
+                         #     className="mb-3"
+                         # ),
+                         #
+                         #
+                         # # Obiettivo
+                         # html.P("Training Objective", style={'fontSize': '1.3rem', 'fontWeight': 'bold'},
+                         #        className="mb-2"),
+                         # dcc.Dropdown(
+                         #     id='profile-objective',
+                         #     options=[
+                         #         {'label': 'Focus on speed and efficiency', 'value': 'Speed'},
+                         #         {'label': 'Focus on learning and precision', 'value': 'Learning'}
+                         #     ],
+                         #     value='Learning',
+                         #     style={'fontSize': '1.1rem', 'borderRadius': '8px'},
+                         #     className="mb-3"
+                         # ),
+                         #
+                         # # Comfort Visivo
+                         # html.P([html.I(className="bi bi-eye me-2"), "Visual Comfort & Accessibility"],
+                         #        style={'fontSize': '1.3rem', 'fontWeight': 'bold'}, className="mb-2"),
+                         # dbc.Checklist(
+                         #     id='profile-visual-comfort',
+                         #     options=[
+                         #         {'label': 'High Contrast Mode', 'value': 'high_contrast'},
+                         #         {'label': 'Large Text Mode', 'value': 'large_text'},
+                         #         # {'label': 'Color-Blind Assist (Text labels for colors)', 'value': 'color_blind_assist'}
+                         #     ],
+                         #     value=[],
+                         #     inline=True,
+                         #     label_style={'fontSize': '1.1rem', 'marginRight': '20px'},
+                         #     input_style={'transform': 'scale(1.2)', 'marginRight': '8px'},
+                         #     className="mb-3"
+                         # ),
 
                          # Note Libere
                          html.P("Any additional requests or comments for your personalized training?",
@@ -863,14 +907,13 @@ app.clientside_callback(
     [State('experiment-id-input', 'value'),
      State('visibility-mode-dropdown', 'value'),
      State('profile-language', 'value'),
-     State('profile-experience-checklist', 'value'),
-     State('profile-objective', 'value'),
-     State('profile-visual-comfort', 'value'),
-     State('profile-other', 'value'),
+     State('profile-experience', 'value'),  # Legge l'esperienza aperta
+     State('distance-setup', 'value'),
+     State('profile-other', 'value'),  # Legge le note/richieste libere
      State('assembly-data-store', 'data')],
     prevent_initial_call=True
 )
-def begin_training(n_clicks, experiment_id, mode, lang, exp_list, obj, visual_list, other, assembly_data):
+def begin_training(n_clicks, experiment_id, mode, lang, experience, setup, other, assembly_data):
     # Normalise experiment id
     if not experiment_id:
         experiment_id = 'unknown'
@@ -886,14 +929,9 @@ def begin_training(n_clicks, experiment_id, mode, lang, exp_list, obj, visual_li
     if mode == 'sentient.json':
         profile = {
             'language': lang,
-            'prior_experience': exp_list if exp_list else ['none'],
-            'training_objective': obj,
-            'visual_comfort': {
-                'high_contrast': 'high_contrast' in visual_list,
-                'large_text': 'large_text' in visual_list,
-                'color_blind_assist': 'color_blind_assist' in visual_list
-            },
-            'other_requests': (other or '').strip()
+            'prior_experience': experience if experience else ['None provided'],
+            'screen_setup': setup if setup else 'Standard placement',  # AGGIUNTO
+             'other_requests': (other or '').strip()
         }
 
         # Categories present in the current session

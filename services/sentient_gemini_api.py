@@ -148,12 +148,12 @@ def initial_style_recommendations(user_profile: Dict[str, Any],
     #     user_profile["preferences"] = ["visual"]
 
     # Estrazione nuovi campi dal profilo
-    skills = ", ".join(user_profile.get('prior_experience', ['none']))
+    skills = user_profile.get('prior_experience', ['none'])
     visual = user_profile.get('visual_comfort', {})
 
     user_content = f"""Generate personalised CSS styling for:
     - Language: {user_profile.get('language', 'English')}
-    - Training Objective: {user_profile.get('training_objective', 'Learning')}
+    - Screen Position & Readability: {user_profile.get('screen_setup', 'Not specified')}
     - Prior Experience: {skills}
     - High Contrast: {visual.get('high_contrast', False)}
     - Large Text Mode: {visual.get('large_text', False)}
@@ -211,24 +211,31 @@ def adapt_step(user_profile: Dict[str, Any],
         "IMPORTANT: Do not set visibility to true for a media type if its corresponding path in the CURRENT STEP payload is an EMPTY STRING. If the path is provided (i.e., the string is NOT empty), the content is AVAILABLE for adaptation, provided it respects the CONSTRAINTS BY STEP TYPE below.."
         "Don't change media file paths—keep them exactly as provided. Do not invent paths for images or video that do not exist. If a certain information is missing then the boolean for the visibility is false."
         "You need also to provide a reasoning of why you choose to make visible something instead of others. Output strict JSON only.\n\n"
+        
         "CONSTRAINTS BY STEP TYPE:\n"
         "- WITHDRAW:  The only media/text options AVAILABLE for this step are short_text and single_pieces (long_text, image_assembly, and video are NOT available). The adaptation MUST be applied to each AVAILABLE option INDEPENDENTLY: determine whether short_text should be VISIBLE (true/false) AND whether single_pieces should be VISIBLE (true/false), based on user history and preferences.\n" #Only short_text + single_pieces available
         "- QUALITY CONTROL: No assembly image available\n"
         "- ASSEMBLY: All content types available\n\n"
+        
         "YOUR TASK:\n"
         "Based on user profile, interaction history, and aggregated preferences from other users:\n"
         "1. Determine which content should be INITIALLY VISIBLE (set to true)\n"
-        "2. You must translate all text if 'Instruction Language' is specified\n"
-        "3. DO NOT modify media file paths\n\n"
+        "2. LEARNING STYLE: Infer if the user is visual (prefers images/video) or analytical (prefers text) based on their self-description.'\n"
+        "3. TECHNICAL COMPETENCE: from the user's description in experience profile, judge the user's level, for example if he is an expert, intermediate or beginner.'\n"
+        "4. SCREEN SETUP ANALYSIS: Analyze 'screen_setup' to determine the physical distance of the user from the device.\n"
+        "5. LANGUAGE: Translate all instructions to the language explicitly or implicitly requested in 'profile-language'\n"
+        "6. DO NOT modify media file paths\n\n"
         "ADAPTATION STRATEGY:\n"
         "- Consider what user clicked in previous similar steps\n"
         "- Consider what majority of users preferred for this step\n"
         "- Balance user preferences with pedagogical effectiveness\n\n"
-        "Considers the user’s experience level based on their selection. If “Advanced LEGO Building” is selected, the user is considered experienced."
+        "- IF DISTANT (e.g., 'on a table', '1 meter away', 'far'): Prioritize 'short_text' over 'long_text' to reduce cognitive load at a distance. If 'long_text' is strictly necessary, ensure it is the only element visible to maximize its space. Media (images/video) should be prioritized as they are easier to distinguish from afar than dense text.'\n"
+        "- IF CLOSE (e.g., 'in my hands', 'on my lap'): You can provide more detailed information like 'long_text' as readability is higher.'\n"
+        "- Consider the user's level of technical experience based on their self-description. If they say they've done many similar exercises, they're considered expert.'\n"
         "- If 'Warehouse Picking' is in prior experience, assume they know the bin system: keep WITHDRAW instructions minimal.\n"
-        "- If 'Color-Blind Assist' is true, you MUST add text labels to colors in the text, e.g., 'Red [R]' or 'Black [B]'.\n"
-        "- If objective is 'focus on speed and efficiency', prioritize 'short_text' and hide 'long_text'.\n"
-        "- If objective is 'focus on learning and precision', prioritize 'long_text' and 'video'.\n"
+      #  "- If 'Color-Blind Assist' is true, you MUST add text labels to colors in the text, e.g., 'Red [R]' or 'Black [B]'.\n"
+      #  "- If objective is 'focus on speed and efficiency', prioritize 'short_text' and hide 'long_text'.\n"
+      #  "- If objective is 'focus on learning and precision', prioritize 'long_text' and 'video'.\n"
             "Output strict JSON only."
     )
 

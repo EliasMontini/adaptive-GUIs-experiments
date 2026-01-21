@@ -1042,3 +1042,15 @@ unknown,Sentient,2026-01-21 13:12:48.652689,navigate_next,1.0,Withdraw Component
 unknown,Sentient,2026-01-21 13:12:48.712424,initial_suggestion,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0
 unknown,Sentient,2026-01-21 13:14:40.645298,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
 unknown,Sentient,2026-01-21 13:18:48.031269,navigate_previous,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0
+unknown,Sentient,2026-01-21 13:48:12.241406,start_experiment,,,0.0,0.0,0.0,0.0,0.0
+unknown,Sentient,2026-01-21 13:48:21.902645,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
+unknown,Sentient,2026-01-21 15:27:59.103377,start_experiment,,,0.0,0.0,0.0,0.0,0.0
+unknown,Sentient,2026-01-21 15:28:10.053558,sentient_step_adapted,1.0,Ritira Componenti per PEZZO 1,1.0,0.0,1.0,0.0,0.0
+unknown,Sentient,2026-01-21 15:29:33.985863,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0
+unknown,Sentient,2026-01-21 15:29:34.077078,initial_suggestion,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0
+unknown,Sentient,2026-01-21 15:29:46.768867,sentient_step_adapted,2.0,Assembly PIECE 1,1.0,0.0,1.0,1.0,0.0
+unknown,Sentient,2026-01-21 15:46:15.346477,start_experiment,,,0.0,0.0,0.0,0.0,0.0
+unknown,Sentient,2026-01-21 15:46:25.819814,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
+unknown,Sentient,2026-01-21 15:49:15.695472,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0
+unknown,Sentient,2026-01-21 15:49:15.728504,initial_suggestion,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0
+unknown,Sentient,2026-01-21 15:49:27.740253,sentient_step_adapted,2.0,Assemblaggio PEZZO 1,1.0,0.0,1.0,1.0,0.0
