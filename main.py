@@ -422,23 +422,29 @@ app.layout = html.Div([
     dcc.Store(id='clicked-buttons-store', data={}),
     dcc.Store(id='user-preferences-store', data={}),
     dcc.Store(id='style-profile-token', data=None),
-
-    html.Div(id="sentient-inline-style", style={"display": "none"}),
+    dcc.Store(id='sentient-css-store', data=None),  # Store for CSS content
 
     # Introduction page
     html.Div(id='intro-container',
              style=styles['intro-screen'],
              children=[
                  html.Div(style={
-                     'width': '900px',
-                     'padding': '40px',
+                     'maxWidth': '900px',
+                     'width': 'calc(100% - 40px)',
+                     'padding': 'clamp(10px, 5%, 40px)',
                      'borderRadius': '15px',
                      'backgroundColor': 'white',
                      'boxShadow': '0 10px 25px rgba(0,0,0,0.1)',
                      'border': '1px solid #e1e4e8',
-                     'margin': '20px auto'
+                     'margin': '200px auto 150px auto',
+                     'boxSizing': 'border-box',
+                     'position': 'relative',
+
+
                  }, children=[
-                     html.H1("LEGO Assembly Training", style={'text-align': 'center', 'margin-bottom': '30px', 'fontSize': '3rem', 'fontWeight': '800', 'color': '#2c3e50', 'letterSpacing': '-1px'}),
+                     html.H1("LEGO Assembly Training",
+                             style={'text-align': 'center', 'margin-bottom': '30px', 'fontSize': '3rem',
+                                    'fontWeight': '800', 'color': '#2c3e50', 'letterSpacing': '-1px'}),
                      html.P("Welcome! Enter your experiment ID to start your personalized training.",
                             style={'margin-bottom': '25px', 'fontSize': '1.3rem'}),
                      dbc.Input(id='experiment-id-input', type='text', placeholder='Enter Experiment ID',
@@ -449,23 +455,31 @@ app.layout = html.Div([
                      dcc.Dropdown(
                          id='visibility-mode-dropdown',
                          options=[
-                             {'label': 'Data Collection – interaction data gathering mode', 'value': 'initial_visibility_data_collection.json'},
-                             {'label': 'Static – standard interface with fixed instructions', 'value': 'initial_visibility_static_mode.json'},
-                             {'label': 'Rule-Based Adaptive – rule-driven guidance based on historical data', 'value': 'initial_visibility_rule_based_adaptive.json'},
-                             {'label': 'Dynamically Adaptive – real-time guidance based on current interactions', 'value': 'initial_visibility_dynamically_adaptive.json'},
-                             {'label': 'Sentient – AI-powered personalized guidance based on your profile', 'value': 'sentient.json'}  #
+                             {'label': 'Data Collection – interaction data gathering mode',
+                              'value': 'initial_visibility_data_collection.json'},
+                             {'label': 'Static – standard interface with fixed instructions',
+                              'value': 'initial_visibility_static_mode.json'},
+                             {'label': 'Rule-Based Adaptive – rule-driven guidance based on historical data',
+                              'value': 'initial_visibility_rule_based_adaptive.json'},
+                             {'label': 'Dynamically Adaptive – real-time guidance based on current interactions',
+                              'value': 'initial_visibility_dynamically_adaptive.json'},
+                             {'label': 'Sentient – AI-powered personalized guidance based on your profile',
+                              'value': 'sentient.json'}  #
                          ],
                          value='initial_visibility_data_collection.json',  # Default selection
                          clearable=False,
-                         style={'text-align': 'center', 'margin-bottom': '20px', 'fontSize': '1.1rem','height': '50px'},
+                         style={'text-align': 'center', 'margin-bottom': '20px', 'fontSize': '1.1rem',
+                                'height': '50px'},
                          className="mb-4"
                      ),
-                      html.Div(id='sentient-profile-form', style={'display': 'none'}, children=[
-                     #     html.Hr(),
-                     #     html.H5("Sentient Training Profile", className="text-primary mb-3"),
+                     html.Div(id='sentient-profile-form', style={'display': 'none'}, children=[
+                         #     html.Hr(),
+                         #     html.H5("Sentient Training Profile", className="text-primary mb-3"),
 
                          # Lingua
-                         html.P([html.I(className="bi bi-translate me-2"),"Instruction Language"],"Instruction Language", style={'fontSize': '1.3rem', 'fontWeight': 'bold'}, className="mb-2"),
+                         html.P([html.I(className="bi bi-translate me-2"), "Instruction Language"],
+                                "Instruction Language", style={'fontSize': '1.3rem', 'fontWeight': 'bold'},
+                                className="mb-2"),
                          dcc.Dropdown(
                              id='profile-language',
                              options=[
@@ -480,41 +494,51 @@ app.layout = html.Div([
                          ),
 
                          # Esperienza (Checklist Strategica)
-                         html.P([html.I(className="bi bi-person-workspace me-2"), "Prior Experience"],"Prior Experience ",style={'fontSize': '1.3rem', 'fontWeight': 'bold'}, className="mb-2"),
+                         html.P([html.I(className="bi bi-person-workspace me-2"), "Prior Experience"],
+                                "Prior Experience ", style={'fontSize': '1.3rem', 'fontWeight': 'bold'},
+                                className="mb-2"),
                          dbc.Checklist(
-                             id='profile-experience-checklist', style={'backgroundColor': '#f8f9fa','padding': '20px','borderRadius':'20px','border':'1px solid #dee2e6'},
+                             id='profile-experience-checklist',
+                             style={'backgroundColor': '#f8f9fa', 'padding': '20px', 'borderRadius': '20px',
+                                    'border': '1px solid #dee2e6'},
                              options=[
                                  {'label': html.Div([
-                                            html.B("Advanced LEGO Building:"),
-                                            html.Br(),
-                                            html.I("I’ve assembled complex LEGO sets or Technic models with moving parts and gears.")
-                                             ]), 'value': 'lego_advanced'},
+                                     html.B("Advanced LEGO Building:"),
+                                     html.Br(),
+                                     html.I(
+                                         "I’ve assembled complex LEGO sets or Technic models with moving parts and gears.")
+                                 ]), 'value': 'lego_advanced'},
                                  {'label': html.Div([
-                                            html.B("Industrial Assembly/Maintenance (Non-LEGO):"),
-                                            html.Br(),
-                                            html.I("I’ve worked on mechanical assemblies or used tools while following technical instructions or diagrams.")
-                                        ]), 'value': 'industrial_mech'},
+                                     html.B("Industrial Assembly/Maintenance (Non-LEGO):"),
+                                     html.Br(),
+                                     html.I(
+                                         "I’ve worked on mechanical assemblies or used tools while following technical instructions or diagrams.")
+                                 ]), 'value': 'industrial_mech'},
                                  {'label': html.Div([
-                                            html.B("Warehouse Picking (Bin systems):"),
-                                            html.Br(),
-                                            html.I("I’m familiar with locating items using bin or location codes (e.g., A1-B03).")
-                                        ]), 'value': 'warehouse_picking'},
+                                     html.B("Warehouse Picking (Bin systems):"),
+                                     html.Br(),
+                                     html.I(
+                                         "I’m familiar with locating items using bin or location codes (e.g., A1-B03).")
+                                 ]), 'value': 'warehouse_picking'},
                                  {'label': html.Div([
-                                            html.B("No prior experience:"),
-                                            html.Br(),
-                                            html.I("I prefer clear, step-by-step guidance for every action.")
-                                        ]), 'value': 'none'}
+                                     html.B("No prior experience:"),
+                                     html.Br(),
+                                     html.I("I prefer clear, step-by-step guidance for every action.")
+                                 ]), 'value': 'none'}
                              ],
                              value=[],
-                             label_style={'marginBottom': '15px', 'display': 'block','fontSize': '1.1rem'}, # Crea spazio tra le opzioni
-                             input_style={'marginRight': '10px', 'transform': 'scale(1.2)'}, # Allontana e ingrandisce il quadratino
-                             #id="profile-experience-checklist",
+                             label_style={'marginBottom': '15px', 'display': 'block', 'fontSize': '1.1rem'},
+                             # Crea spazio tra le opzioni
+                             input_style={'marginRight': '10px', 'transform': 'scale(1.2)'},
+                             # Allontana e ingrandisce il quadratino
+                             # id="profile-experience-checklist",
 
                              className="mb-3"
                          ),
 
                          # Obiettivo
-                         html.P("Training Objective", style={'fontSize': '1.3rem', 'fontWeight': 'bold'},className="mb-2"),
+                         html.P("Training Objective", style={'fontSize': '1.3rem', 'fontWeight': 'bold'},
+                                className="mb-2"),
                          dcc.Dropdown(
                              id='profile-objective',
                              options=[
@@ -527,13 +551,14 @@ app.layout = html.Div([
                          ),
 
                          # Comfort Visivo
-                         html.P([html.I(className="bi bi-eye me-2"), "Visual Comfort & Accessibility"], style={'fontSize': '1.3rem', 'fontWeight': 'bold'},className="mb-2"),
+                         html.P([html.I(className="bi bi-eye me-2"), "Visual Comfort & Accessibility"],
+                                style={'fontSize': '1.3rem', 'fontWeight': 'bold'}, className="mb-2"),
                          dbc.Checklist(
                              id='profile-visual-comfort',
                              options=[
                                  {'label': 'High Contrast Mode', 'value': 'high_contrast'},
                                  {'label': 'Large Text Mode', 'value': 'large_text'},
-                                 #{'label': 'Color-Blind Assist (Text labels for colors)', 'value': 'color_blind_assist'}
+                                 # {'label': 'Color-Blind Assist (Text labels for colors)', 'value': 'color_blind_assist'}
                              ],
                              value=[],
                              inline=True,
@@ -543,13 +568,26 @@ app.layout = html.Div([
                          ),
 
                          # Note Libere
-                         html.P("Any additional requests or comments for your personalized training?", style={'fontSize': '1.3rem', 'fontWeight': 'bold'},className="mb-2"),
+                         html.P("Any additional requests or comments for your personalized training?",
+                                style={'fontSize': '1.3rem', 'fontWeight': 'bold'}, className="mb-2"),
                          dbc.Textarea(id='profile-other', placeholder='e.g. Prefer short sentences...',
-                                        style={'borderRadius': '10px', 'borderColor': '#ced4da', 'padding': '15px'},
+                                      style={'borderRadius': '10px', 'borderColor': '#ced4da', 'padding': '15px'},
                                       className="mb-3"),
                      ]),
                      dcc.Store(id='sentient-profile-store', data=None),
-                     dbc.Button("Begin Training", id='begin-button', color='primary', style={'width': '100%', 'fontSize': '1.8rem', 'padding': '15px', 'fontWeight': 'bold', 'borderRadius': '12px','backgroundColor': '#007bff','boxShadow': '0 4px 15px rgba(0, 123, 255, 0.3)','transition': 'all 0.3s ease'})
+                     dcc.Store(id='begin-button-loading', data=False),
+                     dbc.Button(
+                         [
+                             dbc.Spinner(size="sm", spinner_class_name="me-2", id="begin-spinner",
+                                         spinner_style={"display": "none"}),
+                             html.Span("Begin Training", id="begin-button-text")
+                         ],
+                         id='begin-button',
+                         color='primary',
+                         style={'width': '100%', 'fontSize': '1.8rem', 'padding': '15px', 'fontWeight': 'bold',
+                                'borderRadius': '12px', 'backgroundColor': '#007bff',
+                                'boxShadow': '0 4px 15px rgba(0, 123, 255, 0.3)', 'transition': 'all 0.3s ease'}
+                     )
                  ])
              ]),
 
@@ -564,8 +602,15 @@ app.layout = html.Div([
                 html.Div(className="d-flex gap-2", children=[
                     dbc.Button("PREVIOUS", id='prev-button', color='secondary',
                                style={'padding': '20px 20px', 'width': '150px'}),
-                    dbc.Button("NEXT", id='next-button', color='primary',
-                               style={'padding': '20px 20px', 'width': '150px'}),
+                    dbc.Button(
+                        [
+                            dbc.Spinner(size="sm", spinner_class_name="me-2", id="next-spinner",
+                                        spinner_style={"display": "none"}),
+                            html.Span("NEXT", id="next-button-text")
+                        ],
+                        id='next-button',
+                        color='primary',
+                        style={'padding': '20px 20px', 'width': '150px'}),
                 ])
             ]),
 
@@ -741,6 +786,65 @@ app.layout = html.Div([
         ])
 ])
 
+# Clientside callback to show spinner immediately on button click
+app.clientside_callback(
+    """
+    function(n_clicks) {
+        if (n_clicks) {
+            return [{"display": "inline-block"}, true, "Loading..."];
+        }
+        return [{"display": "none"}, false, "Begin Training"];
+    }
+    """,
+    [Output('begin-spinner', 'spinner_style'),
+     Output('begin-button', 'disabled'),
+     Output('begin-button-text', 'children')],
+    [Input('begin-button', 'n_clicks')],
+    prevent_initial_call=True
+)
+
+# Clientside callback to show spinner on NEXT button click
+app.clientside_callback(
+    """
+    function(n_clicks) {
+        if (n_clicks) {
+            return [{"display": "inline-block"}, true, "Loading..."];
+        }
+        return [{"display": "none"}, false, "NEXT"];
+    }
+    """,
+    [Output('next-spinner', 'spinner_style'),
+     Output('next-button', 'disabled'),
+     Output('next-button-text', 'children')],
+    [Input('next-button', 'n_clicks')],
+    prevent_initial_call=True
+)
+
+# Clientside callback to inject CSS into document head
+app.clientside_callback(
+    """
+    function(css) {
+        if (css) {
+            // Remove existing sentient style if present
+            var existingStyle = document.getElementById('sentient-dynamic-style');
+            if (existingStyle) {
+                existingStyle.remove();
+            }
+            // Create and inject new style element
+            var styleEl = document.createElement('style');
+            styleEl.id = 'sentient-dynamic-style';
+            styleEl.textContent = css;
+            document.head.appendChild(styleEl);
+            console.log('Sentient CSS injected successfully');
+        }
+        return window.dash_clientside.no_update;
+    }
+    """,
+    Output('sentient-css-store', 'data', allow_duplicate=True),
+    [Input('sentient-css-store', 'data')],
+    prevent_initial_call=True
+)
+
 
 # Callbacks
 @app.callback(
@@ -751,7 +855,10 @@ app.layout = html.Div([
      Output('sentient-profile-store', 'data'),
      Output('style-explanation', 'children'),
      Output('style-profile-token', 'data'),
-     Output('sentient-inline-style', 'children')],
+     Output('sentient-css-store', 'data'),
+     Output('begin-spinner', 'spinner_style', allow_duplicate=True),
+     Output('begin-button', 'disabled', allow_duplicate=True),
+     Output('begin-button-text', 'children', allow_duplicate=True)],
     [Input('begin-button', 'n_clicks')],
     [State('experiment-id-input', 'value'),
      State('visibility-mode-dropdown', 'value'),
@@ -760,22 +867,10 @@ app.layout = html.Div([
      State('profile-objective', 'value'),
      State('profile-visual-comfort', 'value'),
      State('profile-other', 'value'),
-     State('assembly-data-store', 'data')]
+     State('assembly-data-store', 'data')],
+    prevent_initial_call=True
 )
 def begin_training(n_clicks, experiment_id, mode, lang, exp_list, obj, visual_list, other, assembly_data):
-    # First render: return all 8 outputs
-    if not n_clicks:
-        return (
-            styles['intro-screen'],  # intro visible
-            {'display': 'none'},  # training hidden
-            None,  # experiment-id-store
-            0,  # current-step
-            None,  # sentient-profile-store
-            "",  # style-explanation
-            None,  # style-profile-token
-            ""  # sentient-inline-style (no CSS yet)
-        )
-
     # Normalise experiment id
     if not experiment_id:
         experiment_id = 'unknown'
@@ -814,14 +909,13 @@ def begin_training(n_clicks, experiment_id, mode, lang, exp_list, obj, visual_li
 
             print(f"Received style_token: {style_token}")
             if css:
-                # Persist to assets (optional) and inject inline (live)
+                # Persist to assets (for future page loads) and store raw CSS for immediate injection
                 assets_dir = pathlib.Path('assets')
                 assets_dir.mkdir(exist_ok=True)
                 (assets_dir / 'sentient_overrides.css').write_text(css, encoding='utf-8')
-                css_text = css or ""
-                css_html = f"<style>{css_text}</style>"
+                css_html = css  # Store raw CSS, clientside callback will inject it
 
-                print("Wrote CSS to assets/sentient_overrides.css and prepared inline CSS.")
+                print("Wrote CSS to assets/sentient_overrides.css and prepared for injection.")
         except Exception as e:
             style_expl = f"Style recommendation failed; using defaults. Error: {str(e)}"
             import traceback
@@ -839,7 +933,10 @@ def begin_training(n_clicks, experiment_id, mode, lang, exp_list, obj, visual_li
         profile,
         style_expl,
         style_token,
-        css_html
+        css_html,
+        {"display": "none"},  # Hide spinner after loading
+        False,  # Re-enable button
+        "Begin Training"  # Reset button text
     )
 
 
@@ -929,7 +1026,10 @@ def convert_aggregated_preferences(aggregated_prefs):
      Output('assembly-img', 'style'),
      Output('video-placeholder', 'style'),
      Output('video-player', 'style'),
-     Output('sentient-last-explanation', 'children')],
+     Output('sentient-last-explanation', 'children'),
+     Output('next-spinner', 'spinner_style', allow_duplicate=True),
+     Output('next-button', 'disabled', allow_duplicate=True),
+     Output('next-button-text', 'children', allow_duplicate=True)],
     [Input('current-step', 'data')],
     [State('assembly-data-store', 'data'),
      State('experiment-id-store', 'data'),
@@ -941,15 +1041,16 @@ def convert_aggregated_preferences(aggregated_prefs):
      State('navigation-in-progress', 'data')],
     prevent_initial_call=True
 )
-
-def update_step_content(current_step, assembly_data, experiment_id, mode, profile, style_token, clicked, prefs, navigation_in_progress):
+def update_step_content(current_step, assembly_data, experiment_id, mode, profile, style_token, clicked, prefs,
+                        navigation_in_progress):
     # 🛑 CONTROLLO CRITICO: Impedisci l'esecuzione se la navigazione è in corso.
     # Questo filtro blocca le chiamate in cascata veloci che avvengono durante la navigazione.
     if navigation_in_progress is True:
         # PreventUpdate interrompe immediatamente il callback senza sprecare API
         raise dash.exceptions.PreventUpdate
     if current_step <= 0 or current_step > len(assembly_data):
-        return "", 0, "", "", "", "", "", "", "", {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, ""
+        return "", 0, "", "", "", "", "", "", "", {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, "", {
+            "display": "none"}, False, "NEXT"
     enabled_interactions = load_enabled_interactions()
     step = assembly_data[current_step - 1]
     step_type = step.get('category', 'Unknown')
@@ -1066,8 +1167,12 @@ def update_step_content(current_step, assembly_data, experiment_id, mode, profil
         show(not vis['single_pieces']), show(vis['single_pieces']),
         show(not vis['assembly']), show(vis['assembly']),
         show(not vis['video']), show(vis['video']),
-        explanation
+        explanation,
+        {"display": "none"},  # Hide spinner after loading
+        False,  # Re-enable button
+        "NEXT"  # Reset button text
     )
+
 
 #  toggle_short_text callback
 
@@ -1642,7 +1747,6 @@ def reset_button_states_and_visibility(
                 step_name = assembly_data[current_step - 1]['name'] if 0 < current_step <= len(assembly_data) else 'N/A'
                 log_interaction(experiment_id, mode, 'computed_suggestion', current_step, step_name, content)
 
-
     # Default labels
     default_label = [html.I(className="bi bi-eye-fill me-1"), "Show"]
     viewed_label = [html.I(className="bi bi-eye-fill me-1"), "Viewed"]
@@ -1742,6 +1846,7 @@ def ensure_directories_exist():
     ]
     for directory in directories:
         os.makedirs(directory, exist_ok=True)
+
 
 @app.callback(
     Output('sentient-profile-form', 'style'),
