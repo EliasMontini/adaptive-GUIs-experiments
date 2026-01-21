@@ -918,6 +918,7 @@ def begin_training(n_clicks, experiment_id, mode, lang, experience, setup, other
     if not experiment_id:
         experiment_id = 'unknown'
 
+
     # Defaults
     profile = None
     style_expl = ""
