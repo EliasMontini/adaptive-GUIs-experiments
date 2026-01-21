@@ -429,36 +429,43 @@ app.layout = html.Div([
     html.Div(id='intro-container',
              style=styles['intro-screen'],
              children=[
-                 html.Div(style={'width': '900px', 'padding': '30px', 'border-radius': '8px',
-                                 }, children=[
-                     html.H1("Assembly Training Dashboard", style={'text-align': 'center', 'margin-bottom': '30px', 'fontSize': '2.5rem', 'fontWeight': 'bold'}),
+                 html.Div(style={
+                     'width': '900px',
+                     'padding': '40px',
+                     'borderRadius': '15px',
+                     'backgroundColor': 'white',
+                     'boxShadow': '0 10px 25px rgba(0,0,0,0.1)',
+                     'border': '1px solid #e1e4e8',
+                     'margin': '20px auto'
+                 }, children=[
+                     html.H1("LEGO Assembly Training", style={'text-align': 'center', 'margin-bottom': '30px', 'fontSize': '3rem', 'fontWeight': '800', 'color': '#2c3e50', 'letterSpacing': '-1px'}),
                      html.P("Welcome! Enter your experiment ID to start your personalized training.",
-                            style={'margin-bottom': '25px', 'fontSize': '1.4rem'}),
+                            style={'margin-bottom': '25px', 'fontSize': '1.3rem'}),
                      dbc.Input(id='experiment-id-input', type='text', placeholder='Enter Experiment ID',
-                               style={'margin-bottom': '30px', 'fontSize': '1.3rem', 'height': '50px'}),
+                               style={'margin-bottom': '30px', 'fontSize': '1.2rem', 'height': '50px'}),
 
-                     html.P("Select the interface style you’d like to use.",
+                     html.P("Choose how the interface guides you during training",
                             style={'margin-bottom': '10px', 'fontSize': '1.3rem', 'fontWeight': 'bold'}),
                      dcc.Dropdown(
                          id='visibility-mode-dropdown',
                          options=[
-                             {'label': 'Data Collection – standard interface', 'value': 'initial_visibility_data_collection.json'},
-                             {'label': 'Dynamically Adaptive', 'value': 'initial_visibility_dynamically_adaptive.json'},
-                             {'label': 'Rule-Based Adaptive', 'value': 'initial_visibility_rule_based_adaptive.json'},
-                             {'label': 'Static – standard interface', 'value': 'initial_visibility_static_mode.json'},
-                             {'label': 'Sentient – personalized guidance based on your profile', 'value': 'sentient.json'}  #
+                             {'label': 'Data Collection – interaction data gathering mode', 'value': 'initial_visibility_data_collection.json'},
+                             {'label': 'Static – standard interface with fixed instructions', 'value': 'initial_visibility_static_mode.json'},
+                             {'label': 'Rule-Based Adaptive – rule-driven guidance based on historical data', 'value': 'initial_visibility_rule_based_adaptive.json'},
+                             {'label': 'Dynamically Adaptive – real-time guidance based on current interactions', 'value': 'initial_visibility_dynamically_adaptive.json'},
+                             {'label': 'Sentient – AI-powered personalized guidance based on your profile', 'value': 'sentient.json'}  #
                          ],
                          value='initial_visibility_data_collection.json',  # Default selection
                          clearable=False,
-                         style={'text-align': 'center', 'margin-bottom': '20px', 'fontSize': '1.2rem','height': '50px'},
+                         style={'text-align': 'center', 'margin-bottom': '20px', 'fontSize': '1.1rem','height': '50px'},
                          className="mb-4"
                      ),
-                     html.Div(id='sentient-profile-form', style={'display': 'none'}, children=[
-                         html.Hr(),
-                         html.H5("Sentient Training Profile", className="text-primary mb-3"),
+                      html.Div(id='sentient-profile-form', style={'display': 'none'}, children=[
+                     #     html.Hr(),
+                     #     html.H5("Sentient Training Profile", className="text-primary mb-3"),
 
                          # Lingua
-                         html.P("Instruction Language", className="mb-1 small fw-bold"),
+                         html.P([html.I(className="bi bi-translate me-2"),"Instruction Language"],"Instruction Language", style={'fontSize': '1.3rem', 'fontWeight': 'bold'}, className="mb-2"),
                          dcc.Dropdown(
                              id='profile-language',
                              options=[
@@ -468,13 +475,14 @@ app.layout = html.Div([
                                  {'label': 'Français', 'value': 'French'}
                              ],
                              value='English',
+                             style={'fontSize': '1.1rem', 'borderRadius': '8px'},
                              className="mb-3"
                          ),
 
                          # Esperienza (Checklist Strategica)
-                         html.P("Prior Experience ",style={'fontSize': '1.5rem', 'fontWeight': 'bold'}, className="mb-1 small fw-bold"),
+                         html.P([html.I(className="bi bi-person-workspace me-2"), "Prior Experience"],"Prior Experience ",style={'fontSize': '1.3rem', 'fontWeight': 'bold'}, className="mb-2"),
                          dbc.Checklist(
-                             id='profile-experience-checklist',
+                             id='profile-experience-checklist', style={'backgroundColor': '#f8f9fa','padding': '20px','borderRadius':'20px','border':'1px solid #dee2e6'},
                              options=[
                                  {'label': html.Div([
                                             html.B("Advanced LEGO Building:"),
@@ -498,45 +506,50 @@ app.layout = html.Div([
                                         ]), 'value': 'none'}
                              ],
                              value=[],
+                             label_style={'marginBottom': '15px', 'display': 'block','fontSize': '1.1rem'}, # Crea spazio tra le opzioni
+                             input_style={'marginRight': '10px', 'transform': 'scale(1.2)'}, # Allontana e ingrandisce il quadratino
                              #id="profile-experience-checklist",
 
-                             className="mb-3 small"
+                             className="mb-3"
                          ),
 
                          # Obiettivo
-                         html.P("Training Objective", style={'fontSize': '1.5rem', 'fontWeight': 'bold'},className="mb-1 small fw-bold"),
+                         html.P("Training Objective", style={'fontSize': '1.3rem', 'fontWeight': 'bold'},className="mb-2"),
                          dcc.Dropdown(
                              id='profile-objective',
                              options=[
-                                 {'label': 'Speed (Efficiency): I prefer concise instructions and quick steps.', 'value': 'Speed'},
-                                 {'label': 'Learning (Precision focus): I prefer detailed guidance', 'value': 'Learning'}
+                                 {'label': 'Focus on speed and efficiency', 'value': 'Speed'},
+                                 {'label': 'Focus on learning and precision', 'value': 'Learning'}
                              ],
                              value='Learning',
+                             style={'fontSize': '1.1rem', 'borderRadius': '8px'},
                              className="mb-3"
                          ),
 
                          # Comfort Visivo
-                         html.P("Visual Comfort & Accessibility", style={'fontSize': '1.5rem', 'fontWeight': 'bold'},className="mb-1 small fw-bold"),
+                         html.P([html.I(className="bi bi-eye me-2"), "Visual Comfort & Accessibility"], style={'fontSize': '1.3rem', 'fontWeight': 'bold'},className="mb-2"),
                          dbc.Checklist(
                              id='profile-visual-comfort',
                              options=[
                                  {'label': 'High Contrast Mode', 'value': 'high_contrast'},
                                  {'label': 'Large Text Mode', 'value': 'large_text'},
-                                 {'label': 'Color-Blind Assist (Text labels for colors)', 'value': 'color_blind_assist'}
+                                 #{'label': 'Color-Blind Assist (Text labels for colors)', 'value': 'color_blind_assist'}
                              ],
                              value=[],
                              inline=True,
-                             className="mb-3 small"
+                             label_style={'fontSize': '1.1rem', 'marginRight': '20px'},
+                             input_style={'transform': 'scale(1.2)', 'marginRight': '8px'},
+                             className="mb-3"
                          ),
 
                          # Note Libere
-                         html.P("Other Requests", style={'fontSize': '1.5rem', 'fontWeight': 'bold'},className="mb-1 small fw-bold"),
+                         html.P("Any additional requests or comments for your personalized training?", style={'fontSize': '1.3rem', 'fontWeight': 'bold'},className="mb-2"),
                          dbc.Textarea(id='profile-other', placeholder='e.g. Prefer short sentences...',
-                                        style={'fontSize': '1.2rem', 'minHeight': '100px'},
+                                        style={'borderRadius': '10px', 'borderColor': '#ced4da', 'padding': '15px'},
                                       className="mb-3"),
                      ]),
                      dcc.Store(id='sentient-profile-store', data=None),
-                     dbc.Button("Begin Training", id='begin-button', color='primary', style={'width': '100%', 'fontSize': '1.8rem', 'padding': '20px', 'fontWeight': 'bold', 'borderRadius': '10px'})
+                     dbc.Button("Begin Training", id='begin-button', color='primary', style={'width': '100%', 'fontSize': '1.8rem', 'padding': '15px', 'fontWeight': 'bold', 'borderRadius': '12px','backgroundColor': '#007bff','boxShadow': '0 4px 15px rgba(0, 123, 255, 0.3)','transition': 'all 0.3s ease'})
                  ])
              ]),
 
