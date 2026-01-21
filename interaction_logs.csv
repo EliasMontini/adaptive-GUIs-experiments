@@ -1,0 +1,998 @@
+experiment_id,timestamp,action,step_id,step_name,short_text_viewed,long_text_viewed,single_pieces_viewed,assembly_viewed,video_viewed,time_spent,hesitation,mode
+123,2025-03-12 07:41:03.163230,start_experiment,,,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-12 07:41:04.406375,toggle_short_text_block,1.0,Step Name 1,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-12 07:41:06.074541,toggle_single_pieces_block,1.0,Step Name 1,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-12 07:41:09.011517,navigate_next,1.0,Step Name 1,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-12 07:41:10.169495,toggle_short_text_block,2.0,Step Name 2,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-12 07:41:12.404278,toggle_single_pieces_block,2.0,Step Name 2,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-12 07:41:13.983148,toggle_video_block,2.0,Step Name 2,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-12 07:41:15.971940,toggle_long_text_block,2.0,Step Name 2,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-12 07:41:17.224684,navigate_next,2.0,Step Name 2,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-12 07:41:18.902684,toggle_single_pieces_block,3.0,Step Name 3,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-12 07:41:21.885751,toggle_short_text_block,3.0,Step Name 3,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-12 07:43:39.550215,start_experiment,,,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-12 07:43:50.442024,start_experiment,,,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-12 07:44:52.190769,start_experiment,,,0.0,0.0,0.0,0.0,0.0,,False,0
+1213,2025-03-12 07:54:22.359822,start_experiment,,,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-12 07:54:54.109393,start_experiment,,,0.0,0.0,0.0,0.0,0.0,,False,0
+13,2025-03-12 07:55:04.870183,start_experiment,,,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-12 07:55:58.348719,start_experiment,,,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-12 07:56:16.591184,start_experiment,,,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-12 07:56:20.209837,toggle_short_text_block,1.0,Step Name 1,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-12 07:56:21.625725,navigate_next,1.0,Step Name 1,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-12 07:57:44.287411,start_experiment,,,0.0,0.0,0.0,0.0,0.0,,False,0
+2eq,2025-03-12 07:58:09.632827,start_experiment,,,0.0,0.0,0.0,0.0,0.0,,False,0
+213,2025-03-12 07:59:13.829512,start_experiment,,,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-12 08:00:08.352734,start_experiment,,,0.0,0.0,0.0,0.0,0.0,,False,0
+22,2025-03-12 08:02:09.344808,start_experiment,,,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-12 08:03:23.818995,start_experiment,,,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-12 08:04:11.315078,start_experiment,,,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-12 08:04:32.733993,start_experiment,,,0.0,0.0,0.0,0.0,0.0,,False,0
+1234,2025-03-12 08:05:45.792120,start_experiment,,,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-12 08:07:24.479609,start_experiment,,,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-12 08:16:07.910805,start_experiment,,,,,,,,,False,0
+123,2025-03-12 08:16:07.974620,step_loaded,1.0,Step Name 1,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-12 08:16:09.879943,toggle_short_text_block,1.0,Step Name 1,1.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-12 08:16:24.721728,toggle_single_pieces_block,1.0,Step Name 1,1.0,0.0,1.0,0.0,0.0,,False,0
+123,2025-03-12 08:16:55.940437,navigate_next,1.0,Step Name 1,1.0,0.0,1.0,0.0,0.0,,False,0
+123,2025-03-12 08:16:55.997594,step_loaded,2.0,Step Name 2,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-12 08:16:57.522069,toggle_short_text_block,2.0,Step Name 2,1.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-13 14:49:54.380628,start_experiment,,,,,,,,,False,0
+123,2025-03-13 14:49:54.481237,step_loaded,1.0,Step Name 1,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-13 14:53:17.797892,start_experiment,,,,,,,,,False,0
+12,2025-03-13 14:53:17.907834,step_loaded,1.0,Step Name 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 14:54:18.321108,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 14:54:18.400200,step_loaded,1.0,Step Name 1,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-13 14:55:37.262500,start_experiment,,,,,,,,,False,0
+12,2025-03-13 14:55:37.367441,step_loaded,1.0,Step Name 1,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-13 15:00:45.528323,start_experiment,,,,,,,,,False,0
+123,2025-03-13 15:00:45.814008,step_loaded,1.0,Step Name 1,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-13 15:42:37.196458,start_experiment,,,,,,,,,False,0
+12,2025-03-13 15:42:37.308595,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-13 15:47:23.684115,toggle_single_pieces_block,1.0,Withdraw Components for PIECE 1,0.0,0.0,1.0,0.0,0.0,,False,0
+12,2025-03-13 15:47:26.262480,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0,,False,0
+123,2025-03-13 15:48:10.622085,start_experiment,,,,,,,,,False,0
+123,2025-03-13 15:48:10.682326,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-13 15:49:31.223911,start_experiment,,,,,,,,,False,0
+123,2025-03-13 15:49:31.277918,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-13 15:50:23.105926,start_experiment,,,,,,,,,False,0
+123,2025-03-13 15:50:23.165530,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-13 15:50:45.717830,start_experiment,,,,,,,,,False,0
+123,2025-03-13 15:50:45.779966,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-13 15:51:48.221693,start_experiment,,,,,,,,,False,0
+12,2025-03-13 15:51:48.280320,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 15:52:31.679445,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 15:52:31.752502,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 15:52:51.622060,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 15:52:51.690000,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-13 15:53:07.972088,start_experiment,,,,,,,,,False,0
+123,2025-03-13 15:53:08.020697,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-13 15:55:35.282900,start_experiment,,,,,,,,,False,0
+123,2025-03-13 15:55:35.337406,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 15:56:12.754546,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 15:56:12.845238,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+q23,2025-03-13 16:01:55.196834,start_experiment,,,,,,,,,False,0
+q23,2025-03-13 16:01:55.299137,step_loaded,1.0,Step Name 1,0.0,0.0,0.0,0.0,0.0,,False,0
+2134,2025-03-13 16:02:13.569687,start_experiment,,,,,,,,,False,0
+2134,2025-03-13 16:02:13.627728,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-13 16:03:44.164970,start_experiment,,,,,,,,,False,0
+123,2025-03-13 16:03:44.236800,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-13 16:04:49.416035,start_experiment,,,,,,,,,False,0
+12,2025-03-13 16:04:49.472827,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-13 16:10:58.773950,start_experiment,,,,,,,,,False,0
+12,2025-03-13 16:10:58.842972,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-13 16:19:25.508699,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-13 16:19:27.060297,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-13 16:19:27.130788,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-13 16:20:25.789665,toggle_single_pieces_block,2.0,Assembly PIECE 1,0.0,0.0,1.0,0.0,0.0,,False,0
+12,2025-03-13 16:20:38.617331,toggle_short_text_block,2.0,Assembly PIECE 1,1.0,0.0,1.0,0.0,0.0,,False,0
+213,2025-03-13 16:22:15.297343,start_experiment,,,,,,,,,False,0
+213,2025-03-13 16:22:15.356645,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+213,2025-03-13 16:22:20.145281,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,False,0
+213,2025-03-13 16:22:49.220457,start_experiment,,,,,,,,,False,0
+213,2025-03-13 16:22:49.325621,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+213,2025-03-13 16:22:51.189166,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-13 16:24:53.938795,start_experiment,,,,,,,,,False,0
+123,2025-03-13 16:24:54.001796,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-13 16:24:54.654845,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-13 16:25:30.247352,start_experiment,,,,,,,,,False,0
+123,2025-03-13 16:25:30.326016,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-13 16:25:31.073906,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:31:02.460976,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 16:31:02.546842,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:31:04.667388,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:31:33.797740,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 16:31:33.861241,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:31:47.511284,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 16:31:47.573443,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:32:08.349493,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 16:32:08.445605,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:32:09.521209,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:34:15.242112,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 16:34:15.304142,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:34:16.438704,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:35:02.556800,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 16:35:02.621421,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:35:03.523615,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:35:16.729893,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 16:35:16.802999,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:35:17.684968,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:37:42.054875,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 16:37:42.143003,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:37:42.949478,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:38:03.297448,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 16:38:03.384339,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:38:03.932194,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:39:28.778475,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 16:39:28.860096,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:39:30.293953,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:40:52.450902,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 16:40:52.516936,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:40:53.456430,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:43:52.066584,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 16:43:52.128566,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:43:52.918233,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:44:28.140522,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 16:44:28.201837,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:44:28.986374,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:45:49.406252,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 16:45:49.505563,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:45:51.090624,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:47:06.698405,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 16:47:06.802902,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:47:07.364191,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:47:40.691258,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 16:47:40.804762,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:47:41.708698,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:50:07.811363,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 16:50:07.883059,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:50:08.620472,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:50:10.485862,toggle_single_pieces_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:50:42.889419,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 16:50:42.973517,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:50:43.808867,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:51:29.023294,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 16:51:29.087297,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:51:54.116691,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 16:51:54.196245,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:51:57.990565,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 16:51:58.051976,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:52:15.131513,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 16:52:15.221519,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:52:16.561857,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:52:17.763677,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:52:17.811404,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:52:19.327798,toggle_long_text_block,2.0,Assembly PIECE 1,0.0,1.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:52:25.688339,toggle_short_text_block,2.0,Assembly PIECE 1,1.0,1.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:52:27.219877,navigate_next,2.0,Assembly PIECE 1,1.0,1.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:52:27.302500,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:52:28.563886,toggle_short_text_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:52:30.031400,toggle_single_pieces_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,1.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:57:03.836537,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 16:57:03.906536,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:58:06.599895,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:58:06.644599,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:58:07.368783,toggle_video_block,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,1.0,,False,0
+unknown,2025-03-13 16:58:18.823980,navigate_next,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,1.0,,False,0
+unknown,2025-03-13 16:58:18.921262,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:58:19.537978,navigate_next,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:58:19.575536,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:58:20.122238,toggle_video_block,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,1.0,,False,0
+unknown,2025-03-13 16:59:24.365403,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 16:59:24.465545,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:59:26.442877,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:59:26.493533,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:59:28.203554,toggle_video_block,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,1.0,,False,0
+unknown,2025-03-13 16:59:31.373893,navigate_next,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,1.0,,False,0
+unknown,2025-03-13 16:59:31.416894,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:59:32.298540,navigate_next,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:59:32.349052,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 16:59:32.959965,toggle_video_block,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,1.0,,False,0
+unknown,2025-03-13 17:00:24.619952,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 17:00:24.675475,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 17:00:25.984673,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 17:00:26.041584,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 17:00:26.811272,toggle_video_block,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,1.0,,False,0
+unknown,2025-03-13 17:00:59.819240,start_experiment,,,,,,,,,False,0
+unknown,2025-03-13 17:00:59.904357,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 17:01:00.687329,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 17:01:00.732887,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-13 17:01:01.229826,toggle_video_block,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,1.0,,False,0
+unknown,2025-03-13 17:01:03.088540,toggle_assembly_block,2.0,Assembly PIECE 1,0.0,0.0,0.0,1.0,1.0,,False,0
+unknown,2025-03-13 17:01:04.151090,toggle_single_pieces_block,2.0,Assembly PIECE 1,0.0,0.0,1.0,1.0,1.0,,False,0
+unknown,2025-03-14 08:57:52.620049,start_experiment,,,,,,,,,False,0
+unknown,2025-03-14 08:57:52.665010,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 08:57:54.387194,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 08:57:54.423732,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 08:57:55.189736,toggle_video_block,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,1.0,,False,0
+unknown,2025-03-14 08:58:19.433220,navigate_next,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,1.0,,False,0
+unknown,2025-03-14 08:58:19.502043,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 08:58:20.826981,navigate_next,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 08:58:20.866207,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 08:58:21.544715,toggle_video_block,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,1.0,,False,0
+123,2025-03-14 09:36:47.582020,start_experiment,,,,,,,,,False,0
+123,2025-03-14 09:36:47.647184,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-14 09:36:48.595371,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-14 09:36:48.628564,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+123,2025-03-14 09:36:49.159266,toggle_video_block,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,1.0,,False,0
+12,2025-03-14 09:50:38.649466,start_experiment,,,,,,,,,False,0
+12,2025-03-14 09:50:38.728970,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:39.859099,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:39.977948,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:40.038951,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:40.163989,navigate_next,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:40.209030,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:40.372621,navigate_next,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:40.416145,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:40.537370,navigate_next,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:40.578857,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:40.714430,navigate_next,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:40.761442,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:40.894924,navigate_next,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:40.939940,step_loaded,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:41.037967,navigate_next,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:41.073207,step_loaded,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:41.185254,navigate_next,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:41.242249,step_loaded,9.0,Withdraw Components for PIECE 5,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:42.876973,navigate_next,9.0,Withdraw Components for PIECE 5,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:42.936881,step_loaded,10.0,Assembly PIECE 5,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:43.175496,navigate_next,10.0,Assembly PIECE 5,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:43.232414,step_loaded,11.0,Assembly PIECE 6,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:43.352573,navigate_next,11.0,Assembly PIECE 6,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:43.394074,step_loaded,12.0,Withdraw Components for PIECE 7,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:43.525415,navigate_next,12.0,Withdraw Components for PIECE 7,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:43.576955,step_loaded,13.0,Assembly PIECE 7,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:43.722854,navigate_next,13.0,Assembly PIECE 7,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:43.763735,step_loaded,14.0,Withdraw Components for PIECE 8,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:43.872905,navigate_next,14.0,Withdraw Components for PIECE 8,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:43.924292,step_loaded,15.0,Assembly PIECE 8,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:44.054206,navigate_next,15.0,Assembly PIECE 8,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:44.092722,step_loaded,16.0,Final Control,0.0,0.0,0.0,0.0,0.0,,False,0
+12,2025-03-14 09:50:44.278650,navigate_to_thankyou,16.0,Final Control,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:49.120734,start_experiment,,,,,,,,,False,0
+unknown,2025-03-14 09:50:49.190522,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:49.795100,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:49.842976,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:50.180476,navigate_next,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:50.221997,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:50.648111,navigate_next,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:50.756627,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:50.940676,navigate_next,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:50.986201,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:51.361843,navigate_next,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:51.405379,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:52.059266,navigate_next,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:52.120802,step_loaded,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:52.296626,navigate_next,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:52.331928,step_loaded,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:52.429959,navigate_next,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:52.475896,step_loaded,9.0,Withdraw Components for PIECE 5,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:52.579021,navigate_next,9.0,Withdraw Components for PIECE 5,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:52.624579,step_loaded,10.0,Assembly PIECE 5,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:52.732778,navigate_next,10.0,Assembly PIECE 5,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:52.774254,step_loaded,11.0,Assembly PIECE 6,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:52.948954,navigate_next,11.0,Assembly PIECE 6,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:52.995179,step_loaded,12.0,Withdraw Components for PIECE 7,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:53.628420,navigate_next,12.0,Withdraw Components for PIECE 7,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:53.673405,step_loaded,13.0,Assembly PIECE 7,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:54.240505,navigate_next,13.0,Assembly PIECE 7,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:54.285564,step_loaded,14.0,Withdraw Components for PIECE 8,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:54.966793,navigate_next,14.0,Withdraw Components for PIECE 8,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:55.099360,step_loaded,15.0,Assembly PIECE 8,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:56.014176,navigate_next,15.0,Assembly PIECE 8,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:56.051166,step_loaded,16.0,Final Control,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:50:57.358003,navigate_to_thankyou,16.0,Final Control,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:38.989697,start_experiment,,,,,,,,,False,0
+unknown,2025-03-14 09:52:39.072231,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:40.336460,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:40.387270,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:40.984553,navigate_next,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:41.056469,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:41.270163,navigate_next,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:41.316344,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:41.466180,navigate_next,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:41.518103,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:41.709354,navigate_next,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:41.781553,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:41.838520,navigate_next,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:41.898162,step_loaded,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:42.041976,navigate_next,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:42.096528,step_loaded,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:42.172750,navigate_next,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:42.230055,step_loaded,9.0,Withdraw Components for PIECE 5,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:42.341812,navigate_next,9.0,Withdraw Components for PIECE 5,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:42.389735,step_loaded,10.0,Assembly PIECE 5,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:42.515691,navigate_next,10.0,Assembly PIECE 5,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:42.576747,step_loaded,11.0,Assembly PIECE 6,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:42.699775,navigate_next,11.0,Assembly PIECE 6,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:42.759550,step_loaded,12.0,Withdraw Components for PIECE 7,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:43.440692,navigate_next,12.0,Withdraw Components for PIECE 7,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:43.491244,step_loaded,13.0,Assembly PIECE 7,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:43.999413,navigate_next,13.0,Assembly PIECE 7,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:44.053412,step_loaded,14.0,Withdraw Components for PIECE 8,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:44.625826,navigate_next,14.0,Withdraw Components for PIECE 8,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:44.716495,step_loaded,15.0,Assembly PIECE 8,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:45.356945,navigate_next,15.0,Assembly PIECE 8,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:45.429046,step_loaded,16.0,Final Control,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-14 09:52:46.303538,navigate_to_thankyou,16.0,Final Control,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-24 13:29:33.950169,start_experiment,,,,,,,,,False,0
+unknown,2025-03-24 13:29:34.024218,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-24 13:29:34.121852,step_loaded_adaptive,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0,,False,0
+unknown,2025-03-24 13:29:44.120217,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0,10.005462,True,0
+unknown,2025-03-24 13:29:44.208745,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,10.074998,True,0
+se,,,,,,,,,,,,0
+unknown,2025-03-24 13:29:44.364632,step_loaded_adaptive,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,1.0,,False,0
+unknown,2025-03-24 13:29:48.821719,navigate_next,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,1.0,4.467699,False,0
+unknown,2025-03-24 13:29:48.956279,step_loaded_adaptive,3.0,Withdraw Components for PIECE 2,1.0,0.0,1.0,0.0,0.0,,False,0
+unknown,2025-03-24 13:29:49.095906,step_loaded_adaptive,3.0,Withdraw Components for PIECE 2,1.0,0.0,1.0,0.0,0.0,,False,0
+unknown,2025-03-24 13:29:51.476718,navigate_next,3.0,Withdraw Components for PIECE 2,1.0,0.0,1.0,0.0,0.0,2.386502,False,0
+unknown,2025-03-24 13:29:51.595405,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,2.486651,False,0
+se,,,,,,,,,,,,0
+unknown,2025-03-24 13:29:51.722159,step_loaded_adaptive,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,1.0,,False,0
+unknown,2025-03-24 13:29:52.594481,navigate_next,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,1.0,0.867661,False,0
+unknown,2025-03-24 13:29:52.689358,step_loaded_adaptive,5.0,Withdraw Components for PIECE 3,1.0,0.0,1.0,0.0,0.0,,False,0
+unknown,2025-03-24 13:29:52.835529,step_loaded_adaptive,5.0,Withdraw Components for PIECE 3,1.0,0.0,1.0,0.0,0.0,,False,0
+unknown,2025-03-24 13:29:53.924126,navigate_next,5.0,Withdraw Components for PIECE 3,1.0,0.0,1.0,0.0,0.0,1.081591,False,0
+unknown,2025-03-24 13:29:54.008036,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,1.168047,False,0
+se,,,,,,,,,,,,0
+unknown,2025-03-24 13:29:54.161499,step_loaded_adaptive,6.0,Assembly PIECE 3,1.0,0.0,0.0,0.0,1.0,,False,0
+unknown,2025-03-24 13:29:55.450889,navigate_next,6.0,Assembly PIECE 3,1.0,0.0,0.0,0.0,1.0,1.311422,False,0
+unknown,2025-03-24 13:29:55.558030,step_loaded,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0,1.381232,False,0
+se,,,,,,,,,,,,0
+unknown,2025-03-24 13:29:55.668407,step_loaded_adaptive,7.0,Withdraw Components for PIECE 4,1.0,0.0,1.0,0.0,0.0,,False,0
+unknown,2025-03-24 13:29:56.488381,navigate_next,7.0,Withdraw Components for PIECE 4,1.0,0.0,1.0,0.0,0.0,0.812542,False,0
+unknown,2025-03-24 13:29:56.606381,step_loaded,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0,0.924933,False,0
+se,,,,,,,,,,,,0
+unknown,2025-03-24 13:29:56.742423,step_loaded_adaptive,8.0,Assembly PIECE 4,1.0,0.0,0.0,0.0,1.0,,False,0
+unknown,2025-03-24 13:29:57.881711,navigate_next,8.0,Assembly PIECE 4,1.0,0.0,0.0,0.0,1.0,1.135132,False,0
+unknown,2025-03-24 13:29:57.946712,step_loaded,9.0,Withdraw Components for PIECE 5,0.0,0.0,0.0,0.0,0.0,1.199221,False,0
+se,,,,,,,,,,,,0
+unknown,2025-03-24 13:29:58.104508,step_loaded_adaptive,9.0,Withdraw Components for PIECE 5,1.0,0.0,1.0,0.0,0.0,,False,0
+unknown,2025-03-24 13:29:59.563978,navigate_next,9.0,Withdraw Components for PIECE 5,1.0,0.0,1.0,0.0,0.0,1.495655,False,0
+unknown,2025-03-24 13:29:59.647759,step_loaded,10.0,Assembly PIECE 5,0.0,0.0,0.0,0.0,0.0,1.545422,False,0
+unknown,2025-03-24 13:29:59.764297,step_loaded_adaptive,10.0,Assembly PIECE 5,1.0,0.0,0.0,0.0,1.0,,False,0
+unknown,2025-03-24 13:30:01.233348,navigate_next,10.0,Assembly PIECE 5,1.0,0.0,0.0,0.0,1.0,1.485051,False,0
+unknown,2025-03-24 13:30:01.300982,step_loaded_adaptive,11.0,Assembly PIECE 6,1.0,0.0,0.0,0.0,1.0,,False,0
+unknown,2025-03-24 13:30:01.374001,step_loaded_adaptive,11.0,Assembly PIECE 6,1.0,0.0,0.0,0.0,1.0,,False,0
+unknown,2025-03-24 13:30:02.460428,navigate_next,11.0,Assembly PIECE 6,1.0,0.0,0.0,0.0,1.0,1.075142,False,0
+unknown,2025-03-24 13:30:02.546952,step_loaded,12.0,Withdraw Components for PIECE 7,0.0,0.0,0.0,0.0,0.0,1.164956,False,0
+se,,,,,,,,,,,,0
+unknown,2025-03-24 13:30:02.666470,step_loaded_adaptive,12.0,Withdraw Components for PIECE 7,1.0,0.0,1.0,0.0,0.0,,False,0
+unknown,2025-03-24 13:30:05.371441,navigate_next,12.0,Withdraw Components for PIECE 7,1.0,0.0,1.0,0.0,0.0,2.708989,False,0
+unknown,2025-03-24 13:30:05.445969,step_loaded_adaptive,13.0,Assembly PIECE 7,1.0,0.0,0.0,0.0,1.0,,False,0
+unknown,2025-03-24 13:30:05.584533,step_loaded_adaptive,13.0,Assembly PIECE 7,1.0,0.0,0.0,0.0,1.0,,False,0
+unknown,2025-03-24 13:30:06.622610,navigate_next,13.0,Assembly PIECE 7,1.0,0.0,0.0,0.0,1.0,1.031304,False,0
+unknown,2025-03-24 13:30:06.713823,step_loaded,14.0,Withdraw Components for PIECE 8,0.0,0.0,0.0,0.0,0.0,1.123075,False,0
+se,,,,,,,,,,,,0
+unknown,2025-03-24 13:30:06.849391,step_loaded_adaptive,14.0,Withdraw Components for PIECE 8,1.0,0.0,1.0,0.0,0.0,,False,0
+unknown,2025-03-24 13:30:07.580797,navigate_next,14.0,Withdraw Components for PIECE 8,1.0,0.0,1.0,0.0,0.0,0.723231,False,0
+unknown,2025-03-24 13:30:07.659135,step_loaded,15.0,Assembly PIECE 8,0.0,0.0,0.0,0.0,0.0,0.801124,False,0
+se,,,,,,,,,,,,0
+unknown,2025-03-24 13:30:07.816059,step_loaded_adaptive,15.0,Assembly PIECE 8,1.0,0.0,0.0,0.0,1.0,,False,0
+unknown,2025-03-24 13:30:09.111356,navigate_next,15.0,Assembly PIECE 8,1.0,0.0,0.0,0.0,1.0,1.289712,False,0
+unknown,2025-03-24 13:30:09.201108,step_loaded,16.0,Final Control,0.0,0.0,0.0,0.0,0.0,1.363297,False,0
+se,,,,,,,,,,,,0
+unknown,2025-03-24 13:30:09.326655,step_loaded_adaptive,16.0,Final Control,1.0,0.0,0.0,0.0,0.0,,False,0
+unknown,2025-03-24 13:30:10.762028,navigate_to_thankyou,16.0,Final Control,1.0,0.0,0.0,0.0,0.0,1.446928,False,0
+12,2025-03-25 11:06:57.503164,start_experiment,,,,,,,,,,0
+12,2025-03-25 11:06:57.603439,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+12,2025-03-25 11:06:59.383040,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+12,2025-03-25 11:07:01.107034,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+12,2025-03-25 11:07:01.205448,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+12,2025-03-25 11:07:02.594431,navigate_previous,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+12,2025-03-25 11:07:02.694014,step_loaded,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+213,2025-03-25 11:09:06.604996,start_experiment,,,,,,,,,,0
+213,2025-03-25 11:09:06.723912,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+213,2025-03-25 11:09:08.324032,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+213,2025-03-25 11:09:09.507276,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+213,2025-03-25 11:09:09.613644,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+213,2025-03-25 11:09:10.607653,navigate_previous,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+213,2025-03-25 11:09:10.677210,step_loaded,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:17:06.807231,start_experiment,,,,,,,,,,0
+123,2025-03-25 11:17:06.872268,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:17:08.180990,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:17:09.737411,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:17:09.814130,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:17:11.387284,navigate_previous,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:17:11.461559,step_loaded,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-25 11:20:18.224906,start_experiment,,,,,,,,,,0
+1234,2025-03-25 11:20:18.473990,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-25 11:20:26.934381,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-25 11:20:28.209416,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-25 11:20:28.298191,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-25 11:20:30.606534,navigate_previous,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-25 11:20:30.949832,step_loaded,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:21:07.639431,start_experiment,,,,,,,,,,0
+123,2025-03-25 11:21:07.747051,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:21:09.058408,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:21:10.323775,toggle_single_pieces_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0,,,0
+123,2025-03-25 11:21:12.655337,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0,,,0
+123,2025-03-25 11:21:12.729437,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:21:14.094315,navigate_previous,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:21:14.173766,step_loaded,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0,,,0
+123,2025-03-25 11:21:32.071764,step_loaded,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0,,,0
+123,2025-03-25 11:21:32.888274,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0,,,0
+123,2025-03-25 11:21:32.974067,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:21:34.078637,navigate_next,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:21:34.152361,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:21:35.449474,toggle_short_text_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:21:37.491529,navigate_next,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:21:37.870887,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:21:39.705959,navigate_previous,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:21:40.009400,step_loaded,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:21:42.789901,navigate_next,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:21:42.928454,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:21:43.832327,navigate_previous,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:21:43.924387,step_loaded,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:21:45.851084,navigate_previous,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:21:45.920575,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:21:49.319596,navigate_next,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:21:49.409132,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:21:50.647494,navigate_next,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:21:50.706201,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:21:53.978221,toggle_long_text_block,4.0,Assembly PIECE 2,0.0,1.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:21:54.887128,navigate_next,4.0,Assembly PIECE 2,0.0,1.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:21:55.135910,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:21:55.943789,navigate_previous,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:21:56.063803,step_loaded,4.0,Assembly PIECE 2,0.0,1.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:24:20.102397,start_experiment,,,,,,,,,,0
+123,2025-03-25 11:24:20.272735,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:24:21.367537,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:24:22.620797,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:24:22.702882,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:24:23.872098,navigate_previous,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:24:23.952716,step_loaded,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:24:29.485113,toggle_single_pieces_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0,,,0
+123,2025-03-25 11:24:31.932734,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0,,,0
+123,2025-03-25 11:24:32.274262,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:24:33.272043,navigate_previous,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 11:24:33.540591,step_loaded,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0,,,0
+12313,2025-03-25 11:28:28.029542,start_experiment,,,,,,,,,,0
+12313,2025-03-25 11:28:28.108319,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+12313,2025-03-25 11:28:29.141480,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+12313,2025-03-25 11:28:30.201698,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+12313,2025-03-25 11:28:30.320696,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+12313,2025-03-25 11:28:31.830263,navigate_previous,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+12313,2025-03-25 11:28:31.946388,step_loaded,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+12313,2025-03-25 11:28:34.483632,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+12313,2025-03-25 11:28:34.592384,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+12313,2025-03-25 11:28:35.635552,toggle_long_text_block,2.0,Assembly PIECE 1,0.0,1.0,0.0,0.0,0.0,,,0
+12313,2025-03-25 11:28:36.697777,navigate_next,2.0,Assembly PIECE 1,0.0,1.0,0.0,0.0,0.0,,,0
+12313,2025-03-25 11:28:36.835724,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+12313,2025-03-25 11:28:37.723202,navigate_previous,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+12313,2025-03-25 11:28:37.946619,step_loaded,2.0,Assembly PIECE 1,0.0,1.0,0.0,0.0,0.0,,,0
+1233,2025-03-25 15:13:17.453223,start_experiment,,,,,,,,,,0
+1233,2025-03-25 15:13:17.495875,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1233,2025-03-25 15:13:19.275893,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1233,2025-03-25 15:13:19.313576,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1233,2025-03-25 15:13:20.752738,navigate_previous,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1233,2025-03-25 15:13:20.813437,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1233,2025-03-25 15:13:21.753432,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1233,2025-03-25 15:13:21.806407,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1233,2025-03-25 15:13:22.938877,navigate_next,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1233,2025-03-25 15:13:23.003416,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+1233,2025-03-25 15:13:24.309517,navigate_previous,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+1233,2025-03-25 15:13:24.364402,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1233,2025-03-25 15:13:24.630976,navigate_previous,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1233,2025-03-25 15:13:24.712922,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1233,2025-03-25 15:13:25.260497,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1233,2025-03-25 15:13:25.337511,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1233,2025-03-25 15:13:25.412676,navigate_next,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1233,2025-03-25 15:13:25.465694,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+1233,2025-03-25 15:13:25.617762,navigate_next,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+1233,2025-03-25 15:13:25.696950,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+1233,2025-03-25 15:13:26.503254,navigate_next,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+1233,2025-03-25 15:13:26.563288,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 15:13:52.760221,start_experiment,,,,,,,,,,0
+123,2025-03-25 15:13:52.821589,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 15:13:53.855307,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 15:13:54.940137,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 15:13:54.991527,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1231,2025-03-25 15:14:16.535371,start_experiment,,,,,,,,,,0
+1231,2025-03-25 15:14:16.591529,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1231,2025-03-25 15:14:58.591899,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+1231,2025-03-25 15:14:59.435454,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+1231,2025-03-25 15:14:59.475388,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1231,2025-03-25 15:14:59.957299,navigate_previous,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1231,2025-03-25 15:14:59.997509,step_loaded,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 15:16:36.030979,start_experiment,,,,,,,,,,0
+123,2025-03-25 15:16:36.097382,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+13,2025-03-25 15:16:57.049663,start_experiment,,,,,,,,,,0
+13,2025-03-25 15:16:57.103384,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 15:18:12.070502,start_experiment,,,,,,,,,,0
+123,2025-03-25 15:18:12.131034,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 15:19:38.052884,start_experiment,,,,,,,,,,0
+123,2025-03-25 15:19:38.112641,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 15:19:40.818618,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 15:19:40.896609,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 15:19:42.068791,navigate_previous,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 15:19:42.123837,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 15:19:45.632681,toggle_single_pieces_block,1.0,Withdraw Components for PIECE 1,0.0,0.0,1.0,0.0,0.0,,,0
+123,2025-03-25 15:19:46.645142,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,1.0,0.0,0.0,,,0
+123,2025-03-25 15:19:46.704315,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 15:19:47.617024,toggle_short_text_block,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 15:19:48.800706,navigate_previous,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 15:19:48.849688,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,1.0,0.0,0.0,,,0
+123,2025-03-25 15:19:52.599397,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,1.0,0.0,0.0,,,0
+123,2025-03-25 15:19:52.654817,step_loaded,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 15:19:53.424532,navigate_next,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-25 15:19:53.493275,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+12312,2025-03-25 16:09:16.688359,start_experiment,,,,,,,,,,0
+12312,2025-03-25 16:09:16.745087,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+12312,2025-03-25 16:32:50.593745,toggle_short_text_none,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+12312,2025-03-25 16:32:51.556311,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+12313,2025-03-25 16:34:31.378099,start_experiment,,,,,,,,,,0
+12313,2025-03-25 16:34:31.430105,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+12313,2025-03-25 16:34:32.746922,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+12313,2025-03-25 16:34:34.093695,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+12313,2025-03-25 16:34:34.152482,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1231,2025-03-25 16:34:41.973852,start_experiment,,,,,,,,,,0
+1231,2025-03-25 16:34:42.041651,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1231,2025-03-25 16:34:51.384937,toggle_single_pieces_block,1.0,Withdraw Components for PIECE 1,0.0,0.0,1.0,0.0,0.0,,,0
+1231,2025-03-25 16:34:52.296801,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,1.0,0.0,0.0,,,0
+1231,2025-03-25 16:34:52.343011,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1231,2025-03-25 16:34:52.952424,navigate_previous,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1231,2025-03-25 16:34:53.003830,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,1.0,0.0,0.0,,,0
+12312,2025-03-26 17:24:51.489976,start_experiment,,,,,,,,,,0
+12312,2025-03-26 17:24:51.600657,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+12312,2025-03-26 17:25:01.327489,toggle_single_pieces_block,1.0,Withdraw Components for PIECE 1,0.0,0.0,1.0,0.0,0.0,,,0
+12312,2025-03-26 17:25:06.167282,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,1.0,0.0,0.0,,,0
+12312,2025-03-26 17:25:06.370538,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1231,2025-03-26 17:25:30.811567,start_experiment,,,,,,,,,,0
+1231,2025-03-26 17:25:30.922177,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1231,2025-03-26 17:27:43.078701,toggle_single_pieces_block,1.0,Withdraw Components for PIECE 1,0.0,0.0,1.0,0.0,0.0,,,0
+1231,2025-03-26 17:27:44.146903,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,1.0,0.0,0.0,,,0
+1231,2025-03-26 17:27:44.270159,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1231,2025-03-26 17:27:45.994792,toggle_single_pieces_block,2.0,Assembly PIECE 1,0.0,0.0,1.0,0.0,0.0,,,0
+1231,2025-03-26 17:27:47.356830,navigate_next,2.0,Assembly PIECE 1,0.0,0.0,1.0,0.0,0.0,,,0
+1231,2025-03-26 17:27:47.430153,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+1231,2025-03-26 17:27:49.043838,navigate_next,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+1231,2025-03-26 17:27:49.143545,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+1231,2025-03-26 17:27:50.911849,toggle_single_pieces_block,4.0,Assembly PIECE 2,0.0,0.0,1.0,0.0,0.0,,,0
+1231,2025-03-26 17:27:51.927370,navigate_next,4.0,Assembly PIECE 2,0.0,0.0,1.0,0.0,0.0,,,0
+1231,2025-03-26 17:27:52.044773,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+1231,2025-03-26 17:27:53.235525,navigate_next,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+1231,2025-03-26 17:27:53.334303,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+1231,2025-03-26 17:27:54.308597,navigate_next,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+1231,2025-03-26 17:27:54.398358,step_loaded,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0,,,0
+1231,2025-03-26 17:27:55.474185,navigate_next,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0,,,0
+1231,2025-03-26 17:27:55.586513,step_loaded,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0,,,0
+1231,2025-03-26 17:27:56.977687,navigate_next,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0,,,0
+1231,2025-03-26 17:27:57.220086,step_loaded,9.0,Withdraw Components for PIECE 5,0.0,0.0,0.0,0.0,0.0,,,0
+1231,2025-03-26 17:27:58.409935,navigate_next,9.0,Withdraw Components for PIECE 5,0.0,0.0,0.0,0.0,0.0,,,0
+1231,2025-03-26 17:27:58.676650,step_loaded,10.0,Assembly PIECE 5,0.0,0.0,0.0,0.0,0.0,,,0
+1231,2025-03-26 17:28:00.821207,navigate_next,10.0,Assembly PIECE 5,0.0,0.0,0.0,0.0,0.0,,,0
+1231,2025-03-26 17:28:01.217490,step_loaded,11.0,Assembly PIECE 6,0.0,0.0,0.0,0.0,0.0,,,0
+213123,2025-03-26 17:28:18.249762,start_experiment,,,,,,,,,,0
+213123,2025-03-26 17:28:18.400756,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+213123,2025-03-26 17:28:22.314548,toggle_single_pieces_block,1.0,Withdraw Components for PIECE 1,0.0,0.0,1.0,0.0,0.0,,,0
+213123,2025-03-26 17:28:23.562582,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,1.0,0.0,0.0,,,0
+213123,2025-03-26 17:28:23.922910,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+213123,2025-03-26 17:28:25.338644,toggle_single_pieces_block,2.0,Assembly PIECE 1,0.0,0.0,1.0,0.0,0.0,,,0
+213123,2025-03-26 17:28:26.281343,navigate_next,2.0,Assembly PIECE 1,0.0,0.0,1.0,0.0,0.0,,,0
+213123,2025-03-26 17:28:26.402861,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+213123,2025-03-26 17:28:27.506673,navigate_next,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+213123,2025-03-26 17:28:27.732962,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+213123,2025-03-26 17:28:29.534583,toggle_single_pieces_block,4.0,Assembly PIECE 2,0.0,0.0,1.0,0.0,0.0,,,0
+213123,2025-03-26 17:28:30.658910,navigate_next,4.0,Assembly PIECE 2,0.0,0.0,1.0,0.0,0.0,,,0
+213123,2025-03-26 17:28:31.138831,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:34:25.911651,start_experiment,,,,,,,,,,0
+2131,2025-03-26 17:34:26.008602,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:34:28.983769,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:34:29.042595,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:34:29.903957,toggle_short_text_block,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:34:30.952833,navigate_next,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:34:31.020246,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:34:31.883839,toggle_short_text_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:34:32.896800,navigate_next,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:34:32.993806,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:34:33.940864,toggle_short_text_block,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:34:35.552054,navigate_next,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:34:35.667208,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:34:37.956879,toggle_short_text_block,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:34:39.211569,navigate_next,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:34:39.362922,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-26 17:37:36.484442,start_experiment,,,,,,,,,,0
+123,2025-03-26 17:37:36.556092,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-26 17:37:38.125075,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-26 17:37:38.250504,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-26 17:37:39.027410,toggle_short_text_block,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-26 17:37:42.310560,navigate_next,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-26 17:37:42.441666,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-26 17:37:43.307308,toggle_short_text_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-26 17:37:44.407786,navigate_next,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-26 17:37:44.595306,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-26 17:37:45.533283,toggle_short_text_block,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-26 17:37:46.565606,navigate_next,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-26 17:37:46.781743,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-26 17:37:47.753427,toggle_short_text_block,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-26 17:37:48.866706,navigate_next,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-26 17:37:49.117798,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-26 17:37:52.162108,toggle_short_text_none,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-26 17:37:53.286469,toggle_short_text_block,6.0,Assembly PIECE 3,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-26 17:37:54.401213,navigate_next,6.0,Assembly PIECE 3,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-26 17:37:54.502770,step_loaded,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-26 17:37:55.837062,toggle_short_text_none,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:41:16.914368,start_experiment,,,,,,,,,,0
+2131,2025-03-26 17:41:17.065833,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:41:18.794338,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:41:18.874673,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:41:19.618197,toggle_short_text_block,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:41:20.493587,navigate_next,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:41:20.584291,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:41:21.614264,toggle_short_text_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:41:22.482507,navigate_next,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:41:22.623050,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:41:23.416595,toggle_short_text_block,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:41:24.291342,navigate_next,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:41:24.411134,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:41:26.014956,toggle_short_text_block,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:41:27.263627,navigate_next,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:41:27.464555,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:41:30.245830,toggle_short_text_none,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:41:32.350687,navigate_next,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:41:32.473590,step_loaded,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0,,,0
+2131,2025-03-26 17:41:33.411926,toggle_short_text_none,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-26 17:47:07.366447,start_experiment,,,,,,,,,,0
+1234,2025-03-26 17:47:07.550434,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-26 17:47:09.172904,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-26 17:47:09.272980,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-26 17:47:10.249756,toggle_short_text_block,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-26 17:47:11.221506,navigate_next,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-26 17:47:11.293440,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-26 17:47:12.235696,toggle_short_text_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-26 17:47:13.482304,navigate_next,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-26 17:47:13.603840,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-26 17:47:14.886920,toggle_short_text_block,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-26 17:47:15.947855,navigate_next,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-26 17:47:16.091407,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-26 17:47:17.267086,toggle_short_text_block,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-26 17:47:18.292671,navigate_next,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-26 17:47:18.534759,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-26 17:47:43.015431,toggle_short_text_none,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-26 17:47:44.219844,toggle_short_text_block,6.0,Assembly PIECE 3,1.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-26 17:47:45.785641,navigate_next,6.0,Assembly PIECE 3,1.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-26 17:47:45.877227,step_loaded,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0,,,0
+123123,2025-03-26 17:49:08.810652,start_experiment,,,,,,,,,,0
+123123,2025-03-26 17:49:09.099558,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123123,2025-03-26 17:49:10.912780,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123123,2025-03-26 17:49:11.024487,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123123,2025-03-26 17:49:12.592142,toggle_short_text_block,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+123123,2025-03-26 17:49:13.837604,navigate_next,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+123123,2025-03-26 17:49:13.942176,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+123123,2025-03-26 17:49:14.699423,toggle_short_text_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+123123,2025-03-26 17:49:15.626941,navigate_next,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+123123,2025-03-26 17:49:15.739356,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+123123,2025-03-26 17:49:16.328874,toggle_short_text_block,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+123123,2025-03-26 17:49:17.218910,navigate_next,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+123123,2025-03-26 17:49:17.305346,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+123123,2025-03-26 17:49:18.008532,toggle_short_text_block,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0,,,0
+123123,2025-03-26 17:49:19.096095,navigate_next,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0,,,0
+123123,2025-03-26 17:49:19.179088,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+123123,2025-03-26 17:49:20.111829,toggle_short_text_none,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+123123,2025-03-26 17:49:21.429639,toggle_short_text_block,6.0,Assembly PIECE 3,1.0,0.0,0.0,0.0,0.0,,,0
+123123,2025-03-26 17:49:21.637055,toggle_short_text_none,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+14234,2025-03-26 22:51:36.187867,start_experiment,,,,,,,,,,0
+14234,2025-03-26 22:51:36.304376,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+14234,2025-03-26 22:51:38.373761,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+14234,2025-03-26 22:51:38.452258,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+14234,2025-03-26 22:51:40.178172,toggle_short_text,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+14234,2025-03-26 22:51:40.992597,navigate_next,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+14234,2025-03-26 22:51:41.071519,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+14234,2025-03-26 22:51:41.658008,toggle_short_text,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+14234,2025-03-26 22:51:42.465699,navigate_next,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+14234,2025-03-26 22:51:42.544431,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+14234,2025-03-26 22:51:43.501498,toggle_short_text,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+14234,2025-03-26 22:51:44.489109,navigate_next,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+14234,2025-03-26 22:51:44.566544,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+14234,2025-03-26 22:51:45.530756,toggle_short_text,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0,,,0
+14234,2025-03-26 22:51:46.786909,navigate_next,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0,,,0
+14234,2025-03-26 22:51:47.208724,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+14234,2025-03-26 22:51:48.011063,toggle_short_text,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+14234,2025-03-26 22:51:58.946115,navigate_next,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+14234,2025-03-26 22:51:59.042709,step_loaded,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0,,,0
+14234,2025-03-26 22:52:03.466946,toggle_long_text,7.0,Withdraw Components for PIECE 4,0.0,1.0,0.0,0.0,0.0,,,0
+14234,2025-03-26 22:52:05.116391,navigate_next,7.0,Withdraw Components for PIECE 4,0.0,1.0,0.0,0.0,0.0,,,0
+14234,2025-03-26 22:52:05.225615,step_loaded,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0,,,0
+14234,2025-03-26 22:52:06.300374,toggle_long_text,8.0,Assembly PIECE 4,0.0,1.0,0.0,0.0,0.0,,,0
+14234,2025-03-26 22:52:07.888838,navigate_next,8.0,Assembly PIECE 4,0.0,1.0,0.0,0.0,0.0,,,0
+14234,2025-03-26 22:52:07.957195,step_loaded,9.0,Withdraw Components for PIECE 5,0.0,0.0,0.0,0.0,0.0,,,0
+14234,2025-03-26 22:52:08.880566,toggle_long_text,9.0,Withdraw Components for PIECE 5,0.0,1.0,0.0,0.0,0.0,,,0
+13224,2025-03-26 22:55:16.117579,start_experiment,,,,,,,,,,0
+13224,2025-03-26 22:55:16.230570,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+13224,2025-03-26 22:55:18.321340,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+13224,2025-03-26 22:55:18.464459,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+13224,2025-03-26 22:55:19.679615,toggle_short_text_block,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+13224,2025-03-26 22:55:20.726504,navigate_next,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+13224,2025-03-26 22:55:20.821298,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+13224,2025-03-26 22:55:21.890232,toggle_short_text_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+13224,2025-03-26 22:55:23.166784,navigate_next,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+13224,2025-03-26 22:55:23.306429,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+13224,2025-03-26 22:55:24.261043,toggle_short_text_block,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+13224,2025-03-26 22:55:25.732319,navigate_next,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+13224,2025-03-26 22:55:26.035243,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+13224,2025-03-26 22:55:27.078133,toggle_short_text_block,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0,,,0
+13224,2025-03-26 22:55:28.371753,navigate_next,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0,,,0
+13224,2025-03-26 22:55:28.567386,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+13224,2025-03-26 22:55:31.830001,navigate_next,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+13224,2025-03-26 22:55:31.932694,step_loaded,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0,,,0
+242354,2025-03-26 22:55:55.595948,start_experiment,,,,,,,,,,0
+242354,2025-03-26 22:55:55.701357,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+242354,2025-03-26 22:55:57.437290,toggle_single_pieces_block,1.0,Withdraw Components for PIECE 1,0.0,0.0,1.0,0.0,0.0,,,0
+242354,2025-03-26 22:55:58.643857,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,1.0,0.0,0.0,,,0
+242354,2025-03-26 22:55:58.716175,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+242354,2025-03-26 22:56:00.072123,toggle_single_pieces_block,2.0,Assembly PIECE 1,0.0,0.0,1.0,0.0,0.0,,,0
+242354,2025-03-26 22:56:01.529725,navigate_next,2.0,Assembly PIECE 1,0.0,0.0,1.0,0.0,0.0,,,0
+242354,2025-03-26 22:56:01.605798,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+242354,2025-03-26 22:56:03.384042,navigate_next,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+242354,2025-03-26 22:56:03.457894,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+242354,2025-03-26 22:56:04.314954,toggle_single_pieces_block,4.0,Assembly PIECE 2,0.0,0.0,1.0,0.0,0.0,,,0
+242354,2025-03-26 22:56:05.128535,navigate_next,4.0,Assembly PIECE 2,0.0,0.0,1.0,0.0,0.0,,,0
+242354,2025-03-26 22:56:05.210640,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+242354,2025-03-26 22:56:06.586539,navigate_next,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+242354,2025-03-26 22:56:06.679651,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+242354,2025-03-26 22:56:07.883952,navigate_next,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+242354,2025-03-26 22:56:07.970743,step_loaded,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-27 06:31:59.262415,start_experiment,,,,,,,,,,0
+123,2025-03-27 06:31:59.318982,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-27 06:32:01.211442,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-27 06:32:01.260002,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-27 06:32:03.813585,toggle_short_text_block,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-27 06:32:04.648257,navigate_next,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-27 06:32:04.691856,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-27 06:32:06.044270,toggle_short_text_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-27 06:32:06.817037,navigate_next,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-27 06:32:06.857672,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-27 06:32:07.522958,toggle_short_text_block,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-27 06:32:08.543187,navigate_next,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-27 06:32:08.602574,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-27 06:32:09.773396,toggle_short_text_block,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-27 06:32:11.422538,navigate_next,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-27 06:32:11.480696,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-27 06:32:13.425391,toggle_short_text_none,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-27 06:32:17.331237,navigate_previous,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-27 06:32:17.371974,step_loaded,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-27 06:32:19.210216,navigate_next,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0,,,0
+123,2025-03-27 06:32:19.259223,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-27 06:33:06.225399,start_experiment,,,,,,,,,,0
+1234,2025-03-27 06:33:06.297960,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-27 06:33:08.112019,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-27 06:33:08.185727,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-27 06:33:08.912043,toggle_short_text_block,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-27 06:33:09.844839,navigate_next,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-27 06:33:09.903141,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-27 06:33:10.762771,toggle_short_text_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-27 06:33:12.077412,navigate_next,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-27 06:33:12.135648,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-27 06:33:12.828819,toggle_short_text_block,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-27 06:33:13.887382,navigate_next,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-27 06:33:14.007453,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-27 06:33:15.648894,toggle_short_text_block,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-27 06:33:17.144543,navigate_next,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-27 06:33:17.200554,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-27 06:33:19.189030,navigate_next,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-27 06:33:19.248363,step_loaded,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-27 06:33:21.800512,navigate_previous,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-27 06:33:21.852368,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-27 06:33:24.936127,toggle_long_text_block,6.0,Assembly PIECE 3,0.0,1.0,0.0,0.0,0.0,,,0
+1234,2025-03-27 06:33:26.914508,navigate_next,6.0,Assembly PIECE 3,0.0,1.0,0.0,0.0,0.0,,,0
+1234,2025-03-27 06:33:27.001032,step_loaded,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-27 06:33:27.544774,navigate_previous,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0,,,0
+1234,2025-03-27 06:33:27.601277,step_loaded,6.0,Assembly PIECE 3,0.0,1.0,0.0,0.0,0.0,,,0
+testllm1,2025-10-07 10:26:29.574899,start_experiment,,,,,,,,,,Sentient
+testllm1,2025-10-07 10:26:29.720995,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+testllm1,2025-10-07 10:26:38.937930,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+testllm1,2025-10-07 10:26:41.904735,toggle_single_pieces_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0,,,Sentient
+testllm1,2025-10-07 10:26:44.709452,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0,,,Sentient
+testllm1,2025-10-07 10:26:44.753599,initial_suggestion,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+testllm1,2025-10-07 10:26:44.812305,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+testllm1,2025-10-07 10:26:49.519998,toggle_long_text_block,2.0,Assembly PIECE 1,0.0,1.0,0.0,0.0,0.0,,,Sentient
+testllm1,2025-10-07 10:26:57.501976,toggle_short_text_block,2.0,Assembly PIECE 1,1.0,1.0,0.0,0.0,0.0,,,Sentient
+test,2025-10-07 10:32:10.868781,start_experiment,,,,,,,,,,Sentient
+test,2025-10-07 10:32:10.961964,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+test,2025-10-07 10:32:17.349482,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+test,2025-10-07 10:32:22.150679,toggle_single_pieces_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0,,,Sentient
+test,2025-10-07 10:32:24.525681,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0,,,Sentient
+test,2025-10-07 10:32:24.552218,initial_suggestion,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+test,2025-10-07 10:32:24.609287,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+test,2025-10-07 10:32:25.765334,toggle_long_text_block,2.0,Assembly PIECE 1,0.0,1.0,0.0,0.0,0.0,,,Sentient
+test,2025-10-07 10:32:33.556400,toggle_short_text_block,2.0,Assembly PIECE 1,1.0,1.0,0.0,0.0,0.0,,,Sentient
+test,2025-10-07 10:33:24.058309,navigate_next,2.0,Assembly PIECE 1,1.0,1.0,0.0,0.0,0.0,,,Sentient
+test,2025-10-07 10:33:24.090783,initial_suggestion,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+test,2025-10-07 10:33:24.146304,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,Sentient
+test,2025-10-07 10:33:26.826499,toggle_short_text_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,Sentient
+test,2025-10-07 10:33:28.743008,toggle_single_pieces_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,1.0,0.0,0.0,,,Sentient
+test,2025-10-07 10:33:30.175787,navigate_next,3.0,Withdraw Components for PIECE 2,1.0,0.0,1.0,0.0,0.0,,,Sentient
+test,2025-10-07 10:33:30.205784,initial_suggestion,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,Sentient
+test,2025-10-07 10:33:30.279544,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,,Sentient
+test,2025-10-07 10:33:31.986341,toggle_long_text_block,4.0,Assembly PIECE 2,0.0,1.0,0.0,0.0,0.0,,,Sentient
+unknown,2025-10-07 10:45:00.622595,start_experiment,,,,,,,,,,Sentient
+unknown,2025-10-07 10:45:00.717285,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+unknown,2025-10-07 10:47:09.111270,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+unknown,2025-10-07 10:47:13.162211,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+dadasd,2025-10-07 10:48:52.211552,start_experiment,,,,,,,,,,Sentient
+test 12,2025-10-07 10:52:59.422127,start_experiment,,,,,,,,,,Sentient
+test 12,2025-10-07 10:52:59.533556,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+Sentient,,,,,,,,,,,,
+test 12,2025-10-07 10:52:59.622141,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+unknown,2025-10-07 10:55:09.261445,start_experiment,,,,,,,,,,Sentient
+unknown,2025-10-07 10:55:09.398969,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+unknown,2025-10-07 10:55:10.909350,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+unknown,2025-10-07 10:55:10.982585,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+unknown,2025-10-07 10:57:45.492415,start_experiment,,,,,,,,,,Sentient
+unknown,2025-10-07 10:57:45.597443,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+unknown,2025-10-07 10:57:47.291207,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+unknown,2025-10-07 10:57:47.370252,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+sfadsaf,2025-10-07 10:58:51.538119,start_experiment,,,,,,,,,,Sentient
+sfadsaf,2025-10-07 10:58:51.602730,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+sfadsaf,2025-10-07 10:58:53.874625,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0,,,Sentient
+sfadsaf,2025-10-07 10:59:14.180870,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+sfadsaf,2025-10-07 10:59:14.215856,initial_suggestion,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+sfadsaf,2025-10-07 10:59:14.264898,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+sfadsaf,2025-10-07 10:59:16.585644,sentient_step_adapted,2.0,Assembly PIECE 1,1.0,1.0,1.0,1.0,0.0,,,Sentient
+sfadsaf,2025-10-07 10:59:16.720663,sentient_step_adapted,2.0,Assembly PIECE 1 - Step-by-step,1.0,0.0,1.0,1.0,0.0,,,Sentient
+sfadsaf,2025-10-07 11:02:06.462979,navigate_next,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+sfadsaf,2025-10-07 11:02:06.497574,initial_suggestion,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+sfadsaf,2025-10-07 11:02:06.551029,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,Sentient
+sfadsaf,2025-10-07 11:02:08.872104,sentient_step_adapted,3.0,Withdraw GNE22 (2x) for PIECE 2,1.0,1.0,1.0,1.0,0.0,,,Sentient
+sfadsaf,2025-10-07 11:02:09.348297,sentient_step_adapted,3.0,Withdraw Components for PIECE 2,1.0,1.0,1.0,0.0,0.0,,,Sentient
+sfadsaf,2025-10-07 11:03:24.952017,navigate_next,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,Sentient
+sfadsaf,2025-10-07 11:03:24.980036,initial_suggestion,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,Sentient
+sfadsaf,2025-10-07 11:03:25.027670,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,,Sentient
+sfadsaf,2025-10-07 11:03:27.346521,sentient_step_adapted,4.0,PIECE 2 Assembly: Insert Axis into GNE22 Pieces,1.0,1.0,1.0,1.0,0.0,,,Sentient
+sfadsaf,2025-10-07 11:03:27.656285,sentient_step_adapted,4.0,Assembly PIECE 2 - Quick Guide,1.0,1.0,1.0,1.0,0.0,,,Sentient
+test1234,2025-10-07 11:10:53.839371,start_experiment,,,,,,,,,,Sentient
+test1234,2025-10-07 11:10:53.937041,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+test1234,2025-10-07 11:10:56.253527,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,1.0,0.0,,,Sentient
+test1234,2025-10-07 11:10:56.468148,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,1.0,0.0,,,Sentient
+test1234,2025-10-07 11:11:15.480612,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+test1234,2025-10-07 11:11:15.519617,initial_suggestion,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+test1234,2025-10-07 11:11:15.584772,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+test1234,2025-10-07 11:11:17.735678,sentient_step_adapted,2.0,Assembly PIECE 1,1.0,1.0,1.0,1.0,0.0,,,Sentient
+test1234,2025-10-07 11:11:18.088620,sentient_step_adapted,2.0,Assembly PIECE 1,1.0,1.0,1.0,1.0,0.0,,,Sentient
+cioa,2025-10-07 11:27:41.708702,start_experiment,,,,,,,,,,Sentient
+cioa,2025-10-07 11:27:41.801108,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+cioa,2025-10-07 11:27:43.785763,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1.0,1.0,1.0,1.0,0.0,,,Sentient
+cioa,2025-10-07 11:27:51.092954,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+cioa,2025-10-07 11:27:51.118015,initial_suggestion,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+cioa,2025-10-07 11:27:51.159378,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+cioa,2025-10-07 11:27:53.420285,sentient_step_adapted,2.0,Assembly PIECE 1,1.0,1.0,1.0,1.0,0.0,,,Sentient
+cioa,2025-10-07 11:27:54.147974,sentient_step_adapted,2.0,Assembly PIECE 1,1.0,1.0,1.0,1.0,0.0,,,Sentient
+unknown,2025-10-07 11:28:21.948394,start_experiment,,,,,,,,,,Data Collection
+czcs,2025-10-07 11:28:43.888731,start_experiment,,,,,,,,,,Sentient
+czcs,2025-10-07 11:28:43.981897,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+czcs,2025-10-07 11:28:46.518424,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+czcs,2025-10-07 11:28:46.653727,sentient_step_adapted,1.0,Withdraw Components for PIECE 1 (Italian Translation),1.0,0.0,1.0,1.0,0.0,,,Sentient
+czcs,2025-10-07 11:28:54.578609,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+czcs,2025-10-07 11:28:54.617186,initial_suggestion,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+czcs,2025-10-07 11:28:54.672512,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+czcs,2025-10-07 11:28:56.893579,sentient_step_adapted,2.0,Assembly PIECE 1,1.0,0.0,0.0,1.0,0.0,,,Sentient
+czcs,2025-10-07 11:28:56.987193,sentient_step_adapted,2.0,Assembly PIECE 1,1.0,0.0,0.0,1.0,0.0,,,Sentient
+czcs,2025-10-07 11:28:59.938673,toggle_long_text_block,2.0,Assembly PIECE 1,0.0,1.0,0.0,0.0,0.0,,,Sentient
+czcs,2025-10-07 11:29:12.086621,navigate_next,2.0,Assembly PIECE 1,0.0,1.0,0.0,0.0,0.0,,,Sentient
+czcs,2025-10-07 11:29:12.118623,initial_suggestion,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+czcs,2025-10-07 11:29:12.175142,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,Sentient
+czcs,2025-10-07 11:29:14.270383,sentient_step_adapted,3.0,Withdraw Components for PIECE 2,1.0,0.0,1.0,1.0,0.0,,,Sentient
+czcs,2025-10-07 11:29:14.944665,sentient_step_adapted,3.0,Withdraw GNE22 (2x) - PIECE 2,1.0,0.0,0.0,0.0,0.0,,,Sentient
+czcs,2025-10-07 11:29:18.258845,navigate_next,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,Sentient
+czcs,2025-10-07 11:29:18.288946,initial_suggestion,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,Sentient
+czcs,2025-10-07 11:29:18.362652,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,,Sentient
+czcs,2025-10-07 11:29:20.957331,sentient_step_adapted,4.0,Assembly PIECE 2,1.0,1.0,0.0,1.0,0.0,,,Sentient
+czcs,2025-10-07 11:29:21.187412,sentient_step_adapted,4.0,Assembly PIECE 2,1.0,0.0,0.0,1.0,0.0,,,Sentient
+czcs,2025-10-07 11:29:25.051234,toggle_video_block,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,1.0,,,Sentient
+czcs,2025-10-07 11:29:26.586900,navigate_next,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,1.0,,,Sentient
+czcs,2025-10-07 11:29:26.624070,initial_suggestion,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0,,,Sentient
+czcs,2025-10-07 11:29:26.693668,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0,,,Sentient
+czcs,2025-10-07 11:29:28.849039,sentient_step_adapted,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0,,,Sentient
+czcs,2025-10-07 11:29:29.049690,sentient_step_adapted,5.0,Preleva i componenti per il PEZZO 3,1.0,0.0,0.0,0.0,0.0,,,Sentient
+czcs,2025-10-07 11:29:40.876836,toggle_single_pieces_block,5.0,Withdraw Components for PIECE 3,0.0,0.0,1.0,0.0,0.0,,,Sentient
+czcs,2025-10-07 11:29:43.098690,navigate_next,5.0,Withdraw Components for PIECE 3,0.0,0.0,1.0,0.0,0.0,,,Sentient
+czcs,2025-10-07 11:29:43.130374,initial_suggestion,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0,,,Sentient
+czcs,2025-10-07 11:29:43.185855,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,Sentient
+czcs,2025-10-07 11:29:45.422835,sentient_step_adapted,6.0,Assembly PIECE 3,1.0,1.0,0.0,1.0,1.0,,,Sentient
+czcs,2025-10-07 11:29:45.612801,sentient_step_adapted,6.0,Assembly PIECE 3,1.0,1.0,0.0,1.0,1.0,,,Sentient
+test,2025-10-07 11:30:48.352541,start_experiment,,,,,,,,,,Sentient
+test,2025-10-07 11:30:48.455698,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+test,2025-10-07 11:30:50.611175,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+test,2025-10-07 11:30:50.959237,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+test,2025-10-07 11:30:55.608647,toggle_single_pieces_block,1.0,Withdraw Components for PIECE 1,0.0,0.0,1.0,0.0,0.0,,,Sentient
+test,2025-10-07 11:30:58.338410,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,1.0,0.0,0.0,,,Sentient
+test,2025-10-07 11:30:58.366442,initial_suggestion,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+test,2025-10-07 11:30:58.420073,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+test,2025-10-07 11:31:00.831779,sentient_step_adapted,2.0,Assembly: PIECE 1,1.0,0.0,0.0,1.0,0.0,,,Sentient
+test,2025-10-07 11:31:00.922732,sentient_step_adapted,2.0,Assembly PIECE 1,1.0,0.0,0.0,1.0,0.0,,,Sentient
+test,2025-10-07 11:31:11.169154,toggle_long_text_block,2.0,Assembly PIECE 1,0.0,1.0,0.0,0.0,0.0,,,Sentient
+tezdgad,2025-10-07 11:40:20.000993,start_experiment,,,,,,,,,,Sentient
+tezdgad,2025-10-07 11:40:20.092142,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+tezdgad,2025-10-07 11:40:22.493536,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1.0,1.0,1.0,0.0,0.0,,,Sentient
+tezdgad,2025-10-07 11:40:22.647562,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1.0,1.0,1.0,1.0,0.0,,,Sentient
+tezdgad,2025-10-07 11:40:45.098871,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+tezdgad,2025-10-07 11:40:45.132876,initial_suggestion,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+tezdgad,2025-10-07 11:40:45.191401,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+tezdgad,2025-10-07 11:40:47.937787,sentient_step_adapted,2.0,Montaggio PEZZO 1,1.0,1.0,1.0,1.0,1.0,,,Sentient
+tezdgad,2025-10-07 11:40:48.081770,sentient_step_adapted,2.0,Passo 1: Assemblaggio PARTI PG1 e SNP1,1.0,1.0,1.0,1.0,0.0,,,Sentient
+tezdgad,2025-10-07 11:40:56.145244,navigate_next,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+tezdgad,2025-10-07 11:40:56.172332,initial_suggestion,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+tezdgad,2025-10-07 11:40:56.231763,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,Sentient
+tezdgad,2025-10-07 11:40:58.540876,sentient_step_adapted,3.0,Withdraw Components for PIECE 2,1.0,1.0,1.0,1.0,0.0,,,Sentient
+tezdgad,2025-10-07 11:40:59.062687,sentient_step_adapted,3.0,Withdraw Components for PIECE 2,1.0,1.0,1.0,1.0,0.0,,,Sentient
+teadt,2025-10-07 11:44:24.657279,start_experiment,,,,,,,,,,Sentient
+teadt,2025-10-07 11:44:24.753799,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+teadt,2025-10-07 11:44:26.898963,sentient_step_adapted,1.0,Preleva i componenti per il PEZZO 1,1.0,0.0,1.0,1.0,0.0,,,Sentient
+teadt,2025-10-07 11:44:27.148447,sentient_step_adapted,1.0,Preleva i componenti per il PEZZO 1,1.0,0.0,1.0,0.0,0.0,,,Sentient
+teadt,2025-10-07 11:44:32.268040,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+teadt,2025-10-07 11:44:32.308039,initial_suggestion,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+teadt,2025-10-07 11:44:32.361408,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+teadt,2025-10-07 11:44:34.687695,sentient_step_adapted,2.0,Assemblaggio PEZZO 1,1.0,1.0,1.0,1.0,0.0,,,Sentient
+teadt,2025-10-07 11:44:35.065586,sentient_step_adapted,2.0,Assemblaggio di PEZZO 1,1.0,1.0,1.0,1.0,0.0,,,Sentient
+dfasdfswdf,2025-10-07 11:48:23.764831,start_experiment,,,,,,,,,,Sentient
+dfasdfswdf,2025-10-07 11:48:23.858406,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+dfasdfswdf,2025-10-07 11:48:26.060753,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,1.0,0.0,,,Sentient
+dfasdfswdf,2025-10-07 11:48:26.132632,sentient_step_adapted,1.0,Withdraw Components: PIECE 1,1.0,1.0,1.0,0.0,0.0,,,Sentient
+SDFASFD,2025-10-07 11:51:41.585417,start_experiment,,,,,,,,,,Sentient
+SDFASFD,2025-10-07 11:51:41.686144,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+SDFASFD,2025-10-07 11:51:43.968381,sentient_step_adapted,1.0,Preleva i componenti per il PEZZO 1,1.0,0.0,1.0,1.0,1.0,,,Sentient
+SDFASFD,2025-10-07 11:51:44.302677,sentient_step_adapted,1.0,Preleva i componenti per il PEZZO 1,1.0,0.0,1.0,1.0,1.0,,,Sentient
+SDFASFD,2025-10-07 11:51:51.306686,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+SDFASFD,2025-10-07 11:51:51.345838,initial_suggestion,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+SDFASFD,2025-10-07 11:51:51.418109,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+SDFASFD,2025-10-07 11:51:53.913860,sentient_step_adapted,2.0,Assemblaggio PEZZO 1,1.0,1.0,1.0,1.0,1.0,,,Sentient
+SDFASFD,2025-10-07 11:51:54.167652,sentient_step_adapted,2.0,Assemblaggio PEZZO 1,1.0,1.0,1.0,1.0,1.0,,,Sentient
+dfasf,2025-10-07 12:12:22.636990,start_experiment,,,,,,,,,,Sentient
+dfasf,2025-10-07 12:12:22.717011,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+dfasf,2025-10-07 12:12:25.228821,sentient_step_adapted,1.0,Retirar Componentes para PIEZA 1,1.0,1.0,1.0,1.0,0.0,,,Sentient
+dfasf,2025-10-07 12:12:25.321094,sentient_step_adapted,1.0,Retirar Componentes PIEZA 1,1.0,0.0,1.0,0.0,0.0,,,Sentient
+dfas,2025-10-07 12:14:11.759086,start_experiment,,,,,,,,,,Sentient
+dfas,2025-10-07 12:14:11.863696,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+dfas,2025-10-07 12:14:16.417871,sentient_step_adapted,1.0,Preleva componenti per PEZZO 1,1.0,0.0,1.0,0.0,0.0,,,Sentient
+dfas,2025-10-07 12:14:17.160697,sentient_step_adapted,1.0,Preleva i componenti per il PEZZO 1,1.0,0.0,1.0,0.0,0.0,,,Sentient
+dfas,2025-10-07 12:14:22.701352,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+dfas,2025-10-07 12:14:22.736608,initial_suggestion,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+dfas,2025-10-07 12:14:22.795222,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+dfas,2025-10-07 12:14:25.456100,sentient_step_adapted,2.0,Assemblaggio PEZZO 1,1.0,1.0,1.0,1.0,0.0,,,Sentient
+dfas,2025-10-07 12:14:30.414596,sentient_step_adapted,2.0,Assemblaggio: INSERIRE PEZZO 1,1.0,0.0,1.0,1.0,0.0,,,Sentient
+dfas,2025-10-07 12:14:37.172750,toggle_long_text_block,2.0,Assembly PIECE 1,0.0,1.0,0.0,0.0,0.0,,,Sentient
+dfas,2025-10-07 12:14:42.380924,navigate_next,2.0,Assembly PIECE 1,0.0,1.0,0.0,0.0,0.0,,,Sentient
+dfas,2025-10-07 12:14:42.415884,initial_suggestion,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+dfas,2025-10-07 12:14:42.462907,step_loaded,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,Sentient
+dfas,2025-10-07 12:14:44.635346,sentient_step_adapted,3.0,Preleva i componenti per il PEZZO 2,1.0,1.0,1.0,1.0,0.0,,,Sentient
+dfas,2025-10-07 12:14:44.865981,sentient_step_adapted,3.0,Preleva componenti per PEZZO 2,1.0,0.0,1.0,0.0,0.0,,,Sentient
+dfas,2025-10-07 12:14:49.345689,navigate_next,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0,,,Sentient
+dfas,2025-10-07 12:14:49.395527,initial_suggestion,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0,,,Sentient
+dfas,2025-10-07 12:14:49.460270,step_loaded,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0,,,Sentient
+dfas,2025-10-07 12:14:51.768167,sentient_step_adapted,4.0,Montaggio PEZZO 2,1.0,1.0,1.0,1.0,0.0,,,Sentient
+dfas,2025-10-07 12:14:51.878975,sentient_step_adapted,4.0,Assemblaggio del PEZZO 2,1.0,1.0,1.0,1.0,0.0,,,Sentient
+dfas,2025-10-07 12:14:59.001626,toggle_video_block,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,1.0,,,Sentient
+dfas,2025-10-07 12:14:59.952381,navigate_next,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,1.0,,,Sentient
+dfas,2025-10-07 12:14:59.985538,initial_suggestion,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0,,,Sentient
+dfas,2025-10-07 12:15:00.057916,step_loaded,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0,,,Sentient
+dfas,2025-10-07 12:15:02.323963,sentient_step_adapted,5.0,Preleva componenti per PEZZO 3,1.0,0.0,1.0,0.0,0.0,,,Sentient
+dfas,2025-10-07 12:15:04.350325,navigate_next,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0,,,Sentient
+dfas,2025-10-07 12:15:04.382890,initial_suggestion,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0,,,Sentient
+dfas,2025-10-07 12:15:04.469341,step_loaded,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,Sentient
+dfas,2025-10-07 12:15:18.085479,navigate_next,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0,,,Sentient
+dfas,2025-10-07 12:15:18.122158,initial_suggestion,6.0,Assembly PIECE 3,1.0,0.0,0.0,0.0,0.0,,,Sentient
+dfas,2025-10-07 12:15:18.191711,step_loaded,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0,,,Sentient
+dfas,2025-10-07 12:15:20.528745,sentient_step_adapted,6.0,Assemblaggio PEZZO 3,1.0,1.0,1.0,1.0,1.0,,,Sentient
+dfas,2025-10-07 12:15:20.928772,sentient_step_adapted,7.0,Preleva i componenti per il PEZZO 4,1.0,0.0,1.0,0.0,0.0,,,Sentient
+dfas,2025-10-07 12:15:21.910082,sentient_step_adapted,5.0,Preleva i componenti per il PEZZO 3,1.0,0.0,1.0,1.0,0.0,,,Sentient
+dfas,2025-10-07 12:15:26.188732,navigate_next,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0,,,Sentient
+dfas,2025-10-07 12:15:26.241710,initial_suggestion,7.0,Withdraw Components for PIECE 4,1.0,0.0,0.0,0.0,0.0,,,Sentient
+dfas,2025-10-07 12:15:26.321987,step_loaded,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0,,,Sentient
+dfas,2025-10-07 12:15:28.927154,sentient_step_adapted,8.0,Assemblaggio PEZZO 4,1.0,1.0,1.0,1.0,1.0,,,Sentient
+dfas,2025-10-07 12:15:28.989050,sentient_step_adapted,8.0,Assemblaggio: PEZZO 4,1.0,0.0,1.0,1.0,1.0,,,Sentient
+dfas,2025-10-07 12:15:49.498690,sentient_step_adapted,6.0,Assemblaggio PEZZO 3,1.0,1.0,1.0,1.0,1.0,,,Sentient
+unknown,2025-10-07 12:20:31.716255,start_experiment,,,,,,,,,,Sentient
+unknown,2025-10-07 12:20:31.848209,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+unknown,2025-10-07 12:20:33.818458,sentient_step_adapted,1.0,Retirar Componentes para PIEZA 1,1.0,1.0,1.0,1.0,1.0,,,Sentient
+unknown,2025-10-07 12:20:34.310055,sentient_step_adapted,1.0,Retirar Componentes para PIEZA 1,1.0,1.0,1.0,1.0,1.0,,,Sentient
+unknown,2025-10-07 12:23:20.989322,start_experiment,,,,,,,,,,Sentient
+unknown,2025-10-07 12:23:21.084849,step_loaded,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+unknown,2025-10-07 12:23:23.228789,sentient_step_adapted,1.0,Preleva i componenti per il PEZZO 1,1.0,0.0,1.0,1.0,0.0,,,Sentient
+unknown,2025-10-07 12:23:23.295079,sentient_step_adapted,1.0,Preleva componenti per PEZZO 1,1.0,0.0,1.0,1.0,1.0,,,Sentient
+unknown,2025-10-07 12:23:28.975228,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+unknown,2025-10-07 12:23:29.006227,initial_suggestion,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0,,,Sentient
+unknown,2025-10-07 12:23:29.055197,step_loaded,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0,,,Sentient
+unknown,2025-10-07 12:23:31.469904,sentient_step_adapted,2.0,Assemblaggio del PEZZO 1,1.0,1.0,1.0,1.0,1.0,,,Sentient
+unknown,2025-10-07 12:23:31.788910,sentient_step_adapted,2.0,Assemblaggio PEZZO 1,1.0,0.0,1.0,1.0,1.0,,,Sentient
+1,2026-01-21 10:01:35.238968,start_experiment,N/A,N/A,,,,,,,,Dynamically Adaptive
