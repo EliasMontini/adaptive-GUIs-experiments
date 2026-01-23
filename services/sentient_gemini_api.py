@@ -4,7 +4,6 @@ import json
 import os
 import time
 
-
 import google.generativeai as genai
 from google.api_core import retry as g_retry
 
@@ -22,6 +21,7 @@ if not API_KEY:
 genai.configure(api_key=API_KEY)
 
 MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+
 
 # -----------------------------------------------------------------------------
 # Utilities
@@ -92,7 +92,7 @@ def _generate_json(model, user_content: str, schema: Dict[str, Any], temperature
         start = text.find("{")
         end = text.rfind("}")
         if start != -1 and end != -1 and end > start:
-            return json.loads(text[start : end + 1])
+            return json.loads(text[start: end + 1])
         raise
 
 
@@ -110,9 +110,9 @@ def initial_style_recommendations(user_profile: Dict[str, Any],
         "explanation": "why these choices"
       }
     """
-
+    requested_language = user_profile.get('language', 'English')
     system = (
-        "You are adapting UI for an industrial assembly training web app (Dash). "
+        f"You are adapting UI for an industrial assembly training web app (Dash). "
         "Based on the user profile, generate CSS overrides to personalise the interface. "
         "Consider: font sizes, colours, spacing, and contrast for accessibility. "
         "If 'high_contrast' is true, use high contrast colors. If 'large_text' is true, increase font sizes to 1.5rem."
@@ -120,6 +120,7 @@ def initial_style_recommendations(user_profile: Dict[str, Any],
         "Also generate a style_profile_token that summarises the user's style preferences for future use. "
         "IMPORTANT: You must provide an 'explanation' field detailing why these style choices were made "
         "based on the user's objective, skills, and visual preferences"
+        f"The 'explanation' MUST be written in {requested_language}."
         "Output strict JSON only."
     )
 
@@ -132,11 +133,11 @@ def initial_style_recommendations(user_profile: Dict[str, Any],
             },
             "style_profile_token": {
                 "type": "string",
-                "description": "Summary of user style preferences",
+                "description": "Summary of user style preferences. Detailed explanation of style choices, written in {requested_language}",
             },
             "explanation": {
                 "type": "string",
-                "description": "Why these style choices were made",
+                "description": "Why these style choices were made. Detailed explanation of style choices, written in {requested_language}",
             },
         },
         "required": ["css_overrides", "style_profile_token", "explanation"],
@@ -148,18 +149,23 @@ def initial_style_recommendations(user_profile: Dict[str, Any],
     #     user_profile["preferences"] = ["visual"]
 
     # Estrazione nuovi campi dal profilo
-    skills = user_profile.get('prior_experience', ['none'])
+    raw_skills = user_profile.get('prior_experience', 'none')
+    skills = ", ".join(raw_skills) if isinstance(raw_skills, list) else raw_skills
+    objective = user_profile.get('training_objective', 'Not specified')
+    setup = user_profile.get('screen_setup', 'Not specified')
+    other = user_profile.get('other_requests', 'none')
     visual = user_profile.get('visual_comfort', {})
 
     user_content = f"""Generate personalised CSS styling for:
     - Language: {user_profile.get('language', 'English')}
-    - Screen Position & Readability: {user_profile.get('screen_setup', 'Not specified')}
+    - Training Goal/Pace: {objective}
+    - Screen Setup: {setup}
     - Prior Experience: {skills}
     - High Contrast: {visual.get('high_contrast', False)}
     - Large Text Mode: {visual.get('large_text', False)}
 
 Assembly Categories: {', '.join(step_categories)}
-Other info: {user_profile.get('other_requests', 'not specified')}
+Additional User Requests: {other}
 
 Constraints:
 - Provide CSS overrides only (not a complete stylesheet)
@@ -187,6 +193,8 @@ def adapt_step(user_profile: Dict[str, Any],
                user_history_formatted: str,
                aggregated_preferences: Dict[str, float],
                enabled_interactions: Dict[str, Any] = None) -> Dict[str, Any]:
+    # 1. Recuperiamo la lingua all'inizio
+    requested_language = user_profile.get('language', 'English')
     """
     Per-step call to adapt content and initial visibility.
 
@@ -198,45 +206,51 @@ def adapt_step(user_profile: Dict[str, Any],
         aggregated_preferences: Optional dict of aggregated preferences for current step
     """
     system = (
-        "You must adapt the content displayed to the participants on the UI (User Interface) by adjusting the visibility of text, images, and videos."
+        f"You must adapt the content displayed to the participants on the UI (User Interface) by adjusting the visibility of text, images, and videos."
         "The interface includes the following elements for each step, which can be set to visible (true) or hidden (false):"
-        "short_text: A concise, one-line summary of the task. long_text: A detailed, multi-step explanation. image_single_pieces: Image of components (withdraw: shows warehouse position) "
-        "image_assembly: Image of assembled result. video: A dynamic video demonstration of the operation."
+        "short_text: A concise, one-line summary of the task. long_text: A detailed, multi-step explanation. image_single_pieces: Image of components (withdraw: shows warehouse position). image_assembly: Image of assembled result. video: A dynamic video demonstration of the operation."
         "If a certain information (image or video) is missing, then the boolean for its visibility must be false."
         "You can't modify the short and long text, keep them as they are. Do not show both long text and short text at the same time for the initial visibility, if you want to make a text visible choose only one of them. "
         "Do not set both 'short_text' and 'long_text' to true simultaneously for the initial visibility. You may set both to false if media (single_pieces, assembly, or video) is made visible, or if the user's history suggests they prefer to start with hidden content."
         "Your task is to develop the final visibility configuration JSON that determines whether each element is visible (true) or not (false)."
-        "Modify the content based on the user profile that is given and the interaction history. If you see a participant is requesting a certain info multiple times and anticipate it and show it immediately in the next visibility configuration"
+        "Modify the content based on the user profile that is given and the interaction history. If you see a participant is requesting a certain info multiple times, anticipate it and show it immediately in the next visibility configuration"
         "Thus you can adjust visibility of elements"
         "IMPORTANT: Do not set visibility to true for a media type if its corresponding path in the CURRENT STEP payload is an EMPTY STRING. If the path is provided (i.e., the string is NOT empty), the content is AVAILABLE for adaptation, provided it respects the CONSTRAINTS BY STEP TYPE below.."
-        "Don't change media file paths—keep them exactly as provided. Do not invent paths for images or video that do not exist. If a certain information is missing then the boolean for the visibility is false."
-        "You need also to provide a reasoning of why you choose to make visible something instead of others. Output strict JSON only.\n\n"
-        
+        "Don't change media file paths, keep them exactly as provided. Do not invent paths for images or video that do not exist. If a certain information is missing then the boolean for the visibility is false."
+        "You need also to provide a reasoning of why you choose to make visible something instead of others. "
+        f"The reasoning field MUST be translated and written in {requested_language}. No English allowed if the requested language is different."
+        f"MANDATORY: Every single text field in the output JSON (title, short_text, long_text, and explanation_of_changes) MUST be written in {requested_language}."
+        "Output strict JSON only.\n\n"
+
         "CONSTRAINTS BY STEP TYPE:\n"
-        "- WITHDRAW:  The only media/text options AVAILABLE for this step are short_text and single_pieces (long_text, image_assembly, and video are NOT available). The adaptation MUST be applied to each AVAILABLE option INDEPENDENTLY: determine whether short_text should be VISIBLE (true/false) AND whether single_pieces should be VISIBLE (true/false), based on user history and preferences.\n" #Only short_text + single_pieces available
+        "- WITHDRAW:  The only media/text options AVAILABLE for this step are short_text and single_pieces (long_text, image_assembly, and video are NOT available). The adaptation MUST be applied to each AVAILABLE option INDEPENDENTLY: determine whether short_text should be VISIBLE (true/false) AND whether single_pieces should be VISIBLE (true/false), based on user history, preferences and objectives.\n"  # Only short_text + single_pieces available
         "- QUALITY CONTROL: No assembly image available\n"
         "- ASSEMBLY: All content types available\n\n"
-        
+
         "YOUR TASK:\n"
-        "Based on user profile, interaction history, and aggregated preferences from other users:\n"
-        "1. Determine which content should be INITIALLY VISIBLE (set to true)\n"
-        "2. LEARNING STYLE: Infer if the user is visual (prefers images/video) or analytical (prefers text) based on their self-description.'\n"
-        "3. TECHNICAL COMPETENCE: from the user's description in experience profile, judge the user's level, for example if he is an expert, intermediate or beginner.'\n"
-        "4. SCREEN SETUP ANALYSIS: Analyze 'screen_setup' to determine the physical distance of the user from the device.\n"
-        "5. LANGUAGE: Translate all instructions to the language explicitly or implicitly requested in 'profile-language'\n"
-        "6. DO NOT modify media file paths\n\n"
-        "ADAPTATION STRATEGY:\n"
-        "- Consider what user clicked in previous similar steps\n"
-        "- Consider what majority of users preferred for this step\n"
-        "- Balance user preferences with pedagogical effectiveness\n\n"
-        "- IF DISTANT (e.g., 'on a table', '1 meter away', 'far'): Prioritize 'short_text' over 'long_text' to reduce cognitive load at a distance. If 'long_text' is strictly necessary, ensure it is the only element visible to maximize its space. Media (images/video) should be prioritized as they are easier to distinguish from afar than dense text.'\n"
-        "- IF CLOSE (e.g., 'in my hands', 'on my lap'): You can provide more detailed information like 'long_text' as readability is higher.'\n"
-        "- Consider the user's level of technical experience based on their self-description. If they say they've done many similar exercises, they're considered expert.'\n"
-        "- If 'Warehouse Picking' is in prior experience, assume they know the bin system: keep WITHDRAW instructions minimal.\n"
-      #  "- If 'Color-Blind Assist' is true, you MUST add text labels to colors in the text, e.g., 'Red [R]' or 'Black [B]'.\n"
-      #  "- If objective is 'focus on speed and efficiency', prioritize 'short_text' and hide 'long_text'.\n"
-      #  "- If objective is 'focus on learning and precision', prioritize 'long_text' and 'video'.\n"
-            "Output strict JSON only."
+        "Analyze the user's open-ended profile, interaction history, and aggregated data from other users, to orchestrate the UI visibility:\n"
+        "Determine which content should be INITIALLY VISIBLE (set to true)\n"
+        f"1. MANDATORY GLOBAL TRANSLATION: Identify the language explicitly provided in 'profile-language'. You MUST translate the 'title' and all 'adaptive_fields' (short_text, long_text) into this requested language AND 'explanation_of_changes' into {requested_language}. Accuracy is critical.\n"
+        "2. EXPERIENCE & COMPETENCE INFERENCE (from 'profile-experience'): from the user's description in experience profile, judge the user's level, for example if he is an expert, intermediate or beginner. If they mention being an 'expert', 'Technic enthusiast', or 'frequent builder', classify as EXPERT. If they mention being 'brand new', 'scared to fail', or 'first time', classify as NOVICE"
+        "3. GOAL AND LEARNING STYLE (from 'profile-goal'): Infer if the user is visual (prefers images/video) or analytical (prefers text) based on their self-description. If the user expresses URGENCY, set visibility to 'short_text' and 'video'. Avoid showing 'long_text' initially. If the user prioritizes QUALITY, set visibility to 'long_text' and 'assembly_image' to ensure no details are missed.'\n"
+        "4. SCREEN SETUP ANALYSIS (from 'form-setup'): Analyze 'screen_setup' to determine user user visibility and readability from the device. If the user reports issues (e.g., text too small, screen is far), you MUST prioritize 'short_text' and visual media (images/video) and minimize the use of 'long_text'. If the user reports 'everything is clear' or 'close up', you can safely show 'long_text' for detailed guidance.\n"
+        "5. DO NOT modify or invent media file paths. If a path is an empty string, visibility MUST be false. NEVER set both 'short_text' and 'long_text' to true simultaneously."
+        f"6. The fields 'title', 'short_text', 'long_text', and 'explanation_of_changes' MUST be written in {requested_language}.\n\n"
+        # "ADAPTATION STRATEGY:\n"
+        # "- Consider what user clicked in previous similar steps\n"
+        # "- Consider what majority of users preferred for this step. If the user consistently reveals a specific content type (e.g., Video) or consistently ignores another, adapt the next steps to favor their demonstrated workflow. The goal is to minimize manual 'Show' clicks by anticipating what information the user finds most helpful.\n"
+        # "- Balance user preferences with pedagogical effectiveness\n\n"
+        # "- Consider the user's level of technical experience based on their self-description. If they say they've done many similar exercises, they're considered expert.'\n"
+        # "- If 'Warehouse Picking' is in prior experience, assume they know the bin system: keep WITHDRAW instructions minimal.\n"
+        #  "- If 'Color-Blind Assist' is true, you MUST add text labels to colors in the text, e.g., 'Red [R]' or 'Black [B]'.\n"
+        #  "- If objective is 'focus on speed and efficiency', prioritize 'short_text' and hide 'long_text'.\n"
+        #  "- If objectanive is 'focus on learning d precision', prioritize 'long_text' and 'video'.\n"
+        "ADAPTATION STRATEGY & DECISION LOGIC:\n"
+        "Balance the user's explicit declarations with implicit behavioral data to find the optimal UI configuration for each specific step.\n"
+        "Consider the user profile (language, experience, visual setup, and session goals) to construct a mental model of the participant. For instance, consider how their reported visibility issues or professional background should naturally influence the density and type of information displayed.\n"
+        "Consider 'user_history_formatted' and 'aggregated_preferences'. Identify trends in what the user (and others) actually interacts with.\n"
+        "Adapt the interface not only to the user but also to the nature of the task (Withdraw, Assembly, Quality Control). A technical expert’s ideal interface might be minimalist, whereas a novice in a rush might require a different balance of visual and textual cues. You have the autonomy to decide which elements to prioritize to maximize training efficiency.\n"
+        "Output strict JSON only."
     )
 
     schema: Dict[str, Any] = {
@@ -277,7 +291,10 @@ def adapt_step(user_profile: Dict[str, Any],
                     "video",
                 ],
             },
-            "explanation_of_changes": {"type": "string"},
+            "explanation_of_changes": {
+                "type": "string",
+                "description": f"Reasoning for the adaptation, written strictly in {requested_language}"
+            },
         },
         "required": [
             "title",
@@ -317,8 +334,7 @@ def adapt_step(user_profile: Dict[str, Any],
             # Ensure percentage is a number
             pct_value = percentage if isinstance(percentage, (int, float)) else 0
             if pct_value > 0:
-                aggregated_prefs_text += f"  - {content_name}: {pct_value*100:.1f}% of users viewed this\n"
-
+                aggregated_prefs_text += f"  - {content_name}: {pct_value * 100:.1f}% of users viewed this\n"
 
     media_availability_text = "AVAILABLE MEDIA PATHS:\n"
     af_in = step_payload.get("adaptive_fields", {})
@@ -332,7 +348,8 @@ def adapt_step(user_profile: Dict[str, Any],
         media_availability_text += "NONE."
 
     # Estrazione nuovi campi per il contenuto utente
-    skills = ", ".join(user_profile.get('prior_experience', ['none']))
+    raw_skills = user_profile.get('prior_experience', 'none')
+    skills = ", ".join(raw_skills) if isinstance(raw_skills, list) else raw_skills
     visual = user_profile.get('visual_comfort', {})
 
     user_content = f"""Adapt this assembly training step:
@@ -343,7 +360,8 @@ STYLE PROFILE: {style_profile_token}
 USER PROFILE:
 - Language: {user_profile.get('language', 'English')}
 - Objective: {user_profile.get('training_objective', 'Learning')}
-- Skills: {skills}
+- Screen Setup: {user_profile.get('screen_setup', 'Not specified')}
+- Experience: {skills}
 - Color-Blind Assist: {visual.get('color_blind_assist', False)}
 - Other Requests: {user_profile.get('other_requests', 'None')}
 

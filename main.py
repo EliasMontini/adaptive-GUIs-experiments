@@ -492,132 +492,57 @@ app.layout = html.Div([
                              },
                              className="mb-4"
                          ),
+                         # Domanda sull'esperienza con LEGO
                          html.Div([
                              html.P([html.I(className="bi bi-person-workspace me-2"),
-                                     "Tell us about your history with LEGO: is this a familiar hobby for you or a brand-new experience?"],
+                                     "Tell us about your experience with LEGO or technical kits: is this a familiar hobby for you or a completely new experience?"],
                                     style={'fontSize': '1.3rem', 'fontWeight': 'bold', 'color': '#2c3e50'},
                                     className="mb-2"),
-                             html.P(
-                             #    "I am an expert, I love Technic.",
-                                 style={'color': '#666', 'fontSize': '1.1rem'}),
+
                              dbc.Textarea(
                                  id='profile-experience',  # Maintaining this ID for general user narrative
-                                 placeholder='e.g., I am an expert, I love Technic; Totally new, I am afraid to fail;...',
+                                 placeholder='e.g., I’m an expert in building model kits; I play with LEGO occasionally; I used to play with LEGO as a child but nothing too complex; I’ve never tried this kind of activity...',
                                  style={'borderRadius': '12px', 'minHeight': '100px', 'fontSize': '1.1rem',
                                         'padding': '15px'}
                              ),
-                             # Nuova domanda sul Setup Ambientale
-                             html.Div([
-                                 html.P([html.I(className="bi bi-display me-2"),
-                                         "Where will your screen be positioned during assembly, and how easy will it be to read?"],
-                                        style={'fontSize': '1.3rem', 'fontWeight': 'bold', 'color': '#2c3e50'},
-                                        className="mb-2"),
-                                 html.P(
-                                     "Tell us if you'll hold it in your hand or if it will be on a table far from you.",
-                                     style={'color': '#666', 'fontSize': '1.1rem'}),
-                                 dbc.Textarea(
-                                     id='distance-setup',  # ID univoco per questa domanda
-                                     placeholder='e.g., On a table 1 meter away; In my hands; Propped up on a shelf...',
-                                     style={'borderRadius': '12px', 'minHeight': '100px', 'fontSize': '1.1rem',
-                                            'padding': '15px'}
-                                 ),
-                             ], className="mb-4"),
-                         # dcc.Dropdown(
                          ], className="mb-4"),
-                         #     id='profile-language',
-                         #     options=[
-                         #         {'label': 'Italiano', 'value': 'Italian'},
-                         #         {'label': 'English', 'value': 'English'},
-                         #         {'label': 'Deutsch', 'value': 'German'},
-                         #         {'label': 'Français', 'value': 'French'}
-                         #     ],
-                         #     value='English',
-                         #     style={'fontSize': '1.1rem', 'borderRadius': '8px'},
-                         #     className="mb-3"
-                         # ),
+                         # Nuova domanda sull'Obiettivo (Speed vs Learning)
+                         html.Div([
+                             html.P([html.I(className="bi bi-stopwatch me-2"),
+                                     "Do you aim to complete the assembly quickly, or take your time to follow each step carefully?"],
+                                    style={'fontSize': '1.3rem', 'fontWeight': 'bold', 'color': '#2c3e50'},
+                                    className="mb-2"),
+                             dbc.Textarea(
+                                 id='profile-goal',  # ID univoco per l'obiettivo
+                                 placeholder='e.g., I want to finish as fast as possible; I want to learn the process in detail; I try to balance speed and understanding...',
+                                 style={'borderRadius': '12px', 'minHeight': '100px', 'fontSize': '1.1rem',
+                                        'padding': '15px'}
+                             ),
+                         ], className="mb-4"),
 
-                         # Esperienza (Checklist Strategica)
-                         # html.P([html.I(className="bi bi-person-workspace me-2"), "Prior Experience"],
-                         #        "Prior Experience ", style={'fontSize': '1.3rem', 'fontWeight': 'bold'},
-                         #        className="mb-2"),
-                         # dbc.Checklist(
-                         #     id='profile-experience-checklist',
-                         #     style={'backgroundColor': '#f8f9fa', 'padding': '20px', 'borderRadius': '20px',
-                         #            'border': '1px solid #dee2e6'},
-                         #     options=[
-                         #         {'label': html.Div([
-                         #             html.B("Advanced LEGO Building:"),
-                         #             html.Br(),
-                         #             html.I(
-                         #                 "I’ve assembled complex LEGO sets or Technic models with moving parts and gears.")
-                         #         ]), 'value': 'lego_advanced'},
-                         #         {'label': html.Div([
-                         #             html.B("Industrial Assembly/Maintenance (Non-LEGO):"),
-                         #             html.Br(),
-                         #             html.I(
-                         #                 "I’ve worked on mechanical assemblies or used tools while following technical instructions or diagrams.")
-                         #         ]), 'value': 'industrial_mech'},
-                         #         {'label': html.Div([
-                         #             html.B("Warehouse Picking (Bin systems):"),
-                         #             html.Br(),
-                         #             html.I(
-                         #                 "I’m familiar with locating items using bin or location codes (e.g., A1-B03).")
-                         #         ]), 'value': 'warehouse_picking'},
-                         #         {'label': html.Div([
-                         #             html.B("No prior experience:"),
-                         #             html.Br(),
-                         #             html.I("I prefer clear, step-by-step guidance for every action.")
-                         #         ]), 'value': 'none'}
-                         #     ],
-                         #     value=[],
-                         #     label_style={'marginBottom': '15px', 'display': 'block', 'fontSize': '1.1rem'},
-                         #     # Crea spazio tra le opzioni
-                         #     input_style={'marginRight': '10px', 'transform': 'scale(1.2)'},
-                         #     # Allontana e ingrandisce il quadratino
-                         #     # id="profile-experience-checklist",
-                         #
-                         #     className="mb-3"
-                         # ),
-                         #
-                         #
-                         # # Obiettivo
-                         # html.P("Training Objective", style={'fontSize': '1.3rem', 'fontWeight': 'bold'},
-                         #        className="mb-2"),
-                         # dcc.Dropdown(
-                         #     id='profile-objective',
-                         #     options=[
-                         #         {'label': 'Focus on speed and efficiency', 'value': 'Speed'},
-                         #         {'label': 'Focus on learning and precision', 'value': 'Learning'}
-                         #     ],
-                         #     value='Learning',
-                         #     style={'fontSize': '1.1rem', 'borderRadius': '8px'},
-                         #     className="mb-3"
-                         # ),
-                         #
-                         # # Comfort Visivo
-                         # html.P([html.I(className="bi bi-eye me-2"), "Visual Comfort & Accessibility"],
-                         #        style={'fontSize': '1.3rem', 'fontWeight': 'bold'}, className="mb-2"),
-                         # dbc.Checklist(
-                         #     id='profile-visual-comfort',
-                         #     options=[
-                         #         {'label': 'High Contrast Mode', 'value': 'high_contrast'},
-                         #         {'label': 'Large Text Mode', 'value': 'large_text'},
-                         #         # {'label': 'Color-Blind Assist (Text labels for colors)', 'value': 'color_blind_assist'}
-                         #     ],
-                         #     value=[],
-                         #     inline=True,
-                         #     label_style={'fontSize': '1.1rem', 'marginRight': '20px'},
-                         #     input_style={'transform': 'scale(1.2)', 'marginRight': '8px'},
-                         #     className="mb-3"
-                         # ),
+                         # Domanda sulla leggibilità testi e immagini
+                         html.Div([
+                             html.P([html.I(className="bi bi-display me-2"),
+                                     "Can you read the text on your interface clearly from where it is positioned?"],
+                                    style={'fontSize': '1.3rem', 'fontWeight': 'bold', 'color': '#2c3e50'},
+                                    className="mb-2"),
 
-                         # Note Libere
-                         html.P("Any additional requests or comments for your personalized training?",
-                                style={'fontSize': '1.3rem', 'fontWeight': 'bold'}, className="mb-2"),
-                         dbc.Textarea(id='profile-other', placeholder='e.g. Prefer short sentences...',
-                                      style={'borderRadius': '10px', 'borderColor': '#ced4da', 'padding': '15px'},
-                                      className="mb-3"),
+                             dbc.Textarea(
+                                 id='form-setup',  # ID univoco per questa domanda
+                                 placeholder='e.g., I can see everything clearly; The text is too small;...',
+                                 style={'borderRadius': '12px', 'minHeight': '100px', 'fontSize': '1.1rem',
+                                        'padding': '15px'}
+                             ),
+                         ], className="mb-4"),
                      ]),
+                     # Note Libere
+                     html.P("Any additional requests or comments for your personalized training?",
+                            style={'fontSize': '1.3rem', 'fontWeight': 'bold'}, className="mb-2"),
+                     dbc.Textarea(id='profile-other', placeholder='e.g. Prefer short sentences...',
+                                  style={'borderRadius': '10px', 'borderColor': '#ced4da', 'padding': '15px'},
+                                  className="mb-3"
+                                  ),
+
                      dcc.Store(id='sentient-profile-store', data=None),
                      dcc.Store(id='begin-button-loading', data=False),
                      dbc.Button(
@@ -662,7 +587,7 @@ app.layout = html.Div([
             html.Div(className="row mb-1", children=[
                 # Short text area
                 html.Div(className="col-md-4", style={'height': '150px'}, children=[
-                    html.Span("Short Description", className="h5 d-block mb-1"),
+                    # html.Span("Short Description", className="h5 d-block mb-1"),
                     html.Div(style=styles['text-content-area'], children=[
                         html.Div(id="short-text-placeholder", className="placeholder-glow", children=[
                             html.Span(className="placeholder col-5"),
@@ -685,7 +610,7 @@ app.layout = html.Div([
 
                 # Long text area
                 html.Div(className="col-md-8", children=[
-                    html.Span("Long Description", className="h5 d-block mb-1"),
+                    # html.Span("Long Description", className="h5 d-block mb-1"),
                     html.Div(style=styles['text-content-area'], children=[
                         html.Div(id="long-text-placeholder", className="placeholder-glow", children=[
                             html.Span(className="placeholder col-7"),
@@ -710,7 +635,7 @@ app.layout = html.Div([
             html.Div(className="row", children=[
                 # Individual Parts image
                 html.Div(className="col-md-4 mb-4", children=[
-                    html.Span("Single Components Image", className="h5 d-block mb-2"),
+                    # html.Span("Single Components Image", className="h5 d-block mb-2"),
                     html.Div(style=styles['image-container'], children=[
                         html.Div(style=styles['image-wrapper'], children=[
                             html.Img(id="single-pieces-placeholder",
@@ -732,7 +657,7 @@ app.layout = html.Div([
 
                 # Assembled Parts image
                 html.Div(className="col-md-4 mb-4", children=[
-                    html.Span("Assembly Image", className="h5 d-block mb-2"),
+                    # html.Span("Assembly Image", className="h5 d-block mb-2"),
                     html.Div(style=styles['image-container'], children=[
                         html.Div(style=styles['image-wrapper'], children=[
                             html.Img(id="assembly-placeholder",
@@ -754,7 +679,7 @@ app.layout = html.Div([
 
                 # Video section
                 html.Div(className="col-md-4 mb-4", children=[
-                    html.Span("Video", className="h5 d-block mb-2"),
+                    # html.Span("Video", className="h5 d-block mb-2"),
                     html.Div(style=styles['image-container'], children=[
                         html.Div(style=styles['image-wrapper'], children=[
                             html.Img(id="video-placeholder",
@@ -908,16 +833,16 @@ app.clientside_callback(
      State('visibility-mode-dropdown', 'value'),
      State('profile-language', 'value'),
      State('profile-experience', 'value'),  # Legge l'esperienza aperta
-     State('distance-setup', 'value'),
+     State('profile-goal', 'value'),
+     State('form-setup', 'value'),
      State('profile-other', 'value'),  # Legge le note/richieste libere
      State('assembly-data-store', 'data')],
     prevent_initial_call=True
 )
-def begin_training(n_clicks, experiment_id, mode, lang, experience, setup, other, assembly_data):
+def begin_training(n_clicks, experiment_id, mode, lang, experience, goal, form, other, assembly_data):
     # Normalise experiment id
     if not experiment_id:
         experiment_id = 'unknown'
-
 
     # Defaults
     profile = None
@@ -931,8 +856,9 @@ def begin_training(n_clicks, experiment_id, mode, lang, experience, setup, other
         profile = {
             'language': lang,
             'prior_experience': experience if experience else ['None provided'],
-            'screen_setup': setup if setup else 'Standard placement',  # AGGIUNTO
-             'other_requests': (other or '').strip()
+            'training_objective': goal if goal else 'General learning',
+            'screen_setup': form if form else 'Standard placement',
+            'other_requests': (other or '').strip()
         }
 
         # Categories present in the current session

@@ -1054,3 +1054,130 @@ unknown,Sentient,2026-01-21 15:46:25.819814,sentient_step_adapted,1.0,Withdraw C
 unknown,Sentient,2026-01-21 15:49:15.695472,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0
 unknown,Sentient,2026-01-21 15:49:15.728504,initial_suggestion,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0
 unknown,Sentient,2026-01-21 15:49:27.740253,sentient_step_adapted,2.0,Assemblaggio PEZZO 1,1.0,0.0,1.0,1.0,0.0
+unknown,Sentient,2026-01-22 18:11:09.671571,start_experiment,,,0.0,0.0,0.0,0.0,0.0
+unknown,Sentient,2026-01-22 18:11:28.667436,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
+1,Sentient,2026-01-23 11:31:25.534579,start_experiment,,,0.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 11:31:32.671959,sentient_step_adapted,1.0,Ritira Componenti per PEZZO 1,1.0,0.0,1.0,0.0,0.0
+1,Sentient,2026-01-23 11:31:48.194897,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 11:31:48.273348,initial_suggestion,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 11:31:55.714996,sentient_step_adapted,2.0,Assemblaggio PEZZO 1,1.0,0.0,0.0,0.0,1.0
+1,Sentient,2026-01-23 11:32:10.379765,navigate_next,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 11:32:11.275191,initial_suggestion,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 11:32:17.913858,sentient_step_adapted,3.0,Ritira Componenti per PEZZO 2,1.0,0.0,1.0,0.0,0.0
+1,Sentient,2026-01-23 11:32:29.242148,navigate_next,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 11:32:29.305581,initial_suggestion,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 11:32:42.383523,sentient_step_adapted,4.0,Montaggio PEZZO 2,1.0,0.0,1.0,0.0,1.0
+1,Sentient,2026-01-23 13:19:26.656890,start_experiment,,,0.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:19:56.472841,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:20:02.593159,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:20:02.628147,initial_suggestion,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:20:19.416977,toggle_assembly_block,2.0,Assembly PIECE 1,0.0,0.0,0.0,1.0,0.0
+1,Sentient,2026-01-23 13:20:25.494568,navigate_next,2.0,Assembly PIECE 1,0.0,0.0,0.0,1.0,0.0
+1,Sentient,2026-01-23 13:20:25.712873,initial_suggestion,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:33:29.193410,start_experiment,,,0.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:33:38.491709,sentient_step_adapted,1.0,Preleva Componenti per PEZZO 1,1.0,0.0,1.0,0.0,0.0
+1,Sentient,2026-01-23 13:33:47.032358,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:33:47.075418,initial_suggestion,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:33:54.282867,sentient_step_adapted,2.0,Montaggio PEZZO 1,1.0,0.0,1.0,1.0,1.0
+1,Sentient,2026-01-23 13:34:08.699298,toggle_long_text_block,2.0,Assembly PIECE 1,0.0,1.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:34:12.564887,navigate_next,2.0,Assembly PIECE 1,0.0,1.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:34:12.619808,initial_suggestion,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:34:22.167381,sentient_step_adapted,3.0,Preleva Componenti per PEZZO 2,1.0,0.0,1.0,0.0,0.0
+1,Sentient,2026-01-23 13:34:32.991076,navigate_next,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:34:33.050736,initial_suggestion,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:34:47.519394,sentient_step_adapted,4.0,Assemblaggio PEZZO 2,1.0,0.0,1.0,0.0,1.0
+1,Sentient,2026-01-23 13:35:04.916294,navigate_next,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:35:04.966096,initial_suggestion,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:35:12.163951,sentient_step_adapted,5.0,Ritira Componenti per PEZZO 3,1.0,0.0,1.0,0.0,0.0
+1,Sentient,2026-01-23 13:35:15.534420,navigate_next,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:35:15.593237,initial_suggestion,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:35:25.452029,sentient_step_adapted,6.0,Assemblaggio PEZZO 3,1.0,0.0,1.0,1.0,1.0
+1,Sentient,2026-01-23 13:35:30.068472,toggle_long_text_block,6.0,Assembly PIECE 3,0.0,1.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:35:33.559266,navigate_next,6.0,Assembly PIECE 3,0.0,1.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:35:33.624978,initial_suggestion,6.0,Assembly PIECE 3,1.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:35:39.285809,sentient_step_adapted,7.0,Preleva Componenti per PEZZO 4,1.0,0.0,1.0,0.0,0.0
+1,Sentient,2026-01-23 13:35:44.386210,navigate_next,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:35:44.493557,initial_suggestion,7.0,Withdraw Components for PIECE 4,1.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:35:52.004503,sentient_step_adapted,8.0,Assemblaggio PEZZO 4,1.0,0.0,0.0,0.0,1.0
+1,Sentient,2026-01-23 13:36:01.645501,toggle_long_text_block,8.0,Assembly PIECE 4,0.0,1.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:36:06.386696,navigate_next,8.0,Assembly PIECE 4,0.0,1.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:36:07.671734,initial_suggestion,8.0,Assembly PIECE 4,1.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:36:16.420070,sentient_step_adapted,9.0,Ritira Componenti per PEZZO 5,1.0,0.0,1.0,0.0,0.0
+1,Sentient,2026-01-23 13:36:24.160591,navigate_next,9.0,Withdraw Components for PIECE 5,0.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:36:24.550928,initial_suggestion,9.0,Withdraw Components for PIECE 5,1.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:36:33.581674,sentient_step_adapted,10.0,Assemblaggio PEZZO 5,1.0,0.0,0.0,1.0,0.0
+1,Sentient,2026-01-23 13:40:15.825669,start_experiment,,,0.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:40:23.469165,sentient_step_adapted,1.0,Preleva Componenti per PEZZO 1,1.0,0.0,1.0,0.0,0.0
+1,Sentient,2026-01-23 13:40:29.932722,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:40:32.688544,initial_suggestion,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:40:40.371636,sentient_step_adapted,2.0,Assemblaggio PEZZO 1,1.0,0.0,1.0,1.0,1.0
+1,Sentient,2026-01-23 13:41:03.420227,toggle_long_text_block,2.0,Assembly PIECE 1,0.0,1.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:41:06.347173,navigate_next,2.0,Assembly PIECE 1,0.0,1.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:41:06.406277,initial_suggestion,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:42:35.437965,sentient_step_adapted,3.0,Preleva Componenti per PEZZO 2,1.0,0.0,1.0,0.0,0.0
+1,Sentient,2026-01-23 13:42:42.862730,navigate_next,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:42:42.911818,initial_suggestion,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:43:04.969976,sentient_step_adapted,4.0,Assemblaggio PEZZO 2,1.0,0.0,1.0,0.0,1.0
+1,Sentient,2026-01-23 13:43:15.618357,toggle_long_text_block,4.0,Assembly PIECE 2,0.0,1.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:43:22.921995,navigate_next,4.0,Assembly PIECE 2,0.0,1.0,0.0,0.0,0.0
+1,Sentient,2026-01-23 13:43:22.971940,initial_suggestion,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:48:58.511902,start_experiment,,,0.0,0.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:49:08.615995,sentient_step_adapted,1.0,Ritira Componenti per PEZZO 1,1.0,0.0,1.0,0.0,0.0
+5,Sentient,2026-01-23 13:49:18.389066,navigate_next,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:49:18.718782,initial_suggestion,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:49:26.402141,sentient_step_adapted,2.0,Assemblaggio PEZZO 1,1.0,0.0,1.0,1.0,1.0
+5,Sentient,2026-01-23 13:49:35.079011,navigate_next,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:49:35.150227,initial_suggestion,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:49:41.987878,sentient_step_adapted,3.0,Preleva i componenti per il PEZZO 2,1.0,0.0,1.0,0.0,0.0
+5,Sentient,2026-01-23 13:49:49.865614,navigate_next,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:49:49.954656,initial_suggestion,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:50:03.675685,sentient_step_adapted,4.0,Assemblaggio PEZZO 2,1.0,0.0,1.0,1.0,1.0
+5,Sentient,2026-01-23 13:50:19.520188,toggle_long_text_block,4.0,Assembly PIECE 2,0.0,1.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:50:23.823337,navigate_next,4.0,Assembly PIECE 2,0.0,1.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:50:23.889687,initial_suggestion,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:50:33.384061,sentient_step_adapted,5.0,Preleva Componenti per PEZZO 3,1.0,0.0,1.0,0.0,0.0
+5,Sentient,2026-01-23 13:50:38.247882,navigate_next,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:50:38.315542,initial_suggestion,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:50:49.410255,sentient_step_adapted,6.0,Assemblaggio PEZZO 3,1.0,0.0,1.0,1.0,1.0
+5,Sentient,2026-01-23 13:51:04.186910,navigate_next,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:51:04.426618,initial_suggestion,6.0,Assembly PIECE 3,1.0,0.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:51:13.740033,sentient_step_adapted,7.0,Preleva Componenti per PEZZO 4,1.0,0.0,1.0,0.0,0.0
+5,Sentient,2026-01-23 13:51:17.747796,navigate_next,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:51:19.349795,initial_suggestion,7.0,Withdraw Components for PIECE 4,1.0,0.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:51:31.568784,sentient_step_adapted,8.0,Assemblaggio PEZZO 4,1.0,0.0,0.0,1.0,1.0
+5,Sentient,2026-01-23 13:51:40.831671,toggle_single_pieces_block,8.0,Assembly PIECE 4,0.0,0.0,1.0,0.0,0.0
+5,Sentient,2026-01-23 13:51:44.634604,toggle_long_text_block,8.0,Assembly PIECE 4,0.0,1.0,1.0,0.0,0.0
+5,Sentient,2026-01-23 13:51:47.002604,navigate_next,8.0,Assembly PIECE 4,0.0,1.0,1.0,0.0,0.0
+5,Sentient,2026-01-23 13:51:48.425328,initial_suggestion,8.0,Assembly PIECE 4,1.0,0.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:51:57.787533,sentient_step_adapted,9.0,Ritira Componenti per PEZZO 5,1.0,0.0,1.0,0.0,0.0
+5,Sentient,2026-01-23 13:52:04.470898,navigate_next,9.0,Withdraw Components for PIECE 5,0.0,0.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:52:04.679120,initial_suggestion,9.0,Withdraw Components for PIECE 5,1.0,0.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:52:16.906077,sentient_step_adapted,10.0,Assemblaggio PEZZO 5,1.0,0.0,0.0,1.0,0.0
+5,Sentient,2026-01-23 13:52:35.757830,toggle_long_text_block,10.0,Assembly PIECE 5,0.0,1.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:52:36.829637,toggle_video_block,10.0,Assembly PIECE 5,0.0,1.0,0.0,0.0,1.0
+5,Sentient,2026-01-23 13:52:40.609881,navigate_next,10.0,Assembly PIECE 5,0.0,1.0,0.0,0.0,1.0
+5,Sentient,2026-01-23 13:52:40.664540,initial_suggestion,10.0,Assembly PIECE 5,1.0,0.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:52:53.442256,sentient_step_adapted,11.0,Assemblaggio PEZZO 6,1.0,0.0,0.0,1.0,0.0
+5,Sentient,2026-01-23 13:53:05.827952,toggle_long_text_block,11.0,Assembly PIECE 6,0.0,1.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:53:09.629833,navigate_next,11.0,Assembly PIECE 6,0.0,1.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:53:09.698430,initial_suggestion,11.0,Assembly PIECE 6,1.0,0.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:53:19.150311,sentient_step_adapted,12.0,Preleva Componenti per PEZZO 7,1.0,0.0,1.0,0.0,0.0
+5,Sentient,2026-01-23 13:53:26.665921,navigate_next,12.0,Withdraw Components for PIECE 7,0.0,0.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:53:26.724413,initial_suggestion,12.0,Withdraw Components for PIECE 7,1.0,0.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:53:36.533814,sentient_step_adapted,13.0,Assemblaggio PEZZO 7,1.0,0.0,0.0,1.0,1.0
+5,Sentient,2026-01-23 13:53:50.343520,toggle_long_text_block,13.0,Assembly PIECE 7,0.0,1.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:53:51.470740,toggle_single_pieces_block,13.0,Assembly PIECE 7,0.0,1.0,1.0,0.0,0.0
+5,Sentient,2026-01-23 13:53:53.564551,navigate_next,13.0,Assembly PIECE 7,0.0,1.0,1.0,0.0,0.0
+5,Sentient,2026-01-23 13:53:53.643163,initial_suggestion,13.0,Assembly PIECE 7,1.0,0.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:54:00.550236,sentient_step_adapted,14.0,Preleva Componenti per PEZZO 8,1.0,0.0,1.0,0.0,0.0
+5,Sentient,2026-01-23 13:54:06.005582,navigate_next,14.0,Withdraw Components for PIECE 8,0.0,0.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:54:06.128551,initial_suggestion,14.0,Withdraw Components for PIECE 8,1.0,0.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:54:19.981355,sentient_step_adapted,15.0,Assemblaggio PEZZO 8,1.0,0.0,0.0,1.0,0.0
+5,Sentient,2026-01-23 13:54:26.009292,toggle_video_block,15.0,Assembly PIECE 8,0.0,0.0,0.0,0.0,1.0
+5,Sentient,2026-01-23 13:54:34.918695,navigate_next,15.0,Assembly PIECE 8,0.0,0.0,0.0,0.0,1.0
+5,Sentient,2026-01-23 13:54:35.321287,initial_suggestion,15.0,Assembly PIECE 8,1.0,0.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:54:46.731975,sentient_step_adapted,16.0,Controllo Finale,1.0,0.0,1.0,0.0,1.0
+5,Sentient,2026-01-23 13:55:01.999690,navigate_to_thankyou,16.0,Final Control,0.0,0.0,0.0,0.0,0.0
+5,Sentient,2026-01-23 13:55:13.980736,restart_application,,,0.0,0.0,0.0,0.0,0.0
+unknown,Sentient,2026-01-23 17:20:07.159909,start_experiment,,,0.0,0.0,0.0,0.0,0.0
+unknown,Sentient,2026-01-23 17:20:24.091124,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
