@@ -1181,3 +1181,282 @@ unknown,Sentient,2026-01-22 18:11:28.667436,sentient_step_adapted,1.0,Withdraw C
 5,Sentient,2026-01-23 13:55:13.980736,restart_application,,,0.0,0.0,0.0,0.0,0.0
 unknown,Sentient,2026-01-23 17:20:07.159909,start_experiment,,,0.0,0.0,0.0,0.0,0.0
 unknown,Sentient,2026-01-23 17:20:24.091124,sentient_step_adapted,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
+4,Sentient,2026-01-23 17:31:21.206734,start_experiment,,,0.0,0.0,0.0,0.0,0.0
+4,Sentient,2026-01-23 17:31:36.089571,sentient_step_adapted,1.0,Komponenten für TEIL 1 entnehmen,1.0,0.0,1.0,0.0,0.0
+6,Sentient,2026-01-23 17:36:39.611212,start_experiment,,,0.0,0.0,0.0,0.0,0.0
+unknown,Sentient,2026-01-24 10:13:12.600296,start_experiment,,,0.0,0.0,0.0,0.0,0.0
+unknown,Sentient,2026-01-24 10:13:21.019500,sentient_step_adapted,1.0,Preleva Componenti per PEZZO 1,1.0,0.0,1.0,0.0,0.0
+unknown,Sentient,2026-01-24 18:27:07.073354,start_experiment,,,0.0,0.0,0.0,0.0,0.0
+unknown,Sentient,2026-01-24 18:27:18.341919,sentient_step_adapted,1.0,Komponenten für TEIL 1 entnehmen,1.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-02 09:29:07.073594,start_experiment,,,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:54:56.093629,start_experiment,,,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:54:57.522743,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:54:58.297024,toggle_single_pieces_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
+11,Data Collection,2026-04-02 09:54:59.364902,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
+11,Data Collection,2026-04-02 09:54:59.443936,initial_suggestion,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:01.261755,toggle_long_text_block,2.0,Assembly PIECE 1,0.0,1.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:05.180937,toggle_video_block,2.0,Assembly PIECE 1,0.0,1.0,0.0,0.0,1.0
+11,Data Collection,2026-04-02 09:55:07.026713,navigate_next,2.0,Assembly PIECE 1,0.0,1.0,0.0,0.0,1.0
+11,Data Collection,2026-04-02 09:55:07.093632,initial_suggestion,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:08.394154,toggle_short_text_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:09.511842,navigate_next,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:09.573025,initial_suggestion,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:10.378456,toggle_long_text_block,4.0,Assembly PIECE 2,0.0,1.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:11.252564,toggle_assembly_block,4.0,Assembly PIECE 2,0.0,1.0,0.0,1.0,0.0
+11,Data Collection,2026-04-02 09:55:12.585596,navigate_next,4.0,Assembly PIECE 2,0.0,1.0,0.0,1.0,0.0
+11,Data Collection,2026-04-02 09:55:12.650213,initial_suggestion,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:13.955246,toggle_single_pieces_block,5.0,Withdraw Components for PIECE 3,0.0,0.0,1.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:15.075339,navigate_next,5.0,Withdraw Components for PIECE 3,0.0,0.0,1.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:15.140192,initial_suggestion,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:18.183626,toggle_single_pieces_block,6.0,Assembly PIECE 3,0.0,0.0,1.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:19.967552,toggle_assembly_block,6.0,Assembly PIECE 3,0.0,0.0,1.0,1.0,0.0
+11,Data Collection,2026-04-02 09:55:20.837794,navigate_next,6.0,Assembly PIECE 3,0.0,0.0,1.0,1.0,0.0
+11,Data Collection,2026-04-02 09:55:20.897164,initial_suggestion,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:22.856225,toggle_short_text_block,7.0,Withdraw Components for PIECE 4,1.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:23.922011,navigate_next,7.0,Withdraw Components for PIECE 4,1.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:23.985948,initial_suggestion,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:24.798574,toggle_assembly_block,8.0,Assembly PIECE 4,0.0,0.0,0.0,1.0,0.0
+11,Data Collection,2026-04-02 09:55:25.927555,navigate_next,8.0,Assembly PIECE 4,0.0,0.0,0.0,1.0,0.0
+11,Data Collection,2026-04-02 09:55:26.006303,initial_suggestion,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:27.381182,toggle_short_text_block,9.0,Withdraw Components for PIECE 5,1.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:28.671299,navigate_next,9.0,Withdraw Components for PIECE 5,1.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:28.727924,initial_suggestion,9.0,Withdraw Components for PIECE 5,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:29.554534,toggle_video_block,10.0,Assembly PIECE 5,0.0,0.0,0.0,0.0,1.0
+11,Data Collection,2026-04-02 09:55:30.057178,toggle_assembly_block,10.0,Assembly PIECE 5,0.0,0.0,0.0,1.0,1.0
+11,Data Collection,2026-04-02 09:55:32.342885,navigate_next,10.0,Assembly PIECE 5,0.0,0.0,0.0,1.0,1.0
+11,Data Collection,2026-04-02 09:55:33.830466,initial_suggestion,10.0,Assembly PIECE 5,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:35.359227,toggle_short_text_block,11.0,Assembly PIECE 6,1.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:35.804883,toggle_long_text_block,11.0,Assembly PIECE 6,1.0,1.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:36.767355,navigate_next,11.0,Assembly PIECE 6,1.0,1.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:36.839650,initial_suggestion,11.0,Assembly PIECE 6,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:38.238817,toggle_short_text_block,12.0,Withdraw Components for PIECE 7,1.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:39.242544,navigate_next,12.0,Withdraw Components for PIECE 7,1.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:39.304464,initial_suggestion,12.0,Withdraw Components for PIECE 7,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:40.321996,toggle_short_text_block,13.0,Assembly PIECE 7,1.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:40.650140,toggle_long_text_block,13.0,Assembly PIECE 7,1.0,1.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:41.506622,navigate_next,13.0,Assembly PIECE 7,1.0,1.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:41.586351,initial_suggestion,13.0,Assembly PIECE 7,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:43.039789,toggle_short_text_block,14.0,Withdraw Components for PIECE 8,1.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:49.198581,navigate_next,14.0,Withdraw Components for PIECE 8,1.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:49.403523,initial_suggestion,14.0,Withdraw Components for PIECE 8,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:51.001727,toggle_single_pieces_block,15.0,Assembly PIECE 8,0.0,0.0,1.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:52.835812,navigate_next,15.0,Assembly PIECE 8,0.0,0.0,1.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:52.896315,initial_suggestion,15.0,Assembly PIECE 8,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-02 09:55:54.246269,toggle_video_block,16.0,Final Control,0.0,0.0,0.0,0.0,1.0
+11,Data Collection,2026-04-02 09:55:55.345237,navigate_to_thankyou,16.0,Final Control,0.0,0.0,0.0,0.0,1.0
+11,Data Collection,2026-04-16 08:48:57.628820,start_experiment,,,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-16 08:48:58.765846,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:00.091916,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:00.120780,initial_suggestion,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:01.087550,toggle_long_text_block,2.0,Assembly PIECE 1,0.0,1.0,0.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:01.999875,navigate_next,2.0,Assembly PIECE 1,0.0,1.0,0.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:02.029572,initial_suggestion,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:03.211837,toggle_single_pieces_block,3.0,Withdraw Components for PIECE 2,0.0,0.0,1.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:04.815947,navigate_next,3.0,Withdraw Components for PIECE 2,0.0,0.0,1.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:04.920613,initial_suggestion,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:06.310914,toggle_short_text_block,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:07.711461,navigate_next,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:07.810537,initial_suggestion,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:09.516843,toggle_short_text_block,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:10.096711,toggle_single_pieces_block,5.0,Withdraw Components for PIECE 3,1.0,0.0,1.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:11.157231,navigate_next,5.0,Withdraw Components for PIECE 3,1.0,0.0,1.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:11.231072,initial_suggestion,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:12.205813,toggle_single_pieces_block,6.0,Assembly PIECE 3,0.0,0.0,1.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:12.734346,toggle_assembly_block,6.0,Assembly PIECE 3,0.0,0.0,1.0,1.0,0.0
+11,Data Collection,2026-04-16 08:49:13.803167,toggle_long_text_block,6.0,Assembly PIECE 3,0.0,1.0,1.0,1.0,0.0
+11,Data Collection,2026-04-16 08:49:14.416719,navigate_next,6.0,Assembly PIECE 3,0.0,1.0,1.0,1.0,0.0
+11,Data Collection,2026-04-16 08:49:14.453025,initial_suggestion,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:16.260759,toggle_single_pieces_block,7.0,Withdraw Components for PIECE 4,0.0,0.0,1.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:17.624395,navigate_next,7.0,Withdraw Components for PIECE 4,0.0,0.0,1.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:17.678129,initial_suggestion,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:18.549794,toggle_single_pieces_block,8.0,Assembly PIECE 4,0.0,0.0,1.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:19.308593,navigate_next,8.0,Assembly PIECE 4,0.0,0.0,1.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:19.390783,initial_suggestion,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:20.519981,toggle_single_pieces_block,9.0,Withdraw Components for PIECE 5,0.0,0.0,1.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:21.507760,navigate_next,9.0,Withdraw Components for PIECE 5,0.0,0.0,1.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:21.648579,initial_suggestion,9.0,Withdraw Components for PIECE 5,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:22.705515,toggle_short_text_block,10.0,Assembly PIECE 5,1.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:23.436032,navigate_next,10.0,Assembly PIECE 5,1.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:23.571461,initial_suggestion,10.0,Assembly PIECE 5,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:24.515513,toggle_long_text_block,11.0,Assembly PIECE 6,0.0,1.0,0.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:25.214618,toggle_assembly_block,11.0,Assembly PIECE 6,0.0,1.0,0.0,1.0,0.0
+11,Data Collection,2026-04-16 08:49:26.347138,navigate_next,11.0,Assembly PIECE 6,0.0,1.0,0.0,1.0,0.0
+11,Data Collection,2026-04-16 08:49:26.572323,initial_suggestion,11.0,Assembly PIECE 6,0.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:28.251068,toggle_short_text_block,12.0,Withdraw Components for PIECE 7,1.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:29.364953,navigate_next,12.0,Withdraw Components for PIECE 7,1.0,0.0,0.0,0.0,0.0
+11,Data Collection,2026-04-16 08:49:29.413221,initial_suggestion,12.0,Withdraw Components for PIECE 7,0.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:05.006713,start_experiment,,,0.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:06.547536,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:07.350631,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:07.377576,initial_suggestion,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:08.611945,toggle_single_pieces_block,2.0,Assembly PIECE 1,0.0,0.0,1.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:11.100470,toggle_assembly_block,2.0,Assembly PIECE 1,0.0,0.0,1.0,1.0,0.0
+12,Data Collection,2026-04-16 09:24:11.495623,toggle_assembly_block,2.0,Assembly PIECE 1,0.0,0.0,1.0,1.0,0.0
+12,Data Collection,2026-04-16 09:24:11.770424,toggle_long_text_block,2.0,Assembly PIECE 1,0.0,1.0,1.0,1.0,0.0
+12,Data Collection,2026-04-16 09:24:13.065575,toggle_short_text_block,2.0,Assembly PIECE 1,1.0,1.0,1.0,1.0,0.0
+12,Data Collection,2026-04-16 09:24:14.122647,navigate_next,2.0,Assembly PIECE 1,1.0,1.0,1.0,1.0,0.0
+12,Data Collection,2026-04-16 09:24:14.147728,initial_suggestion,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:15.145613,toggle_short_text_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:15.964037,navigate_next,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:15.993807,initial_suggestion,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:16.650205,toggle_short_text_block,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:17.563788,navigate_next,4.0,Assembly PIECE 2,1.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:17.588426,initial_suggestion,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:18.434214,toggle_short_text_block,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:19.298565,navigate_next,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:19.327194,initial_suggestion,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:20.159542,toggle_single_pieces_block,6.0,Assembly PIECE 3,0.0,0.0,1.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:21.208538,navigate_next,6.0,Assembly PIECE 3,0.0,0.0,1.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:21.235058,initial_suggestion,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:22.222296,toggle_single_pieces_block,7.0,Withdraw Components for PIECE 4,0.0,0.0,1.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:23.125427,navigate_next,7.0,Withdraw Components for PIECE 4,0.0,0.0,1.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:23.152763,initial_suggestion,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:23.888272,toggle_short_text_block,8.0,Assembly PIECE 4,1.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:25.293017,navigate_next,8.0,Assembly PIECE 4,1.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:25.690014,initial_suggestion,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:25.899183,toggle_long_text_block,8.0,Assembly PIECE 4,1.0,1.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:28.069342,navigate_next,9.0,Withdraw Components for PIECE 5,0.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:28.099949,initial_suggestion,9.0,Withdraw Components for PIECE 5,0.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:29.427199,toggle_long_text_block,10.0,Assembly PIECE 5,0.0,1.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:30.762912,navigate_next,10.0,Assembly PIECE 5,0.0,1.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:30.793195,initial_suggestion,10.0,Assembly PIECE 5,0.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:31.798837,toggle_long_text_block,11.0,Assembly PIECE 6,0.0,1.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:33.042285,navigate_next,11.0,Assembly PIECE 6,0.0,1.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:33.076776,initial_suggestion,11.0,Assembly PIECE 6,0.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:34.092530,toggle_short_text_block,12.0,Withdraw Components for PIECE 7,1.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:35.375904,navigate_next,12.0,Withdraw Components for PIECE 7,1.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:35.403623,initial_suggestion,12.0,Withdraw Components for PIECE 7,0.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:36.608747,toggle_long_text_block,13.0,Assembly PIECE 7,0.0,1.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:38.325860,toggle_short_text_block,13.0,Assembly PIECE 7,1.0,1.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:40.410306,navigate_next,13.0,Assembly PIECE 7,1.0,1.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:40.854558,initial_suggestion,13.0,Assembly PIECE 7,0.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:42.007381,toggle_single_pieces_block,14.0,Withdraw Components for PIECE 8,0.0,0.0,1.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:43.022270,navigate_next,14.0,Withdraw Components for PIECE 8,0.0,0.0,1.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:43.051817,initial_suggestion,14.0,Withdraw Components for PIECE 8,0.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:57.086403,toggle_long_text_block,15.0,Assembly PIECE 8,0.0,1.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:58.006094,navigate_next,15.0,Assembly PIECE 8,0.0,1.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:58.036374,initial_suggestion,15.0,Assembly PIECE 8,0.0,0.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:24:59.162015,toggle_long_text_block,16.0,Final Control,0.0,1.0,0.0,0.0,0.0
+12,Data Collection,2026-04-16 09:25:00.688889,toggle_video_block,16.0,Final Control,0.0,1.0,0.0,0.0,1.0
+12,Data Collection,2026-04-16 09:25:01.929554,navigate_to_thankyou,16.0,Final Control,0.0,1.0,0.0,0.0,1.0
+12,Data Collection,2026-04-16 09:25:03.354862,restart_application,,,0.0,0.0,0.0,0.0,0.0
+1,Data Collection,2026-04-16 10:01:49.330574,start_experiment,,,0.0,0.0,0.0,0.0,0.0
+1,Data Collection,2026-04-16 10:01:51.589765,toggle_single_pieces_block,1.0,Withdraw Components for PIECE 1,0.0,0.0,1.0,0.0,0.0
+1,Data Collection,2026-04-16 10:01:56.470585,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
+1,Data Collection,2026-04-16 10:14:51.726414,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
+1,Data Collection,2026-04-16 10:14:51.757330,initial_suggestion,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0
+1,Data Collection,2026-04-16 10:14:52.778758,navigate_next,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0
+1,Data Collection,2026-04-16 10:14:52.807011,initial_suggestion,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0
+1,Data Collection,2026-04-16 10:14:54.509446,toggle_short_text_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0
+1,Data Collection,2026-04-16 10:15:00.214151,toggle_single_pieces_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,1.0,0.0,0.0
+1,Data Collection,2026-04-16 10:15:22.615701,navigate_previous,3.0,Withdraw Components for PIECE 2,1.0,0.0,1.0,0.0,0.0
+1,Data Collection,2026-04-16 10:15:23.539714,navigate_previous,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0
+1,Data Collection,2026-04-16 10:15:30.000719,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
+1,Data Collection,2026-04-16 10:15:30.036468,initial_suggestion,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0
+1,Data Collection,2026-04-16 10:15:31.413082,toggle_short_text_block,2.0,Assembly PIECE 1,1.0,0.0,0.0,0.0,0.0
+1,Data Collection,2026-04-16 10:15:32.195814,toggle_long_text_block,2.0,Assembly PIECE 1,1.0,1.0,0.0,0.0,0.0
+1,Data Collection,2026-04-16 10:15:34.062253,toggle_assembly_block,2.0,Assembly PIECE 1,1.0,1.0,0.0,1.0,0.0
+1,Data Collection,2026-04-16 10:15:59.743167,navigate_next,2.0,Assembly PIECE 1,1.0,1.0,0.0,1.0,0.0
+1,Data Collection,2026-04-16 10:15:59.777789,initial_suggestion,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:16:10.516083,start_experiment,,,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:16:11.872376,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:16:13.200892,toggle_single_pieces_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:16:21.111029,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:16:21.139197,initial_suggestion,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:16:21.773952,navigate_next,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:16:21.802595,initial_suggestion,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:16:23.337243,toggle_single_pieces_block,3.0,Withdraw Components for PIECE 2,0.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:16:24.188022,toggle_short_text_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:16:49.602293,navigate_next,3.0,Withdraw Components for PIECE 2,1.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:16:49.638167,initial_suggestion,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:16:50.219917,navigate_next,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:16:50.252717,initial_suggestion,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:16:51.365971,toggle_single_pieces_block,5.0,Withdraw Components for PIECE 3,0.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:16:52.469561,toggle_short_text_block,5.0,Withdraw Components for PIECE 3,1.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:17:04.314221,navigate_next,5.0,Withdraw Components for PIECE 3,1.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:17:04.341511,initial_suggestion,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:17:05.229062,navigate_next,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:17:05.257031,initial_suggestion,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:17:07.541422,toggle_single_pieces_block,7.0,Withdraw Components for PIECE 4,0.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:17:11.639914,toggle_short_text_block,7.0,Withdraw Components for PIECE 4,1.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:17:35.749169,navigate_next,7.0,Withdraw Components for PIECE 4,1.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:17:35.783021,initial_suggestion,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:17:36.513289,navigate_next,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:17:36.546615,initial_suggestion,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:17:37.698355,toggle_single_pieces_block,9.0,Withdraw Components for PIECE 5,0.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:17:44.111001,toggle_short_text_block,9.0,Withdraw Components for PIECE 5,1.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:17:46.479891,navigate_next,9.0,Withdraw Components for PIECE 5,1.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:17:46.506544,initial_suggestion,9.0,Withdraw Components for PIECE 5,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:17:48.403854,toggle_single_pieces_block,10.0,Assembly PIECE 5,0.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:17:50.727592,toggle_short_text_block,10.0,Assembly PIECE 5,1.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:18:03.088298,navigate_next,10.0,Assembly PIECE 5,1.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:18:03.119006,initial_suggestion,10.0,Assembly PIECE 5,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:18:04.932933,toggle_single_pieces_block,11.0,Assembly PIECE 6,0.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:18:07.403470,navigate_next,11.0,Assembly PIECE 6,0.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:18:07.429249,initial_suggestion,11.0,Assembly PIECE 6,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:18:09.628734,toggle_single_pieces_block,12.0,Withdraw Components for PIECE 7,0.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:19:28.611319,navigate_next,12.0,Withdraw Components for PIECE 7,0.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:19:28.637879,initial_suggestion,12.0,Withdraw Components for PIECE 7,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:19:29.582608,navigate_next,13.0,Assembly PIECE 7,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:19:29.617714,initial_suggestion,13.0,Assembly PIECE 7,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:19:31.234577,toggle_single_pieces_block,14.0,Withdraw Components for PIECE 8,0.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:19:36.613845,navigate_next,14.0,Withdraw Components for PIECE 8,0.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:19:36.650295,initial_suggestion,14.0,Withdraw Components for PIECE 8,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:19:38.172265,toggle_single_pieces_block,15.0,Assembly PIECE 8,0.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:19:39.868188,navigate_next,15.0,Assembly PIECE 8,0.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:19:39.894458,initial_suggestion,15.0,Assembly PIECE 8,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:19:57.873415,start_experiment,,,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:19:59.821949,toggle_short_text_block,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:20:12.478251,navigate_next,1.0,Withdraw Components for PIECE 1,1.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:20:12.506530,initial_suggestion,1.0,Withdraw Components for PIECE 1,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:20:13.589359,toggle_assembly_block,2.0,Assembly PIECE 1,0.0,0.0,0.0,1.0,0.0
+unknown,Data Collection,2026-04-16 10:20:27.296358,navigate_next,2.0,Assembly PIECE 1,0.0,0.0,0.0,1.0,0.0
+unknown,Data Collection,2026-04-16 10:20:27.330371,initial_suggestion,2.0,Assembly PIECE 1,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:20:27.913478,toggle_short_text_block,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:20:36.993455,navigate_next,3.0,Withdraw Components for PIECE 2,1.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:20:37.024279,initial_suggestion,3.0,Withdraw Components for PIECE 2,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:20:37.920190,toggle_assembly_block,4.0,Assembly PIECE 2,0.0,0.0,0.0,1.0,0.0
+unknown,Data Collection,2026-04-16 10:20:48.747169,navigate_next,4.0,Assembly PIECE 2,0.0,0.0,0.0,1.0,0.0
+unknown,Data Collection,2026-04-16 10:20:48.778491,initial_suggestion,4.0,Assembly PIECE 2,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:20:50.228206,toggle_short_text_block,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:21:08.323845,navigate_next,5.0,Withdraw Components for PIECE 3,1.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:21:08.353466,initial_suggestion,5.0,Withdraw Components for PIECE 3,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:21:09.282201,toggle_assembly_block,6.0,Assembly PIECE 3,0.0,0.0,0.0,1.0,0.0
+unknown,Data Collection,2026-04-16 10:21:24.896907,navigate_next,6.0,Assembly PIECE 3,0.0,0.0,0.0,1.0,0.0
+unknown,Data Collection,2026-04-16 10:21:24.927251,initial_suggestion,6.0,Assembly PIECE 3,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:21:32.559761,toggle_short_text_block,7.0,Withdraw Components for PIECE 4,1.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:21:45.089484,navigate_next,7.0,Withdraw Components for PIECE 4,1.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:21:45.120400,initial_suggestion,7.0,Withdraw Components for PIECE 4,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:21:45.942497,toggle_assembly_block,8.0,Assembly PIECE 4,0.0,0.0,0.0,1.0,0.0
+unknown,Data Collection,2026-04-16 10:21:53.022165,navigate_next,8.0,Assembly PIECE 4,0.0,0.0,0.0,1.0,0.0
+unknown,Data Collection,2026-04-16 10:21:53.059503,initial_suggestion,8.0,Assembly PIECE 4,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:21:56.085235,toggle_short_text_block,9.0,Withdraw Components for PIECE 5,1.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:22:02.175832,navigate_next,9.0,Withdraw Components for PIECE 5,1.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:22:02.236013,initial_suggestion,9.0,Withdraw Components for PIECE 5,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:22:03.464457,toggle_assembly_block,10.0,Assembly PIECE 5,0.0,0.0,0.0,1.0,0.0
+unknown,Data Collection,2026-04-16 10:22:06.646511,toggle_short_text_block,10.0,Assembly PIECE 5,1.0,0.0,0.0,1.0,0.0
+unknown,Data Collection,2026-04-16 10:22:08.592480,toggle_long_text_block,10.0,Assembly PIECE 5,1.0,1.0,0.0,1.0,0.0
+unknown,Data Collection,2026-04-16 10:22:22.834927,navigate_next,10.0,Assembly PIECE 5,1.0,1.0,0.0,1.0,0.0
+unknown,Data Collection,2026-04-16 10:22:22.873343,initial_suggestion,10.0,Assembly PIECE 5,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:22:25.163728,toggle_assembly_block,11.0,Assembly PIECE 6,0.0,0.0,0.0,1.0,0.0
+unknown,Data Collection,2026-04-16 10:22:28.501658,toggle_long_text_block,11.0,Assembly PIECE 6,0.0,1.0,0.0,1.0,0.0
+unknown,Data Collection,2026-04-16 10:22:42.294504,navigate_next,11.0,Assembly PIECE 6,0.0,1.0,0.0,1.0,0.0
+unknown,Data Collection,2026-04-16 10:22:42.335370,initial_suggestion,11.0,Assembly PIECE 6,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:22:44.814356,toggle_single_pieces_block,12.0,Withdraw Components for PIECE 7,0.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:22:48.239199,navigate_next,12.0,Withdraw Components for PIECE 7,0.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:22:48.270230,initial_suggestion,12.0,Withdraw Components for PIECE 7,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:22:51.903568,toggle_assembly_block,13.0,Assembly PIECE 7,0.0,0.0,0.0,1.0,0.0
+unknown,Data Collection,2026-04-16 10:22:53.698257,toggle_long_text_block,13.0,Assembly PIECE 7,0.0,1.0,0.0,1.0,0.0
+unknown,Data Collection,2026-04-16 10:23:08.267612,navigate_next,13.0,Assembly PIECE 7,0.0,1.0,0.0,1.0,0.0
+unknown,Data Collection,2026-04-16 10:23:08.293726,initial_suggestion,13.0,Assembly PIECE 7,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:23:10.594085,toggle_single_pieces_block,14.0,Withdraw Components for PIECE 8,0.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:23:12.005489,toggle_short_text_block,14.0,Withdraw Components for PIECE 8,1.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:23:32.127179,navigate_next,14.0,Withdraw Components for PIECE 8,1.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:23:32.162751,initial_suggestion,14.0,Withdraw Components for PIECE 8,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:23:35.428040,toggle_assembly_block,15.0,Assembly PIECE 8,0.0,0.0,0.0,1.0,0.0
+unknown,Data Collection,2026-04-16 10:23:47.051541,navigate_next,15.0,Assembly PIECE 8,0.0,0.0,0.0,1.0,0.0
+unknown,Data Collection,2026-04-16 10:23:47.082994,initial_suggestion,15.0,Assembly PIECE 8,0.0,0.0,0.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:23:49.764624,toggle_single_pieces_block,16.0,Final Control,0.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:23:51.556683,toggle_short_text_block,16.0,Final Control,1.0,0.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:23:52.735249,toggle_long_text_block,16.0,Final Control,1.0,1.0,1.0,0.0,0.0
+unknown,Data Collection,2026-04-16 10:23:57.017948,toggle_video_block,16.0,Final Control,1.0,1.0,1.0,0.0,1.0

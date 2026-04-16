@@ -366,7 +366,7 @@ USER PROFILE:
 - Other Requests: {user_profile.get('other_requests', 'None')}
 
 CURRENT STEP:
-- Title: {step_payload.get('name')}
+- Title: {step_payload.get('name')}gli 
 - Category: {step_payload.get('category')}
 - Short text: {step_payload['adaptive_fields'].get('short_text', '')}
 - Long text: {step_payload['adaptive_fields'].get('long_text', '')}

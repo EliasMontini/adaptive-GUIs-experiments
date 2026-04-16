@@ -1960,4 +1960,4 @@ def test_log_interaction():
 # Esegui il test solo se eseguito direttamente
 if __name__ == '__main__':
     # test_log_interaction()  # Decommentare per testare
-    app.run(debug=False, host='0.0.0.0', port=3000)
+    app.run(debug=False, host='0.0.0.0', port=5002)
