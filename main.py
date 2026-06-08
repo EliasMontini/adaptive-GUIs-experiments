@@ -15,7 +15,7 @@ from utils.historical_data_manager import HistoricalDataManager
 import shutil
 from pathlib import Path
 
-historical_manager = HistoricalDataManager('first_round_of_test.csv')
+historical_manager = HistoricalDataManager('analysis/all_20_experiments.csv')
 # Initialize the app with Flask server to handle static files
 
 

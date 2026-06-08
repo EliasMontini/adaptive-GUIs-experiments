@@ -1,0 +1,321 @@
+experiment_id;action;step_id;step_name;short_text_viewed;long_text_viewed;single_pieces_viewed;assembly_viewed;video_viewed
+1;navigate_next;1;Withdraw Components for PIECE 1;1;0;1;0;0
+1;navigate_next;2;Assembly PIECE 1;1;0;0;0;1
+1;navigate_next;3;Withdraw Components for PIECE 2;0;0;1;0;0
+1;navigate_next;4;Assembly PIECE 2;0;0;0;0;1
+1;navigate_next;5;Withdraw Components for PIECE 3;0;0;1;0;0
+1;navigate_next;6;Assembly PIECE 3;0;0;0;1;0
+1;navigate_next;7;Withdraw Components for PIECE 4;0;0;1;0;0
+1;navigate_next;8;Assembly PIECE 4;0;0;0;1;0
+1;navigate_next;9;Withdraw Components for PIECE 5;0;0;1;0;0
+1;navigate_next;10;Assembly PIECE 5;0;0;0;1;0
+1;navigate_next;11;Assembly PIECE 6;0;0;1;1;0
+1;navigate_next;12;Withdraw Components for PIECE 7;0;0;1;0;0
+1;navigate_next;13;Assembly PIECE 7;0;0;0;1;1
+1;navigate_next;14;Withdraw Components for PIECE 8;0;0;1;0;0
+1;navigate_next;15;Assembly PIECE 8;0;0;0;0;1
+1;navigate_to_thankyou;16;Final Control;0;0;0;0;1
+2;navigate_next;1;Withdraw Components for PIECE 1;1;0;0;0;0
+2;navigate_next;2;Assembly PIECE 1;1;1;1;1;0
+2;navigate_next;3;Withdraw Components for PIECE 2;1;0;0;0;0
+2;navigate_next;4;Assembly PIECE 2;1;0;1;1;1
+2;navigate_next;5;Withdraw Components for PIECE 3;1;0;0;0;0
+2;navigate_next;6;Assembly PIECE 3;1;0;0;1;0
+2;navigate_next;7;Withdraw Components for PIECE 4;1;0;0;0;0
+2;navigate_next;8;Assembly PIECE 4;1;0;0;1;0
+2;navigate_next;9;Withdraw Components for PIECE 5;1;0;0;0;0
+2;navigate_next;10;Assembly PIECE 5;1;0;1;1;0
+2;navigate_next;11;Assembly PIECE 6;1;0;0;1;0
+2;navigate_next;12;Withdraw Components for PIECE 7;1;0;0;0;0
+2;navigate_next;13;Assembly PIECE 7;1;1;0;1;0
+2;navigate_next;14;Withdraw Components for PIECE 8;1;0;0;0;0
+2;navigate_next;15;Assembly PIECE 8;1;0;0;1;0
+2;navigate_to_thankyou;16;Final Control;1;1;1;0;0
+3;navigate_next;1;Withdraw Components for PIECE 1;1;0;0;0;0
+3;navigate_next;2;Assembly PIECE 1;1;0;1;1;0
+3;navigate_next;3;Withdraw Components for PIECE 2;1;0;0;0;0
+3;navigate_next;4;Assembly PIECE 2;1;1;0;1;0
+3;navigate_next;5;Withdraw Components for PIECE 3;1;0;0;0;0
+3;navigate_next;6;Assembly PIECE 3;1;0;0;1;0
+3;navigate_next;7;Withdraw Components for PIECE 4;1;0;0;0;0
+3;navigate_next;8;Assembly PIECE 4;1;0;0;1;0
+3;navigate_next;9;Withdraw Components for PIECE 5;1;0;0;0;0
+3;navigate_next;10;Assembly PIECE 5;1;0;0;1;0
+3;navigate_next;11;Assembly PIECE 6;1;0;0;1;0
+3;navigate_next;12;Withdraw Components for PIECE 7;1;0;0;0;0
+3;navigate_next;13;Assembly PIECE 7;1;0;0;1;1
+3;navigate_next;14;Withdraw Components for PIECE 8;1;0;0;0;0
+3;navigate_next;15;Assembly PIECE 8;1;0;0;1;0
+3;navigate_to_thankyou;16;Final Control;1;0;0;0;1
+4;navigate_next;1;Withdraw Components for PIECE 1;1;0;1;0;0
+4;navigate_next;2;Assembly PIECE 1;0;0;0;1;0
+4;navigate_next;3;Withdraw Components for PIECE 2;1;0;1;0;0
+4;navigate_next;4;Assembly PIECE 2;0;0;1;1;0
+4;navigate_next;5;Withdraw Components for PIECE 3;1;0;1;0;0
+4;navigate_next;6;Assembly PIECE 3;0;0;0;1;0
+4;navigate_next;7;Withdraw Components for PIECE 4;1;0;1;0;0
+4;navigate_next;8;Assembly PIECE 4;0;0;0;1;0
+4;navigate_next;9;Withdraw Components for PIECE 5;1;0;1;0;0
+4;navigate_next;10;Assembly PIECE 5;0;0;0;1;0
+4;navigate_next;11;Assembly PIECE 6;0;0;0;1;0
+4;navigate_next;12;Withdraw Components for PIECE 7;1;0;1;0;0
+4;navigate_next;13;Assembly PIECE 7;0;0;0;1;0
+4;navigate_next;14;Withdraw Components for PIECE 8;1;0;1;0;0
+4;navigate_next;15;Assembly PIECE 8;0;0;0;1;0
+4;navigate_to_thankyou;16;Final Control;1;0;1;0;1
+5;navigate_next;1;Withdraw Components for PIECE 1;1;0;1;0;0
+5;navigate_next;2;Assembly PIECE 1;0;0;0;1;0
+5;navigate_next;3;Withdraw Components for PIECE 2;1;0;1;0;0
+5;navigate_next;4;Assembly PIECE 2;0;0;0;0;1
+5;navigate_next;5;Withdraw Components for PIECE 3;1;0;1;0;0
+5;navigate_next;6;Assembly PIECE 3;0;0;0;1;0
+5;navigate_next;7;Withdraw Components for PIECE 4;1;0;1;0;0
+5;navigate_next;8;Assembly PIECE 4;0;0;0;1;0
+5;navigate_next;9;Withdraw Components for PIECE 5;1;0;1;0;0
+5;navigate_next;10;Assembly PIECE 5;0;0;0;1;0
+5;navigate_next;11;Assembly PIECE 6;0;0;0;1;0
+5;navigate_next;12;Withdraw Components for PIECE 7;1;0;1;0;0
+5;navigate_next;13;Assembly PIECE 7;1;0;1;1;1
+5;navigate_next;14;Withdraw Components for PIECE 8;1;0;0;0;0
+5;navigate_next;15;Assembly PIECE 8;0;0;0;1;0
+5;navigate_to_thankyou;16;Final Control;1;1;1;0;1
+6;navigate_next;1;Withdraw Components for PIECE 1;1;0;1;0;0
+6;navigate_next;2;Assembly PIECE 1;1;1;0;1;0
+6;navigate_next;3;Withdraw Components for PIECE 2;1;0;1;0;0
+6;navigate_next;4;Assembly PIECE 2;1;0;0;1;0
+6;navigate_next;5;Withdraw Components for PIECE 3;1;0;0;0;0
+6;navigate_next;6;Assembly PIECE 3;1;0;0;1;0
+6;navigate_next;7;Withdraw Components for PIECE 4;1;0;1;0;0
+6;navigate_next;8;Assembly PIECE 4;0;0;0;1;0
+6;navigate_next;9;Withdraw Components for PIECE 5;1;0;0;0;0
+6;navigate_next;10;Assembly PIECE 5;0;1;0;1;0
+6;navigate_next;11;Assembly PIECE 6;1;0;0;1;0
+6;navigate_next;12;Withdraw Components for PIECE 7;1;0;1;0;0
+6;navigate_next;13;Assembly PIECE 7;0;1;0;1;1
+6;navigate_next;14;Withdraw Components for PIECE 8;1;0;1;0;0
+6;navigate_next;15;Assembly PIECE 8;1;0;0;1;0
+6;navigate_to_thankyou;16;Final Control;1;1;0;0;1
+7;navigate_next;1;Withdraw Components for PIECE 1;1;0;1;0;0
+7;navigate_next;2;Assembly PIECE 1;1;1;1;1;0
+7;navigate_next;3;Withdraw Components for PIECE 2;1;0;1;0;0
+7;navigate_next;4;Assembly PIECE 2;0;1;0;1;1
+7;navigate_next;5;Withdraw Components for PIECE 3;1;0;0;0;0
+7;navigate_next;6;Assembly PIECE 3;0;1;0;0;1
+7;navigate_next;7;Withdraw Components for PIECE 4;1;0;0;0;0
+7;navigate_next;8;Assembly PIECE 4;1;1;0;0;1
+7;navigate_next;9;Withdraw Components for PIECE 5;1;0;0;0;0
+7;navigate_next;10;Assembly PIECE 5;0;1;0;0;1
+7;navigate_next;11;Assembly PIECE 6;0;1;0;0;1
+7;navigate_next;12;Withdraw Components for PIECE 7;1;0;1;0;0
+7;navigate_next;13;Assembly PIECE 7;0;1;0;0;1
+7;navigate_next;14;Withdraw Components for PIECE 8;1;0;1;0;0
+7;navigate_next;15;Assembly PIECE 8;0;1;0;0;1
+7;navigate_to_thankyou;16;Final Control;0;1;0;0;1
+8;navigate_next;1;Withdraw Components for PIECE 1;1;0;1;0;0
+8;navigate_next;2;Assembly PIECE 1;0;1;1;1;0
+8;navigate_next;3;Withdraw Components for PIECE 2;1;0;0;0;0
+8;navigate_next;4;Assembly PIECE 2;0;1;0;1;0
+8;navigate_next;5;Withdraw Components for PIECE 3;0;0;1;0;0
+8;navigate_next;6;Assembly PIECE 3;0;0;0;1;0
+8;navigate_next;7;Withdraw Components for PIECE 4;1;0;1;0;0
+8;navigate_next;8;Assembly PIECE 4;1;0;0;1;0
+8;navigate_next;9;Withdraw Components for PIECE 5;1;0;0;0;0
+8;navigate_next;10;Assembly PIECE 5;1;0;0;1;0
+8;navigate_next;11;Assembly PIECE 6;1;0;1;1;0
+8;navigate_next;12;Withdraw Components for PIECE 7;1;0;0;0;0
+8;navigate_next;13;Assembly PIECE 7;0;1;0;1;0
+8;navigate_next;14;Withdraw Components for PIECE 8;1;0;0;0;0
+8;navigate_next;15;Assembly PIECE 8;0;1;0;1;0
+8;navigate_to_thankyou;16;Final Control;1;1;0;0;0
+9;navigate_next;1;Withdraw Components for PIECE 1;1;0;1;0;0
+9;navigate_next;2;Assembly PIECE 1;1;1;1;1;1
+9;navigate_next;3;Withdraw Components for PIECE 2;1;0;1;0;0
+9;navigate_next;4;Assembly PIECE 2;0;1;0;1;0
+9;navigate_next;5;Withdraw Components for PIECE 3;1;0;1;0;0
+9;navigate_next;6;Assembly PIECE 3;0;0;0;1;0
+9;navigate_next;7;Withdraw Components for PIECE 4;1;0;1;0;0
+9;navigate_next;8;Assembly PIECE 4;1;1;0;1;0
+9;navigate_next;9;Withdraw Components for PIECE 5;1;0;1;0;0
+9;navigate_next;10;Assembly PIECE 5;0;1;0;1;0
+9;navigate_next;11;Assembly PIECE 6;1;1;1;1;0
+9;navigate_next;12;Withdraw Components for PIECE 7;1;0;1;0;0
+9;navigate_next;13;Assembly PIECE 7;0;1;0;1;1
+9;navigate_next;14;Withdraw Components for PIECE 8;1;0;1;0;0
+9;navigate_next;15;Assembly PIECE 8;0;1;0;1;0
+9;navigate_to_thankyou;16;Final Control;0;1;0;0;1
+10;navigate_next;1;Withdraw Components for PIECE 1;1;0;1;0;0
+10;navigate_next;2;Assembly PIECE 1;0;0;0;1;0
+10;navigate_next;3;Withdraw Components for PIECE 2;1;0;0;0;0
+10;navigate_next;4;Assembly PIECE 2;0;0;0;1;0
+10;navigate_next;5;Withdraw Components for PIECE 3;1;0;0;0;0
+10;navigate_next;6;Assembly PIECE 3;0;0;0;1;0
+10;navigate_next;7;Withdraw Components for PIECE 4;1;0;0;0;0
+10;navigate_next;8;Assembly PIECE 4;0;0;0;1;0
+10;navigate_next;9;Withdraw Components for PIECE 5;1;0;0;0;0
+10;navigate_next;10;Assembly PIECE 5;0;0;0;1;0
+10;navigate_next;11;Assembly PIECE 6;1;0;0;1;0
+10;navigate_next;12;Withdraw Components for PIECE 7;1;0;0;0;0
+10;navigate_next;13;Assembly PIECE 7;0;0;0;1;0
+10;navigate_next;14;Withdraw Components for PIECE 8;1;0;0;0;0
+10;navigate_next;15;Assembly PIECE 8;0;0;0;1;0
+10;navigate_to_thankyou;16;Final Control;0;0;0;0;1
+11;navigate_next;1;Withdraw Components for PIECE 1;1;0;0;0;0
+11;navigate_next;2;Assembly PIECE 1;0;0;0;0;1
+11;navigate_next;3;Withdraw Components for PIECE 2;0;0;1;0;0
+11;navigate_next;4;Assembly PIECE 2;0;0;0;1;1
+11;navigate_next;5;Withdraw Components for PIECE 3;1;0;0;0;0
+11;navigate_next;6;Assembly PIECE 3;0;0;0;1;1
+11;navigate_next;7;Withdraw Components for PIECE 4;1;0;0;0;0
+11;navigate_next;8;Assembly PIECE 4;0;0;0;1;0
+11;navigate_next;9;Withdraw Components for PIECE 5;1;0;0;0;0
+11;navigate_next;10;Assembly PIECE 5;0;0;0;1;1
+11;navigate_next;11;Assembly PIECE 6;1;0;0;1;1
+11;navigate_next;12;Withdraw Components for PIECE 7;1;0;0;0;0
+11;navigate_next;13;Assembly PIECE 7;0;0;0;1;1
+11;navigate_next;14;Withdraw Components for PIECE 8;1;0;0;0;0
+11;navigate_next;15;Assembly PIECE 8;0;0;0;1;0
+11;navigate_to_thankyou;16;Final Control;1;0;0;0;1
+12;navigate_next;1;Withdraw Components for PIECE 1;0;0;1;0;0
+12;navigate_next;2;Assembly PIECE 1;0;0;0;1;0
+12;navigate_next;3;Withdraw Components for PIECE 2;0;0;1;0;0
+12;navigate_next;4;Assembly PIECE 2;0;0;0;1;0
+12;navigate_next;5;Withdraw Components for PIECE 3;0;0;1;0;0
+12;navigate_next;6;Assembly PIECE 3;0;0;0;1;0
+12;navigate_next;7;Withdraw Components for PIECE 4;0;0;1;0;0
+12;navigate_next;8;Assembly PIECE 4;0;0;0;1;0
+12;navigate_next;9;Withdraw Components for PIECE 5;0;0;1;0;0
+12;navigate_next;10;Assembly PIECE 5;0;0;0;1;0
+12;navigate_next;11;Assembly PIECE 6;0;0;1;1;0
+12;navigate_next;12;Withdraw Components for PIECE 7;0;0;1;0;0
+12;navigate_next;13;Assembly PIECE 7;0;0;1;1;0
+12;navigate_next;14;Withdraw Components for PIECE 8;0;0;1;0;0
+12;navigate_next;15;Assembly PIECE 8;0;0;0;1;0
+12;navigate_to_thankyou;16;Final Control;0;0;1;0;0
+13;navigate_next;1;Withdraw Components for PIECE 1;0;0;1;0;0
+13;navigate_next;2;Assembly PIECE 1;0;0;1;1;0
+13;navigate_next;3;Withdraw Components for PIECE 2;0;0;1;0;0
+13;navigate_next;4;Assembly PIECE 2;0;0;0;1;0
+13;navigate_next;5;Withdraw Components for PIECE 3;0;0;1;0;0
+13;navigate_next;6;Assembly PIECE 3;0;0;0;1;0
+13;navigate_next;7;Withdraw Components for PIECE 4;0;0;1;0;0
+13;navigate_next;8;Assembly PIECE 4;0;0;0;1;0
+13;navigate_next;9;Withdraw Components for PIECE 5;0;0;1;0;0
+13;navigate_next;10;Assembly PIECE 5;0;0;0;1;0
+13;navigate_next;11;Assembly PIECE 6;0;0;1;1;1
+13;navigate_next;12;Withdraw Components for PIECE 7;0;0;1;0;0
+13;navigate_next;13;Assembly PIECE 7;0;0;0;1;1
+13;navigate_next;14;Withdraw Components for PIECE 8;0;0;1;0;0
+13;navigate_next;15;Assembly PIECE 8;0;0;0;1;0
+13;navigate_to_thankyou;16;Final Control;0;0;1;0;0
+14;navigate_next;1;Withdraw Components for PIECE 1;1;0;1;0;0
+14;navigate_next;2;Assembly PIECE 1;0;0;1;1;0
+14;navigate_next;3;Withdraw Components for PIECE 2;0;0;1;0;0
+14;navigate_next;4;Assembly PIECE 2;0;0;0;1;0
+14;navigate_next;5;Withdraw Components for PIECE 3;0;0;1;0;0
+14;navigate_next;6;Assembly PIECE 3;0;0;0;1;0
+14;navigate_next;7;Withdraw Components for PIECE 4;1;0;1;0;0
+14;navigate_next;8;Assembly PIECE 4;0;0;0;1;0
+14;navigate_next;9;Withdraw Components for PIECE 5;0;0;1;0;0
+14;navigate_next;10;Assembly PIECE 5;0;0;0;1;0
+14;navigate_next;11;Assembly PIECE 6;0;0;1;1;1
+14;navigate_next;12;Withdraw Components for PIECE 7;0;0;1;0;0
+14;navigate_next;13;Assembly PIECE 7;0;0;0;1;1
+14;navigate_next;14;Withdraw Components for PIECE 8;0;0;1;0;0
+14;navigate_next;15;Assembly PIECE 8;0;0;0;1;0
+14;navigate_to_thankyou;16;Final Control;1;0;1;0;0
+15;navigate_next;1;Withdraw Components for PIECE 1;1;0;1;0;0
+15;navigate_next;2;Assembly PIECE 1;0;0;0;1;0
+15;navigate_next;3;Withdraw Components for PIECE 2;1;0;1;0;0
+15;navigate_next;4;Assembly PIECE 2;0;0;1;1;0
+15;navigate_next;5;Withdraw Components for PIECE 3;1;0;1;0;0
+15;navigate_next;6;Assembly PIECE 3;0;0;0;1;0
+15;navigate_next;7;Withdraw Components for PIECE 4;1;0;1;0;0
+15;navigate_next;8;Assembly PIECE 4;0;0;0;1;0
+15;navigate_next;9;Withdraw Components for PIECE 5;1;0;1;0;0
+15;navigate_next;10;Assembly PIECE 5;0;0;0;1;0
+15;navigate_next;11;Assembly PIECE 6;1;0;0;1;0
+15;navigate_next;12;Withdraw Components for PIECE 7;1;0;0;0;0
+15;navigate_next;13;Assembly PIECE 7;0;0;0;1;1
+15;navigate_next;14;Withdraw Components for PIECE 8;1;0;1;0;0
+15;navigate_next;15;Assembly PIECE 8;0;0;0;1;0
+15;navigate_to_thankyou;16;Final Control;1;0;1;0;0
+16;navigate_next;1;Withdraw Components for PIECE 1;0;0;1;0;0
+16;navigate_next;2;Assembly PIECE 1;0;0;1;1;0
+16;navigate_next;3;Withdraw Components for PIECE 2;0;0;1;0;0
+16;navigate_next;4;Assembly PIECE 2;0;0;1;1;0
+16;navigate_next;5;Withdraw Components for PIECE 3;0;0;1;0;0
+16;navigate_next;6;Assembly PIECE 3;0;0;1;1;0
+16;navigate_next;7;Withdraw Components for PIECE 4;0;0;1;0;0
+16;navigate_next;8;Assembly PIECE 4;0;0;0;1;0
+16;navigate_next;9;Withdraw Components for PIECE 5;0;0;1;0;0
+16;navigate_next;10;Assembly PIECE 5;0;0;0;1;1
+16;navigate_next;11;Assembly PIECE 6;0;0;1;1;1
+16;navigate_next;12;Withdraw Components for PIECE 7;0;0;1;0;0
+16;navigate_next;13;Assembly PIECE 7;0;0;0;1;1
+16;navigate_next;14;Withdraw Components for PIECE 8;0;0;1;0;0
+16;navigate_next;15;Assembly PIECE 8;0;0;0;1;0
+16;navigate_to_thankyou;16;Final Control;0;0;1;0;1
+17;navigate_next;1;Withdraw Components for PIECE 1;0;0;1;0;0
+17;navigate_next;2;Assembly PIECE 1;0;1;1;1;1
+17;navigate_next;3;Withdraw Components for PIECE 2;0;0;1;0;0
+17;navigate_next;4;Assembly PIECE 2;0;0;1;1;0
+17;navigate_next;5;Withdraw Components for PIECE 3;0;0;1;0;0
+17;navigate_next;6;Assembly PIECE 3;0;0;0;1;0
+17;navigate_next;7;Withdraw Components for PIECE 4;0;0;1;0;0
+17;navigate_next;8;Assembly PIECE 4;0;0;0;1;0
+17;navigate_next;9;Withdraw Components for PIECE 5;0;0;1;0;0
+17;navigate_next;10;Assembly PIECE 5;0;0;0;1;0
+17;navigate_next;11;Assembly PIECE 6;1;0;1;1;0
+17;navigate_next;12;Withdraw Components for PIECE 7;0;0;1;0;0
+17;navigate_next;13;Assembly PIECE 7;0;0;1;1;1
+17;navigate_next;14;Withdraw Components for PIECE 8;0;0;1;0;0
+17;navigate_next;15;Assembly PIECE 8;0;0;0;1;1
+17;navigate_to_thankyou;16;Final Control;1;0;1;0;1
+18;navigate_next;1;Withdraw Components for PIECE 1;1;0;1;0;0
+18;navigate_next;2;Assembly PIECE 1;1;0;1;1;0
+18;navigate_next;3;Withdraw Components for PIECE 2;1;0;1;0;0
+18;navigate_next;4;Assembly PIECE 2;1;0;0;1;0
+18;navigate_next;5;Withdraw Components for PIECE 3;1;0;0;0;0
+18;navigate_next;6;Assembly PIECE 3;1;0;0;1;0
+18;navigate_next;7;Withdraw Components for PIECE 4;1;0;1;0;0
+18;navigate_next;8;Assembly PIECE 4;1;0;0;1;0
+18;navigate_next;9;Withdraw Components for PIECE 5;1;0;0;0;0
+18;navigate_next;10;Assembly PIECE 5;0;0;0;1;0
+18;navigate_next;11;Assembly PIECE 6;0;0;0;1;0
+18;navigate_next;12;Withdraw Components for PIECE 7;1;0;0;0;0
+18;navigate_next;13;Assembly PIECE 7;1;0;0;1;1
+18;navigate_next;14;Withdraw Components for PIECE 8;1;0;1;0;0
+18;navigate_next;15;Assembly PIECE 8;0;0;0;1;1
+18;navigate_to_thankyou;16;Final Control;1;0;1;0;0
+19;navigate_next;1;Withdraw Components for PIECE 1;1;0;1;0;0
+19;navigate_next;2;Assembly PIECE 1;1;0;1;1;0
+19;navigate_next;3;Withdraw Components for PIECE 2;1;0;1;0;0
+19;navigate_next;4;Assembly PIECE 2;0;0;1;1;0
+19;navigate_next;5;Withdraw Components for PIECE 3;1;0;1;0;0
+19;navigate_next;6;Assembly PIECE 3;0;0;0;1;0
+19;navigate_next;7;Withdraw Components for PIECE 4;1;0;1;0;0
+19;navigate_next;8;Assembly PIECE 4;0;0;0;1;0
+19;navigate_next;9;Withdraw Components for PIECE 5;1;0;1;0;0
+19;navigate_next;10;Assembly PIECE 5;0;0;0;1;1
+19;navigate_next;11;Assembly PIECE 6;0;0;0;1;1
+19;navigate_next;12;Withdraw Components for PIECE 7;1;0;1;0;0
+19;navigate_next;13;Assembly PIECE 7;0;0;0;1;1
+19;navigate_next;14;Withdraw Components for PIECE 8;1;0;1;0;0
+19;navigate_next;15;Assembly PIECE 8;0;0;0;1;0
+19;navigate_to_thankyou;16;Final Control;1;0;1;0;1
+20;navigate_next;1;Withdraw Components for PIECE 1;0;0;1;0;0
+20;navigate_next;2;Assembly PIECE 1;0;0;0;1;0
+20;navigate_next;3;Withdraw Components for PIECE 2;0;0;1;0;0
+20;navigate_next;4;Assembly PIECE 2;0;0;0;1;0
+20;navigate_next;5;Withdraw Components for PIECE 3;0;0;0;0;0
+20;navigate_next;6;Assembly PIECE 3;0;0;1;1;0
+20;navigate_next;7;Withdraw Components for PIECE 4;0;0;1;0;0
+20;navigate_next;8;Assembly PIECE 4;0;0;0;1;0
+20;navigate_next;9;Withdraw Components for PIECE 5;0;0;1;0;0
+20;navigate_next;10;Assembly PIECE 5;0;0;0;1;1
+20;navigate_next;11;Assembly PIECE 6;0;0;1;1;1
+20;navigate_next;12;Withdraw Components for PIECE 7;0;0;1;0;0
+20;navigate_next;13;Assembly PIECE 7;0;0;1;1;1
+20;navigate_next;14;Withdraw Components for PIECE 8;0;0;1;0;0
+20;navigate_next;15;Assembly PIECE 8;0;0;0;1;0
+20;navigate_to_thankyou;16;Final Control;0;0;1;0;0

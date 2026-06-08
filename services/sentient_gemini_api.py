@@ -110,7 +110,8 @@ def initial_style_recommendations(user_profile: Dict[str, Any],
         "explanation": "why these choices"
       }
     """
-    requested_language = user_profile.get('language', 'English')
+    #requested_language = user_profile.get('language', 'English')
+    requested_language = (user_profile.get('language') or 'English').strip() or 'English'
     system = (
         f"You are adapting UI for an industrial assembly training web app (Dash). "
         "Based on the user profile, generate CSS overrides to personalise the interface. "
@@ -194,7 +195,8 @@ def adapt_step(user_profile: Dict[str, Any],
                aggregated_preferences: Dict[str, float],
                enabled_interactions: Dict[str, Any] = None) -> Dict[str, Any]:
     # 1. Recuperiamo la lingua all'inizio
-    requested_language = user_profile.get('language', 'English')
+    #requested_language = user_profile.get('language', 'English')
+    requested_language = (user_profile.get('language') or 'English').strip() or 'English'
     """
     Per-step call to adapt content and initial visibility.
 
