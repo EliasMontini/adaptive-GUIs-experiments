@@ -65,6 +65,7 @@ INTERACTIONS_PATH = os.path.join(PROJECT_ROOT, 'settings', 'enabled_interactions
 
 CHECKPOINT_SEQ = os.path.join(PROJECT_ROOT, 'analysis', 'gemini_sequential_11_20_checkpoint.csv')
 CHECKPOINT_LOO = os.path.join(PROJECT_ROOT, 'analysis', 'gemini_loo_all20_checkpoint.csv')
+SHUFFLE_SEQ_PATH = os.path.join(PROJECT_ROOT, 'analysis', 'gemini_sequential_shuffle_orders.json')
 
 FORMAT_COLS = ['short_text_viewed', 'long_text_viewed', 'single_pieces_viewed',
                'assembly_viewed', 'video_viewed']
@@ -176,6 +177,20 @@ def save_checkpoint(records, path):
     pd.DataFrame(records).to_csv(path, index=False)
 
 
+def load_shuffle_orders(path):
+    """Return {repeat_int: {'base': [...], 'seq': [...]}} from JSON, or {} if none."""
+    if os.path.exists(path):
+        with open(path) as f:
+            raw = json.load(f)
+        return {int(k): v for k, v in raw.items()}
+    return {}
+
+
+def save_shuffle_orders(orders, path):
+    with open(path, 'w') as f:
+        json.dump({str(k): v for k, v in orders.items()}, f)
+
+
 def step_accuracy_available(pred, gt_row):
     """Binary accuracy restricted to formats available for this step type."""
     step_id = int(gt_row['step_id'])
@@ -200,15 +215,29 @@ print("EVALUATION 1: Sequential simulation — experiments 11-20")
 print("="*60)
 
 seq_records, seq_done = load_checkpoint(CHECKPOINT_SEQ)
-total_seq = len(range(11, 21)) * 16 * N_REPEATS
+seq_shuffle_orders = load_shuffle_orders(SHUFFLE_SEQ_PATH)
+total_seq = N * 10 * N_REPEATS
 done_seq = 0
 t0 = time.time()
 
-for exp_id in range(11, 21):
-    training_exps = [e for e in all_exp_ids if e < exp_id]
-    user_steps = gt[gt['experiment_id'] == exp_id].sort_values('step_id')
+for repeat in range(1, N_REPEATS + 1):
+    if repeat in seq_shuffle_orders:
+        base_exps = seq_shuffle_orders[repeat]['base']
+        seq_exps  = seq_shuffle_orders[repeat]['seq']
+        print(f"  Repeat {repeat} | restored shuffle | base: {base_exps} | sequential: {seq_exps}")
+    else:
+        shuffled_all = list(all_exp_ids)
+        np.random.shuffle(shuffled_all)
+        base_exps = shuffled_all[:10]
+        seq_exps  = shuffled_all[10:]
+        seq_shuffle_orders[repeat] = {'base': list(base_exps), 'seq': list(seq_exps)}
+        save_shuffle_orders(seq_shuffle_orders, SHUFFLE_SEQ_PATH)
+        print(f"  Repeat {repeat} | base: {base_exps} | sequential: {seq_exps}")
 
-    for repeat in range(1, N_REPEATS + 1):
+    for i, exp_id in enumerate(seq_exps):
+        training_exps = base_exps + seq_exps[:i]
+        user_steps = gt[gt['experiment_id'] == exp_id].sort_values('step_id')
+
         completed = []
         for _, row in user_steps.iterrows():
             step_id = int(row['step_id'])
@@ -248,6 +277,8 @@ seq_out = os.path.join(PROJECT_ROOT, 'analysis', 'gemini_sequential_11_20.csv')
 seq_df.to_csv(seq_out, index=False)
 if os.path.exists(CHECKPOINT_SEQ):
     os.remove(CHECKPOINT_SEQ)
+if os.path.exists(SHUFFLE_SEQ_PATH):
+    os.remove(SHUFFLE_SEQ_PATH)
 print(f"\nSequential results saved to: {seq_out}")
 
 # Summary
@@ -270,11 +301,15 @@ total_loo = N * 16 * N_REPEATS
 done_loo = 0
 t0 = time.time()
 
-for exp_id in all_exp_ids:
-    training_exps = [e for e in all_exp_ids if e != exp_id]
-    user_steps = gt[gt['experiment_id'] == exp_id].sort_values('step_id')
+for repeat in range(1, N_REPEATS + 1):
+    shuffled_loo_ids = list(all_exp_ids)
+    np.random.shuffle(shuffled_loo_ids)
+    print(f"  Repeat {repeat} experiment order: {shuffled_loo_ids}")
 
-    for repeat in range(1, N_REPEATS + 1):
+    for exp_id in shuffled_loo_ids:
+        training_exps = [e for e in all_exp_ids if e != exp_id]
+        user_steps = gt[gt['experiment_id'] == exp_id].sort_values('step_id')
+
         completed = []
         for _, row in user_steps.iterrows():
             step_id = int(row['step_id'])
@@ -311,6 +346,8 @@ for exp_id in all_exp_ids:
 loo_df = pd.DataFrame(loo_records)
 loo_out = os.path.join(PROJECT_ROOT, 'analysis', 'gemini_loo_all20.csv')
 loo_df.to_csv(loo_out, index=False)
+if os.path.exists(CHECKPOINT_LOO):
+    os.remove(CHECKPOINT_LOO)
 print(f"\nLOO results saved to: {loo_out}")
 
 # Summary
