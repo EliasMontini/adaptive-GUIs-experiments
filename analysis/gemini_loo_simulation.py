@@ -57,7 +57,7 @@ from services.sentient_gemini_api import adapt_step
 # ---------------------------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------------------------
-N_REPEATS = 3      # repetitions per user/step to average non-determinism
+N_REPEATS = 3  # repetitions per user/step to average non-determinism
 
 GT_PATH = os.path.join(PROJECT_ROOT, 'analysis', 'all_20_experiments.csv')
 STEPS_PATH = os.path.join(PROJECT_ROOT, 'settings', 'steps_sources.json')
@@ -110,10 +110,10 @@ def compute_aggregated_prefs(training_exp_ids, step_id):
         return {k: 0.0 for k in FORMAT_KEYS}
     return {
         'short_text': float(train_step['short_text_viewed'].mean()),
-        'long_text':  float(train_step['long_text_viewed'].mean()),
+        'long_text': float(train_step['long_text_viewed'].mean()),
         'single_pieces': float(train_step['single_pieces_viewed'].mean()),
-        'assembly':   float(train_step['assembly_viewed'].mean()),
-        'video':      float(train_step['video_viewed'].mean()),
+        'assembly': float(train_step['assembly_viewed'].mean()),
+        'video': float(train_step['video_viewed'].mean()),
     }
 
 
@@ -210,9 +210,9 @@ def step_accuracy_available(pred, gt_row):
 # ---------------------------------------------------------------------------
 # EVALUATION 1 — Sequential simulation for experiments 11-20
 # ---------------------------------------------------------------------------
-print("\n" + "="*60)
+print("\n" + "=" * 60)
 print("EVALUATION 1: Sequential simulation — experiments 11-20")
-print("="*60)
+print("=" * 60)
 
 seq_records, seq_done = load_checkpoint(CHECKPOINT_SEQ)
 seq_shuffle_orders = load_shuffle_orders(SHUFFLE_SEQ_PATH)
@@ -223,13 +223,13 @@ t0 = time.time()
 for repeat in range(1, N_REPEATS + 1):
     if repeat in seq_shuffle_orders:
         base_exps = seq_shuffle_orders[repeat]['base']
-        seq_exps  = seq_shuffle_orders[repeat]['seq']
+        seq_exps = seq_shuffle_orders[repeat]['seq']
         print(f"  Repeat {repeat} | restored shuffle | base: {base_exps} | sequential: {seq_exps}")
     else:
         shuffled_all = list(all_exp_ids)
         np.random.shuffle(shuffled_all)
         base_exps = shuffled_all[:10]
-        seq_exps  = shuffled_all[10:]
+        seq_exps = shuffled_all[10:]
         seq_shuffle_orders[repeat] = {'base': list(base_exps), 'seq': list(seq_exps)}
         save_shuffle_orders(seq_shuffle_orders, SHUFFLE_SEQ_PATH)
         print(f"  Repeat {repeat} | base: {base_exps} | sequential: {seq_exps}")
@@ -270,7 +270,7 @@ for repeat in range(1, N_REPEATS + 1):
         elapsed = time.time() - t0
         eta = (elapsed / done_seq) * (total_seq - done_seq) if done_seq else 0
         print(f"  Exp {exp_id} | prior={len(training_exps)} | repeat={repeat} "
-              f"| elapsed={elapsed/60:.1f}m ETA={eta/60:.1f}m")
+              f"| elapsed={elapsed / 60:.1f}m ETA={eta / 60:.1f}m")
 
 seq_df = pd.DataFrame(seq_records)
 seq_out = os.path.join(PROJECT_ROOT, 'analysis', 'gemini_sequential_11_20.csv')
@@ -285,16 +285,15 @@ print(f"\nSequential results saved to: {seq_out}")
 seq_per_exp = seq_df.groupby('experiment_id')['accuracy_5'].mean()
 print("\n--- Sequential: mean accuracy per experiment (avg over repeats) ---")
 for eid, acc in seq_per_exp.items():
-    print(f"  Exp {eid:2d} | prior users: {eid-1:2d} | accuracy: {acc:.3f}")
+    print(f"  Exp {eid:2d} | prior users: {eid - 1:2d} | accuracy: {acc:.3f}")
 print(f"  Overall mean: {seq_per_exp.mean():.3f}")
-
 
 # ---------------------------------------------------------------------------
 # EVALUATION 2 — LOO evaluation (all 20 users)
 # ---------------------------------------------------------------------------
-print("\n" + "="*60)
+print("\n" + "=" * 60)
 print("EVALUATION 2: LOO evaluation — all 20 users")
-print("="*60)
+print("=" * 60)
 
 loo_records, loo_done = load_checkpoint(CHECKPOINT_LOO)
 total_loo = N * 16 * N_REPEATS
@@ -341,7 +340,7 @@ for repeat in range(1, N_REPEATS + 1):
         elapsed = time.time() - t0
         eta = (elapsed / done_loo) * (total_loo - done_loo) if done_loo else 0
         print(f"  User {exp_id:2d} | repeat={repeat} "
-              f"| elapsed={elapsed/60:.1f}m ETA={eta/60:.1f}m")
+              f"| elapsed={elapsed / 60:.1f}m ETA={eta / 60:.1f}m")
 
 loo_df = pd.DataFrame(loo_records)
 loo_out = os.path.join(PROJECT_ROOT, 'analysis', 'gemini_loo_all20.csv')
