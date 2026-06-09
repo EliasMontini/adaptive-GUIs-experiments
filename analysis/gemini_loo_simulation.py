@@ -63,6 +63,9 @@ GT_PATH = os.path.join(PROJECT_ROOT, 'analysis', 'all_20_experiments.csv')
 STEPS_PATH = os.path.join(PROJECT_ROOT, 'settings', 'steps_sources.json')
 INTERACTIONS_PATH = os.path.join(PROJECT_ROOT, 'settings', 'enabled_interactions.json')
 
+CHECKPOINT_SEQ = os.path.join(PROJECT_ROOT, 'analysis', 'gemini_sequential_11_20_checkpoint.csv')
+CHECKPOINT_LOO = os.path.join(PROJECT_ROOT, 'analysis', 'gemini_loo_all20_checkpoint.csv')
+
 FORMAT_COLS = ['short_text_viewed', 'long_text_viewed', 'single_pieces_viewed',
                'assembly_viewed', 'video_viewed']
 FORMAT_KEYS = ['short_text', 'long_text', 'single_pieces', 'assembly', 'video']
@@ -156,6 +159,23 @@ def step_accuracy(pred, gt_row):
     return sum(p == g for p, g in pairs) / 5
 
 
+def load_checkpoint(path):
+    """Return (records_list, done_set) from a checkpoint CSV, or ([], set()) if none."""
+    if os.path.exists(path):
+        df = pd.read_csv(path)
+        records = df.to_dict('records')
+        done = set(zip(df['experiment_id'].astype(int),
+                       df['step_id'].astype(int),
+                       df['repeat'].astype(int)))
+        print(f"  Checkpoint found: {len(records)} records, resuming.")
+        return records, done
+    return [], set()
+
+
+def save_checkpoint(records, path):
+    pd.DataFrame(records).to_csv(path, index=False)
+
+
 def step_accuracy_available(pred, gt_row):
     """Binary accuracy restricted to formats available for this step type."""
     step_id = int(gt_row['step_id'])
@@ -179,7 +199,7 @@ print("\n" + "="*60)
 print("EVALUATION 1: Sequential simulation — experiments 11-20")
 print("="*60)
 
-seq_records = []
+seq_records, seq_done = load_checkpoint(CHECKPOINT_SEQ)
 total_seq = len(range(11, 21)) * 16 * N_REPEATS
 done_seq = 0
 t0 = time.time()
@@ -192,6 +212,12 @@ for exp_id in range(11, 21):
         completed = []
         for _, row in user_steps.iterrows():
             step_id = int(row['step_id'])
+
+            if (exp_id, step_id, repeat) in seq_done:
+                completed.append(step_id)
+                done_seq += 1
+                continue
+
             try:
                 pred = call_gemini(exp_id, step_id, training_exps, completed)
                 acc5 = step_accuracy(pred, row)
@@ -206,6 +232,7 @@ for exp_id in range(11, 21):
                     **{f'pred_{k}': pred[k] for k in FORMAT_KEYS},
                     **{f'gt_{k}': int(row[c]) for k, c in zip(FORMAT_KEYS, FORMAT_COLS)},
                 })
+                save_checkpoint(seq_records, CHECKPOINT_SEQ)
             except Exception as e:
                 print(f"  [ERROR] exp={exp_id} step={step_id} repeat={repeat}: {e}")
             completed.append(step_id)
@@ -219,6 +246,8 @@ for exp_id in range(11, 21):
 seq_df = pd.DataFrame(seq_records)
 seq_out = os.path.join(PROJECT_ROOT, 'analysis', 'gemini_sequential_11_20.csv')
 seq_df.to_csv(seq_out, index=False)
+if os.path.exists(CHECKPOINT_SEQ):
+    os.remove(CHECKPOINT_SEQ)
 print(f"\nSequential results saved to: {seq_out}")
 
 # Summary
@@ -236,7 +265,7 @@ print("\n" + "="*60)
 print("EVALUATION 2: LOO evaluation — all 20 users")
 print("="*60)
 
-loo_records = []
+loo_records, loo_done = load_checkpoint(CHECKPOINT_LOO)
 total_loo = N * 16 * N_REPEATS
 done_loo = 0
 t0 = time.time()
@@ -249,6 +278,12 @@ for exp_id in all_exp_ids:
         completed = []
         for _, row in user_steps.iterrows():
             step_id = int(row['step_id'])
+
+            if (exp_id, step_id, repeat) in loo_done:
+                completed.append(step_id)
+                done_loo += 1
+                continue
+
             try:
                 pred = call_gemini(exp_id, step_id, training_exps, completed)
                 acc5 = step_accuracy(pred, row)
@@ -262,6 +297,7 @@ for exp_id in all_exp_ids:
                     **{f'pred_{k}': pred[k] for k in FORMAT_KEYS},
                     **{f'gt_{k}': int(row[c]) for k, c in zip(FORMAT_KEYS, FORMAT_COLS)},
                 })
+                save_checkpoint(loo_records, CHECKPOINT_LOO)
             except Exception as e:
                 print(f"  [ERROR] exp={exp_id} step={step_id} repeat={repeat}: {e}")
             completed.append(step_id)
