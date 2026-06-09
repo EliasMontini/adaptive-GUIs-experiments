@@ -67,6 +67,8 @@ CHECKPOINT_SEQ = os.path.join(PROJECT_ROOT, 'analysis', 'gemini_sequential_11_20
 CHECKPOINT_LOO = os.path.join(PROJECT_ROOT, 'analysis', 'gemini_loo_all20_checkpoint.csv')
 SHUFFLE_SEQ_PATH = os.path.join(PROJECT_ROOT, 'analysis', 'gemini_sequential_shuffle_orders.json')
 
+RUN_ID = time.strftime('%Y%m%d_%H%M%S')
+
 FORMAT_COLS = ['short_text_viewed', 'long_text_viewed', 'single_pieces_viewed',
                'assembly_viewed', 'video_viewed']
 FORMAT_KEYS = ['short_text', 'long_text', 'single_pieces', 'assembly', 'video']
@@ -273,7 +275,7 @@ for repeat in range(1, N_REPEATS + 1):
               f"| elapsed={elapsed / 60:.1f}m ETA={eta / 60:.1f}m")
 
 seq_df = pd.DataFrame(seq_records)
-seq_out = os.path.join(PROJECT_ROOT, 'analysis', 'gemini_sequential_11_20.csv')
+seq_out = os.path.join(PROJECT_ROOT, 'analysis', f'gemini_sequential_{RUN_ID}.csv')
 seq_df.to_csv(seq_out, index=False)
 if os.path.exists(CHECKPOINT_SEQ):
     os.remove(CHECKPOINT_SEQ)
@@ -343,7 +345,7 @@ for repeat in range(1, N_REPEATS + 1):
               f"| elapsed={elapsed / 60:.1f}m ETA={eta / 60:.1f}m")
 
 loo_df = pd.DataFrame(loo_records)
-loo_out = os.path.join(PROJECT_ROOT, 'analysis', 'gemini_loo_all20.csv')
+loo_out = os.path.join(PROJECT_ROOT, 'analysis', f'gemini_loo_{RUN_ID}.csv')
 loo_df.to_csv(loo_out, index=False)
 if os.path.exists(CHECKPOINT_LOO):
     os.remove(CHECKPOINT_LOO)
