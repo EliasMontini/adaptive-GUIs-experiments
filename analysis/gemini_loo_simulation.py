@@ -59,6 +59,11 @@ from services.sentient_gemini_api import adapt_step
 # ---------------------------------------------------------------------------
 N_REPEATS = 3  # repetitions per user/step to average non-determinism
 
+EXPERIMENTS = [
+    'sequential',
+    'loo'
+]
+
 GT_PATH = os.path.join(PROJECT_ROOT, 'analysis', 'all_20_experiments.csv')
 STEPS_PATH = os.path.join(PROJECT_ROOT, 'settings', 'steps_sources.json')
 INTERACTIONS_PATH = os.path.join(PROJECT_ROOT, 'settings', 'enabled_interactions.json')
@@ -97,7 +102,7 @@ with open(STEPS_PATH) as f:
 with open(INTERACTIONS_PATH) as f:
     enabled_interactions = json.load(f)
 
-all_exp_ids = sorted(gt['experiment_id'].unique())
+all_exp_ids = [int(i) for i in sorted(gt['experiment_id'].unique())]
 N = len(all_exp_ids)
 print(f"Loaded {len(gt)} rows, {N} experiments: {all_exp_ids}")
 
@@ -212,161 +217,163 @@ def step_accuracy_available(pred, gt_row):
 # ---------------------------------------------------------------------------
 # EVALUATION 1 — Sequential simulation for experiments 11-20
 # ---------------------------------------------------------------------------
-print("\n" + "=" * 60)
-print("EVALUATION 1: Sequential simulation — experiments 11-20")
-print("=" * 60)
+if 'sequential' in EXPERIMENTS:
+    print("\n" + "=" * 60)
+    print("EVALUATION 1: Sequential simulation — experiments 11-20")
+    print("=" * 60)
 
-seq_records, seq_done = load_checkpoint(CHECKPOINT_SEQ)
-seq_shuffle_orders = load_shuffle_orders(SHUFFLE_SEQ_PATH)
-total_seq = N * 10 * N_REPEATS
-done_seq = 0
-t0 = time.time()
+    seq_records, seq_done = load_checkpoint(CHECKPOINT_SEQ)
+    seq_shuffle_orders = load_shuffle_orders(SHUFFLE_SEQ_PATH)
+    total_seq = N * 10 * N_REPEATS
+    done_seq = 0
+    t0 = time.time()
 
-for repeat in range(1, N_REPEATS + 1):
-    if repeat in seq_shuffle_orders:
-        base_exps = seq_shuffle_orders[repeat]['base']
-        seq_exps = seq_shuffle_orders[repeat]['seq']
-        print(f"  Repeat {repeat} | restored shuffle | base: {base_exps} | sequential: {seq_exps}")
-    else:
-        shuffled_all = list(all_exp_ids)
-        np.random.shuffle(shuffled_all)
-        base_exps = shuffled_all[:10]
-        seq_exps = shuffled_all[10:]
-        seq_shuffle_orders[repeat] = {'base': list(base_exps), 'seq': list(seq_exps)}
-        save_shuffle_orders(seq_shuffle_orders, SHUFFLE_SEQ_PATH)
-        print(f"  Repeat {repeat} | base: {base_exps} | sequential: {seq_exps}")
+    for repeat in range(1, N_REPEATS + 1):
+        if repeat in seq_shuffle_orders:
+            base_exps = seq_shuffle_orders[repeat]['base']
+            seq_exps = seq_shuffle_orders[repeat]['seq']
+            print(f"  Repeat {repeat} | restored shuffle | base: {base_exps} | sequential: {seq_exps}")
+        else:
+            shuffled_all = list(all_exp_ids)
+            np.random.shuffle(shuffled_all)
+            base_exps = shuffled_all[:10]
+            seq_exps = shuffled_all[10:]
+            seq_shuffle_orders[repeat] = {'base': list(base_exps), 'seq': list(seq_exps)}
+            save_shuffle_orders(seq_shuffle_orders, SHUFFLE_SEQ_PATH)
+            print(f"  Repeat {repeat} | base: {base_exps} | sequential: {seq_exps}")
 
-    for i, exp_id in enumerate(seq_exps):
-        training_exps = base_exps + seq_exps[:i]
-        user_steps = gt[gt['experiment_id'] == exp_id].sort_values('step_id')
+        for i, exp_id in enumerate(seq_exps):
+            training_exps = base_exps + seq_exps[:i]
+            user_steps = gt[gt['experiment_id'] == exp_id].sort_values('step_id')
 
-        completed = []
-        for _, row in user_steps.iterrows():
-            step_id = int(row['step_id'])
+            completed = []
+            for _, row in user_steps.iterrows():
+                step_id = int(row['step_id'])
 
-            if (exp_id, step_id, repeat) in seq_done:
+                if (exp_id, step_id, repeat) in seq_done:
+                    completed.append(step_id)
+                    done_seq += 1
+                    continue
+
+                try:
+                    pred = call_gemini(exp_id, step_id, training_exps, completed)
+                    acc5 = step_accuracy(pred, row)
+                    acc_avail = step_accuracy_available(pred, row)
+                    seq_records.append({
+                        'experiment_id': exp_id,
+                        'prior_users': len(training_exps),
+                        'step_id': step_id,
+                        'repeat': repeat,
+                        'accuracy_5': acc5,
+                        'accuracy_available': acc_avail,
+                        **{f'pred_{k}': pred[k] for k in FORMAT_KEYS},
+                        **{f'gt_{k}': int(row[c]) for k, c in zip(FORMAT_KEYS, FORMAT_COLS)},
+                    })
+                    save_checkpoint(seq_records, CHECKPOINT_SEQ)
+                except Exception as e:
+                    print(f"  [ERROR] exp={exp_id} step={step_id} repeat={repeat}: {e}")
                 completed.append(step_id)
                 done_seq += 1
-                continue
 
-            try:
-                pred = call_gemini(exp_id, step_id, training_exps, completed)
-                acc5 = step_accuracy(pred, row)
-                acc_avail = step_accuracy_available(pred, row)
-                seq_records.append({
-                    'experiment_id': exp_id,
-                    'prior_users': len(training_exps),
-                    'step_id': step_id,
-                    'repeat': repeat,
-                    'accuracy_5': acc5,
-                    'accuracy_available': acc_avail,
-                    **{f'pred_{k}': pred[k] for k in FORMAT_KEYS},
-                    **{f'gt_{k}': int(row[c]) for k, c in zip(FORMAT_KEYS, FORMAT_COLS)},
-                })
-                save_checkpoint(seq_records, CHECKPOINT_SEQ)
-            except Exception as e:
-                print(f"  [ERROR] exp={exp_id} step={step_id} repeat={repeat}: {e}")
-            completed.append(step_id)
-            done_seq += 1
+            elapsed = time.time() - t0
+            eta = (elapsed / done_seq) * (total_seq - done_seq) if done_seq else 0
+            print(f"  Exp {exp_id} | prior={len(training_exps)} | repeat={repeat} "
+                  f"| elapsed={elapsed / 60:.1f}m ETA={eta / 60:.1f}m")
 
-        elapsed = time.time() - t0
-        eta = (elapsed / done_seq) * (total_seq - done_seq) if done_seq else 0
-        print(f"  Exp {exp_id} | prior={len(training_exps)} | repeat={repeat} "
-              f"| elapsed={elapsed / 60:.1f}m ETA={eta / 60:.1f}m")
+    seq_df = pd.DataFrame(seq_records)
+    seq_out = os.path.join(PROJECT_ROOT, 'analysis', f'gemini_sequential_{RUN_ID}.csv')
+    seq_df.to_csv(seq_out, index=False)
+    if os.path.exists(CHECKPOINT_SEQ):
+        os.remove(CHECKPOINT_SEQ)
+    if os.path.exists(SHUFFLE_SEQ_PATH):
+        os.remove(SHUFFLE_SEQ_PATH)
+    print(f"\nSequential results saved to: {seq_out}")
 
-seq_df = pd.DataFrame(seq_records)
-seq_out = os.path.join(PROJECT_ROOT, 'analysis', f'gemini_sequential_{RUN_ID}.csv')
-seq_df.to_csv(seq_out, index=False)
-if os.path.exists(CHECKPOINT_SEQ):
-    os.remove(CHECKPOINT_SEQ)
-if os.path.exists(SHUFFLE_SEQ_PATH):
-    os.remove(SHUFFLE_SEQ_PATH)
-print(f"\nSequential results saved to: {seq_out}")
-
-# Summary
-seq_per_exp = seq_df.groupby('experiment_id')['accuracy_5'].mean()
-print("\n--- Sequential: mean accuracy per experiment (avg over repeats) ---")
-for eid, acc in seq_per_exp.items():
-    print(f"  Exp {eid:2d} | prior users: {eid - 1:2d} | accuracy: {acc:.3f}")
-print(f"  Overall mean: {seq_per_exp.mean():.3f}")
+    # Summary
+    seq_per_exp = seq_df.groupby('experiment_id')['accuracy_5'].mean()
+    print("\n--- Sequential: mean accuracy per experiment (avg over repeats) ---")
+    for eid, acc in seq_per_exp.items():
+        print(f"  Exp {eid:2d} | prior users: {eid - 1:2d} | accuracy: {acc:.3f}")
+    print(f"  Overall mean: {seq_per_exp.mean():.3f}")
 
 # ---------------------------------------------------------------------------
 # EVALUATION 2 — LOO evaluation (all 20 users)
 # ---------------------------------------------------------------------------
-print("\n" + "=" * 60)
-print("EVALUATION 2: LOO evaluation — all 20 users")
-print("=" * 60)
+if 'loo' in EXPERIMENTS:
+    print("\n" + "=" * 60)
+    print("EVALUATION 2: LOO evaluation — all 20 users")
+    print("=" * 60)
 
-loo_records, loo_done = load_checkpoint(CHECKPOINT_LOO)
-total_loo = N * 16 * N_REPEATS
-done_loo = 0
-t0 = time.time()
+    loo_records, loo_done = load_checkpoint(CHECKPOINT_LOO)
+    total_loo = N * 16 * N_REPEATS
+    done_loo = 0
+    t0 = time.time()
 
-for repeat in range(1, N_REPEATS + 1):
-    shuffled_loo_ids = list(all_exp_ids)
-    np.random.shuffle(shuffled_loo_ids)
-    print(f"  Repeat {repeat} experiment order: {shuffled_loo_ids}")
+    for repeat in range(1, N_REPEATS + 1):
+        shuffled_loo_ids = list(all_exp_ids)
+        np.random.shuffle(shuffled_loo_ids)
+        print(f"  Repeat {repeat} experiment order: {shuffled_loo_ids}")
 
-    for exp_id in shuffled_loo_ids:
-        training_exps = [e for e in all_exp_ids if e != exp_id]
-        user_steps = gt[gt['experiment_id'] == exp_id].sort_values('step_id')
+        for exp_id in shuffled_loo_ids:
+            training_exps = [e for e in all_exp_ids if e != exp_id]
+            user_steps = gt[gt['experiment_id'] == exp_id].sort_values('step_id')
 
-        completed = []
-        for _, row in user_steps.iterrows():
-            step_id = int(row['step_id'])
+            completed = []
+            for _, row in user_steps.iterrows():
+                step_id = int(row['step_id'])
 
-            if (exp_id, step_id, repeat) in loo_done:
+                if (exp_id, step_id, repeat) in loo_done:
+                    completed.append(step_id)
+                    done_loo += 1
+                    continue
+
+                try:
+                    pred = call_gemini(exp_id, step_id, training_exps, completed)
+                    acc5 = step_accuracy(pred, row)
+                    acc_avail = step_accuracy_available(pred, row)
+                    loo_records.append({
+                        'experiment_id': exp_id,
+                        'step_id': step_id,
+                        'repeat': repeat,
+                        'accuracy_5': acc5,
+                        'accuracy_available': acc_avail,
+                        **{f'pred_{k}': pred[k] for k in FORMAT_KEYS},
+                        **{f'gt_{k}': int(row[c]) for k, c in zip(FORMAT_KEYS, FORMAT_COLS)},
+                    })
+                    save_checkpoint(loo_records, CHECKPOINT_LOO)
+                except Exception as e:
+                    print(f"  [ERROR] exp={exp_id} step={step_id} repeat={repeat}: {e}")
                 completed.append(step_id)
                 done_loo += 1
-                continue
 
-            try:
-                pred = call_gemini(exp_id, step_id, training_exps, completed)
-                acc5 = step_accuracy(pred, row)
-                acc_avail = step_accuracy_available(pred, row)
-                loo_records.append({
-                    'experiment_id': exp_id,
-                    'step_id': step_id,
-                    'repeat': repeat,
-                    'accuracy_5': acc5,
-                    'accuracy_available': acc_avail,
-                    **{f'pred_{k}': pred[k] for k in FORMAT_KEYS},
-                    **{f'gt_{k}': int(row[c]) for k, c in zip(FORMAT_KEYS, FORMAT_COLS)},
-                })
-                save_checkpoint(loo_records, CHECKPOINT_LOO)
-            except Exception as e:
-                print(f"  [ERROR] exp={exp_id} step={step_id} repeat={repeat}: {e}")
-            completed.append(step_id)
-            done_loo += 1
+            elapsed = time.time() - t0
+            eta = (elapsed / done_loo) * (total_loo - done_loo) if done_loo else 0
+            print(f"  User {exp_id:2d} | repeat={repeat} "
+                  f"| elapsed={elapsed / 60:.1f}m ETA={eta / 60:.1f}m")
 
-        elapsed = time.time() - t0
-        eta = (elapsed / done_loo) * (total_loo - done_loo) if done_loo else 0
-        print(f"  User {exp_id:2d} | repeat={repeat} "
-              f"| elapsed={elapsed / 60:.1f}m ETA={eta / 60:.1f}m")
+    loo_df = pd.DataFrame(loo_records)
+    loo_out = os.path.join(PROJECT_ROOT, 'analysis', f'gemini_loo_{RUN_ID}.csv')
+    loo_df.to_csv(loo_out, index=False)
+    if os.path.exists(CHECKPOINT_LOO):
+        os.remove(CHECKPOINT_LOO)
+    print(f"\nLOO results saved to: {loo_out}")
 
-loo_df = pd.DataFrame(loo_records)
-loo_out = os.path.join(PROJECT_ROOT, 'analysis', f'gemini_loo_{RUN_ID}.csv')
-loo_df.to_csv(loo_out, index=False)
-if os.path.exists(CHECKPOINT_LOO):
-    os.remove(CHECKPOINT_LOO)
-print(f"\nLOO results saved to: {loo_out}")
+    # Summary
+    loo_per_user = loo_df.groupby('experiment_id')['accuracy_5'].mean()
+    print("\n--- LOO: mean accuracy per user (avg over repeats) ---")
+    for eid, acc in loo_per_user.items():
+        print(f"  User {eid:2d}: {acc:.3f}")
+    print(f"\n  LOO Gemini mean:  {loo_per_user.mean():.3f}")
+    print(f"  LOO Gemini SD:    {loo_per_user.std():.3f}")
 
-# Summary
-loo_per_user = loo_df.groupby('experiment_id')['accuracy_5'].mean()
-print("\n--- LOO: mean accuracy per user (avg over repeats) ---")
-for eid, acc in loo_per_user.items():
-    print(f"  User {eid:2d}: {acc:.3f}")
-print(f"\n  LOO Gemini mean:  {loo_per_user.mean():.3f}")
-print(f"  LOO Gemini SD:    {loo_per_user.std():.3f}")
+    # Format-level breakdown (LOO)
+    print("\n--- LOO per-format accuracy ---")
+    for k, c in zip(FORMAT_KEYS, FORMAT_COLS):
+        pred_col = f'pred_{k}'
+        gt_col = f'gt_{k}'
+        fmt_acc = (loo_df[pred_col] == loo_df[gt_col]).mean()
+        print(f"  {k:20s}: {fmt_acc:.3f}")
 
 # Naive baseline for reference
 naive_acc = (gt[FORMAT_COLS] == 0).mean(axis=1).mean()
 print(f"\n  Naive baseline (predict all 0): {naive_acc:.3f}")
-
-# Format-level breakdown (LOO)
-print("\n--- LOO per-format accuracy ---")
-for k, c in zip(FORMAT_KEYS, FORMAT_COLS):
-    pred_col = f'pred_{k}'
-    gt_col = f'gt_{k}'
-    fmt_acc = (loo_df[pred_col] == loo_df[gt_col]).mean()
-    print(f"  {k:20s}: {fmt_acc:.3f}")
