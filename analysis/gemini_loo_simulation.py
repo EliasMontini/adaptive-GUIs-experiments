@@ -124,21 +124,24 @@ def compute_aggregated_prefs(training_exp_ids, step_id):
     }
 
 
-def format_history(user_id, completed_step_ids, training_exp_ids):
+def format_history(user_id, completed_step_ids, training_exp_ids, completed_preds=None):
     """Within-session history string for steps already completed."""
     if not completed_step_ids:
         return "CURRENT USER: No previous interactions\n"
+    completed_preds = completed_preds or {}
     user_data = gt[(gt['experiment_id'] == user_id) & (gt['step_id'].isin(completed_step_ids))]
     text = "CURRENT USER PREVIOUS INTERACTIONS:\n"
     for _, row in user_data.sort_values('step_id').iterrows():
         step_id = int(row['step_id'])
         agg = compute_aggregated_prefs(training_exp_ids, step_id)
+        step_pred = completed_preds.get(step_id, {})
         text += f"  Step {step_id}:\n"
         for k, c in zip(FORMAT_KEYS, FORMAT_COLS):
             user_viewed = int(row[c])
             pop_avg = agg[k]
             if not (pop_avg == 0 and user_viewed == 0):  # do not include formats that neither the user nor the population viewed
-                text += f"    {k}: user_viewed={user_viewed}, population_avg={pop_avg:.2f}\n"
+                suggested = step_pred.get(k, 'N/A')
+                text += f"    {k}: suggested={suggested}, user_viewed={user_viewed}, population_avg={pop_avg:.2f}\n"
     return text
 
 
@@ -148,10 +151,10 @@ def build_step_payload(step_id):
             'category': s['category'], 'adaptive_fields': s['adaptive_fields']}
 
 
-def call_gemini(user_id, step_id, training_exp_ids, completed_steps):
+def call_gemini(user_id, step_id, training_exp_ids, completed_steps, completed_preds=None):
     """One Gemini call; returns dict of binary predictions."""
     agg = compute_aggregated_prefs(training_exp_ids, step_id)
-    hist = format_history(user_id, completed_steps, training_exp_ids)
+    hist = format_history(user_id, completed_steps, training_exp_ids, completed_preds)
     payload = build_step_payload(step_id)
 
     result = adapt_step(
@@ -229,6 +232,10 @@ if 'sequential' in EXPERIMENTS:
     print("=" * 60)
 
     seq_records, seq_done = load_checkpoint(CHECKPOINT_SEQ)
+    seq_pred_lookup = {
+        (int(r['experiment_id']), int(r['step_id']), int(r['repeat'])): {k: r[f'pred_{k}'] for k in FORMAT_KEYS}
+        for r in seq_records
+    }
     seq_shuffle_orders = load_shuffle_orders(SHUFFLE_SEQ_PATH)
     total_seq = N * 10 * N_REPEATS
     done_seq = 0
@@ -253,16 +260,20 @@ if 'sequential' in EXPERIMENTS:
             user_steps = gt[gt['experiment_id'] == exp_id].sort_values('step_id')
 
             completed = []
+            completed_preds = {}
             for _, row in user_steps.iterrows():
                 step_id = int(row['step_id'])
 
                 if (exp_id, step_id, repeat) in seq_done:
                     completed.append(step_id)
+                    if (exp_id, step_id, repeat) in seq_pred_lookup:
+                        completed_preds[step_id] = seq_pred_lookup[(exp_id, step_id, repeat)]
                     done_seq += 1
                     continue
 
                 try:
-                    pred = call_gemini(exp_id, step_id, training_exps, completed)
+                    pred = call_gemini(exp_id, step_id, training_exps, completed, completed_preds)
+                    completed_preds[step_id] = pred
                     acc5 = step_accuracy(pred, row)
                     acc_avail = step_accuracy_available(pred, row)
                     seq_records.append({
@@ -311,6 +322,10 @@ if 'loo' in EXPERIMENTS:
     print("=" * 60)
 
     loo_records, loo_done = load_checkpoint(CHECKPOINT_LOO)
+    loo_pred_lookup = {
+        (int(r['experiment_id']), int(r['step_id']), int(r['repeat'])): {k: r[f'pred_{k}'] for k in FORMAT_KEYS}
+        for r in loo_records
+    }
     total_loo = N * 16 * N_REPEATS
     done_loo = 0
     t0 = time.time()
@@ -325,16 +340,20 @@ if 'loo' in EXPERIMENTS:
             user_steps = gt[gt['experiment_id'] == exp_id].sort_values('step_id')
 
             completed = []
+            completed_preds = {}
             for _, row in user_steps.iterrows():
                 step_id = int(row['step_id'])
 
                 if (exp_id, step_id, repeat) in loo_done:
                     completed.append(step_id)
+                    if (exp_id, step_id, repeat) in loo_pred_lookup:
+                        completed_preds[step_id] = loo_pred_lookup[(exp_id, step_id, repeat)]
                     done_loo += 1
                     continue
 
                 try:
-                    pred = call_gemini(exp_id, step_id, training_exps, completed)
+                    pred = call_gemini(exp_id, step_id, training_exps, completed, completed_preds)
+                    completed_preds[step_id] = pred
                     acc5 = step_accuracy(pred, row)
                     acc_avail = step_accuracy_available(pred, row)
                     loo_records.append({
