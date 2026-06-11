@@ -38,7 +38,6 @@ def _with_backoff(fn, *args, **kwargs):
             print(f"⏳ Rate limiting: waiting {wait_time:.1f}s before API call")
             time.sleep(wait_time)
 
-    last = None
     for delay in (0, 1.0, 2.0, 5.0):  # ⚠️ Aumentati i delay
         try:
             result = fn(*args, **kwargs)
