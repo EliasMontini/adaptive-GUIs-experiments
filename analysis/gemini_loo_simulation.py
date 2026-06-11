@@ -102,7 +102,7 @@ with open(STEPS_PATH) as f:
 with open(INTERACTIONS_PATH) as f:
     enabled_interactions = json.load(f)
 
-all_exp_ids = sorted(gt['experiment_id'].unique())
+all_exp_ids = [int(i) for i in sorted(gt['experiment_id'].unique())]
 N = len(all_exp_ids)
 print(f"Loaded {len(gt)} rows, {N} experiments: {all_exp_ids}")
 
