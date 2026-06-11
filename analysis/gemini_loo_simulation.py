@@ -124,15 +124,21 @@ def compute_aggregated_prefs(training_exp_ids, step_id):
     }
 
 
-def format_history(user_id, completed_step_ids):
+def format_history(user_id, completed_step_ids, training_exp_ids):
     """Within-session history string for steps already completed."""
     if not completed_step_ids:
         return "CURRENT USER: No previous interactions\n"
     user_data = gt[(gt['experiment_id'] == user_id) & (gt['step_id'].isin(completed_step_ids))]
     text = "CURRENT USER PREVIOUS INTERACTIONS:\n"
     for _, row in user_data.sort_values('step_id').iterrows():
-        viewed = [k for k, c in zip(FORMAT_KEYS, FORMAT_COLS) if row[c]]
-        text += f"  Step {int(row['step_id'])}: viewed [{', '.join(viewed) if viewed else 'nothing'}]\n"
+        step_id = int(row['step_id'])
+        agg = compute_aggregated_prefs(training_exp_ids, step_id)
+        text += f"  Step {step_id}:\n"
+        for k, c in zip(FORMAT_KEYS, FORMAT_COLS):
+            user_viewed = int(row[c])
+            pop_avg = agg[k]
+            if not (pop_avg == 0 and user_viewed == 0):  # do not include formats that neither the user nor the population viewed
+                text += f"    {k}: user_viewed={user_viewed}, population_avg={pop_avg:.2f}\n"
     return text
 
 
@@ -145,7 +151,7 @@ def build_step_payload(step_id):
 def call_gemini(user_id, step_id, training_exp_ids, completed_steps):
     """One Gemini call; returns dict of binary predictions."""
     agg = compute_aggregated_prefs(training_exp_ids, step_id)
-    hist = format_history(user_id, completed_steps)
+    hist = format_history(user_id, completed_steps, training_exp_ids)
     payload = build_step_payload(step_id)
 
     result = adapt_step(
