@@ -8,7 +8,7 @@ import google.generativeai as genai
 from google.api_core import retry as g_retry
 
 _last_api_call = None
-_MIN_DELAY_BETWEEN_CALLS = 2.0  # secondi tra chiamat# e
+_MIN_DELAY_BETWEEN_CALLS = 0.06  # secondi tra chiamat# e
 
 # -----------------------------------------------------------------------------
 # Configuration
@@ -234,23 +234,20 @@ def adapt_step(user_profile: Dict[str, Any],
         "Determine which content should be INITIALLY VISIBLE (set to true)\n"
         f"1. MANDATORY GLOBAL TRANSLATION: Identify the language explicitly provided in 'profile-language'. You MUST translate the 'title' and all 'adaptive_fields' (short_text, long_text) into this requested language AND 'explanation_of_changes' into {requested_language}. Accuracy is critical.\n"
         "2. EXPERIENCE & COMPETENCE INFERENCE (from 'profile-experience'): from the user's description in experience profile, judge the user's level, for example if he is an expert, intermediate or beginner. If they mention being an 'expert', 'Technic enthusiast', or 'frequent builder', classify as EXPERT. If they mention being 'brand new', 'scared to fail', or 'first time', classify as NOVICE"
-        "3. GOAL AND LEARNING STYLE (from 'profile-goal'): Infer if the user is visual (prefers images/video) or analytical (prefers text) based on their self-description. If the user expresses URGENCY, set visibility to 'short_text' and 'video'. Avoid showing 'long_text' initially. If the user prioritizes QUALITY, set visibility to 'long_text' and 'assembly_image' to ensure no details are missed.'\n"
+        "3. GOAL AND LEARNING STYLE (from 'profile-goal'): Infer if the user is visual (prefers images/video) or analytical (prefers text) based on their self-description.'\n"
         "4. SCREEN SETUP ANALYSIS (from 'form-setup'): Analyze 'screen_setup' to determine user user visibility and readability from the device. If the user reports issues (e.g., text too small, screen is far), you MUST prioritize 'short_text' and visual media (images/video) and minimize the use of 'long_text'. If the user reports 'everything is clear' or 'close up', you can safely show 'long_text' for detailed guidance.\n"
         "5. DO NOT modify or invent media file paths. If a path is an empty string, visibility MUST be false. NEVER set both 'short_text' and 'long_text' to true simultaneously."
         f"6. The fields 'title', 'short_text', 'long_text', and 'explanation_of_changes' MUST be written in {requested_language}.\n\n"
-        # "ADAPTATION STRATEGY:\n"
-        # "- Consider what user clicked in previous similar steps\n"
-        # "- Consider what majority of users preferred for this step. If the user consistently reveals a specific content type (e.g., Video) or consistently ignores another, adapt the next steps to favor their demonstrated workflow. The goal is to minimize manual 'Show' clicks by anticipating what information the user finds most helpful.\n"
-        # "- Balance user preferences with pedagogical effectiveness\n\n"
-        # "- Consider the user's level of technical experience based on their self-description. If they say they've done many similar exercises, they're considered expert.'\n"
-        # "- If 'Warehouse Picking' is in prior experience, assume they know the bin system: keep WITHDRAW instructions minimal.\n"
-        #  "- If 'Color-Blind Assist' is true, you MUST add text labels to colors in the text, e.g., 'Red [R]' or 'Black [B]'.\n"
-        #  "- If objective is 'focus on speed and efficiency', prioritize 'short_text' and hide 'long_text'.\n"
-        #  "- If objectanive is 'focus on learning d precision', prioritize 'long_text' and 'video'.\n"
+      
+      
         "ADAPTATION STRATEGY & DECISION LOGIC:\n"
         "Balance the user's explicit declarations with implicit behavioral data to find the optimal UI configuration for each specific step.\n"
         "Consider the user profile (language, experience, visual setup, and session goals) to construct a mental model of the participant. For instance, consider how their reported visibility issues or professional background should naturally influence the density and type of information displayed.\n"
         "Consider 'user_history_formatted' and 'aggregated_preferences'. Identify trends in what the user (and others) actually interacts with.\n"
+        #"Consider "TABELLA SUGGESTION" and identify, for each completed step, which content was SUGGESTED (your previous prediction) and which content the user ACTUALLY chose to view."\n.
+        #"Treat the gap between suggested and actual as a signal: if the user repeatedly revealed content you had hidden, or ignored content you had shown, your current prediction strategy is misaligned with this user — correct it for the current step."\n.
+        #If suggestions and actual choices consistently matched, maintain the same strategy.\n"
+        #"Note: 'aggregated_preferences' reports ONLY the formats that are available for the current step type — percentages reflect genuine user choices among available options only, not availability constraints. A 0% means the format is available but no previous user chose to view it.\n"
         "Adapt the interface not only to the user but also to the nature of the task (Withdraw, Assembly, Quality Control). A technical expert’s ideal interface might be minimalist, whereas a novice in a rush might require a different balance of visual and textual cues. You have the autonomy to decide which elements to prioritize to maximize training efficiency.\n"
         "Output strict JSON only."
     )

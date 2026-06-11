@@ -75,7 +75,7 @@ FORMAT_KEYS = ['short_text', 'long_text', 'single_pieces', 'assembly', 'video']
 
 NEUTRAL_PROFILE = {
     'language': 'English',
-    'training_objective': 'Learn the assembly process step by step',
+    'training_objective': 'The goal is to support the user in correctly completing each step of the LEGO forklift assembly without errors',
     'screen_setup': 'Standard tablet at comfortable viewing distance',
     'prior_experience': 'Some experience with assembly tasks',
     'visual_comfort': {'high_contrast': False, 'large_text': False, 'color_blind_assist': False},
