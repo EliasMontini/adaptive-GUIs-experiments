@@ -242,7 +242,28 @@ def adapt_step(user_profile: Dict[str, Any],
         "ADAPTATION STRATEGY & DECISION LOGIC:\n"
         "Balance the user's explicit declarations with implicit behavioral data to find the optimal UI configuration for each specific step.\n"
         "Consider the user profile (language, experience, visual setup, and session goals) to construct a mental model of the participant. For instance, consider how their reported visibility issues or professional background should naturally influence the density and type of information displayed.\n"
-        "Consider 'user_history_formatted' and 'aggregated_preferences'. Identify trends in what the user (and others) actually interacts with.\n"
+        "Consider both 'user_history_formatted' and 'aggregated_preferences'. "
+        "Consider both 'user_history_formatted' and 'aggregated_preferences'. "
+        "When the two signals suggest different visibility configurations, give slightly more weight to the current user's own interaction history, "
+        "as it reflects this specific individual's demonstrated preferences. "
+        "Use the aggregated preferences as a contextual reference, especially when the user's history is limited. "
+        "When analysing both the current user's history and the aggregated preferences, "
+        "take into account the step type of each past interaction — whether it was a withdraw, assembly, or quality control step — "
+        "and use this context to reason appropriately about the current user's preferences for the current step type.\n"
+        "COLD-START HANDLING (first 2 steps per step type): "
+        "All participants in this study were first-time users of this adaptive interface — none had prior experience with it. "
+        "As a result, users' format choices in the very first withdraw step and the very first assembly step are often exploratory and inconsistent, "
+        "reflecting interface discovery rather than stable personal preferences. "
+        "Therefore, do NOT over-interpret format choices from the first withdraw step when predicting the second withdraw step, "
+        "nor from the first assembly step when predicting subsequent assembly steps. "
+        "Treat the first occurrence of each step type as low-reliability evidence and weight it accordingly. "
+        "From the third step of the same type onward, the user's pattern can be considered more reliable and should be given progressively higher weight.\n"
+        "For each completed step in the current user's history, you can see both what you suggested "
+        "and what the user actually chose to view. "
+        "If you notice a recurring gap — the user repeatedly revealed formats you had hidden, "
+        "or ignored formats you had shown — treat this as a signal that your current strategy "
+        "is not well aligned with this user, and adjust your prediction for the current step accordingly.\n"
+        #"Consider 'user_history_formatted' and 'aggregated_preferences'. Identify trends in what the user (and others) actually interacts with.\n"
         #"Consider "TABELLA SUGGESTION" and identify, for each completed step, which content was SUGGESTED (your previous prediction) and which content the user ACTUALLY chose to view."\n.
         #"Treat the gap between suggested and actual as a signal: if the user repeatedly revealed content you had hidden, or ignored content you had shown, your current prediction strategy is misaligned with this user — correct it for the current step."\n.
         #If suggestions and actual choices consistently matched, maintain the same strategy.\n"
@@ -357,7 +378,7 @@ STYLE PROFILE: {style_profile_token}
 
 USER PROFILE:
 - Language: {user_profile.get('language', 'English')}
-- Objective: {user_profile.get('training_objective', 'Learning')}
+- Objective: {user_profile.get('training_objective', 'Complete the assembly correctly without errors')}
 - Screen Setup: {user_profile.get('screen_setup', 'Not specified')}
 - Experience: {skills}
 - Color-Blind Assist: {visual.get('color_blind_assist', False)}
